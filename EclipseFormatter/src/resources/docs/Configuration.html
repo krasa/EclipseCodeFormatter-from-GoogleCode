@@ -1,0 +1,134 @@
+<!--
+  ~ External Code Formatter
+  ~ Copyright (c) 2007-2009  Esko Luontola, www.orfjackal.net
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store, no-cache, must-revalidate">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" lang="en">
+    <meta name="robots" content="none">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" type="text/css" media="all" href="../DefaultCSS/s.css">
+    <title>Configuring Eclipse Code Formatter</title>
+
+</head>
+<body id="IJ_help" class="template">
+<div id="container">
+
+    <div id="header" style="background:url(../DefaultCSS/img/bg_idea_big.jpg)">
+        <h1>Configuring Eclipse Code Formatter</h1>
+    </div>
+
+    <div id="content">
+
+        <div class="introduction">
+            <p>This section will explain how you can start using <b>Eclipse Code Formatter</b> in your project.
+                When the plugin has been enabled, it will transparently replace IDEA's built-in code formatter.</p>
+            <ul style="list-style-image:url(../DefaultCSS/img/blue_romb_blt.png);">
+                <li>You can reformat your code as before, by pressing <span class="shortcut">Ctrl+Alt+L</span>, or when
+                    committing files to VCS.
+                </li>
+                <li>If the Eclipse code formatter does not support a file type, or you try to reformat a selected text,
+                    the plugin will automatically fall back to using IDEA's built-in code formatter.
+                </li>
+            </ul>
+
+            <h3>Help topics</h3>
+            <ul style="list-style-image:url(../DefaultCSS/img/blue_romb_blt.png);">
+                <li><a href="#eclipse">Using the Eclipse code formatter</a></li>
+                <li><a href="#cli">Using a custom code formatter</a></li>
+            </ul>
+
+        </div>
+
+        <div class="section">
+            <a name="eclipse"><h2>Using the Eclipse code formatter</h2></a>
+
+            <p>You will need to have <b>Eclipse 3.2</b> or later installed to use the Eclipse code formatter from within
+                IDEA. The Eclipse code formatter supports formatting only Java source code files. When reformatting code
+                with it, Eclipse's startup banner will show up momentarily.</p>
+
+            <p>In <b>Eclipse Code Formatter</b>'s project settings, choose the
+                <span class="ijControl">Use the Eclipse code formatter</span> option and configure the following fields:</p>
+
+            <dl>
+                <dt>Eclipse executable</dt>
+                <dd>Point this to the install location of <b>Eclipse 3.2 or later</b>.
+
+                    <table cellpadding="4" cellspacing="0" class="ijTip">
+                        <tr>
+                            <td class="noteIcon"><img src="../DefaultCSS/img/tip.gif" alt="Note">&nbsp;</td>
+                            <td><p>On Windows, it is better to select <b>eclipsec.exe</b> instead of <b>eclipse.exe</b>,
+                                because the latter one would pop up a black command prompt dialog during reformatting.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </dd>
+
+                <dt>Eclipse preferences</dt>
+                <dd>The location of an Eclipse project's <b>org.eclipse.jdt.core.prefs</b> file which contains the
+                    formatter settings. You will need to enable project specific formatter settings in Eclipse to get
+                    this file. <a href="#eclipse-prefs">See the following section</a> for instructions on how to get
+                    this preferences file.
+                </dd>
+            </dl>
+
+            <div class="ijProcedureSteps">
+                <p class="procHeader"><a name="eclipse-prefs">Getting the Eclipse code formatter preferences file</a></p>
+
+                <ol>
+                    <li>With your project open in <b>Eclipse</b>'s workspace, right-click the <b>project</b> and
+                        choose <span class="ijControl">Properties</span>.
+                    </li>
+
+                    <li>Go to <span class="ijControl">Java Code Style | Formatter</span>
+                        and select <span class="ijControl">Enable project specific settings</span>.
+
+                        <p><img src="img/eclipseFormatter.png" alt=""/></p>
+                    </li>
+
+                    <li>Also in the project properties, go to <span class="ijControl">Java Compiler</span> and
+                        select <span class="ijControl">Enable project specific settings</span>. Make
+                        sure that the <span class="ijControl">Compiler compliance level</span> is set right.
+
+                        <p><img src="img/eclipseCompiler.png" alt=""/></p>
+                    </li>
+
+                    <li>Click <span class="ijControl">OK</span> to save the settings.
+                    </li>
+
+                    <li>Go to the <b>.settings</b> directory inside your project's directory. There you will find the
+                        <b>org.eclipse.jdt.core.prefs</b> file which contains the Eclipse formatter settings.
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+    
+    </div>
+
+</div>
+
+<div id="footer">
+    <p><b>Copyright &copy; 2007-2009 Esko Luontola. All rights reserved</b></p>
+</div>
+</body>
+</html>
+        

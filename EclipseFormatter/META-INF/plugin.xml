@@ -1,0 +1,49 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD"
+        "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin version="2">
+
+    <name>Eclipse Code Formatter</name>
+    <id>EclipseCodeFormatter</id>
+    <version>0.1.1</version>
+
+    <description><![CDATA[
+        Allows using Eclipse's code formatter directly from IntelliJ
+        without slow executing Eclipse via command line.
+
+
+        <br>
+        <br>Known issues:
+        <br>-when file is edited and editor is closed
+        and then file is reformatted without prior saving,
+        changes gets lost.
+        <br>-when editor is opened, view moves one line up after reformatting
+
+        ]]></description>
+    <category>Formatting</category>
+
+    <vendor email="vojta.krasa@gmail.com">Vojtech Krasa</vendor>
+
+    <idea-version since-build="110.137" until-build="110.9999"/>
+
+    <change-notes><![CDATA[
+        <p>0.1.1 (2011-11-01)
+        <br>- Release for 11.0</p>
+        <p>0.1.0 (2011-11-01)
+        <br>- Initial release for 10.5</p>
+    ]]></change-notes>
+
+    <!--<helpset file="formatter-help.jar" path="/Help.hs"/>-->
+
+    <project-components>
+        <component>
+            <implementation-class>krasa.formatter.plugin.ProjectSettingsComponent</implementation-class>
+        </component>
+    </project-components>
+    <helpset path="/Help.hs" file="testpluginuploaf.jar"/>
+    <actions>
+        <action id="QuickChangeCodeFormatter" class="krasa.formatter.QuickChangeCodeFormatterAction"
+                text="Switch Code Formatter" description="Switch Code Formatter">
+            <add-to-group group-id="ChangeScheme" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

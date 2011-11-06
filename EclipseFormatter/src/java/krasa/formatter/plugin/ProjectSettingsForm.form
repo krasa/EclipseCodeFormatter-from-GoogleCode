@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="krasa.formatter.plugin.ProjectSettingsForm">
+  <grid id="27dc6" binding="rootComponent" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1530" height="268"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="cd640" class="javax.swing.JLabel" binding="eclipsePrefsLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="144" height="27"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="4ff2e"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.eclipsePrefs"/>
+        </properties>
+      </component>
+      <component id="4ff2e" class="javax.swing.JTextField" binding="eclipsePrefs">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="27"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="d8281" class="javax.swing.JButton" binding="eclipsePrefsBrowse">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="93" height="27"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text resource-bundle="krasa/formatter/messages" key="action.browse"/>
+        </properties>
+      </component>
+      <component id="eaedb" class="javax.swing.JLabel" binding="eclipseSupportedFileTypesLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <labelFor value="90367"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.eclipseSupportedFileTypes"/>
+        </properties>
+      </component>
+      <component id="90367" class="javax.swing.JTextField" binding="eclipseSupportedFileTypes">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+        </properties>
+      </component>
+      <component id="a1e8b" class="javax.swing.JRadioButton" binding="useDefaultFormatter">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="12"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.useDefault"/>
+        </properties>
+      </component>
+      <component id="a7c42" class="javax.swing.JRadioButton" binding="useEclipseFormatter">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="12" style="1"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.useEclipse"/>
+        </properties>
+      </component>
+      <hspacer id="d2ae0">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="30" height="-1"/>
+          </grid>
+        </constraints>
+      </hspacer>
+      <component id="443bc" class="javax.swing.JTextPane" binding="eclipsePrefsExample">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Label.background"/>
+          <editable value="false"/>
+          <foreground swing-color="Label.foreground"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.eclipsePrefsExample"/>
+        </properties>
+      </component>
+      <component id="eac10" class="javax.swing.JTextArea" binding="eclipseFormatterCannotFormatTextArea" default-binding="true">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <text resource-bundle="krasa/formatter/messages" key="settings.help"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="selectedFormatter">
+      <member id="a1e8b"/>
+      <member id="a7c42"/>
+      <member id="85dc2"/>
+    </group>
+  </buttonGroups>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor"/>
+    <suppress inspection="MissingMnemonic"/>
+    <suppress inspection="NoScrollPane"/>
+  </inspectionSuppressions>
+</form>
