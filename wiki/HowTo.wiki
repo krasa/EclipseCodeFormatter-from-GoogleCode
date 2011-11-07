@@ -1,4 +1,4 @@
-#labels Phase-Deploy
+#labels Phase-Deploy,Howtouseit
 =Using the Eclipse code formatter=
 
 You will need to enable project specific formatter settings in Eclipse to get preference file.
