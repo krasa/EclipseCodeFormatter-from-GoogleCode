@@ -1,0 +1,11 @@
+=Using the Eclipse code formatter=
+
+You will need to enable project specific formatter settings in Eclipse to get preference file.
+
+== Getting the Eclipse code formatter preferences file ==
+
+ # With your project open in Eclipse's workspace, right-click the project and choose Properties.
+ # Go to Java Code Style | Formatter and select Enable project specific settings.
+ # Also in the project properties, go to Java Compiler and select Enable project specific settings. *Make sure that the Compiler compliance level is set right.*
+ # Click OK to save the settings.
+ # Go to the .settings directory inside your project's directory. There you will find the org.eclipse.jdt.core.prefs file which contains the Eclipse formatter settings.
