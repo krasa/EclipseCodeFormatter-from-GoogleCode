@@ -15,7 +15,18 @@
           <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/antadapter" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/batch" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/codeassist" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/compiler" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/dom" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/eval" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/formatter" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/model" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/scripts" />
+          <root url="file://$MODULE_DIR$/../../_eclipse/org.eclipse.jdt.core/search" />
+        </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>

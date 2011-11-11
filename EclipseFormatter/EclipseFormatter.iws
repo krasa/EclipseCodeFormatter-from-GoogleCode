@@ -1,85 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2d6f995a-0c32-4f0b-afa9-3827d21d569f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.core.contenttype_3.4.100.v20110423-0524.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.core.jobs_3.5.100.v20110404.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.core.resources.win32.x86_3.5.100.v20110423-0524.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.core.resources_3.7.100.v20110510-0712.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.core.runtime_3.7.0.v20110110.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.equinox.app_1.3.100.v20110321.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.equinox.common_3.6.0.v20110523.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.jdt.core_3.7.1.v_B76_R37x.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.osgi_3.7.1.R37x_v20110808-1106.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/org.eclipse.text_3.5.101.r371_v20110810-0800.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/eclipse" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/bg_idea_big.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/IDEA.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/arrow.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/bg_idea_big.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/blue_romb_blt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/box_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/code_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/code_box_left_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/code_box_top_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/content_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/error_line.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/folder.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/h4_blt.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/header_border_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/header_dot_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/img_bg.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/note.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/notice.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/notice_blue.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/notice_purple.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/section_blt.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/seealso_blt.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/tip.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img/topic.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/img" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs/img/eclipseCompiler.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs/img/eclipseFormatter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs/img" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter/icons/logo-16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter/icons/logo-32.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter/icons" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EclipseFormatter.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EclipseFormatter.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EclipseFormatter.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/Messages.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/QuickChangeCodeFormatterAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/Resources.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/EclipseCodeFormatterFacade.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/MyCodeFormatterApplication.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectCodeStyleInstaller.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/IllegalSettingsException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/SettingsManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/DefaultCSS/s.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/Help.hs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/HelpTOC.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/Map.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs/Configuration.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/docs/Intro.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties" />
+    <list default="true" readonly="true" id="2d6f995a-0c32-4f0b-afa9-3827d21d569f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iml" afterPath="$PROJECT_DIR$/EclipseFormatter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.ipr" afterPath="$PROJECT_DIR$/EclipseFormatter.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iws" afterPath="$PROJECT_DIR$/EclipseFormatter.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/QuickChangeCodeFormatterAction.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/QuickChangeCodeFormatterAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties" afterPath="$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties" />
     </list>
     <ignored path="EclipseFormatter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -138,10 +67,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Messages.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Messages.java">
+      <file leaf-file-name="ProjectSettingsComponent.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="55" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
+            <state line="55" column="13" selection-start="2216" selection-end="2216" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EclipseCodeStyleManager.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="109" column="9" selection-start="4228" selection-end="4228" vertical-scroll-proportion="1.2830188">
               <folding />
             </state>
           </provider>
@@ -150,59 +90,72 @@
       <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="66" selection-start="1197" selection-end="1197" vertical-scroll-proportion="0.0">
+            <state line="21" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectSettingsComponent.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java">
+      <file leaf-file-name="DelegatingCodeStyleManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="62" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.048022598">
+            <state line="112" column="4" selection-start="3772" selection-end="3772" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1435#1469#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.dtd" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/plugin.dtd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="30" selection-start="1876" selection-end="1876" vertical-scroll-proportion="-11.769231">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectSettingsForm.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectSettingsForm.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java">
+      <file leaf-file-name="messages.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="251" column="45" selection-start="7556" selection-end="7556" vertical-scroll-proportion="0.0">
+            <state line="38" column="10" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EclipseFormatter.iws" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
+      <file leaf-file-name="MyCodeFormatterApplication.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/MyCodeFormatterApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+            <state line="346" column="0" selection-start="10400" selection-end="10400" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EclipseFormatter.ipr" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EclipseFormatter.ipr">
+      <file leaf-file-name="DefaultCodeFormatter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0">
+            <state line="131" column="35" selection-start="4592" selection-end="4592" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EclipseFormatter.iml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EclipseFormatter.iml">
+      <file leaf-file-name="DefaultCodeFormatter.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.jdt.core_3.7.1.v_B76_R37x.jar!/org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="59" column="0" selection-start="4531" selection-end="4531" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodeStyleManagerImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/impl/source/codeStyle/CodeStyleManagerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="132" column="14" selection-start="5017" selection-end="5017" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -226,8 +179,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/Messages.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" />
-        <option value="$PROJECT_DIR$/EclipseFormatter.iws" />
         <option value="$PROJECT_DIR$/EclipseFormatter.iml" />
+        <option value="$PROJECT_DIR$/EclipseFormatter.iws" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/QuickChangeCodeFormatterAction.java" />
+        <option value="$PROJECT_DIR$/../JetBrains-intellij-community-105/java/java-impl/src/com/intellij/psi/impl/source/codeStyle/ImportHelper.java" />
+        <option value="$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-impl/src/com/intellij/codeInsight/actions/OptimizeImportsProcessor.java" />
+        <option value="$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/impl/source/codeStyle/CodeFormatterFacade.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" />
+        <option value="$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java" />
       </list>
     </option>
   </component>
@@ -264,7 +226,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -283,26 +244,145 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="krasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="krasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="krasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="options.lastSelected" value="krasa.formatter.plugin.ProjectSettingsComponent" />
+    <property name="project.structure.side.proportion" value="0.20000002" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RunManager" selected="Plugin.Unnamed">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -410,11 +490,22 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="false" name="Unnamed" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="EclipseFormatter" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <log_file path="C:/Documents and Settings/Administrator/.IntelliJIdea10/system/plugins-sandbox/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
+      <log_file path="$USER_HOME$/.IntelliJIdea11/system/plugins-sandbox/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
@@ -437,13 +528,18 @@
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="1">
+    <configuration default="false" name="Unnamed" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Plugin.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="Query Language Console.Unnamed" />
     </list>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -474,6 +570,7 @@
     <option name="FORCE_UPDATE" value="false" />
     <configuration useDefault="true">C:\Users\UNICORN\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnFileUrlMappingImpl">
     <option name="myMappingRoots">
@@ -506,28 +603,28 @@
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32956383" sideWeight="0.49065802" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44103393" sideWeight="0.47403133" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.96930534" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JavaRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32956383" sideWeight="0.5028432" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3801105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42454395" sideWeight="0.5193735" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44749597" sideWeight="0.4939074" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JavaRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Notes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.49715677" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32148626" sideWeight="0.49715677" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24939074" sideWeight="0.6704362" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2591389" sideWeight="0.5589661" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.96930534" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.03069467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27753305" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" sideWeight="0.62995595" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -587,40 +684,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Messages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="55" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="66" selection-start="1197" selection-end="1197" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="251" column="45" selection-start="7556" selection-end="7556" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EclipseFormatter.ipr">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EclipseFormatter.iml">
@@ -628,9 +694,261 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/annotations/src/org/jetbrains/annotations/NotNull.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="1" selection-start="1259" selection-end="1259" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-api/src/com/intellij/psi/codeStyle/CodeStyleManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="33" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-impl/src/com/intellij/codeInsight/actions/ReformatAndOptimizeImportsProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="13" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-impl/src/com/intellij/codeInsight/actions/AbstractLayoutCodeProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="22" selection-start="2136" selection-end="2136" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-api/src/com/intellij/psi/codeStyle/CodeStyleSettingsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="37" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-impl/src/com/intellij/codeInsight/actions/OptimizeImportsProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="57" selection-start="2393" selection-end="2393" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-api/src/com/intellij/lang/ImportOptimizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="17" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-api/src/com/intellij/lang/LanguageImportStatements.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="35" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/platform-api/src/com/intellij/lang/LanguageExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="32" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/java/java-impl/src/com/intellij/lang/java/JavaImportOptimizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="92" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/java/openapi/src/com/intellij/psi/codeStyle/JavaCodeStyleManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="32" selection-start="3708" selection-end="3708" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/java/java-impl/src/com/intellij/psi/impl/source/codeStyle/JavaCodeStyleManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="44" selection-start="4130" selection-end="4130" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/java/java-impl/src/com/intellij/psi/impl/source/codeStyle/ImportHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="39" selection-start="4348" selection-end="4348" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-105/platform/lang-impl/src/com/intellij/codeInsight/actions/OptimizeImportsAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="29" selection-start="3357" selection-end="3358" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/QuickChangeCodeFormatterAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="15" selection-start="871" selection-end="871" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/impl/source/codeStyle/PostFormatProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="12" selection-start="1119" selection-end="1119" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/codeInsight/actions/ReformatCodeProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="58" selection-start="3106" selection-end="3106" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/annotations/src/org/jetbrains/annotations/NotNull.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="3" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/formatting/FormatProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="24" selection-start="8484" selection-end="8484" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/formatting/FormatterImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="14" selection-start="6883" selection-end="6883" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/java/java-impl/src/com/intellij/lang/java/JavaFormattingModelBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="28" selection-start="2068" selection-end="2068" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/formatter/DocumentBasedFormattingModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="9" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/core-api/src/com/intellij/openapi/editor/Document.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="17" selection-start="1468" selection-end="1468" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/impl/source/codeStyle/CodeFormatterFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="57" selection-start="8501" selection-end="8501" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/codeInsight/actions/AbstractLayoutCodeProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="11" selection-start="5790" selection-end="5790" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/vcs-impl/src/com/intellij/openapi/vcs/actions/AbstractShowDiffAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="52" selection-start="4151" selection-end="4151" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/vcs-impl/src/com/intellij/openapi/vcs/impl/AbstractVcsHelperImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="562" column="33" selection-start="24450" selection-end="24450" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/plugins/cvs/cvs-plugin/src/com/intellij/cvsSupport2/actions/ActionOnSelectedElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="20" selection-start="5155" selection-end="5155" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lvcs-impl/testSrc/com/intellij/history/integration/ActionsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="29" selection-start="3759" selection-end="3759" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/java/java-tests/testSrc/com/intellij/psi/AddClassToFileTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="16" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/plugins/android/src/org/jetbrains/android/newProject/AndroidModuleBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="440" column="20" selection-start="17359" selection-end="17359" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/plugins/android/testSrc/org/jetbrains/android/AndroidRenameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="271" column="4" selection-start="13686" selection-end="13686" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/vcs-impl/src/com/intellij/openapi/vcs/actions/AnnotateToggleAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="29" selection-start="5852" selection-end="5852" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/plugins/ant/tests/src/com/intellij/lang/ant/AntRenameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="138" column="18" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/vcs-impl/src/com/intellij/openapi/vcs/changes/patch/ApplyPatchAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="228" column="20" selection-start="9806" selection-end="9806" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/platform-impl/src/com/intellij/openapi/application/impl/ApplicationImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1273" column="28" selection-start="41022" selection-end="41022" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://C:/org.eclipse.jdt.ui.prefs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="25" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../_T-Mobile/_sdp7200/sdp-api/.settings/org.eclipse.jdt.core.prefs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="3" selection-start="205" selection-end="504" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectCodeStyleInstaller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="13" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="10" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/MyCodeFormatterApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="346" column="0" selection-start="10400" selection-end="10400" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="131" column="35" selection-start="4592" selection-end="4592" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.jdt.core_3.7.1.v_B76_R37x.jar!/org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="0" selection-start="4531" selection-end="4531" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/platform/lang-impl/src/com/intellij/psi/impl/source/codeStyle/CodeStyleManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="14" selection-start="5017" selection-end="5017" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/plugin.dtd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="30" selection-start="1876" selection-end="1876" vertical-scroll-proportion="-11.769231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="62" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.048022598">
+        <state line="55" column="13" selection-start="2216" selection-end="2216" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="4" selection-start="3772" selection-end="3772" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1435#1469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="9" selection-start="4228" selection-end="4228" vertical-scroll-proportion="1.2830188">
           <folding />
         </state>
       </provider>
@@ -692,7 +1010,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.20000002" />
               </list>
             </option>
           </splitter-proportions>

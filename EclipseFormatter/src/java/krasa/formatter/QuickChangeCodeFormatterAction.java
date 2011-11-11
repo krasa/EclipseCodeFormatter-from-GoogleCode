@@ -19,16 +19,21 @@ public class QuickChangeCodeFormatterAction extends QuickSwitchSchemeAction {
         for (final Settings.Formatter lf : Settings.Formatter.values()) {
             group.add(new DumbAwareAction(lf.name(), "", lf == formatter ? ourCurrentAction : ourNotCurrentAction) {
                 public void actionPerformed(AnActionEvent e) {
-                    ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance( project );
-                    final Settings state = instance.getState();
-                    state.setFormatter(lf);
-                    instance.loadState(state);
+                  changeFormatter( project, lf );
                 }
             });
         }
     }
 
-    protected boolean isEnabled() {
+  private void changeFormatter( Project project, Settings.Formatter lf )
+  {
+    ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance( project );
+    final Settings state = instance.getState();
+    state.setFormatter(lf);
+    instance.loadState(state);
+  }
+
+  protected boolean isEnabled() {
         return true;
     }
 }

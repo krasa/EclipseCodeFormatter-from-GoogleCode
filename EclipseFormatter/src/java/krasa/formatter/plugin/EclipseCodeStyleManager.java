@@ -5,8 +5,10 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.VisualPosition;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.ReadonlyStatusHandler;
@@ -67,27 +69,35 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 				formattedByIntelliJ = true;
 				super.reformatText(psiFile, startOffset, endOffset);
 			} else if (file != null) {
+				FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
 				if (editor != null) {
+
+					int visualColumnToRestore = getVisualColumnToRestore(editor);
+
 //					ApplicationManager.getApplication().runWriteAction(new Runnable() {
 //						@Override
 //						public void run() {
-							Document document = editor.getDocument();
-							String text = document.getText();
-							int fixedStartOffset = startOffset;
-							//if there is selected text
-							if (startOffset != 0) {
-								//start offset must be on the start of line
-								fixedStartOffset = text.substring(0, startOffset).lastIndexOf(LINE_SEPARATOR) + 1;
-							}
-							document.setText(codeFormatterFacade.format(text, fixedStartOffset, endOffset, LINE_SEPARATOR));
+					Document document = editor.getDocument();
+//					fileDocumentManager.saveDocument(document); DO NOT SAVE IT, IT BREAKS IT
+					String text = document.getText();
+					int fixedStartOffset = startOffset;
+					//if there is selected text
+					if (startOffset != 0) {
+						//start offset must be on the start of line
+						fixedStartOffset = text.substring(0, startOffset).lastIndexOf(LINE_SEPARATOR) + 1;
+					}
+					document.setText(codeFormatterFacade.format(text, fixedStartOffset, endOffset, LINE_SEPARATOR));
+
+
+					restoreVisualColumnToRestore(editor, visualColumnToRestore);
+
 //						}
 //					});
 				} else {
-					FileDocumentManager instance = FileDocumentManager.getInstance();
-					String iDocument = codeFormatterFacade.format(ioFile(file), LINE_SEPARATOR);
-					Document writeTo = instance.getDocument(file);
-					writeTo.setText(iDocument);
-					instance.saveDocument(writeTo);
+					Document writeTo = fileDocumentManager.getDocument(file);
+					fileDocumentManager.saveDocument(writeTo);
+					writeTo.setText(codeFormatterFacade.format(ioFile(file), LINE_SEPARATOR));
+					fileDocumentManager.saveDocument(writeTo);
 				}
 			} else {
 				notifyNothingWasFormatted();
@@ -98,6 +108,43 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 			e.printStackTrace();
 			notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
 		}
+	}
+
+	private void restoreVisualColumnToRestore(Editor editor, int visualColumnToRestore) {
+		if (visualColumnToRestore < 0) {
+		} else {
+			CaretModel caretModel = editor.getCaretModel();
+			VisualPosition position = caretModel.getVisualPosition();
+			if (visualColumnToRestore != position.column) {
+				caretModel.moveToVisualPosition(new VisualPosition(position.line, visualColumnToRestore));
+			}
+		}
+	}
+
+	private int getVisualColumnToRestore(Editor editor) {
+		int visualColumnToRestore = -1;
+
+		if (editor != null) {
+			Document document1 = editor.getDocument();
+			int caretOffset = editor.getCaretModel().getOffset();
+			caretOffset = Math.max(Math.min(caretOffset, document1.getTextLength() - 1), 0);
+			CharSequence text1 = document1.getCharsSequence();
+			int caretLine = document1.getLineNumber(caretOffset);
+			int lineStartOffset = document1.getLineStartOffset(caretLine);
+			int lineEndOffset = document1.getLineEndOffset(caretLine);
+			boolean fixCaretPosition = true;
+			for (int i = lineStartOffset; i < lineEndOffset; i++) {
+				char c = text1.charAt(i);
+				if (c != ' ' && c != '\t' && c != '\n') {
+					fixCaretPosition = false;
+					break;
+				}
+			}
+			if (fixCaretPosition) {
+				visualColumnToRestore = editor.getCaretModel().getVisualPosition().column;
+			}
+		}
+		return visualColumnToRestore;
 	}
 
 	private void notifyNothingWasFormatted() {
