@@ -4,7 +4,7 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>0.2</version>
+    <version>0.2.1</version>
 
     <description><![CDATA[
         Allows using Eclipse's code formatter directly from IntelliJ
@@ -13,18 +13,22 @@
 
         <br>
         <br>Known issues:
-        <br>-when editor is opened, view moves one line up after reformatting
+        <br>-when editor is opened, view sometimes moves one line up or down after reformatting
 
         ]]></description>
     <category>Formatting</category>
 
-    <vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech Krasa</vendor>
+    <vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech
+        Krasa
+    </vendor>
 
     <idea-version since-build="110.137" until-build=""/>
-    <!--<idea-version since-build="100.000" until-build="110.137"/>-->
+    <!--<idea-version since-build="100.000" until-build="109.999"/>-->
 
     <change-notes><![CDATA[
-        <p>0.2 (2011-11-01)
+        <p>0.2.1 (2011-11-17)
+        <br>- Release for 11.0</p>
+        <p>0.2 (2011-11-17)
         <br>- fixed bug -when file was edited and editor was closed
         and then file was reformatted without prior saving,
         changes was lost.</p>
