@@ -29,4 +29,4 @@ http://eclipse-code-formatter-intellij-plugin.googlecode.com/svn/importsSettings
  * org.eclipse.jdt.core.compiler.source=1.6
 
 == Notifications ==
- * if you do not like them, turn them off at Settings - Notifications
+ * if you do not like them, turn them off (Settings - Notifications)
