@@ -1,11 +1,10 @@
 package krasa.formatter.eclipse;
 
+import java.io.File;
+import java.util.Properties;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.IDocument;
-
-import java.io.File;
-import java.util.Properties;
 
 /**
  * TODO it would be nice to cache CodeFormatter
@@ -57,6 +56,9 @@ public class EclipseCodeFormatterFacade {
 	 */
 	public String format(String text, int startOffset, int endOffset,
 			String lineSeparator) {
+		if (endOffset > text.length()) {
+			endOffset = text.length();
+		}
 		return codeFormatterApplication.format(text,
 				newCodeFormatter(pathToConfigFile), startOffset, endOffset
 						- startOffset, lineSeparator);

@@ -19,16 +19,15 @@ package krasa.formatter.plugin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.Indent;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,18 +100,6 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
 		return original.getLineIndent(file, offset);
 	}
 
-//    @Override
-//    public String getLineIndent(@NotNull Editor editor) {
-//        return original.getLineIndent(editor);
-
-//    }
-
-
-	@Override
-	public String getLineIndent(@NotNull Document document, int offset) {
-		return original.getLineIndent(document, offset);
-
-	}
 
 
 	public Indent getIndent(String text, FileType fileType) {
@@ -136,19 +123,33 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
 		return original.isSequentialProcessingAllowed();
 	}
 
-	@Override
-	public void performActionWithFormatterDisabled(Runnable r) {
-		original.performActionWithFormatterDisabled(r);
-	}
 
-	@Override
-	public <T extends Throwable> void performActionWithFormatterDisabled(ThrowableRunnable<T> r) throws T {
-		original.performActionWithFormatterDisabled(r);
-	}
+    @Override
+    public String getLineIndent(@NotNull Editor editor) {
+        return original.getLineIndent(editor);
 
-	@Override
-	public <T> T performActionWithFormatterDisabled(Computable<T> r) {
-		return original.performActionWithFormatterDisabled(r);
+    }
 
-	}
+
+//	@Override
+//	public String getLineIndent(@NotNull Document document, int offset) {
+//		return original.getLineIndent(document, offset);
+//
+//	}
+//
+//	@Override
+//	public void performActionWithFormatterDisabled(Runnable r) {
+//		original.performActionWithFormatterDisabled(r);
+//	}
+//
+//	@Override
+//	public <T extends Throwable> void performActionWithFormatterDisabled(ThrowableRunnable<T> r) throws T {
+//		original.performActionWithFormatterDisabled(r);
+//	}
+//
+//	@Override
+//	public <T> T performActionWithFormatterDisabled(Computable<T> r) {
+//		return original.performActionWithFormatterDisabled(r);
+//
+//	}
 }

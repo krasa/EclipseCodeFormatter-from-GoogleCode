@@ -18,15 +18,6 @@
 package krasa.formatter.plugin;
 
 import com.intellij.ui.DocumentAdapter;
-import krasa.formatter.Messages;
-import krasa.formatter.settings.Settings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +25,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.DocumentEvent;
+import krasa.formatter.Messages;
+import krasa.formatter.settings.Settings;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Configuration dialog for changing the {@link krasa.formatter.settings.Settings} of the plugin.
@@ -43,216 +42,248 @@ import java.util.List;
  */
 public class ProjectSettingsForm {
 
-	private static final Color NORMAL = new JTextField().getBackground();
-	private static final Color WARNING = new Color(255, 255, 204);
-	private static final Color ERROR = new Color(255, 204, 204);
+    private static final Color NORMAL = new JTextField().getBackground();
+    private static final Color WARNING = new Color(255, 255, 204);
+    private static final Color ERROR = new Color(255, 204, 204);
 
-	private JPanel rootComponent;
+    private JPanel rootComponent;
 
-	private JRadioButton useDefaultFormatter;
-	private JRadioButton useEclipseFormatter;
+    private JRadioButton useDefaultFormatter;
+    private JRadioButton useEclipseFormatter;
 
-	private JTextField eclipseSupportedFileTypes;
-	private JLabel eclipseSupportedFileTypesLabel;
-	private JTextField eclipsePrefs;
-	private JButton eclipsePrefsBrowse;
-	private JLabel eclipsePrefsLabel;
-	private JTextPane eclipsePrefsExample;
-	private JTextArea eclipseFormatterCannotFormatTextArea;
+    private JButton eclipsePrefsBrowse;
 
+    private JTextField eclipseSupportedFileTypes;
+    private JTextField eclipsePrefs;
+    private JFormattedTextField optimizeImportGroups;
 
-	private final List<Popup> visiblePopups = new ArrayList<Popup>();
-	@Nullable
-	private File lastDirectory;
+    private JLabel eclipseSupportedFileTypesLabel;
+    private JLabel eclipsePrefsLabel;
+    private JTextPane eclipsePrefsExample;
+    private JCheckBox optimizeImportsCheckBox;
+    private JLabel optimizeImportGroupsLabel;
+    private JTextPane optimizeImportGroupsHelpLabel;
 
-	public ProjectSettingsForm() {
-		JToggleButton[] modifyableButtons = new JToggleButton[]{
-				useDefaultFormatter,
-				useEclipseFormatter,
-		};
-		for (JToggleButton button : modifyableButtons) {
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					updateComponents();
-				}
-			});
-		}
+    private JTextArea help;
 
-		JTextField[] modifyableFields = new JTextField[]{
-				eclipsePrefs,
-		};
-		for (JTextField field : modifyableFields) {
-			field.getDocument().addDocumentListener(new DocumentAdapter() {
-				protected void textChanged(DocumentEvent e) {
-					updateComponents();
-				}
-			});
-		}
+    private final List<Popup> visiblePopups = new ArrayList<Popup>();
+    @Nullable
+    private File lastDirectory;
 
-		eclipseSupportedFileTypes.setText("*.java");
-		eclipsePrefsBrowse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				browseForFile(eclipsePrefs);
-			}
-		});
+    public ProjectSettingsForm() {
+        JToggleButton[] modifyableButtons = new JToggleButton[]{
+                useDefaultFormatter,
+                useEclipseFormatter,
+                optimizeImportsCheckBox,
+        };
+        for (JToggleButton button : modifyableButtons) {
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    updateComponents();
+                }
+            });
+        }
 
-		rootComponent.addAncestorListener(new AncestorListener() {
-			public void ancestorAdded(AncestorEvent event) {
-				// Called when component becomes visible, to ensure that the popups
-				// are visible when the form is shown for the first time.
-				updateComponents();
-			}
+        JTextField[] modifyableFields = new JTextField[]{
+                eclipsePrefs,eclipseSupportedFileTypes, optimizeImportGroups
+        };
+        for (JTextField field : modifyableFields) {
+            field.getDocument().addDocumentListener(new DocumentAdapter() {
+                protected void textChanged(DocumentEvent e) {
+                    updateComponents();
+                }
+            });
+        }
 
-			public void ancestorRemoved(AncestorEvent event) {
-			}
+        eclipseSupportedFileTypes.setText("*.java");
+        eclipsePrefsBrowse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                browseForFile(eclipsePrefs);
+            }
+        });
 
-			public void ancestorMoved(AncestorEvent event) {
-			}
-		});
-	}
+        rootComponent.addAncestorListener(new AncestorListener() {
+            public void ancestorAdded(AncestorEvent event) {
+                // Called when component becomes visible, to ensure that the popups
+                // are visible when the form is shown for the first time.
+                updateComponents();
+            }
 
-	private void browseForFile(@NotNull JTextField target) {
-		JFileChooser chooser = new JFileChooser();
-		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		chooser.setMultiSelectionEnabled(false);
-		chooser.setFileHidingEnabled(false);	// Eclipse's prefs file is in a hidden ".settings" directory
+            public void ancestorRemoved(AncestorEvent event) {
+            }
 
-		if (target.getText().equals("") && lastDirectory != null) {
-			chooser.setCurrentDirectory(lastDirectory);
-		} else {
-			File currentSelection = new File(target.getText());
-			chooser.setCurrentDirectory(currentSelection);
-			chooser.setSelectedFile(currentSelection);
-		}
+            public void ancestorMoved(AncestorEvent event) {
+            }
+        });
+    }
 
-		int result = chooser.showOpenDialog(rootComponent);
-		if (result == JFileChooser.APPROVE_OPTION) {
-			target.setText(chooser.getSelectedFile().getAbsolutePath());
-		}
-		lastDirectory = chooser.getCurrentDirectory();
-	}
+    private void browseForFile(@NotNull JTextField target) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setMultiSelectionEnabled(false);
+        chooser.setFileHidingEnabled(false);    // Eclipse's prefs file is in a hidden ".settings" directory
 
-	private void updateComponents() {
-		hidePopups();
+        if (target.getText().equals("") && lastDirectory != null) {
+            chooser.setCurrentDirectory(lastDirectory);
+        } else {
+            File currentSelection = new File(target.getText());
+            chooser.setCurrentDirectory(currentSelection);
+            chooser.setSelectedFile(currentSelection);
+        }
 
-		enabledBy(useEclipseFormatter, new JComponent[]{
-				eclipseSupportedFileTypesLabel,
-				eclipsePrefs,
-				eclipsePrefsBrowse,
-				eclipsePrefsLabel,
-				eclipsePrefsExample,
-		});
-		if ( notEmpty(eclipsePrefs) && fileExists(eclipsePrefs)) {
-			ok(eclipsePrefs);
-		}
+        int result = chooser.showOpenDialog(rootComponent);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            target.setText(chooser.getSelectedFile().getAbsolutePath());
+        }
+        lastDirectory = chooser.getCurrentDirectory();
+    }
 
-	}
+    private void updateComponents() {
+        hidePopups();
 
-	private void enabledBy(@NotNull JToggleButton control, @NotNull JComponent[] targets) {
-		for (JComponent target : targets) {
-			target.setEnabled(control.isEnabled() && control.isSelected());
-		}
-	}
+        enabledBy(new JComponent[]{
+                eclipseSupportedFileTypesLabel,
+                eclipsePrefs,
+                eclipsePrefsBrowse,
+                eclipsePrefsLabel,
+                eclipsePrefsExample,
+                optimizeImportsCheckBox,
+        }, useEclipseFormatter);
 
-	private boolean notEmpty(@NotNull JTextField field) {
-		if (field.getText().trim().length() == 0) {
-			field.setBackground(WARNING);
-			showPopup(field, Messages.message( "warning.requiredField" ));
-			return false;
-		}
-		return true;
-	}
+        enabledBy(new JComponent[]{
+                optimizeImportGroups,
+                optimizeImportGroupsLabel,
+                optimizeImportGroupsHelpLabel,
+        }, optimizeImportsCheckBox, useEclipseFormatter);
 
-	private boolean containsText(@NotNull String needle, @NotNull JTextField field) {
-		if (!field.getText().contains(needle)) {
-			field.setBackground(ERROR);
-			showPopup(field, Messages.message("warning.mustContain", needle));
-			return false;
-		}
-		return true;
-	}
+        if (notEmpty(eclipsePrefs) && fileExists(eclipsePrefs)) {
+            ok(eclipsePrefs);
+        }
 
-	private boolean fileExists(@NotNull JTextField field) {
-		if (!new File(field.getText()).isFile()) {
-			field.setBackground(ERROR);
-			showPopup(field, Messages.message("warning.noSuchFile"));
-			return false;
-		}
-		return true;
-	}
+    }
 
-	private void atLeastOneSelected(JToggleButton... buttons) {
-		for (JToggleButton button : buttons) {
-			if (button.isSelected()) {
-				return;
-			}
-		}
-		showPopup(buttons[0], Messages.message("warning.selectAtLeastOne"));
-	}
+    private void enabledBy(@NotNull JComponent[] targets, @NotNull JToggleButton... control) {
+        boolean b = true;
+        for (JToggleButton jToggleButton : control) {
+            b = b && (jToggleButton.isEnabled() && jToggleButton.isSelected());
+        }
+        for (JComponent target : targets) {
+            target.setEnabled(b);
+        }
+    }
 
-	private void ok(@NotNull JTextField field) {
-		field.setBackground(NORMAL);
-	}
+    private boolean notEmpty(@NotNull JTextField field) {
+        if (field.getText().trim().length() == 0) {
+            field.setBackground(WARNING);
+            showPopup(field, Messages.message("warning.requiredField"));
+            return false;
+        }
+        return true;
+    }
 
-	private void showPopup(@NotNull JComponent parent, @NotNull String message) {
-		if (!parent.isShowing() || !parent.isEnabled()) {
-			return; // if getLocationOnScreen is called when the component is not showing, an exception is thrown
-		}
-		JToolTip tip = new JToolTip();
-		tip.setTipText(message);
-		Dimension tipSize = tip.getPreferredSize();
+    private boolean containsText(@NotNull String needle, @NotNull JTextField field) {
+        if (!field.getText().contains(needle)) {
+            field.setBackground(ERROR);
+            showPopup(field, Messages.message("warning.mustContain", needle));
+            return false;
+        }
+        return true;
+    }
 
-		Point location = parent.getLocationOnScreen();
-		int x = (int) location.getX();
-		int y = (int) (location.getY() - tipSize.getHeight());
+    private boolean fileExists(@NotNull JTextField field) {
+        if (!new File(field.getText()).isFile()) {
+            field.setBackground(ERROR);
+            showPopup(field, Messages.message("warning.noSuchFile"));
+            return false;
+        }
+        return true;
+    }
 
-		Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x, y);
-		popup.show();
-		visiblePopups.add(popup);
-	}
+    private void atLeastOneSelected(JToggleButton... buttons) {
+        for (JToggleButton button : buttons) {
+            if (button.isSelected()) {
+                return;
+            }
+        }
+        showPopup(buttons[0], Messages.message("warning.selectAtLeastOne"));
+    }
 
-	private void hidePopups() {
-		for (Iterator<Popup> it = visiblePopups.iterator(); it.hasNext(); ) {
-			Popup popup = it.next();
-			popup.hide();
-			it.remove();
-		}
-	}
+    private void ok(@NotNull JTextField field) {
+        field.setBackground(NORMAL);
+    }
 
-	@NotNull
-	public JPanel getRootComponent() {
-		return rootComponent;
-	}
+    private void showPopup(@NotNull JComponent parent, @NotNull String message) {
+        if (!parent.isShowing() || !parent.isEnabled()) {
+            return; // if getLocationOnScreen is called when the component is not showing, an exception is thrown
+        }
+        JToolTip tip = new JToolTip();
+        tip.setTipText(message);
+        Dimension tipSize = tip.getPreferredSize();
 
-	public void importFrom(@NotNull Settings in) {
-		useDefaultFormatter.setSelected(in.getFormatter().equals( Settings.Formatter.DEFAULT));
-		useEclipseFormatter.setSelected(in.getFormatter().equals( Settings.Formatter.ECLIPSE));
-		eclipsePrefs.setText(in.getEclipsePrefs());
-		updateComponents();
-	}
+        Point location = parent.getLocationOnScreen();
+        int x = (int) location.getX();
+        int y = (int) (location.getY() - tipSize.getHeight());
 
-	public void exportTo(@NotNull Settings out) {
-		if (useEclipseFormatter.isSelected()) {
-			out.setFormatter( Settings.Formatter.ECLIPSE);
-		} else {
-			out.setFormatter( Settings.Formatter.DEFAULT);
-		}
+        Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x, y);
+        popup.show();
+        visiblePopups.add(popup);
+    }
 
-		out.setEclipsePrefs(eclipsePrefs.getText());
-	}
+    private void hidePopups() {
+        for (Iterator<Popup> it = visiblePopups.iterator(); it.hasNext(); ) {
+            Popup popup = it.next();
+            popup.hide();
+            it.remove();
+        }
+    }
 
-	@SuppressWarnings({"RedundantIfStatement", "ConstantConditions"})
-	public boolean isModified(Settings data) {
-		if (useDefaultFormatter.isSelected() != data.getFormatter().equals( Settings.Formatter.DEFAULT)) {
-			return true;
-		}
-		if (useEclipseFormatter.isSelected() != data.getFormatter().equals( Settings.Formatter.ECLIPSE)) {
-			return true;
-		}
-		if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null) {
-			return true;
-		}
+    @NotNull
+    public JPanel getRootComponent() {
+        return rootComponent;
+    }
 
-		return false;
-	}
+    public void importFrom(@NotNull Settings in) {
+        useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
+        useEclipseFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.ECLIPSE));
+        eclipsePrefs.setText(in.getEclipsePrefs());
+        setData(in);
+        updateComponents();
+    }
+
+    public void exportTo(@NotNull Settings out) {
+        if (useEclipseFormatter.isSelected()) {
+            out.setFormatter(Settings.Formatter.ECLIPSE);
+        } else {
+            out.setFormatter(Settings.Formatter.DEFAULT);
+        }
+        getData(out);
+        out.setEclipsePrefs(eclipsePrefs.getText());
+    }
+
+    public void setData(Settings data) {
+        optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
+        optimizeImportGroups.setText(data.getJoinedGroup());
+    }
+
+    public void getData(Settings data) {
+        data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
+        data.setJoinedGroup(optimizeImportGroups.getText());
+    }
+
+    @SuppressWarnings({"RedundantIfStatement", "ConstantConditions"})
+    public boolean isModified(Settings data) {
+        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {
+            return true;
+        }
+        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
+            return true;
+        }
+        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null) {
+            return true;
+        }
+        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) return true;
+        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups.getText().equals(data.getJoinedGroup()) : data.getJoinedGroup() != null)
+            return true;
+        return false;
+    }
 }

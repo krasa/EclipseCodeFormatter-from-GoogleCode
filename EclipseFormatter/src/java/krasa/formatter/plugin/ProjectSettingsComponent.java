@@ -18,7 +18,7 @@
 package krasa.formatter.plugin;
 
 import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.NotificationsConfiguration;
+import com.intellij.notification.impl.NotificationsConfiguration;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
@@ -28,6 +28,7 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import javax.swing.*;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
 import krasa.formatter.settings.IllegalSettingsException;
@@ -38,11 +39,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
-//import com.intellij.notification.impl.NotificationsConfiguration;
-
-//import com.intellij.notification.NotificationsConfiguration;
 //import com.intellij.notification.NotificationsConfiguration;
 
 /**

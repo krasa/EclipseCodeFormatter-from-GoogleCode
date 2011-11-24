@@ -17,6 +17,9 @@
 
 package krasa.formatter.settings;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,8 +36,48 @@ public class Settings implements Cloneable {
 	private Formatter formatter = Formatter.DEFAULT;
 	@NotNull
 	private String eclipsePrefs = "";
-	@NotNull
-	private String lineSeparator = "\\n";
+	private String joinedGroup = "";
+	private boolean optimizeImports = true;
+	private Integer notifyFromTextLenght = 300;
+
+	public Integer getNotifyFromTextLenght() {
+		return notifyFromTextLenght;
+	}
+
+	public void setNotifyFromTextLenght(Integer notifyFromTextLenght) {
+		this.notifyFromTextLenght = notifyFromTextLenght;
+	}
+
+	public void setJoinedGroup(String joinedGroup) {
+		this.joinedGroup = joinedGroup;
+	}
+
+	public boolean isOptimizeImports() {
+		return optimizeImports;
+	}
+
+	public void setOptimizeImports(boolean optimizeImports) {
+		this.optimizeImports = optimizeImports;
+	}
+
+	public String getJoinedGroup() {
+		return joinedGroup;
+	}
+
+	public List<JoinedGroup> getJoinedGroupAsList() {
+		if (joinedGroup == null || joinedGroup.isEmpty()) {
+			return Collections.emptyList();
+		}
+		List<JoinedGroup> joinedGroups = new ArrayList<JoinedGroup>();
+        for (String group : joinedGroup.split(";")) {
+			String[] split = group.split("-");
+			if (split.length != 2) {
+				continue;
+			}
+			joinedGroups.add(JoinedGroup.from(split[0], split[1]));
+		}
+		return joinedGroups;
+	}
 
 	@NotNull
 	public final Settings clone() {
@@ -43,15 +86,6 @@ public class Settings implements Cloneable {
 		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	@NotNull
-	public String getLineSeparator() {
-		return lineSeparator;
-	}
-
-	public void setLineSeparator(@NotNull String lineSeparator) {
-		this.lineSeparator = lineSeparator;
 	}
 
 	@NotNull
