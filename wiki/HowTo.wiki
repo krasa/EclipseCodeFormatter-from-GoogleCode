@@ -1,4 +1,3 @@
-#labels Phase-Deploy
 =Instructions=
  #  enable project specific formatter settings in Eclipse to get preference file
  #  set path to eclipse preference file in IntelliJ settings
@@ -7,7 +6,7 @@
 
 
 == Optimizing imports ==
- * Settings - Code Style - Imports - set "Class count to use import with '*'" and "Name count to use static import with '*'" to 999 or more
+ * Settings - Code Style - Imports - set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more
  * delete or modify import layout as you wish. 
  * IntelliJ's Import Optimizing must be turned off (Settings-Editor-Show "Reformat Code" dialog...)
  * IntelliJ will be still used for optimizing, this plugin just appends blank lines between the major groups
