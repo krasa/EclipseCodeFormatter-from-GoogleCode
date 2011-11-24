@@ -6,8 +6,8 @@
 
 
 == Optimizing imports ==
- * Settings - Code Style - Imports - set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more
- * delete or modify import layout as you wish, there is no need to define packages. 
+ * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more (Settings - Code Style - Imports)
+ * delete or modify import layout as you wish, there is no need to define packages (Settings - Code Style - Imports)
  * IntelliJ's Import Optimizing must be turned off (Settings-Editor-Show "Reformat Code" dialog...)
  * IntelliJ will be still used for optimizing, this plugin just appends blank lines between the groups. 
  * Import groups can be joined together (blank line is not added), Example  of settings:   java-javax; com-org;
