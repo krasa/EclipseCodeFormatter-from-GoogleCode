@@ -27,3 +27,6 @@
  * org.eclipse.jdt.core.compiler.compliance=1.6
  * org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
  * org.eclipse.jdt.core.compiler.source=1.6
+
+== Notifications ==
+ * if you do not like them, turn them off at Settings - Notifications
