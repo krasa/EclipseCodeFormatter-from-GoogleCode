@@ -12,7 +12,7 @@
  * IntelliJ will be still used for optimizing, this plugin just appends blank lines between the major groups
  * Import groups can joined together (blank line is not added), Example  of settings:   java-javax; com-org;
 
-
+http://eclipse-code-formatter-intellij-plugin.googlecode.com/svn/importsSettings.png
 
 
 == Getting the Eclipse code formatter preferences file ==
