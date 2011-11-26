@@ -17,9 +17,6 @@
 
 package krasa.formatter.settings;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -64,19 +61,12 @@ public class Settings implements Cloneable {
 		return joinedGroup;
 	}
 
-	public List<JoinedGroup> getJoinedGroupAsList() {
+	public ImportGroupSettings getImportGroupSettings() {
 		if (joinedGroup == null || joinedGroup.isEmpty()) {
-			return Collections.emptyList();
+			return ImportGroupSettings.empty();
 		}
-		List<JoinedGroup> joinedGroups = new ArrayList<JoinedGroup>();
-        for (String group : joinedGroup.split(";")) {
-			String[] split = group.split("-");
-			if (split.length != 2) {
-				continue;
-			}
-			joinedGroups.add(JoinedGroup.from(split[0], split[1]));
-		}
-		return joinedGroups;
+
+		return new ImportGroupSettings(joinedGroup);
 	}
 
 	@NotNull

@@ -1,51 +1,34 @@
 package krasa.formatter.settings;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Vojtech Krasa
  */
 public class JoinedGroup {
 
-    private final String group1;
-    private final String group2;
+    private final List<String> groups;
 
-    public String getGroup1() {
-        return group1;
+    public JoinedGroup(@NotNull String... param) {
+        groups = new ArrayList<String>();
+        for (String s : param) {
+            groups.add(s.trim());
+        }
     }
 
-    public String getGroup2() {
-        return group2;
+    public boolean contains(JoinedGroup that) {
+        for (String s : that.getGroups()) {
+            if (!groups.contains(s)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public JoinedGroup(String group1, String group2) {
-        this.group1 = group1;
-        this.group2 = group2;
+    public List<String> getGroups() {
+        return groups;
     }
-
-    public static JoinedGroup from(String group1, String group2) {
-        return new JoinedGroup(group1, group2);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        JoinedGroup that = (JoinedGroup) o;
-
-        return isSame(that);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = group1.hashCode();
-        result = 31 * result + group2.hashCode();
-        return result;
-    }
-
-    private boolean isSame(JoinedGroup that) {
-        boolean b = group1.equals(that.group1) && group2.equals(that.group2);
-        boolean c = group1.equals(that.group2) && group2.equals(that.group1);
-        return b || c;
-    }
-
 }
