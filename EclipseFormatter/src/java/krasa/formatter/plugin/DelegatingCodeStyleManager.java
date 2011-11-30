@@ -42,88 +42,87 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings({"deprecation"})
 public class DelegatingCodeStyleManager extends CodeStyleManager {
 
-	@NotNull
-	protected final CodeStyleManager original;
+    @NotNull
+    protected final CodeStyleManager original;
 
-	public DelegatingCodeStyleManager(@NotNull CodeStyleManager original) {
-		this.original = original;
-	}
+    public DelegatingCodeStyleManager(@NotNull CodeStyleManager original) {
+        this.original = original;
+    }
 
-	@NotNull
-	public CodeStyleManager getOriginal() {
-		return original;
-	}
+    @NotNull
+    public CodeStyleManager getOriginal() {
+        return original;
+    }
 
-	@NotNull
-	public Project getProject() {
-		return original.getProject();
-	}
+    @NotNull
+    public Project getProject() {
+        return original.getProject();
+    }
 
-	@NotNull
-	public PsiElement reformat(@NotNull PsiElement element) throws IncorrectOperationException {
-		return original.reformat(element);
-	}
+    @NotNull
+    public PsiElement reformat(@NotNull PsiElement element) throws IncorrectOperationException {
+        return original.reformat(element);
+    }
 
-	@NotNull
-	public PsiElement reformat(@NotNull PsiElement element, boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
-		return original.reformat(element, canChangeWhiteSpacesOnly);
-	}
+    @NotNull
+    public PsiElement reformat(@NotNull PsiElement element, boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
+        return original.reformat(element, canChangeWhiteSpacesOnly);
+    }
 
-	public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset) throws IncorrectOperationException {
-		return original.reformatRange(element, startOffset, endOffset);
-	}
+    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset) throws IncorrectOperationException {
+        return original.reformatRange(element, startOffset, endOffset);
+    }
 
-	public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset, boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
-		return original.reformatRange(element, startOffset, endOffset, canChangeWhiteSpacesOnly);
-	}
+    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset, boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
+        return original.reformatRange(element, startOffset, endOffset, canChangeWhiteSpacesOnly);
+    }
 
-	public void reformatText(@NotNull PsiFile element, int startOffset, int endOffset) throws IncorrectOperationException {
-		original.reformatText(element, startOffset, endOffset);
-	}
+    public void reformatText(@NotNull PsiFile element, int startOffset, int endOffset) throws IncorrectOperationException {
+        original.reformatText(element, startOffset, endOffset);
+    }
 
-	public void adjustLineIndent(@NotNull PsiFile file, TextRange rangeToAdjust) throws IncorrectOperationException {
-		original.adjustLineIndent(file, rangeToAdjust);
-	}
+    public void adjustLineIndent(@NotNull PsiFile file, TextRange rangeToAdjust) throws IncorrectOperationException {
+        original.adjustLineIndent(file, rangeToAdjust);
+    }
 
-	public int adjustLineIndent(@NotNull PsiFile file, int offset) throws IncorrectOperationException {
-		return original.adjustLineIndent(file, offset);
-	}
+    public int adjustLineIndent(@NotNull PsiFile file, int offset) throws IncorrectOperationException {
+        return original.adjustLineIndent(file, offset);
+    }
 
-	public int adjustLineIndent(@NotNull Document document, int offset) {
-		return original.adjustLineIndent(document, offset);
-	}
+    public int adjustLineIndent(@NotNull Document document, int offset) {
+        return original.adjustLineIndent(document, offset);
+    }
 
-	public boolean isLineToBeIndented(@NotNull PsiFile file, int offset) {
-		return original.isLineToBeIndented(file, offset);
-	}
+    public boolean isLineToBeIndented(@NotNull PsiFile file, int offset) {
+        return original.isLineToBeIndented(file, offset);
+    }
 
-	@Nullable
-	public String getLineIndent(@NotNull PsiFile file, int offset) {
-		return original.getLineIndent(file, offset);
-	}
+    @Nullable
+    public String getLineIndent(@NotNull PsiFile file, int offset) {
+        return original.getLineIndent(file, offset);
+    }
 
 
+    public Indent getIndent(String text, FileType fileType) {
+        return original.getIndent(text, fileType);
+    }
 
-	public Indent getIndent(String text, FileType fileType) {
-		return original.getIndent(text, fileType);
-	}
+    public String fillIndent(Indent indent, FileType fileType) {
+        return original.fillIndent(indent, fileType);
+    }
 
-	public String fillIndent(Indent indent, FileType fileType) {
-		return original.fillIndent(indent, fileType);
-	}
+    public Indent zeroIndent() {
+        return original.zeroIndent();
+    }
 
-	public Indent zeroIndent() {
-		return original.zeroIndent();
-	}
+    public void reformatNewlyAddedElement(@NotNull ASTNode block, @NotNull ASTNode addedElement) throws IncorrectOperationException {
+        original.reformatNewlyAddedElement(block, addedElement);
+    }
 
-	public void reformatNewlyAddedElement(@NotNull ASTNode block, @NotNull ASTNode addedElement) throws IncorrectOperationException {
-		original.reformatNewlyAddedElement(block, addedElement);
-	}
-
-	@Override
-	public boolean isSequentialProcessingAllowed() {
-		return original.isSequentialProcessingAllowed();
-	}
+    @Override
+    public boolean isSequentialProcessingAllowed() {
+        return original.isSequentialProcessingAllowed();
+    }
 
 
     @Override
@@ -132,7 +131,7 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
 
     }
 
-
+//
 //	@Override
 //	public String getLineIndent(@NotNull Document document, int offset) {
 //		return original.getLineIndent(document, offset);

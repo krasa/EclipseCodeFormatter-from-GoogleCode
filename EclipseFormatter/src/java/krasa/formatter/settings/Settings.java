@@ -21,9 +21,14 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Esko Luontola
+ * @author Vojtech Krasa
  * @since 4.12.2007
  */
 public class Settings implements Cloneable {
+
+	public DisabledFileTypeSettings geDisabledFileTypeSettings() {
+		return new DisabledFileTypeSettings(disabledFileTypes);
+	}
 
 	public static enum Formatter {
 		DEFAULT, ECLIPSE
@@ -34,8 +39,27 @@ public class Settings implements Cloneable {
 	@NotNull
 	private String eclipsePrefs = "";
 	private String joinedGroup = "";
+	private String disabledFileTypes = "";
 	private boolean optimizeImports = true;
+	private boolean formatOtherFileTypesWithIntelliJ = true;
+	private boolean formatSeletedTextInAllFileTypes = true;
 	private Integer notifyFromTextLenght = 300;
+
+    public boolean isFormatSeletedTextInAllFileTypes() {
+        return formatSeletedTextInAllFileTypes;
+    }
+
+    public void setFormatSeletedTextInAllFileTypes(boolean formatSeletedTextInAllFileTypes) {
+        this.formatSeletedTextInAllFileTypes = formatSeletedTextInAllFileTypes;
+    }
+
+    public boolean isFormatOtherFileTypesWithIntelliJ() {
+		return formatOtherFileTypesWithIntelliJ;
+	}
+
+	public void setFormatOtherFileTypesWithIntelliJ(boolean formatOtherFileTypesWithIntelliJ) {
+		this.formatOtherFileTypesWithIntelliJ = formatOtherFileTypesWithIntelliJ;
+	}
 
 	public Integer getNotifyFromTextLenght() {
 		return notifyFromTextLenght;
@@ -51,6 +75,14 @@ public class Settings implements Cloneable {
 
 	public boolean isOptimizeImports() {
 		return optimizeImports;
+	}
+
+	public String getDisabledFileTypes() {
+		return disabledFileTypes;
+	}
+
+	public void setDisabledFileTypes(String disabledFileTypes) {
+		this.disabledFileTypes = disabledFileTypes;
 	}
 
 	public void setOptimizeImports(boolean optimizeImports) {

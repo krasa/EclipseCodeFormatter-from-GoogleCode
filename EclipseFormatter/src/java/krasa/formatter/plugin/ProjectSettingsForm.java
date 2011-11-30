@@ -18,6 +18,7 @@
 package krasa.formatter.plugin;
 
 import com.intellij.ui.DocumentAdapter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
+
 import krasa.formatter.Messages;
 import krasa.formatter.settings.Settings;
 import org.jetbrains.annotations.NotNull;
@@ -38,6 +40,7 @@ import org.jetbrains.annotations.Nullable;
  * Configuration dialog for changing the {@link krasa.formatter.settings.Settings} of the plugin.
  *
  * @author Esko Luontola
+ * @author Vojtech Krasa
  * @since 4.12.2007
  */
 public class ProjectSettingsForm {
@@ -65,6 +68,11 @@ public class ProjectSettingsForm {
     private JTextPane optimizeImportGroupsHelpLabel;
 
     private JTextArea help;
+    private JTextField disabledFileTypes;
+    private JTextPane disabledFileTypesHelpLabel;
+    private JRadioButton doNotFormatOtherFilesRadioButton;
+    private JRadioButton formatOtherFilesWithExceptionsRadioButton;
+    private JCheckBox formatSeletedTextInAllFileTypes;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @Nullable
@@ -75,6 +83,9 @@ public class ProjectSettingsForm {
                 useDefaultFormatter,
                 useEclipseFormatter,
                 optimizeImportsCheckBox,
+                doNotFormatOtherFilesRadioButton,
+                formatOtherFilesWithExceptionsRadioButton,
+                formatSeletedTextInAllFileTypes,
         };
         for (JToggleButton button : modifyableButtons) {
             button.addActionListener(new ActionListener() {
@@ -85,7 +96,7 @@ public class ProjectSettingsForm {
         }
 
         JTextField[] modifyableFields = new JTextField[]{
-                eclipsePrefs,eclipseSupportedFileTypes, optimizeImportGroups
+                eclipsePrefs, eclipseSupportedFileTypes, optimizeImportGroups, disabledFileTypes
         };
         for (JTextField field : modifyableFields) {
             field.getDocument().addDocumentListener(new DocumentAdapter() {
@@ -148,6 +159,9 @@ public class ProjectSettingsForm {
                 eclipsePrefsLabel,
                 eclipsePrefsExample,
                 optimizeImportsCheckBox,
+                doNotFormatOtherFilesRadioButton,
+                formatOtherFilesWithExceptionsRadioButton,
+                formatSeletedTextInAllFileTypes,
         }, useEclipseFormatter);
 
         enabledBy(new JComponent[]{
@@ -155,6 +169,11 @@ public class ProjectSettingsForm {
                 optimizeImportGroupsLabel,
                 optimizeImportGroupsHelpLabel,
         }, optimizeImportsCheckBox, useEclipseFormatter);
+
+        enabledBy(new JComponent[]{
+                disabledFileTypes,
+                disabledFileTypesHelpLabel,
+        }, formatOtherFilesWithExceptionsRadioButton, useEclipseFormatter);
 
         if (notEmpty(eclipsePrefs) && fileExists(eclipsePrefs)) {
             ok(eclipsePrefs);
@@ -243,11 +262,23 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
+        if (in.isFormatOtherFileTypesWithIntelliJ()) {
+            formatOtherFilesWithExceptionsRadioButton.setSelected(true);
+        } else {
+            doNotFormatOtherFilesRadioButton.setSelected(true);
+        }
         useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
         useEclipseFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.ECLIPSE));
-        eclipsePrefs.setText(in.getEclipsePrefs());
         setData(in);
         updateComponents();
+    }
+
+    public void setData(Settings data) {
+        eclipsePrefs.setText(data.getEclipsePrefs());
+        optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
+        optimizeImportGroups.setText(data.getJoinedGroup());
+        disabledFileTypes.setText(data.getDisabledFileTypes());
+        formatSeletedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
     }
 
     public void exportTo(@NotNull Settings out) {
@@ -260,30 +291,23 @@ public class ProjectSettingsForm {
         out.setEclipsePrefs(eclipsePrefs.getText());
     }
 
-    public void setData(Settings data) {
-        optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
-        optimizeImportGroups.setText(data.getJoinedGroup());
-    }
-
     public void getData(Settings data) {
+        data.setEclipsePrefs(eclipsePrefs.getText());
         data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
         data.setJoinedGroup(optimizeImportGroups.getText());
+        data.setDisabledFileTypes(disabledFileTypes.getText());
+        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes.isSelected());
     }
 
-    @SuppressWarnings({"RedundantIfStatement", "ConstantConditions"})
     public boolean isModified(Settings data) {
-        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {
+        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
             return true;
-        }
-        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
-            return true;
-        }
-        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null) {
-            return true;
-        }
         if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) return true;
         if (optimizeImportGroups.getText() != null ? !optimizeImportGroups.getText().equals(data.getJoinedGroup()) : data.getJoinedGroup() != null)
             return true;
+        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes()) : data.getDisabledFileTypes() != null)
+            return true;
+        if (formatSeletedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes()) return true;
         return false;
     }
 }

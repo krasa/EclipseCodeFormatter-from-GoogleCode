@@ -17,6 +17,8 @@
 
 package krasa.formatter.plugin;
 
+import com.intellij.codeInsight.actions.LayoutCodeDialog;
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -29,6 +31,7 @@ import org.picocontainer.MutablePicoContainer;
  * Switches a project's {@link CodeStyleManager} to a eclipse formatter and back.
  *
  * @author Esko Luontola
+ * @author Vojtech Krasa
  * @since 2.12.2007
  */
 public class ProjectCodeStyleInstaller {
@@ -58,6 +61,9 @@ public class ProjectCodeStyleInstaller {
         CodeStyleManager manager = CodeStyleManager.getInstance(project);
         if (!(manager instanceof EclipseCodeStyleManager) && Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
             registerCodeStyleManager(project, new EclipseCodeStyleManager(manager, settings, project));
+			if (settings.isOptimizeImports()) {
+				PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
+			}
         }
     }
 
