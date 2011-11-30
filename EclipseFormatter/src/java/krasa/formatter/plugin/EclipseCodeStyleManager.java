@@ -80,10 +80,12 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 Notification notification = new Notification(GROUP_DISPLAY_ID, "",
                         "No file to format", NotificationType.ERROR);
                 showNotification(notification);
-            } else if (skipFormatting(virtualFile, project, psiFile, startOffset, endOffset)) {
-                notifyNothingWasFormatted();
-            } else if (!canReformatWithEclipse(virtualFile, project)) {
-                formatWithIntelliJ(psiFile, startOffset, endOffset);
+            }  else if (!canReformatWithEclipse(virtualFile, project)) {
+                if (skipFormatting(virtualFile, project, psiFile, startOffset, endOffset)) {
+                    notifyFormattingWasDisabled(psiFile);
+                } else {
+                    formatWithIntelliJ(psiFile, startOffset, endOffset);
+                }
             } else {
                 optimizeImports(psiFile, project);
                 formatWithEclipse(psiFile, startOffset, endOffset, virtualFile);
@@ -287,9 +289,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         return visualColumnToRestore;
     }
 
-    private void notifyNothingWasFormatted() {
+    private void notifyFormattingWasDisabled(PsiFile psiFile) {
         Notification notification = new Notification(GROUP_DISPLAY_ID, "",
-                "Formatting was disabled for this file type", NotificationType.WARNING);
+                psiFile.getName()+ " - formatting was disabled for this file type", NotificationType.WARNING);
         showNotification(notification);
     }
 
