@@ -262,11 +262,8 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
-        if (in.isFormatOtherFileTypesWithIntelliJ()) {
-            formatOtherFilesWithExceptionsRadioButton.setSelected(true);
-        } else {
-            doNotFormatOtherFilesRadioButton.setSelected(true);
-        }
+        formatOtherFilesWithExceptionsRadioButton.setSelected(in.isFormatOtherFileTypesWithIntelliJ());
+        doNotFormatOtherFilesRadioButton.setSelected(!in.isFormatOtherFileTypesWithIntelliJ());
         useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
         useEclipseFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.ECLIPSE));
         setData(in);
@@ -287,6 +284,11 @@ public class ProjectSettingsForm {
         } else {
             out.setFormatter(Settings.Formatter.DEFAULT);
         }
+        if (formatOtherFilesWithExceptionsRadioButton.isSelected()) {
+            out.setFormatOtherFileTypesWithIntelliJ(true);
+        } else {
+            out.setFormatOtherFileTypesWithIntelliJ(false);
+        }
         getData(out);
         out.setEclipsePrefs(eclipsePrefs.getText());
     }
@@ -300,6 +302,18 @@ public class ProjectSettingsForm {
     }
 
     public boolean isModified(Settings data) {
+        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {
+            return true;
+        }
+        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
+            return true;
+        }
+        if (formatOtherFilesWithExceptionsRadioButton.isSelected() != data.isFormatOtherFileTypesWithIntelliJ()) {
+            return true;
+        }
+        if (doNotFormatOtherFilesRadioButton.isSelected() != !data.isFormatOtherFileTypesWithIntelliJ()) {
+            return true;
+        }
         if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
             return true;
         if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) return true;
