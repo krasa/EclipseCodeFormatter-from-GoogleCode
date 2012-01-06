@@ -3,7 +3,6 @@
  # [HowTo#Getting-the-Eclipse-code-formatter-preferences-file set path to eclipse preference file in IntelliJ settings] 
  #  format code as usual, notification will come up with result 
  #  use ctrl + ~ for quick switch between formatters    
-[HowTo#Getting-the-Eclipse-code-formatter-preferences-file set path to eclipse preference file in IntelliJ settings] 
 
 == Optimizing imports ==
  * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more (Settings - Code Style - Imports)
@@ -16,7 +15,7 @@
 http://eclipse-code-formatter-intellij-plugin.googlecode.com/svn/importsSettings.png
 
 
-== Getting the Eclipse code formatter preferences file ==
+= Getting the Eclipse code formatter preferences file =
 
  # With your project open in Eclipse's workspace, right-click the project and choose Properties.
  # Go to Java Code Style | Formatter and select Enable project specific settings.
