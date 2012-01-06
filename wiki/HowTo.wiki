@@ -1,6 +1,6 @@
 =Instructions=
- #  enable project specific formatter settings in Eclipse to get preference file
- # [HowTo#Getting_the_Eclipse_code_formatter_preferences_file set path to eclipse preference file in IntelliJ settings] 
+ #  [HowTo#Getting_the_Eclipse_code_formatter_preferences_file enable project specific formatter settings in Eclipse to get preference file]
+ #  set path to org.eclipse.jdt.core.prefs in settings of this plugin 
  #  format code as usual, notification will come up with result 
  #  use ctrl + ~ for quick switch between formatters    
 
