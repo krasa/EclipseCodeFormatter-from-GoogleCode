@@ -4,7 +4,7 @@
  #  format code as usual, notification will come up with result 
  #  use ctrl + ~ for quick switch between formatters    
 
-* Possible problems: *
+* Possible problems with formatting : *
  * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
 
 
