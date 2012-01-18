@@ -4,6 +4,10 @@
  #  format code as usual, notification will come up with result 
  #  use ctrl + ~ for quick switch between formatters    
 
+* Possible problems: *
+ * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
+
+
 == Optimizing imports ==
  * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more (Settings - Code Style - Imports)
  * delete or modify import layout as you wish, there is no need to define packages (Settings - Code Style - Imports)
