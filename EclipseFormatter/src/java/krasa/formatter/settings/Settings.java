@@ -26,24 +26,24 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Settings implements Cloneable {
 
-	public DisabledFileTypeSettings geDisabledFileTypeSettings() {
-		return new DisabledFileTypeSettings(disabledFileTypes);
-	}
+    public DisabledFileTypeSettings geDisabledFileTypeSettings() {
+        return new DisabledFileTypeSettings(disabledFileTypes);
+    }
 
-	public static enum Formatter {
-		DEFAULT, ECLIPSE
-	}
+    public static enum Formatter {
+        DEFAULT, ECLIPSE
+    }
 
-	@NotNull
-	private Formatter formatter = Formatter.DEFAULT;
-	@NotNull
-	private String eclipsePrefs = "";
-	private String joinedGroup = "";
-	private String disabledFileTypes = "";
-	private boolean optimizeImports = true;
-	private boolean formatOtherFileTypesWithIntelliJ = true;
-	private boolean formatSeletedTextInAllFileTypes = true;
-	private Integer notifyFromTextLenght = 300;
+    @NotNull
+    private Formatter formatter = Formatter.DEFAULT;
+    @NotNull
+    private String eclipsePrefs = "";
+    private String joinedGroup = "";
+    private String disabledFileTypes = "";
+    private boolean optimizeImports = true;
+    private boolean formatOtherFileTypesWithIntelliJ = true;
+    private boolean formatSeletedTextInAllFileTypes = true;
+    private Integer notifyFromTextLenght = 300;
 
     public boolean isFormatSeletedTextInAllFileTypes() {
         return formatSeletedTextInAllFileTypes;
@@ -54,77 +54,84 @@ public class Settings implements Cloneable {
     }
 
     public boolean isFormatOtherFileTypesWithIntelliJ() {
-		return formatOtherFileTypesWithIntelliJ;
-	}
+        return formatOtherFileTypesWithIntelliJ;
+    }
 
-	public void setFormatOtherFileTypesWithIntelliJ(boolean formatOtherFileTypesWithIntelliJ) {
-		this.formatOtherFileTypesWithIntelliJ = formatOtherFileTypesWithIntelliJ;
-	}
+    public void setFormatOtherFileTypesWithIntelliJ(boolean formatOtherFileTypesWithIntelliJ) {
+        this.formatOtherFileTypesWithIntelliJ = formatOtherFileTypesWithIntelliJ;
+    }
 
-	public Integer getNotifyFromTextLenght() {
-		return notifyFromTextLenght;
-	}
+    public Integer getNotifyFromTextLenght() {
+        return notifyFromTextLenght;
+    }
 
-	public void setNotifyFromTextLenght(Integer notifyFromTextLenght) {
-		this.notifyFromTextLenght = notifyFromTextLenght;
-	}
+    public void setNotifyFromTextLenght(Integer notifyFromTextLenght) {
+        this.notifyFromTextLenght = notifyFromTextLenght;
+    }
 
-	public void setJoinedGroup(String joinedGroup) {
-		this.joinedGroup = joinedGroup;
-	}
+    public void setJoinedGroup(String joinedGroup) {
+        this.joinedGroup = joinedGroup;
+    }
 
-	public boolean isOptimizeImports() {
-		return optimizeImports;
-	}
+    public boolean isOptimizeImports() {
+        return optimizeImports;
+    }
 
-	public String getDisabledFileTypes() {
-		return disabledFileTypes;
-	}
+    public String getDisabledFileTypes() {
+        return disabledFileTypes;
+    }
 
-	public void setDisabledFileTypes(String disabledFileTypes) {
-		this.disabledFileTypes = disabledFileTypes;
-	}
+    public void setDisabledFileTypes(String disabledFileTypes) {
+        this.disabledFileTypes = disabledFileTypes;
+    }
 
-	public void setOptimizeImports(boolean optimizeImports) {
-		this.optimizeImports = optimizeImports;
-	}
+    public void setOptimizeImports(boolean optimizeImports) {
+        this.optimizeImports = optimizeImports;
+    }
 
-	public String getJoinedGroup() {
-		return joinedGroup;
-	}
+    public String getJoinedGroup() {
+        return joinedGroup;
+    }
 
-	public ImportGroupSettings getImportGroupSettings() {
-		if (joinedGroup == null || joinedGroup.isEmpty()) {
-			return ImportGroupSettings.empty();
-		}
+    public ImportGroupSettings getImportGroupSettings() {
+        if (joinedGroup == null || joinedGroup.isEmpty()) {
+            return ImportGroupSettings.empty();
+        }
 
-		return new ImportGroupSettings(joinedGroup);
-	}
+        return new ImportGroupSettings(joinedGroup);
+    }
 
-	@NotNull
-	public final Settings clone() {
-		try {
-			return (Settings) super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @NotNull
+    public final Settings clone() {
+        try {
+            return (Settings) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	@NotNull
-	public Formatter getFormatter() {
-		return formatter;
-	}
+    @NotNull
+    public Formatter getFormatter() {
+        return formatter;
+    }
 
-	public void setFormatter(@NotNull Formatter formatter) {
-		this.formatter = formatter;
-	}
+    public void setFormatter(@NotNull Formatter formatter) {
+        this.formatter = formatter;
+    }
 
-	@NotNull
-	public String getEclipsePrefs() {
-		return eclipsePrefs;
-	}
+    @NotNull
+    public String getEclipsePrefs() {
+        return eclipsePrefs;
+    }
 
-	public void setEclipsePrefs(@NotNull String eclipsePrefs) {
-		this.eclipsePrefs = eclipsePrefs;
-	}
+    public void setEclipsePrefs(@NotNull String eclipsePrefs) {
+        this.eclipsePrefs = eclipsePrefs;
+    }
+
+
+    public boolean isPreferenceFileConfigured() {
+        return eclipsePrefs != null && !eclipsePrefs.isEmpty();
+    }
+
+
 }

@@ -32,7 +32,8 @@ import java.util.ResourceBundle;
  */
 public class Messages {
 
-    @NonNls private static final String BUNDLE_NAME = "krasa.formatter.messages";
+    @NonNls
+    private static final String BUNDLE_NAME = "krasa.formatter.messages";
 
     private static Reference<ResourceBundle> bundle;
 
@@ -51,13 +52,13 @@ public class Messages {
         return bundle;
     }
 
-    public static String message(@PropertyKey(resourceBundle = BUNDLE_NAME)String key, Object... params) {
+    public static String message(@PropertyKey(resourceBundle = BUNDLE_NAME) String key, Object... params) {
         return CommonBundle.message(getBundle(), key, params);
     }
 
     public static String message(IllegalSettingsException e) {
         String field = message(e.getField());
-        String error = message(e.getErrorKey(), (Object[])e.getErrorParams());
+        String error = message(e.getErrorKey(), (Object[]) e.getErrorParams());
         return message("error.errorInField", field, error);
     }
 }

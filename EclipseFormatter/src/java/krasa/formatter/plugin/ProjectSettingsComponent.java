@@ -18,7 +18,7 @@
 package krasa.formatter.plugin;
 
 import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.impl.NotificationsConfiguration;
+import com.intellij.notification.NotificationsConfiguration;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
@@ -28,7 +28,6 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import javax.swing.*;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
 import krasa.formatter.settings.IllegalSettingsException;
@@ -39,145 +38,149 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-//import com.intellij.notification.NotificationsConfiguration;
+import javax.swing.*;
+
+//import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
  * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the
  * formatter whenever the plugin settings are changed.
- * 
+ *
  * @author Esko Luontola
  * @since 4.12.2007
  */
-@State(name = "EclipseCodeFormatter", storages = { @Storage(id = "other", file = "$PROJECT_FILE$") })
+@State(name = "EclipseCodeFormatter", storages = {@Storage(id = "other", file = "$PROJECT_FILE$")})
 public class ProjectSettingsComponent implements ProjectComponent, Configurable, PersistentStateComponent<Settings> {
 
-	private static final Logger LOG = Logger.getInstance(ProjectSettingsComponent.class.getName());
+    public static final String GROUP_DISPLAY_ID = "Eclipse code formatter info";
+    public static final String GROUP_DISPLAY_ID_ERROR = "Eclipse code formatter error";
+    private static final Logger LOG = Logger.getInstance(ProjectSettingsComponent.class.getName());
 
-	@NotNull
-	private final ProjectCodeStyleInstaller projectCodeStyle;
-	@NotNull
-	private final Settings settings = new Settings();
-	@Nullable
-	private ProjectSettingsForm form;
-	@Nullable
-	private ImageIcon icon;
+    @NotNull
+    private final ProjectCodeStyleInstaller projectCodeStyle;
+    @NotNull
+    private final Settings settings = new Settings();
+    @Nullable
+    private ProjectSettingsForm form;
+    @Nullable
+    private ImageIcon icon;
 
-	public ProjectSettingsComponent(@NotNull Project project) {
-		this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
+    public ProjectSettingsComponent(@NotNull Project project) {
+        this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
 
-		NotificationsConfiguration.getNotificationsConfiguration().register(EclipseCodeStyleManager.GROUP_DISPLAY_ID,
-				NotificationDisplayType.BALLOON);
-		NotificationsConfiguration.getNotificationsConfiguration().register(
-				EclipseCodeStyleManager.GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
-	}
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID,
+                NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(
+                GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
+    }
 
-	private void install(@NotNull Settings settings) {
-		projectCodeStyle.changeFormatterTo(settings);
-	}
+    private void install(@NotNull Settings settings) {
+        projectCodeStyle.changeFormatterTo(settings);
+    }
 
-	private void uninstall() {
-		projectCodeStyle.changeFormatterTo(null);
-	}
+    private void uninstall() {
+        projectCodeStyle.changeFormatterTo(null);
+    }
 
-	private void verifySettingsOf(@Nullable ProjectSettingsForm form) throws ConfigurationException {
-		try {
-			if (form != null) {
-				Settings test = settings.clone();
-				form.exportTo(test);
-				SettingsManager.verify( test );
-			}
-		} catch (IllegalSettingsException e) {
-			LOG.info(e);
-			throw new ConfigurationException(Messages.message(e));
-		}
-	}
+    private void verifySettingsOf(@Nullable ProjectSettingsForm form) throws ConfigurationException {
+        try {
+            if (form != null) {
+                Settings test = settings.clone();
+                form.exportTo(test);
+                SettingsManager.verify(test);
+            }
+        } catch (IllegalSettingsException e) {
+            LOG.info(e);
+            throw new ConfigurationException(Messages.message(e));
+        }
+    }
 
-	// implements ProjectComponent
+    // implements ProjectComponent
 
-	public void initComponent() {
-	}
+    public void initComponent() {
+    }
 
-	public void disposeComponent() {
-	}
+    public void disposeComponent() {
+    }
 
-	@NotNull
-	public String getComponentName() {
-		return "ProjectSettingsComponent";
-	}
+    @NotNull
+    public String getComponentName() {
+        return "ProjectSettingsComponent";
+    }
 
-	public void projectOpened() {
-		install(settings);
-	}
+    public void projectOpened() {
+        install(settings);
+    }
 
-	public void projectClosed() {
-		uninstall();
-	}
+    public void projectClosed() {
+        uninstall();
+    }
 
-	// implements Configurable
+    // implements Configurable
 
-	@Nls
-	public String getDisplayName() {
-		return Messages.message( "action.pluginSettings" );
-	}
+    @Nls
+    public String getDisplayName() {
+        return Messages.message("action.pluginSettings");
+    }
 
-	@Nullable
-	public Icon getIcon() {
-		if (icon == null) {
-			icon = new ImageIcon( Resources.PROGRAM_LOGO_32);
-		}
-		return icon;
-	}
+    @Nullable
+    public Icon getIcon() {
+        if (icon == null) {
+            icon = new ImageIcon(Resources.PROGRAM_LOGO_32);
+        }
+        return icon;
+    }
 
-	@Nullable
-	@NonNls
-	public String getHelpTopic() {
-		return "EclipseCodeFormatter.Configuration";
-	}
+    @Nullable
+    @NonNls
+    public String getHelpTopic() {
+        return "EclipseCodeFormatter.Configuration";
+    }
 
-	@NotNull
-	public JComponent createComponent() {
-		if (form == null) {
-			form = new ProjectSettingsForm();
-		}
-		return form.getRootComponent();
-	}
+    @NotNull
+    public JComponent createComponent() {
+        if (form == null) {
+            form = new ProjectSettingsForm();
+        }
+        return form.getRootComponent();
+    }
 
-	public boolean isModified() {
-		return form != null && form.isModified(settings);
-	}
+    public boolean isModified() {
+        return form != null && form.isModified(settings);
+    }
 
-	public void apply() throws ConfigurationException {
-		verifySettingsOf(form);
-		if (form != null) {
-			form.exportTo(settings);
-			install(settings);
-		}
-	}
+    public void apply() throws ConfigurationException {
+        verifySettingsOf(form);
+        if (form != null) {
+            form.exportTo(settings);
+            install(settings);
+        }
+    }
 
-	public void reset() {
-		if (form != null) {
-			form.importFrom(settings);
-		}
-	}
+    public void reset() {
+        if (form != null) {
+            form.importFrom(settings);
+        }
+    }
 
-	public void disposeUIResources() {
-		form = null;
-	}
+    public void disposeUIResources() {
+        form = null;
+    }
 
-	// implements PersistentStateComponent
+    // implements PersistentStateComponent
 
-	@NotNull
-	public Settings getState() {
-		return settings.clone();
-	}
+    @NotNull
+    public Settings getState() {
+        return settings.clone();
+    }
 
-	public void loadState(@NotNull Settings state) {
-		XmlSerializerUtil.copyBean(state, settings);
-		install(settings);
-	}
+    public void loadState(@NotNull Settings state) {
+        XmlSerializerUtil.copyBean(state, settings);
+        install(settings);
+    }
 
-	public static ProjectSettingsComponent getInstance(Project project) {
-		return project.getComponent(ProjectSettingsComponent.class);
-	}
+    public static ProjectSettingsComponent getInstance(Project project) {
+        return project.getComponent(ProjectSettingsComponent.class);
+    }
 
 }

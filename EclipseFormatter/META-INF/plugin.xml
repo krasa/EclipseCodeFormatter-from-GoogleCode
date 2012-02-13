@@ -4,10 +4,12 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>0.6</version>
+    <version>0.8</version>
 
     <description><![CDATA[
-        Allows using Eclipse's code formatter directly from IntelliJ without slow executing Eclipse via command line.
+        Allows using Eclipse's code formatter directly from IntelliJ. 
+        Solves the problem of maintaining a common code style in team environments where both IDEA and Eclipse are used.
+        
         Also emulates Eclipse's imports optimizing - go to <a href="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo">http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo</a>
         for instructions how to configure it.
 
@@ -18,12 +20,18 @@
         Krasa
     </vendor>
 
-    <!--<idea-version since-build="110.137" until-build=""/>-->
-    <idea-version since-build="100.000" until-build="109.999"/>
+    <idea-version since-build="114.65" until-build=""/>
+    <!--<idea-version since-build="100.000" until-build="109.999"/>-->
 
     <change-notes><![CDATA[
-        <p>0.6 (2011-11-31)
-        <br>- new ability to disable IntelliJ code formatter for certain file types
+        <p>0.8 (2012-02-13)
+        <br>- fixed rebuild for 11.1 build 114.65
+        </p>        
+        <p>0.7 (2012-02-13)
+        <br>- rebuild for 11.1 build 114.65
+        </p>
+        <p>0.6 (2011-12-1)
+        <br>- new ability to disable IntelliJ's code formatter for certain file types
         </p>
         <p>0.5 (2011-11-26)
         <br>- improved imports group joining
@@ -33,7 +41,7 @@
         </p>
         <p>0.3 (2011-11-24)
         <br>- new Eclipse like Optimizing Imports function
-        <br>- notification about successfull formatting will come up only when formatted area is longer than 300 character.
+        <br>- notification about successful formatting will come up only when formatted area is longer than 300 character.
         </p>
         <p>0.2 (2011-11-17)
         <br>- fixed bug -when file was edited and editor was closed

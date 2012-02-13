@@ -24,44 +24,44 @@ import java.io.File;
 
 /**
  * Builds a CodeFormatter based on the {@link Settings}.
- * 
+ *
  * @author Esko Luontola
  * @since 4.12.2007
  */
 public class SettingsManager {
 
-	private static final String WHITESPACE = "\\s+";
+    private static final String WHITESPACE = "\\s+";
 
-	@Nullable
-	public static void verify(@NotNull Settings settings)
-			throws IllegalSettingsException {
-		if (settings.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
-			mustNotBeEmpty(settings.getEclipsePrefs(), "settings.eclipsePrefs");
+    @Nullable
+    public static void verify(@NotNull Settings settings)
+            throws IllegalSettingsException {
+        if (settings.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
+            mustNotBeEmpty(settings.getEclipsePrefs(), "settings.eclipsePrefs");
 
-			File eclipsePrefs = new File(settings.getEclipsePrefs());
+            File eclipsePrefs = new File(settings.getEclipsePrefs());
 
-			fileMustExist(eclipsePrefs, "settings.eclipsePrefs");
+            fileMustExist(eclipsePrefs, "settings.eclipsePrefs");
 
-			assert eclipsePrefs.isFile() : "Not a file: " + eclipsePrefs;
-		}
-	}
+            assert eclipsePrefs.isFile() : "Not a file: " + eclipsePrefs;
+        }
+    }
 
-	private static void mustNotBeEmpty(@NotNull String s, @NotNull String field)
-			throws IllegalSettingsException {
-		if (isEmpty(s)) {
-			throw new IllegalSettingsException(field, "error.emptyField");
-		}
-	}
+    private static void mustNotBeEmpty(@NotNull String s, @NotNull String field)
+            throws IllegalSettingsException {
+        if (isEmpty(s)) {
+            throw new IllegalSettingsException(field, "error.emptyField");
+        }
+    }
 
-	private static void fileMustExist(@NotNull File file, @NotNull String field)
-			throws IllegalSettingsException {
-		if (!file.isFile()) {
-			throw new IllegalSettingsException(field, "error.noSuchFile",
-					file.toString());
-		}
-	}
+    private static void fileMustExist(@NotNull File file, @NotNull String field)
+            throws IllegalSettingsException {
+        if (!file.isFile()) {
+            throw new IllegalSettingsException(field, "error.noSuchFile",
+                    file.toString());
+        }
+    }
 
-	private static boolean isEmpty(@NotNull String s) {
-		return s.trim().length() == 0;
-	}
+    private static boolean isEmpty(@NotNull String s) {
+        return s.trim().length() == 0;
+    }
 }

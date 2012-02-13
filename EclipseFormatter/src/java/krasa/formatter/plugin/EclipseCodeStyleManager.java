@@ -2,7 +2,6 @@ package krasa.formatter.plugin;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.CaretModel;
@@ -22,15 +21,14 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.psi.impl.CheckUtil;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.util.IncorrectOperationException;
-
-import java.io.File;
-import java.util.Scanner;
-
 import krasa.formatter.eclipse.EclipseCodeFormatterFacade;
 import krasa.formatter.settings.DisabledFileTypeSettings;
 import krasa.formatter.settings.JoinedGroup;
 import krasa.formatter.settings.Settings;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.util.Scanner;
 
 /**
  * Supported operations are handled by Eclipse formatter, other by IntelliJ
@@ -42,11 +40,8 @@ import org.jetbrains.annotations.NotNull;
  * @since 30.10.20011
  */
 public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
-    public static final String GROUP_DISPLAY_ID = "Eclipse code formatter info";
-    public static final String GROUP_DISPLAY_ID_ERROR = "Eclipse code formatter error";
 
-    private static final Logger LOG = Logger
-            .getInstance(EclipseCodeStyleManager.class.getName());
+    private static final Logger LOG = Logger.getInstance(EclipseCodeStyleManager.class.getName());
     public static final String LINE_SEPARATOR = "\n";
 
     @NotNull
@@ -55,18 +50,20 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     protected final EclipseCodeFormatterFacade codeFormatterFacade;
     @NotNull
     private Settings settings;
+    private Notifier notifier;
 
     public EclipseCodeStyleManager(@NotNull CodeStyleManager original,
-                                   @NotNull Settings settings, @NotNull Project project) {
+                                   @NotNull Settings settings,
+                                   @NotNull Project project) {
         super(original);
         this.project = project;
         this.settings = settings;
-        codeFormatterFacade = new EclipseCodeFormatterFacade(
-                settings.getEclipsePrefs());
+        codeFormatterFacade = new EclipseCodeFormatterFacade(settings.getEclipsePrefs());
+        notifier = new Notifier(project);
     }
 
-    public void reformatText(@NotNull PsiFile psiFile, final int startOffset,
-                             final int endOffset) throws IncorrectOperationException {
+    public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)
+            throws IncorrectOperationException {
         boolean formattedByIntelliJ = false;
         try {
             ApplicationManager.getApplication().assertWriteAccessAllowed();
@@ -77,12 +74,12 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             Project project = psiFile.getProject();
 
             if (virtualFile == null) {
-                Notification notification = new Notification(GROUP_DISPLAY_ID, "",
-                        "No file to format", NotificationType.ERROR);
-                showNotification(notification);
-            }  else if (!canReformatWithEclipse(virtualFile, project)) {
-                if (skipFormatting(virtualFile, project, psiFile, startOffset, endOffset)) {
-                    notifyFormattingWasDisabled(psiFile);
+                Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", "No file to format",
+                        NotificationType.ERROR);
+                notifier.showNotification(notification);
+            } else if (!canReformatWithEclipse(virtualFile, project)) {
+                if (skipFormatting(virtualFile, psiFile, startOffset, endOffset)) {
+                    notifier.notifyFormattingWasDisabled(psiFile);
                 } else {
                     formatWithIntelliJ(psiFile, startOffset, endOffset);
                 }
@@ -92,11 +89,14 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             }
         } catch (final Exception e) {
             e.printStackTrace();
-            notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
+            notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         }
     }
 
-    private boolean skipFormatting(VirtualFile virtualFile, Project project, PsiFile psiFile, int startOffset, int endOffset) {
+    private boolean skipFormatting(VirtualFile virtualFile,
+                                   PsiFile psiFile,
+                                   int startOffset,
+                                   int endOffset) {
         if (settings.isFormatSeletedTextInAllFileTypes()) {
             final Editor editor = PsiUtilBase.findEditor(psiFile);
             if (editor != null) {
@@ -108,7 +108,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             }
         }
         if (settings.isFormatOtherFileTypesWithIntelliJ()) {
-            return isDisabledFileType(virtualFile, project);
+            return isDisabledFileType(virtualFile);
         }
         return true;
     }
@@ -117,7 +117,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         return startOffset == 0 && endOffset == text.length();
     }
 
-    private boolean isDisabledFileType(VirtualFile virtualFile, Project project) {
+    private boolean isDisabledFileType(VirtualFile virtualFile) {
         String path = ioFile(virtualFile).getPath();
         DisabledFileTypeSettings disabledFileTypeSettings = settings.geDisabledFileTypeSettings();
         return disabledFileTypeSettings.isDisabled(path);
@@ -143,10 +143,10 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             // if there is selected text
             if (startOffset != 0) {
                 // start offset must be on the start of line
-                fixedStartOffset = text.substring(0, startOffset)
-                        .lastIndexOf(LINE_SEPARATOR) + 1;
+                fixedStartOffset = text.substring(0, startOffset).lastIndexOf(LINE_SEPARATOR) + 1;
             }
-            skipSuccessFormattingNotification = isSkipNotification(startOffset, endOffset); // little fix for etc. ctrl+shift+enter
+            skipSuccessFormattingNotification = isSkipNotification(startOffset,
+                    endOffset); // little fix for etc. ctrl+shift+enter
             document.setText(codeFormatterFacade.format(text, fixedStartOffset, endOffset, LINE_SEPARATOR));
             postOptimizeImports(document);
 
@@ -162,7 +162,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             fileDocumentManager.saveDocument(writeTo);
         }
         if (!skipSuccessFormattingNotification) {
-            notifySuccessFormatting(psiFile, false);
+            notifier.notifySuccessFormatting(psiFile, false);
         }
     }
 
@@ -173,7 +173,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     private void formatWithIntelliJ(PsiFile psiFile, int startOffset, int endOffset) {
         super.reformatText(psiFile, startOffset, endOffset);
         if (!isSkipNotification(startOffset, endOffset)) {
-            notifySuccessFormatting(psiFile, true);
+            notifier.notifySuccessFormatting(psiFile, true);
         }
     }
 
@@ -181,11 +181,11 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         if (!settings.isOptimizeImports()) {
             return;
         }
-        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
+        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project)
+                .prepareOptimizeImportsResult((PsiJavaFile) psiFile);
 
         try {
-            final PsiDocumentManager manager = PsiDocumentManager
-                    .getInstance(psiFile.getProject());
+            final PsiDocumentManager manager = PsiDocumentManager.getInstance(psiFile.getProject());
             final Document document = manager.getDocument(psiFile);
             if (document != null) {
                 manager.commitDocument(document);
@@ -201,7 +201,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         }
     }
 
-    /**appends blank lines between import groups*/
+    /**
+     * appends blank lines between import groups
+     */
     private void postOptimizeImports(Document document) {
         if (!settings.isOptimizeImports()) {
             return;
@@ -232,15 +234,12 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         document.setText(sb.toString());
     }
 
-    private boolean shouldAppendBlankLine(String lastImportGroup,
-                                          String currentImportGroup) {
-        if (lastImportGroup == null)
-            return false;
+    private boolean shouldAppendBlankLine(String lastImportGroup, String currentImportGroup) {
+        if (lastImportGroup == null) return false;
 
         // TODO find out what is the eclipse's algorithm
-        return !lastImportGroup.equals(currentImportGroup)
-                && !settings.getImportGroupSettings().contains(
-                new JoinedGroup(lastImportGroup, currentImportGroup));
+        return !lastImportGroup.equals(currentImportGroup) && !settings.getImportGroupSettings()
+                .contains(new JoinedGroup(lastImportGroup, currentImportGroup));
     }
 
     private void append(StringBuilder sb, String next) {
@@ -248,15 +247,13 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         sb.append(LINE_SEPARATOR);
     }
 
-    private void restoreVisualColumnToRestore(Editor editor,
-                                              int visualColumnToRestore) {
+    private void restoreVisualColumnToRestore(Editor editor, int visualColumnToRestore) {
         if (visualColumnToRestore < 0) {
         } else {
             CaretModel caretModel = editor.getCaretModel();
             VisualPosition position = caretModel.getVisualPosition();
             if (visualColumnToRestore != position.column) {
-                caretModel.moveToVisualPosition(new VisualPosition(
-                        position.line, visualColumnToRestore));
+                caretModel.moveToVisualPosition(new VisualPosition(position.line, visualColumnToRestore));
             }
         }
     }
@@ -267,8 +264,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         if (editor != null) {
             Document document1 = editor.getDocument();
             int caretOffset = editor.getCaretModel().getOffset();
-            caretOffset = Math.max(
-                    Math.min(caretOffset, document1.getTextLength() - 1), 0);
+            caretOffset = Math.max(Math.min(caretOffset, document1.getTextLength() - 1), 0);
             CharSequence text1 = document1.getCharsSequence();
             int caretLine = document1.getLineNumber(caretOffset);
             int lineStartOffset = document1.getLineStartOffset(caretLine);
@@ -282,79 +278,19 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 }
             }
             if (fixCaretPosition) {
-                visualColumnToRestore = editor.getCaretModel()
-                        .getVisualPosition().column;
+                visualColumnToRestore = editor.getCaretModel().getVisualPosition().column;
             }
         }
         return visualColumnToRestore;
     }
 
-    private void notifyFormattingWasDisabled(PsiFile psiFile) {
-        Notification notification = new Notification(GROUP_DISPLAY_ID, "",
-                psiFile.getName()+ " - formatting was disabled for this file type", NotificationType.WARNING);
-        showNotification(notification);
+
+    private boolean canReformatWithEclipse(@NotNull VirtualFile file, @NotNull Project project) {
+        return file.isInLocalFileSystem() && isWritable(file, project) && fileTypeIsSupported(file);
     }
 
-    private void notifyFailedFormatting(PsiFile psiFile,
-                                        boolean formattedByIntelliJ, Exception e) {
-        String error = e.getMessage() == null ? "" : e.getMessage();
-        if (!formattedByIntelliJ) {
-            Notification notification = new Notification(GROUP_DISPLAY_ID, "",
-                    psiFile.getName()
-                            + " failed to format with Eclipse code formatter. "
-                            + error, NotificationType.ERROR);
-            showNotification(notification);
-        } else {
-            Notification notification = new Notification(
-                    GROUP_DISPLAY_ID,
-                    "",
-                    psiFile.getName()
-                            + " failed to format with IntelliJ code formatter. "
-                            + error, NotificationType.ERROR);
-            showNotification(notification);
-        }
-    }
-
-    private void notifySuccessFormatting(PsiFile psiFile,
-                                         boolean formattedByIntelliJ) {
-        if (formattedByIntelliJ) {
-            Notification notification = new Notification(
-                    GROUP_DISPLAY_ID,
-                    "",
-                    psiFile.getName()
-                            + " formatted sucessfully by IntelliJ code formatter",
-                    NotificationType.WARNING);
-            showNotification(notification);
-        } else {
-            Notification notification = new Notification(
-                    GROUP_DISPLAY_ID,
-                    "",
-                    psiFile.getName()
-                            + " formatted sucessfully by Eclipse code formatter",
-                    NotificationType.INFORMATION);
-            showNotification(notification);
-        }
-    }
-
-    private void showNotification(final Notification notification) {
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Notifications.Bus.notify(notification, project);
-            }
-        });
-    }
-
-    private boolean canReformatWithEclipse(@NotNull VirtualFile file,
-                                           @NotNull Project project) {
-        return file.isInLocalFileSystem() && isWritable(file, project)
-                && fileTypeIsSupported(file);
-    }
-
-    private static boolean isWritable(@NotNull VirtualFile file,
-                                      @NotNull Project project) {
-        return !ReadonlyStatusHandler.getInstance(project)
-                .ensureFilesWritable(file).hasReadonlyFiles();
+    private static boolean isWritable(@NotNull VirtualFile file, @NotNull Project project) {
+        return !ReadonlyStatusHandler.getInstance(project).ensureFilesWritable(file).hasReadonlyFiles();
     }
 
     private boolean fileTypeIsSupported(@NotNull VirtualFile file) {

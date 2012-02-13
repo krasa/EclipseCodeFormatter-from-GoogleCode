@@ -27,14 +27,14 @@ import java.net.URL;
  */
 public class Resources {
 
-	public static final URL PROGRAM_LOGO_16 = Resources.class.getResource("icons/logo-16.png");
-	public static final URL PROGRAM_LOGO_32 = Resources.class.getResource("icons/logo-32.png");
+    public static final URL PROGRAM_LOGO_16 = Resources.class.getResource("icons/logo-16.png");
+    public static final URL PROGRAM_LOGO_32 = Resources.class.getResource("icons/logo-32.png");
 
-	static {
-		assert PROGRAM_LOGO_16 != null;
-		assert PROGRAM_LOGO_32 != null;
-	}
+    static {
+        assert PROGRAM_LOGO_16 != null;
+        assert PROGRAM_LOGO_32 != null;
+    }
 
-	private Resources() {
-	}
+    private Resources() {
+    }
 }

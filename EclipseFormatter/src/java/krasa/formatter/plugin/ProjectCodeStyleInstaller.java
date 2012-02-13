@@ -17,8 +17,6 @@
 
 package krasa.formatter.plugin;
 
-import com.intellij.codeInsight.actions.LayoutCodeDialog;
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -39,7 +37,8 @@ public class ProjectCodeStyleInstaller {
     private static final String CODE_STYLE_MANAGER_KEY = CodeStyleManager.class.getName();
     private static final Logger LOG = Logger.getInstance(ProjectCodeStyleInstaller.class.getName());
 
-    @NotNull private final Project project;
+    @NotNull
+    private final Project project;
 
     public ProjectCodeStyleInstaller(@NotNull Project project) {
         this.project = project;
@@ -61,9 +60,10 @@ public class ProjectCodeStyleInstaller {
         CodeStyleManager manager = CodeStyleManager.getInstance(project);
         if (!(manager instanceof EclipseCodeStyleManager) && Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
             registerCodeStyleManager(project, new EclipseCodeStyleManager(manager, settings, project));
-			if (settings.isOptimizeImports()) {
-				PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
-			}
+            //todo nastaveni okna pro formatovani at se otvira
+//            if (settings.isOptimizeImports()) {
+//                PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
+//            }
         }
     }
 
