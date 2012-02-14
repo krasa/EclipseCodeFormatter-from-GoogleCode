@@ -8,40 +8,50 @@ import java.io.File;
 import java.util.Properties;
 
 /**
- * TODO it would be nice to cache CodeFormatter
- *
  * @author Vojtech Krasa
  */
 public class EclipseCodeFormatterFacade {
     protected final MyCodeFormatterApplication codeFormatterApplication;
     protected final String pathToConfigFile;
+    protected CodeFormatter codeFormatter;
+    private long lastModified;
 
     public EclipseCodeFormatterFacade(String pathToConfigFile) {
         codeFormatterApplication = new MyCodeFormatterApplication();
-
         this.pathToConfigFile = pathToConfigFile;
-        newCodeFormatter(pathToConfigFile);
     }
 
-    private CodeFormatter newCodeFormatter(String pathToConfigFile) {
-        Properties properties = codeFormatterApplication
-                .readConfig(pathToConfigFile);
-        if (properties.isEmpty()) {
-            throw new IllegalStateException("incorrect properties file");
+    private CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
+        File file = new File(this.pathToConfigFile);
+        if (!file.exists()) {
+            throw new InvalidPathToConfigFileException();
         }
 
-        CodeFormatter codeFormatter = ToolFactory
-                .createCodeFormatter(properties);
+        if (codeFormatter == null || configFileWasChanged(file)) {
+            return newCodeFormatter(file);
+        }
         return codeFormatter;
     }
 
-    public String format(File file) {
-        return format(file, null);
+    private CodeFormatter newCodeFormatter(File file) throws InvalidPathToConfigFileException {
+        lastModified = file.lastModified();
+        Properties properties = codeFormatterApplication.readConfig(file);
+
+        if (properties.isEmpty()) {
+            throw new InvalidPathToConfigFileException("incorrect properties file");
+        }
+
+        codeFormatter = ToolFactory.createCodeFormatter(properties);
+        return codeFormatter;
     }
 
-    public String format(File file, String lineSeparator) {
+    private boolean configFileWasChanged(File file) {
+        return file.lastModified() > lastModified;
+    }
+
+    public String format(File file, String lineSeparator) throws InvalidPathToConfigFileException {
         IDocument iDocument = codeFormatterApplication.formatWithoutWrite(file,
-                newCodeFormatter(pathToConfigFile), lineSeparator);
+                getCodeFormatter(), lineSeparator);
         return iDocument.get();
     }
 
@@ -52,12 +62,12 @@ public class EclipseCodeFormatterFacade {
      * @param lineSeparator - null for default
      */
     public String format(String text, int startOffset, int endOffset,
-                         String lineSeparator) {
+                         String lineSeparator) throws InvalidPathToConfigFileException {
         if (endOffset > text.length()) {
             endOffset = text.length();
         }
         return codeFormatterApplication.format(text,
-                newCodeFormatter(pathToConfigFile), startOffset, endOffset
+                getCodeFormatter(), startOffset, endOffset
                 - startOffset, lineSeparator);
     }
 }

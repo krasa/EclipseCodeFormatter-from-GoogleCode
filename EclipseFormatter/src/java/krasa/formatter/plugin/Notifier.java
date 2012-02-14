@@ -6,6 +6,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
+import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,12 +14,16 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Notifier {
 
+    public static final String FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE = "formatting failed, probably due to not compilable code or wrong config file";
+    public static final String FILE_DOES_NOT_EXISTS = "file does not exists";
+    public static final String NO_FILE_TO_FORMAT = "No file to format";
+
+
     @NotNull
     private final Project project;
 
     public Notifier(Project project) {
         this.project = project;
-
     }
 
     public void notifyFailedFormatting(PsiFile psiFile, boolean formattedByIntelliJ, Exception e) {
@@ -60,4 +65,9 @@ public class Notifier {
         });
     }
 
+    public void notify(InvalidPathToConfigFileException e) {
+        String content = "Path to Eclipse code formatter config file is invalid: "+e.getMessage();
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        showNotification(notification);
+    }
 }

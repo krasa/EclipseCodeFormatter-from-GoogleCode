@@ -13,10 +13,10 @@
  *******************************************************************************/
 package krasa.formatter.eclipse;
 
+import krasa.formatter.plugin.Notifier;
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
-import org.eclipse.jdt.internal.core.util.Util;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
@@ -246,15 +246,13 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         } catch (IOException e) {
             String errorMessage = Messages.bind(Messages.CaughtException,
                     "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
-            Util.log(e, errorMessage);
-            System.err.println(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage));
+            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
+                    errorMessage), e);
         } catch (BadLocationException e) {
             String errorMessage = Messages.bind(Messages.CaughtException,
                     "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
-            Util.log(e, errorMessage);
-            System.err.println(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage));
+            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
+                    errorMessage), e);
         }
     }
 
@@ -282,15 +280,11 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         } catch (IOException e) {
             String errorMessage = Messages.bind(Messages.CaughtException,
                     "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
-            Util.log(e, errorMessage);
-            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage));
+            throw new RuntimeException(errorMessage, e);
         } catch (BadLocationException e) {
             String errorMessage = Messages.bind(Messages.CaughtException,
                     "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
-            Util.log(e, errorMessage);
-            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage));
+            throw new RuntimeException(errorMessage, e);
         }
 
     }
@@ -309,15 +303,13 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                 edit.apply(doc);
             } else {
                 throw new RuntimeException(
-                        "formatting failed, probably due to not compilable code or wrong config file");
+                        Notifier.FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE);
             }
             return doc.get();
         } catch (BadLocationException e) {
             String errorMessage = Messages.bind(Messages.CaughtException,
                     "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
-            Util.log(e, errorMessage);
-            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage));
+            throw new RuntimeException(errorMessage, e);
         }
 
     }
@@ -395,7 +387,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                     break;
                 case CONFIG_MODE:
                     this.configName = currentArg;
-                    this.options = readConfig(currentArg);
+                    this.options = readConfig(new File(currentArg));
                     if (this.options == null) {
                         displayHelp(Messages.bind(
                                 Messages.CommandLineErrorConfig, currentArg));
@@ -430,16 +422,16 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
      * Return a Java Properties file representing the options that are in the
      * specified configuration file.
      */
-    Properties readConfig(String filename) {
+    Properties readConfig(File file) {
         BufferedInputStream stream = null;
         try {
-            stream = new BufferedInputStream(new FileInputStream(new File(
-                    filename)));
+            stream = new BufferedInputStream(new FileInputStream(file));
             final Properties formatterOptions = new Properties();
             formatterOptions.load(stream);
             return formatterOptions;
         } catch (IOException e) {
-            Util.log(e, Messages.bind(Messages.ConfigFileReadingError));
+            throw new RuntimeException(
+                    Messages.bind(Messages.ConfigFileReadingError), e);
         } finally {
             if (stream != null) {
                 try {
@@ -449,14 +441,12 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                 }
             }
         }
-        return null;
     }
 
     /**
      * Runs the Java code formatter application
      */
-    public Object run(Object args)
-            throws Exception {
+    public Object run(Object args) throws Exception {
         String str[] = (String[]) args;
         File[] filesToFormat = processCommandLine((String[]) args);
 

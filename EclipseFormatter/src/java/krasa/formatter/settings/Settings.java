@@ -26,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Settings implements Cloneable {
 
+    public static final String LINE_SEPARATOR = "\n";
+
     public DisabledFileTypeSettings geDisabledFileTypeSettings() {
         return new DisabledFileTypeSettings(disabledFileTypes);
     }

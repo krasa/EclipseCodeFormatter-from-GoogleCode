@@ -82,13 +82,12 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
         original.reformatText(element, startOffset, endOffset);
     }
 
-    @Override
-    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges) throws IncorrectOperationException {
-        for (TextRange textRange : textRanges) {
-            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
-        }
-//        original.reformatText(psiFile, textRanges);
-    }
+//    @Override
+//    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges) throws IncorrectOperationException {
+//        for (TextRange textRange : textRanges) {
+//            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
+//        }
+//    }
 
     public void adjustLineIndent(@NotNull PsiFile file, TextRange rangeToAdjust) throws
             IncorrectOperationException {
