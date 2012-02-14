@@ -43,18 +43,24 @@ import javax.swing.*;
 //import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
- * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the
- * formatter whenever the plugin settings are changed.
+ * Takes care of initializing a project's CodeFormatter and disposing of it when
+ * the project is closed. Updates the formatter whenever the plugin settings are
+ * changed.
  *
  * @author Esko Luontola
  * @since 4.12.2007
  */
 @State(name = "EclipseCodeFormatter", storages = {@Storage(id = "other", file = "$PROJECT_FILE$")})
-public class ProjectSettingsComponent implements ProjectComponent, Configurable, PersistentStateComponent<Settings> {
+public class ProjectSettingsComponent
+        implements
+        ProjectComponent,
+        Configurable,
+        PersistentStateComponent<Settings> {
 
     public static final String GROUP_DISPLAY_ID = "Eclipse code formatter info";
     public static final String GROUP_DISPLAY_ID_ERROR = "Eclipse code formatter error";
-    private static final Logger LOG = Logger.getInstance(ProjectSettingsComponent.class.getName());
+    private static final Logger LOG = Logger
+            .getInstance(ProjectSettingsComponent.class.getName());
 
     @NotNull
     private final ProjectCodeStyleInstaller projectCodeStyle;
@@ -68,8 +74,8 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     public ProjectSettingsComponent(@NotNull Project project) {
         this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
 
-        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID,
-                NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(
+                GROUP_DISPLAY_ID, NotificationDisplayType.BALLOON);
         NotificationsConfiguration.getNotificationsConfiguration().register(
                 GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
     }
@@ -82,7 +88,8 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
         projectCodeStyle.changeFormatterTo(null);
     }
 
-    private void verifySettingsOf(@Nullable ProjectSettingsForm form) throws ConfigurationException {
+    private void verifySettingsOf(@Nullable ProjectSettingsForm form)
+            throws ConfigurationException {
         try {
             if (form != null) {
                 Settings test = settings.clone();

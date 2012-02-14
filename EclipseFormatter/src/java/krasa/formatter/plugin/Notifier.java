@@ -18,7 +18,6 @@ public class Notifier {
     public static final String FILE_DOES_NOT_EXISTS = "file does not exists";
     public static final String NO_FILE_TO_FORMAT = "No file to format";
 
-
     @NotNull
     private final Project project;
 
@@ -26,33 +25,45 @@ public class Notifier {
         this.project = project;
     }
 
-    public void notifyFailedFormatting(PsiFile psiFile, boolean formattedByIntelliJ, Exception e) {
+    public void notifyFailedFormatting(PsiFile psiFile,
+                                       boolean formattedByIntelliJ, Exception e) {
         String error = e.getMessage() == null ? "" : e.getMessage();
         String content;
         if (!formattedByIntelliJ) {
-            content = psiFile.getName() + " failed to format with Eclipse code formatter. " + error;
+            content = psiFile.getName()
+                    + " failed to format with Eclipse code formatter. " + error;
         } else {
-            content = psiFile.getName() + " failed to format with IntelliJ code formatter. " + error;
+            content = psiFile.getName()
+                    + " failed to format with IntelliJ code formatter. "
+                    + error;
         }
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        Notification notification = new Notification(
+                ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content,
+                NotificationType.ERROR);
         showNotification(notification);
     }
 
     void notifyFormattingWasDisabled(PsiFile psiFile) {
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
-                psiFile.getName() + " - formatting was disabled for this file type", NotificationType.WARNING);
+        Notification notification = new Notification(
+                ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
+                psiFile.getName()
+                        + " - formatting was disabled for this file type",
+                NotificationType.WARNING);
         showNotification(notification);
     }
-
 
     void notifySuccessFormatting(PsiFile psiFile, boolean formattedByIntelliJ) {
         String content;
         if (formattedByIntelliJ) {
-            content = psiFile.getName() + " formatted sucessfully by IntelliJ code formatter";
+            content = psiFile.getName()
+                    + " formatted sucessfully by IntelliJ code formatter";
         } else {
-            content = psiFile.getName() + " formatted sucessfully by Eclipse code formatter";
+            content = psiFile.getName()
+                    + " formatted sucessfully by Eclipse code formatter";
         }
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.INFORMATION);
+        Notification notification = new Notification(
+                ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content,
+                NotificationType.INFORMATION);
         showNotification(notification);
     }
 
@@ -66,8 +77,11 @@ public class Notifier {
     }
 
     public void notify(InvalidPathToConfigFileException e) {
-        String content = "Path to Eclipse code formatter config file is invalid: "+e.getMessage();
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        String content = "Path to Eclipse code formatter config file is invalid: "
+                + e.getMessage();
+        Notification notification = new Notification(
+                ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content,
+                NotificationType.ERROR);
         showNotification(notification);
     }
 }

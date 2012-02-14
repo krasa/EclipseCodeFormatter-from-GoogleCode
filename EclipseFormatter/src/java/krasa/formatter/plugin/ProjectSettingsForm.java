@@ -18,7 +18,15 @@
 package krasa.formatter.plugin;
 
 import com.intellij.ui.DocumentAdapter;
+import krasa.formatter.Messages;
+import krasa.formatter.settings.Settings;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,18 +34,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.DocumentEvent;
-
-import krasa.formatter.Messages;
-import krasa.formatter.settings.Settings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
- * Configuration dialog for changing the {@link krasa.formatter.settings.Settings} of the plugin.
+ * Configuration dialog for changing the
+ * {@link krasa.formatter.settings.Settings} of the plugin.
  *
  * @author Esko Luontola
  * @author Vojtech Krasa
@@ -80,13 +80,10 @@ public class ProjectSettingsForm {
 
     public ProjectSettingsForm() {
         JToggleButton[] modifyableButtons = new JToggleButton[]{
-                useDefaultFormatter,
-                useEclipseFormatter,
-                optimizeImportsCheckBox,
-                doNotFormatOtherFilesRadioButton,
+                useDefaultFormatter, useEclipseFormatter,
+                optimizeImportsCheckBox, doNotFormatOtherFilesRadioButton,
                 formatOtherFilesWithExceptionsRadioButton,
-                formatSeletedTextInAllFileTypes,
-        };
+                formatSeletedTextInAllFileTypes,};
         for (JToggleButton button : modifyableButtons) {
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -95,9 +92,9 @@ public class ProjectSettingsForm {
             });
         }
 
-        JTextField[] modifyableFields = new JTextField[]{
-                eclipsePrefs, eclipseSupportedFileTypes, optimizeImportGroups, disabledFileTypes
-        };
+        JTextField[] modifyableFields = new JTextField[]{eclipsePrefs,
+                eclipseSupportedFileTypes, optimizeImportGroups,
+                disabledFileTypes};
         for (JTextField field : modifyableFields) {
             field.getDocument().addDocumentListener(new DocumentAdapter() {
                 protected void textChanged(DocumentEvent e) {
@@ -115,7 +112,8 @@ public class ProjectSettingsForm {
 
         rootComponent.addAncestorListener(new AncestorListener() {
             public void ancestorAdded(AncestorEvent event) {
-                // Called when component becomes visible, to ensure that the popups
+                // Called when component becomes visible, to ensure that the
+                // popups
                 // are visible when the form is shown for the first time.
                 updateComponents();
             }
@@ -132,7 +130,8 @@ public class ProjectSettingsForm {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setMultiSelectionEnabled(false);
-        chooser.setFileHidingEnabled(false);    // Eclipse's prefs file is in a hidden ".settings" directory
+        chooser.setFileHidingEnabled(false); // Eclipse's prefs file is in a
+        // hidden ".settings" directory
 
         if (target.getText().equals("") && lastDirectory != null) {
             chooser.setCurrentDirectory(lastDirectory);
@@ -152,28 +151,20 @@ public class ProjectSettingsForm {
     private void updateComponents() {
         hidePopups();
 
-        enabledBy(new JComponent[]{
-                eclipseSupportedFileTypesLabel,
-                eclipsePrefs,
-                eclipsePrefsBrowse,
-                eclipsePrefsLabel,
-                eclipsePrefsExample,
-                optimizeImportsCheckBox,
+        enabledBy(new JComponent[]{eclipseSupportedFileTypesLabel,
+                eclipsePrefs, eclipsePrefsBrowse, eclipsePrefsLabel,
+                eclipsePrefsExample, optimizeImportsCheckBox,
                 doNotFormatOtherFilesRadioButton,
                 formatOtherFilesWithExceptionsRadioButton,
-                formatSeletedTextInAllFileTypes,
-        }, useEclipseFormatter);
+                formatSeletedTextInAllFileTypes,}, useEclipseFormatter);
 
-        enabledBy(new JComponent[]{
-                optimizeImportGroups,
-                optimizeImportGroupsLabel,
-                optimizeImportGroupsHelpLabel,
-        }, optimizeImportsCheckBox, useEclipseFormatter);
+        enabledBy(new JComponent[]{optimizeImportGroups,
+                optimizeImportGroupsLabel, optimizeImportGroupsHelpLabel,},
+                optimizeImportsCheckBox, useEclipseFormatter);
 
-        enabledBy(new JComponent[]{
-                disabledFileTypes,
-                disabledFileTypesHelpLabel,
-        }, formatOtherFilesWithExceptionsRadioButton, useEclipseFormatter);
+        enabledBy(new JComponent[]{disabledFileTypes,
+                disabledFileTypesHelpLabel,},
+                formatOtherFilesWithExceptionsRadioButton, useEclipseFormatter);
 
         if (notEmpty(eclipsePrefs) && fileExists(eclipsePrefs)) {
             ok(eclipsePrefs);
@@ -181,7 +172,8 @@ public class ProjectSettingsForm {
 
     }
 
-    private void enabledBy(@NotNull JComponent[] targets, @NotNull JToggleButton... control) {
+    private void enabledBy(@NotNull JComponent[] targets,
+                           @NotNull JToggleButton... control) {
         boolean b = true;
         for (JToggleButton jToggleButton : control) {
             b = b && (jToggleButton.isEnabled() && jToggleButton.isSelected());
@@ -200,7 +192,8 @@ public class ProjectSettingsForm {
         return true;
     }
 
-    private boolean containsText(@NotNull String needle, @NotNull JTextField field) {
+    private boolean containsText(@NotNull String needle,
+                                 @NotNull JTextField field) {
         if (!field.getText().contains(needle)) {
             field.setBackground(ERROR);
             showPopup(field, Messages.message("warning.mustContain", needle));
@@ -233,7 +226,8 @@ public class ProjectSettingsForm {
 
     private void showPopup(@NotNull JComponent parent, @NotNull String message) {
         if (!parent.isShowing() || !parent.isEnabled()) {
-            return; // if getLocationOnScreen is called when the component is not showing, an exception is thrown
+            return; // if getLocationOnScreen is called when the component is
+            // not showing, an exception is thrown
         }
         JToolTip tip = new JToolTip();
         tip.setTipText(message);
@@ -243,7 +237,8 @@ public class ProjectSettingsForm {
         int x = (int) location.getX();
         int y = (int) (location.getY() - tipSize.getHeight());
 
-        Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x, y);
+        Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x,
+                y);
         popup.show();
         visiblePopups.add(popup);
     }
@@ -262,10 +257,14 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
-        formatOtherFilesWithExceptionsRadioButton.setSelected(in.isFormatOtherFileTypesWithIntelliJ());
-        doNotFormatOtherFilesRadioButton.setSelected(!in.isFormatOtherFileTypesWithIntelliJ());
-        useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
-        useEclipseFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.ECLIPSE));
+        formatOtherFilesWithExceptionsRadioButton.setSelected(in
+                .isFormatOtherFileTypesWithIntelliJ());
+        doNotFormatOtherFilesRadioButton.setSelected(!in
+                .isFormatOtherFileTypesWithIntelliJ());
+        useDefaultFormatter.setSelected(in.getFormatter().equals(
+                Settings.Formatter.DEFAULT));
+        useEclipseFormatter.setSelected(in.getFormatter().equals(
+                Settings.Formatter.ECLIPSE));
         setData(in);
         updateComponents();
     }
@@ -275,7 +274,8 @@ public class ProjectSettingsForm {
         optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
         optimizeImportGroups.setText(data.getJoinedGroup());
         disabledFileTypes.setText(data.getDisabledFileTypes());
-        formatSeletedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
+        formatSeletedTextInAllFileTypes.setSelected(data
+                .isFormatSeletedTextInAllFileTypes());
     }
 
     public void exportTo(@NotNull Settings out) {
@@ -298,30 +298,43 @@ public class ProjectSettingsForm {
         data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
         data.setJoinedGroup(optimizeImportGroups.getText());
         data.setDisabledFileTypes(disabledFileTypes.getText());
-        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes.isSelected());
+        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes
+                .isSelected());
     }
 
     public boolean isModified(Settings data) {
-        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {
+        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(
+                Settings.Formatter.DEFAULT)) {
             return true;
         }
-        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
+        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(
+                Settings.Formatter.ECLIPSE)) {
             return true;
         }
-        if (formatOtherFilesWithExceptionsRadioButton.isSelected() != data.isFormatOtherFileTypesWithIntelliJ()) {
+        if (formatOtherFilesWithExceptionsRadioButton.isSelected() != data
+                .isFormatOtherFileTypesWithIntelliJ()) {
             return true;
         }
-        if (doNotFormatOtherFilesRadioButton.isSelected() != !data.isFormatOtherFileTypesWithIntelliJ()) {
+        if (doNotFormatOtherFilesRadioButton.isSelected() != !data
+                .isFormatOtherFileTypesWithIntelliJ()) {
             return true;
         }
-        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
+        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(
+                data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
             return true;
-        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) return true;
-        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups.getText().equals(data.getJoinedGroup()) : data.getJoinedGroup() != null)
+        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports())
             return true;
-        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes()) : data.getDisabledFileTypes() != null)
+        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups
+                .getText().equals(data.getJoinedGroup()) : data
+                .getJoinedGroup() != null)
             return true;
-        if (formatSeletedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes()) return true;
+        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText()
+                .equals(data.getDisabledFileTypes()) : data
+                .getDisabledFileTypes() != null)
+            return true;
+        if (formatSeletedTextInAllFileTypes.isSelected() != data
+                .isFormatSeletedTextInAllFileTypes())
+            return true;
         return false;
     }
 }

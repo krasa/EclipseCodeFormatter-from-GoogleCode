@@ -19,7 +19,7 @@ public class ImportGroupSettings {
     }
 
     /**
-     * example:  com-org-eu-net; cz-com;
+     * example: com-org-eu-net; cz-com;
      */
     public ImportGroupSettings(@NotNull String groupsString) {
         this.groups = new ArrayList<JoinedGroup>();

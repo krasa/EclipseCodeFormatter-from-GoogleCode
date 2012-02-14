@@ -51,7 +51,8 @@ public class Settings implements Cloneable {
         return formatSeletedTextInAllFileTypes;
     }
 
-    public void setFormatSeletedTextInAllFileTypes(boolean formatSeletedTextInAllFileTypes) {
+    public void setFormatSeletedTextInAllFileTypes(
+            boolean formatSeletedTextInAllFileTypes) {
         this.formatSeletedTextInAllFileTypes = formatSeletedTextInAllFileTypes;
     }
 
@@ -59,7 +60,8 @@ public class Settings implements Cloneable {
         return formatOtherFileTypesWithIntelliJ;
     }
 
-    public void setFormatOtherFileTypesWithIntelliJ(boolean formatOtherFileTypesWithIntelliJ) {
+    public void setFormatOtherFileTypesWithIntelliJ(
+            boolean formatOtherFileTypesWithIntelliJ) {
         this.formatOtherFileTypesWithIntelliJ = formatOtherFileTypesWithIntelliJ;
     }
 
@@ -130,10 +132,8 @@ public class Settings implements Cloneable {
         this.eclipsePrefs = eclipsePrefs;
     }
 
-
     public boolean isPreferenceFileConfigured() {
         return eclipsePrefs != null && !eclipsePrefs.isEmpty();
     }
-
 
 }

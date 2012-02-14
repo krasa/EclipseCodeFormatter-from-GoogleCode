@@ -14,10 +14,14 @@ import krasa.formatter.settings.Settings;
  */
 public class QuickChangeCodeFormatterAction extends QuickSwitchSchemeAction {
 
-    protected void fillActions(final Project project, DefaultActionGroup group, DataContext dataContext) {
-        Settings.Formatter formatter = ProjectSettingsComponent.getInstance(project).getState().getFormatter();
+    protected void fillActions(final Project project, DefaultActionGroup group,
+                               DataContext dataContext) {
+        Settings.Formatter formatter = ProjectSettingsComponent
+                .getInstance(project).getState().getFormatter();
         for (final Settings.Formatter lf : Settings.Formatter.values()) {
-            group.add(new DumbAwareAction(lf.name(), "", lf == formatter ? ourCurrentAction : ourNotCurrentAction) {
+            group.add(new DumbAwareAction(lf.name(), "", lf == formatter
+                    ? ourCurrentAction
+                    : ourNotCurrentAction) {
                 public void actionPerformed(AnActionEvent e) {
                     changeFormatter(project, lf);
                 }
@@ -26,7 +30,8 @@ public class QuickChangeCodeFormatterAction extends QuickSwitchSchemeAction {
     }
 
     private void changeFormatter(Project project, Settings.Formatter lf) {
-        ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance(project);
+        ProjectSettingsComponent instance = ProjectSettingsComponent
+                .getInstance(project);
         final Settings state = instance.getState();
         state.setFormatter(lf);
         instance.loadState(state);

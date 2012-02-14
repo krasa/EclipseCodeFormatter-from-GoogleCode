@@ -37,7 +37,8 @@ import java.io.File;
  */
 public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
-    private static final Logger LOG = Logger.getInstance(EclipseCodeStyleManager.class.getName());
+    private static final Logger LOG = Logger
+            .getInstance(EclipseCodeStyleManager.class.getName());
 
     @NotNull
     protected final EclipseCodeFormatterFacade codeFormatterFacade;
@@ -48,17 +49,17 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     private ImportOptimization importOptimization;
 
     public EclipseCodeStyleManager(@NotNull CodeStyleManager original,
-                                   @NotNull Settings settings,
-                                   @NotNull Project project) {
+                                   @NotNull Settings settings, @NotNull Project project) {
         super(original);
         this.settings = settings;
-        codeFormatterFacade = new EclipseCodeFormatterFacade(settings.getEclipsePrefs());
+        codeFormatterFacade = new EclipseCodeFormatterFacade(
+                settings.getEclipsePrefs());
         notifier = new Notifier(project);
-        importOptimization = new ImportOptimization( settings);
+        importOptimization = new ImportOptimization(settings);
     }
 
-    public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)
-            throws IncorrectOperationException {
+    public void reformatText(@NotNull PsiFile psiFile, final int startOffset,
+                             final int endOffset) throws IncorrectOperationException {
         boolean formattedByIntelliJ = false;
         try {
             ApplicationManager.getApplication().assertWriteAccessAllowed();
@@ -69,8 +70,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             Project project = psiFile.getProject();
 
             if (virtualFile == null) {
-                Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", Notifier.NO_FILE_TO_FORMAT,
-                        NotificationType.ERROR);
+                Notification notification = new Notification(
+                        ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
+                        Notifier.NO_FILE_TO_FORMAT, NotificationType.ERROR);
                 notifier.showNotification(notification);
             } else if (!canReformatWithEclipse(virtualFile, project)) {
                 if (skipFormatting(virtualFile, psiFile, startOffset, endOffset)) {
@@ -81,7 +83,6 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             } else {
                 importOptimization.byIntellij(psiFile, project);
                 formatWithEclipse(psiFile, startOffset, endOffset, virtualFile);
-                System.err.println("asdas");
             }
         } catch (final InvalidPathToConfigFileException e) {
             e.printStackTrace();
@@ -92,10 +93,8 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         }
     }
 
-    private boolean skipFormatting(VirtualFile virtualFile,
-                                   PsiFile psiFile,
-                                   int startOffset,
-                                   int endOffset) {
+    private boolean skipFormatting(VirtualFile virtualFile, PsiFile psiFile,
+                                   int startOffset, int endOffset) {
         if (settings.isFormatSeletedTextInAllFileTypes()) {
             final Editor editor = PsiUtilBase.findEditor(psiFile);
             if (editor != null) {
@@ -118,15 +117,18 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
     private boolean isDisabledFileType(VirtualFile virtualFile) {
         String path = ioFile(virtualFile).getPath();
-        DisabledFileTypeSettings disabledFileTypeSettings = settings.geDisabledFileTypeSettings();
+        DisabledFileTypeSettings disabledFileTypeSettings = settings
+                .geDisabledFileTypeSettings();
         return disabledFileTypeSettings.isDisabled(path);
     }
 
-
-    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset, VirtualFile virtualFile) throws InvalidPathToConfigFileException {
+    private void formatWithEclipse(PsiFile psiFile, int startOffset,
+                                   int endOffset, VirtualFile virtualFile)
+            throws InvalidPathToConfigFileException {
         final Editor editor = PsiUtilBase.findEditor(psiFile);
         boolean skipSuccessFormattingNotification = false;
-        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
+        FileDocumentManager fileDocumentManager = FileDocumentManager
+                .getInstance();
         if (editor != null) {
             int visualColumnToRestore = getVisualColumnToRestore(editor);
 
@@ -145,8 +147,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 fixedStartOffset = getLineStartOffset(startOffset, text);
             }
             skipSuccessFormattingNotification = isSkipNotification(startOffset,
-                    endOffset); // little fix for etc. ctrl+shift+enter
-            document.setText(codeFormatterFacade.format(text, fixedStartOffset, endOffset, Settings.LINE_SEPARATOR));
+                    endOffset, text); // little fix for etc. ctrl+shift+enter
+            document.setText(codeFormatterFacade.format(text, fixedStartOffset,
+                    endOffset, Settings.LINE_SEPARATOR));
             importOptimization.appendBlankLinesBetweenGroups(document);
 
             restoreVisualColumnToRestore(editor, visualColumnToRestore);
@@ -156,7 +159,8 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         } else { // editor is closed
             Document writeTo = fileDocumentManager.getDocument(virtualFile);
             fileDocumentManager.saveDocument(writeTo);
-            writeTo.setText(codeFormatterFacade.format(ioFile(virtualFile), Settings.LINE_SEPARATOR));
+            writeTo.setText(codeFormatterFacade.format(ioFile(virtualFile),
+                    Settings.LINE_SEPARATOR));
             importOptimization.appendBlankLinesBetweenGroups(writeTo);
             fileDocumentManager.saveDocument(writeTo);
         }
@@ -166,28 +170,35 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     }
 
     private int getLineStartOffset(int startOffset, String text) {
-        return text.substring(0, startOffset).lastIndexOf(Settings.LINE_SEPARATOR) + 1;
+        return text.substring(0, startOffset).lastIndexOf(
+                Settings.LINE_SEPARATOR) + 1;
     }
 
-    private boolean isSkipNotification(int startOffset, int endOffset) {
-        return endOffset - startOffset < settings.getNotifyFromTextLenght();
+    private boolean isSkipNotification(int startOffset, int endOffset,
+                                       String text) {
+        boolean isShort = endOffset - startOffset < settings
+                .getNotifyFromTextLenght();
+        boolean isWholeFile = startOffset == 0 && endOffset == text.length();
+        return isShort && !isWholeFile;
     }
 
-    private void formatWithIntelliJ(PsiFile psiFile, int startOffset, int endOffset) {
+    private void formatWithIntelliJ(PsiFile psiFile, int startOffset,
+                                    int endOffset) {
         super.reformatText(psiFile, startOffset, endOffset);
-        if (!isSkipNotification(startOffset, endOffset)) {
+        if (!isSkipNotification(startOffset, endOffset, psiFile.getText())) {
             notifier.notifySuccessFormatting(psiFile, true);
         }
     }
 
-
-    private void restoreVisualColumnToRestore(Editor editor, int visualColumnToRestore) {
+    private void restoreVisualColumnToRestore(Editor editor,
+                                              int visualColumnToRestore) {
         if (visualColumnToRestore < 0) {
         } else {
             CaretModel caretModel = editor.getCaretModel();
             VisualPosition position = caretModel.getVisualPosition();
             if (visualColumnToRestore != position.column) {
-                caretModel.moveToVisualPosition(new VisualPosition(position.line, visualColumnToRestore));
+                caretModel.moveToVisualPosition(new VisualPosition(
+                        position.line, visualColumnToRestore));
             }
         }
     }
@@ -198,7 +209,8 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         if (editor != null) {
             Document document1 = editor.getDocument();
             int caretOffset = editor.getCaretModel().getOffset();
-            caretOffset = Math.max(Math.min(caretOffset, document1.getTextLength() - 1), 0);
+            caretOffset = Math.max(
+                    Math.min(caretOffset, document1.getTextLength() - 1), 0);
             CharSequence text1 = document1.getCharsSequence();
             int caretLine = document1.getLineNumber(caretOffset);
             int lineStartOffset = document1.getLineStartOffset(caretLine);
@@ -212,19 +224,23 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 }
             }
             if (fixCaretPosition) {
-                visualColumnToRestore = editor.getCaretModel().getVisualPosition().column;
+                visualColumnToRestore = editor.getCaretModel()
+                        .getVisualPosition().column;
             }
         }
         return visualColumnToRestore;
     }
 
-
-    private boolean canReformatWithEclipse(@NotNull VirtualFile file, @NotNull Project project) {
-        return file.isInLocalFileSystem() && isWritable(file, project) && fileTypeIsSupported(file);
+    private boolean canReformatWithEclipse(@NotNull VirtualFile file,
+                                           @NotNull Project project) {
+        return file.isInLocalFileSystem() && isWritable(file, project)
+                && fileTypeIsSupported(file);
     }
 
-    private static boolean isWritable(@NotNull VirtualFile file, @NotNull Project project) {
-        return !ReadonlyStatusHandler.getInstance(project).ensureFilesWritable(file).hasReadonlyFiles();
+    private static boolean isWritable(@NotNull VirtualFile file,
+                                      @NotNull Project project) {
+        return !ReadonlyStatusHandler.getInstance(project)
+                .ensureFilesWritable(file).hasReadonlyFiles();
     }
 
     private boolean fileTypeIsSupported(@NotNull VirtualFile file) {

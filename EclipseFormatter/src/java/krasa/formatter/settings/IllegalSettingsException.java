@@ -32,7 +32,8 @@ public class IllegalSettingsException extends Exception {
     @NotNull
     private final String[] errorParams;
 
-    public IllegalSettingsException(@NotNull String field, @NotNull String errorKey, @NotNull String... errorParams) {
+    public IllegalSettingsException(@NotNull String field,
+                                    @NotNull String errorKey, @NotNull String... errorParams) {
         super(field + ": " + errorKey);
         this.field = field;
         this.errorKey = errorKey;

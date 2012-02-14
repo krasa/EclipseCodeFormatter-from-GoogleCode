@@ -19,7 +19,8 @@ import java.util.Scanner;
  * @author Vojtech Krasa
  */
 public class ImportOptimization {
-    private static final Logger LOG = Logger.getInstance(ImportOptimization.class.getName());
+    private static final Logger LOG = Logger
+            .getInstance(ImportOptimization.class.getName());
 
     public static final int START_OF_IMPORTS_PACKAGE_DECLARATION = 7;
     @NotNull
@@ -33,16 +34,18 @@ public class ImportOptimization {
         if (!settings.isOptimizeImports()) {
             return;
         }
-        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project)
-                .prepareOptimizeImportsResult((PsiJavaFile) psiFile);
+        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(
+                project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
 
         try {
-            final PsiDocumentManager manager = PsiDocumentManager.getInstance(psiFile.getProject());
+            final PsiDocumentManager manager = PsiDocumentManager
+                    .getInstance(psiFile.getProject());
             final Document document = manager.getDocument(psiFile);
             if (document != null) {
                 manager.commitDocument(document);
             }
-            final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
+            final PsiImportList oldImportList = ((PsiJavaFile) psiFile)
+                    .getImportList();
             assert oldImportList != null;
             if (newImportList != null) {
                 oldImportList.replace(newImportList);
@@ -52,7 +55,6 @@ public class ImportOptimization {
             LOG.error(e);
         }
     }
-
 
     /**
      * appends blank lines between import groups
@@ -68,13 +70,14 @@ public class ImportOptimization {
             String next = scanner.nextLine();
             if (next == null) {
                 break;
-            } 
+            }
             if (next.startsWith("import ")) {
                 int i = next.indexOf(".");
                 if (isNotValidImport(i)) {
                     continue;
                 }
-                String currentImportGroup = next.substring(START_OF_IMPORTS_PACKAGE_DECLARATION, i);
+                String currentImportGroup = next.substring(
+                        START_OF_IMPORTS_PACKAGE_DECLARATION, i);
                 if (shouldAppendBlankLine(lastImportGroup, currentImportGroup)) {
                     sb.append(Settings.LINE_SEPARATOR);
                 }
@@ -91,16 +94,20 @@ public class ImportOptimization {
         return i <= START_OF_IMPORTS_PACKAGE_DECLARATION;
     }
 
-    private boolean shouldAppendBlankLine(String lastImportGroup, String currentImportGroup) {
-        if (lastImportGroup == null) return false;
+    private boolean shouldAppendBlankLine(String lastImportGroup,
+                                          String currentImportGroup) {
+        if (lastImportGroup == null)
+            return false;
 
         // TODO find out what is the eclipse's algorithm
-        return !(lastImportGroup.equals(currentImportGroup) || isConfiguredToJoin(lastImportGroup, currentImportGroup));
+        return !(lastImportGroup.equals(currentImportGroup) || isConfiguredToJoin(
+                lastImportGroup, currentImportGroup));
     }
 
-    private boolean isConfiguredToJoin(String lastImportGroup, String currentImportGroup) {
-        return settings.getImportGroupSettings()
-                .contains(new JoinedGroup(lastImportGroup, currentImportGroup));
+    private boolean isConfiguredToJoin(String lastImportGroup,
+                                       String currentImportGroup) {
+        return settings.getImportGroupSettings().contains(
+                new JoinedGroup(lastImportGroup, currentImportGroup));
     }
 
     private void append(StringBuilder sb, String next) {
