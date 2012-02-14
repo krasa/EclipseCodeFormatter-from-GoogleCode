@@ -1,15 +1,8 @@
 /*******************************************************************************
- *  Copyright (c) 2005, 2011 IBM Corporation and others.
- *  All rights reserved. This program and the accompanying materials
- *  are made available under the terms of the Eclipse Public License v1.0
- *  which accompanies this distribution, and is available at
- *  http://www.eclipse.org/legal/epl-v10.html
- *
- *  Contributors:
- *     Ben Konrath <ben@bagu.org> - initial implementation
- *     Red Hat Incorporated - improvements based on comments from JDT developers
- *     IBM Corporation - Code review and integration
- *     IBM Corporation - Fix for 340181
+ * Copyright (c) 2005, 2011 IBM Corporation and others. All rights reserved. This program and the accompanying materials are made available
+ * under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Ben Konrath <ben@bagu.org> - initial implementation Red Hat Incorporated -
+ * improvements based on comments from JDT developers IBM Corporation - Code review and integration IBM Corporation - Fix for 340181
  *******************************************************************************/
 package krasa.formatter.eclipse;
 
@@ -33,16 +26,14 @@ import java.util.Properties;
  * Implements an Eclipse Application for org.eclipse.jdt.core.JavaCodeFormatter.
  * <p/>
  * <p>
- * On MacOS, when invoked using the Eclipse executable, the "user.dir" property
- * is set to the folder in which the eclipse.ini file is located. This makes it
- * harder to use relative paths to point to the files to be formatted or the
- * configuration file to use to set the code formatter's options.
+ * On MacOS, when invoked using the Eclipse executable, the "user.dir" property is set to the folder in which the eclipse.ini file is
+ * located. This makes it harder to use relative paths to point to the files to be formatted or the configuration file to use to set the
+ * code formatter's options.
  * </p>
  * <p/>
  * <p>
- * There are a couple improvements that could be made: 1. Make a list of all the
- * files first so that a file does not get formatted twice. 2. Use a text based
- * progress monitor for output.
+ * There are a couple improvements that could be made: 1. Make a list of all the files first so that a file does not get formatted twice. 2.
+ * Use a text based progress monitor for output.
  * </p>
  *
  * @author Ben Konrath <bkonrath@redhat.com>
@@ -53,8 +44,7 @@ import java.util.Properties;
 public class MyCodeFormatterApplication implements IPlatformRunnable {
 
     /**
-     * Deals with the messages in the properties file (cut n' pasted from a
-     * generated class).
+     * Deals with the messages in the properties file (cut n' pasted from a generated class).
      */
     private final static class Messages extends NLS {
         private static final String BUNDLE_NAME = "org.eclipse.jdt.core.formatter.messages";//$NON-NLS-1$
@@ -96,8 +86,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         }
 
         /**
-         * Bind the given message's substitution locations with the given string
-         * values.
+         * Bind the given message's substitution locations with the given string values.
          *
          * @param message the message to be manipulated
          * @return the manipulated String
@@ -107,8 +96,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         }
 
         /**
-         * Bind the given message's substitution locations with the given string
-         * values.
+         * Bind the given message's substitution locations with the given string values.
          *
          * @param message the message to be manipulated
          * @param binding the object to be inserted into the message
@@ -119,22 +107,19 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         }
 
         /**
-         * Bind the given message's substitution locations with the given string
-         * values.
+         * Bind the given message's substitution locations with the given string values.
          *
          * @param message  the message to be manipulated
          * @param binding1 An object to be inserted into the message
          * @param binding2 A second object to be inserted into the message
          * @return the manipulated String
          */
-        public static String bind(String message, Object binding1,
-                                  Object binding2) {
+        public static String bind(String message, Object binding1, Object binding2) {
             return bind(message, new Object[]{binding1, binding2});
         }
 
         /**
-         * Bind the given message's substitution locations with the given string
-         * values.
+         * Bind the given message's substitution locations with the given string values.
          *
          * @param message  the message to be manipulated
          * @param bindings An array of objects to be inserted into the message
@@ -177,8 +162,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
     }
 
     /**
-     * Recursively format the Java source code that is contained in the
-     * directory rooted at dir.
+     * Recursively format the Java source code that is contained in the directory rooted at dir.
      */
     protected void formatDirTree(File dir, CodeFormatter codeFormatter) {
 
@@ -205,13 +189,9 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
         try {
             // read the file
             if (this.verbose) {
-                System.out
-                        .println(Messages.bind(Messages.CommandLineFormatting,
-                                file.getAbsolutePath()));
+                System.out.println(Messages.bind(Messages.CommandLineFormatting, file.getAbsolutePath()));
             }
-            String contents = new String(
-                    org.eclipse.jdt.internal.compiler.util.Util
-                            .getFileCharContent(file, null));
+            String contents = new String(org.eclipse.jdt.internal.compiler.util.Util.getFileCharContent(file, null));
             // format the file (the meat and potatoes)
             doc.set(contents);
             // TODO was in previous version
@@ -219,15 +199,12 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
             // codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, contents,
             // 0, contents.length(), 0, null);
 
-            TextEdit edit = codeFormatter.format(
-                    CodeFormatter.K_COMPILATION_UNIT
-                            | CodeFormatter.F_INCLUDE_COMMENTS, contents, 0,
+            TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, contents, 0,
                     contents.length(), 0, null);
             if (edit != null) {
                 edit.apply(doc);
             } else {
-                System.err.println(Messages.bind(Messages.FormatProblem,
-                        file.getAbsolutePath()));
+                System.err.println(Messages.bind(Messages.FormatProblem, file.getAbsolutePath()));
                 return;
             }
 
@@ -244,71 +221,54 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                 }
             }
         } catch (IOException e) {
-            String errorMessage = Messages.bind(Messages.CaughtException,
-                    "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
-            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage), e);
+            String errorMessage = Messages.bind(Messages.CaughtException, "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
+            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip, errorMessage), e);
         } catch (BadLocationException e) {
-            String errorMessage = Messages.bind(Messages.CaughtException,
-                    "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
-            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip,
-                    errorMessage), e);
+            String errorMessage = Messages.bind(Messages.CaughtException, "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
+            throw new RuntimeException(Messages.bind(Messages.ExceptionSkip, errorMessage), e);
         }
     }
 
-    public IDocument formatWithoutWrite(File file, CodeFormatter codeFormatter,
-                                        String lineSeparator) {
+    public IDocument formatWithoutWrite(File file, CodeFormatter codeFormatter, String lineSeparator) {
         IDocument doc = new Document();
         try {
-            String contents = new String(
-                    org.eclipse.jdt.internal.compiler.util.Util
-                            .getFileCharContent(file, null));
+            String contents = new String(org.eclipse.jdt.internal.compiler.util.Util.getFileCharContent(file, null));
             // format the file (the meat and potatoes)
             doc.set(contents);
 
-            TextEdit edit = codeFormatter.format(
-                    CodeFormatter.K_COMPILATION_UNIT
-                            | CodeFormatter.F_INCLUDE_COMMENTS, contents, 0,
+            TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, contents, 0,
                     contents.length(), 0, lineSeparator);
             if (edit != null) {
                 edit.apply(doc);
             } else {
-                throw new RuntimeException(Messages.bind(
-                        Messages.FormatProblem, file.getAbsolutePath()));
+                throw new RuntimeException(Messages.bind(Messages.FormatProblem, file.getAbsolutePath()));
             }
             return doc;
         } catch (IOException e) {
-            String errorMessage = Messages.bind(Messages.CaughtException,
-                    "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
+            String errorMessage = Messages.bind(Messages.CaughtException, "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
             throw new RuntimeException(errorMessage, e);
         } catch (BadLocationException e) {
-            String errorMessage = Messages.bind(Messages.CaughtException,
-                    "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
+            String errorMessage = Messages.bind(Messages.CaughtException, "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
             throw new RuntimeException(errorMessage, e);
         }
 
     }
 
-    public String format(String contents, CodeFormatter codeFormatter,
-                         int startOffset, int endOffset, String lineSeparator) {
+    public String format(String contents, CodeFormatter codeFormatter, int startOffset, int endOffset, String lineSeparator) {
 
         IDocument doc = new Document();
         try {
             doc.set(contents);
-            TextEdit edit = codeFormatter.format(
-                    CodeFormatter.K_COMPILATION_UNIT
-                            | CodeFormatter.F_INCLUDE_COMMENTS, contents,
+            TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, contents,
                     startOffset, endOffset, 0, lineSeparator);
             if (edit != null) {
                 edit.apply(doc);
             } else {
-                throw new RuntimeException(
-                        Notifier.FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE);
+                throw new RuntimeException(Notifier.FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE);
             }
             return doc.get();
         } catch (BadLocationException e) {
-            String errorMessage = Messages.bind(Messages.CaughtException,
-                    "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
+            String errorMessage = Messages.bind(Messages.CaughtException, "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
             throw new RuntimeException(errorMessage, e);
         }
 
@@ -361,11 +321,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                     File file = new File(currentArg);
                     if (file.exists()) {
                         if (filesToFormat.length == fileCounter) {
-                            System.arraycopy(
-                                    filesToFormat,
-                                    0,
-                                    (filesToFormat = new File[fileCounter * 2]),
-                                    0, fileCounter);
+                            System.arraycopy(filesToFormat, 0, (filesToFormat = new File[fileCounter * 2]), 0, fileCounter);
                         }
                         filesToFormat[fileCounter++] = file;
                     } else {
@@ -375,12 +331,8 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                         } catch (IOException e2) {
                             canonicalPath = file.getAbsolutePath();
                         }
-                        String errorMsg = file.isAbsolute()
-                                ? Messages.bind(Messages.CommandLineErrorFile,
-                                canonicalPath)
-                                : Messages
-                                .bind(Messages.CommandLineErrorFileTryFullPath,
-                                        canonicalPath);
+                        String errorMsg = file.isAbsolute() ? Messages.bind(Messages.CommandLineErrorFile, canonicalPath) : Messages.bind(
+                                Messages.CommandLineErrorFileTryFullPath, canonicalPath);
                         displayHelp(errorMsg);
                         return null;
                     }
@@ -389,8 +341,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
                     this.configName = currentArg;
                     this.options = readConfig(new File(currentArg));
                     if (this.options == null) {
-                        displayHelp(Messages.bind(
-                                Messages.CommandLineErrorConfig, currentArg));
+                        displayHelp(Messages.bind(Messages.CommandLineErrorConfig, currentArg));
                         return null;
                     }
                     mode = DEFAULT_MODE;
@@ -403,8 +354,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
             return null;
         }
         if (this.quiet && this.verbose) {
-            displayHelp(Messages.bind(Messages.CommandLineErrorQuietVerbose,
-                    new String[]{ARG_QUIET, ARG_VERBOSE}));
+            displayHelp(Messages.bind(Messages.CommandLineErrorQuietVerbose, new String[]{ARG_QUIET, ARG_VERBOSE}));
             return null;
         }
         if (fileCounter == 0) {
@@ -412,15 +362,13 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
             return null;
         }
         if (filesToFormat.length != fileCounter) {
-            System.arraycopy(filesToFormat, 0,
-                    (filesToFormat = new File[fileCounter]), 0, fileCounter);
+            System.arraycopy(filesToFormat, 0, (filesToFormat = new File[fileCounter]), 0, fileCounter);
         }
         return filesToFormat;
     }
 
     /**
-     * Return a Java Properties file representing the options that are in the
-     * specified configuration file.
+     * Return a Java Properties file representing the options that are in the specified configuration file.
      */
     Properties readConfig(File file) {
         BufferedInputStream stream = null;
@@ -430,8 +378,7 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
             formatterOptions.load(stream);
             return formatterOptions;
         } catch (IOException e) {
-            throw new RuntimeException(
-                    Messages.bind(Messages.ConfigFileReadingError), e);
+            throw new RuntimeException(Messages.bind(Messages.ConfigFileReadingError), e);
         } finally {
             if (stream != null) {
                 try {
@@ -456,14 +403,12 @@ public class MyCodeFormatterApplication implements IPlatformRunnable {
 
         if (!this.quiet) {
             if (this.configName != null) {
-                System.out.println(Messages.bind(
-                        Messages.CommandLineConfigFile, this.configName));
+                System.out.println(Messages.bind(Messages.CommandLineConfigFile, this.configName));
             }
             System.out.println(Messages.bind(Messages.CommandLineStart));
         }
 
-        final CodeFormatter codeFormatter = ToolFactory
-                .createCodeFormatter(this.options);
+        final CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(this.options);
         // format the list of files and/or directories
         for (int i = 0, max = filesToFormat.length; i < max; i++) {
             final File file = filesToFormat[i];

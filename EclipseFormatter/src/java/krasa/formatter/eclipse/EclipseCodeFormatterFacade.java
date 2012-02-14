@@ -21,8 +21,7 @@ public class EclipseCodeFormatterFacade {
         this.pathToConfigFile = pathToConfigFile;
     }
 
-    private CodeFormatter getCodeFormatter()
-            throws InvalidPathToConfigFileException {
+    private CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
         File file = new File(this.pathToConfigFile);
         if (!file.exists()) {
             throw new InvalidPathToConfigFileException();
@@ -34,14 +33,12 @@ public class EclipseCodeFormatterFacade {
         return codeFormatter;
     }
 
-    private CodeFormatter newCodeFormatter(File file)
-            throws InvalidPathToConfigFileException {
+    private CodeFormatter newCodeFormatter(File file) throws InvalidPathToConfigFileException {
         lastModified = file.lastModified();
         Properties properties = codeFormatterApplication.readConfig(file);
 
         if (properties.isEmpty()) {
-            throw new InvalidPathToConfigFileException(
-                    "incorrect properties file");
+            throw new InvalidPathToConfigFileException("incorrect properties file");
         }
 
         codeFormatter = ToolFactory.createCodeFormatter(properties);
@@ -52,10 +49,8 @@ public class EclipseCodeFormatterFacade {
         return file.lastModified() > lastModified;
     }
 
-    public String format(File file, String lineSeparator)
-            throws InvalidPathToConfigFileException {
-        IDocument iDocument = codeFormatterApplication.formatWithoutWrite(file,
-                getCodeFormatter(), lineSeparator);
+    public String format(File file, String lineSeparator) throws InvalidPathToConfigFileException {
+        IDocument iDocument = codeFormatterApplication.formatWithoutWrite(file, getCodeFormatter(), lineSeparator);
         return iDocument.get();
     }
 
@@ -65,12 +60,10 @@ public class EclipseCodeFormatterFacade {
      * @param endOffset     end of formatted area
      * @param lineSeparator - null for default
      */
-    public String format(String text, int startOffset, int endOffset,
-                         String lineSeparator) throws InvalidPathToConfigFileException {
+    public String format(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
         if (endOffset > text.length()) {
             endOffset = text.length();
         }
-        return codeFormatterApplication.format(text, getCodeFormatter(),
-                startOffset, endOffset - startOffset, lineSeparator);
+        return codeFormatterApplication.format(text, getCodeFormatter(), startOffset, endOffset - startOffset, lineSeparator);
     }
 }

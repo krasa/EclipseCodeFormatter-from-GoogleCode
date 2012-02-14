@@ -19,8 +19,7 @@ import java.util.Scanner;
  * @author Vojtech Krasa
  */
 public class ImportOptimization {
-    private static final Logger LOG = Logger
-            .getInstance(ImportOptimization.class.getName());
+    private static final Logger LOG = Logger.getInstance(ImportOptimization.class.getName());
 
     public static final int START_OF_IMPORTS_PACKAGE_DECLARATION = 7;
     @NotNull
@@ -30,22 +29,20 @@ public class ImportOptimization {
         this.settings = settings;
     }
 
-    public void byIntellij(PsiFile psiFile, Project project) {
+    public void byIntellij(PsiFile psiFile) {
         if (!settings.isOptimizeImports()) {
             return;
         }
-        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(
-                project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
+        Project project = psiFile.getProject();
+        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
 
         try {
-            final PsiDocumentManager manager = PsiDocumentManager
-                    .getInstance(psiFile.getProject());
+            final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
             final Document document = manager.getDocument(psiFile);
             if (document != null) {
                 manager.commitDocument(document);
             }
-            final PsiImportList oldImportList = ((PsiJavaFile) psiFile)
-                    .getImportList();
+            final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
             assert oldImportList != null;
             if (newImportList != null) {
                 oldImportList.replace(newImportList);
@@ -63,8 +60,14 @@ public class ImportOptimization {
         if (!settings.isOptimizeImports()) {
             return;
         }
+        String documentText = document.getText();
+        String text = appendBlankLinesBetweenGroups(documentText);
+        document.setText(text);
+    }
+
+    protected String appendBlankLinesBetweenGroups(String documentText) {
         StringBuilder sb = new StringBuilder();
-        Scanner scanner = new Scanner(document.getText());
+        Scanner scanner = new Scanner(documentText);
         String lastImportGroup = null;
         while (scanner.hasNext()) {
             String next = scanner.nextLine();
@@ -76,8 +79,7 @@ public class ImportOptimization {
                 if (isNotValidImport(i)) {
                     continue;
                 }
-                String currentImportGroup = next.substring(
-                        START_OF_IMPORTS_PACKAGE_DECLARATION, i);
+                String currentImportGroup = next.substring(START_OF_IMPORTS_PACKAGE_DECLARATION, i);
                 if (shouldAppendBlankLine(lastImportGroup, currentImportGroup)) {
                     sb.append(Settings.LINE_SEPARATOR);
                 }
@@ -87,27 +89,23 @@ public class ImportOptimization {
             }
             append(sb, next);
         }
-        document.setText(sb.toString());
+        return sb.toString();
     }
 
     private boolean isNotValidImport(int i) {
         return i <= START_OF_IMPORTS_PACKAGE_DECLARATION;
     }
 
-    private boolean shouldAppendBlankLine(String lastImportGroup,
-                                          String currentImportGroup) {
+    private boolean shouldAppendBlankLine(String lastImportGroup, String currentImportGroup) {
         if (lastImportGroup == null)
             return false;
 
         // TODO find out what is the eclipse's algorithm
-        return !(lastImportGroup.equals(currentImportGroup) || isConfiguredToJoin(
-                lastImportGroup, currentImportGroup));
+        return !(lastImportGroup.equals(currentImportGroup) || isConfiguredToJoin(lastImportGroup, currentImportGroup));
     }
 
-    private boolean isConfiguredToJoin(String lastImportGroup,
-                                       String currentImportGroup) {
-        return settings.getImportGroupSettings().contains(
-                new JoinedGroup(lastImportGroup, currentImportGroup));
+    private boolean isConfiguredToJoin(String lastImportGroup, String currentImportGroup) {
+        return settings.getImportGroupSettings().contains(new JoinedGroup(lastImportGroup, currentImportGroup));
     }
 
     private void append(StringBuilder sb, String next) {

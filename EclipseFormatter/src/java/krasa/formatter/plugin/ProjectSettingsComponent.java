@@ -1,18 +1,9 @@
 /*
- * External Code Formatter
- * Copyright (c) 2007-2009  Esko Luontola, www.orfjackal.net
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * External Code Formatter Copyright (c) 2007-2009 Esko Luontola, www.orfjackal.net Licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+ * the specific language governing permissions and limitations under the License.
  */
 
 package krasa.formatter.plugin;
@@ -40,27 +31,21 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-//import com.intellij.notification.impl.NotificationsConfiguration;
+// import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
- * Takes care of initializing a project's CodeFormatter and disposing of it when
- * the project is closed. Updates the formatter whenever the plugin settings are
- * changed.
+ * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
+ * plugin settings are changed.
  *
  * @author Esko Luontola
  * @since 4.12.2007
  */
 @State(name = "EclipseCodeFormatter", storages = {@Storage(id = "other", file = "$PROJECT_FILE$")})
-public class ProjectSettingsComponent
-        implements
-        ProjectComponent,
-        Configurable,
-        PersistentStateComponent<Settings> {
+public class ProjectSettingsComponent implements ProjectComponent, Configurable, PersistentStateComponent<Settings> {
 
     public static final String GROUP_DISPLAY_ID = "Eclipse code formatter info";
     public static final String GROUP_DISPLAY_ID_ERROR = "Eclipse code formatter error";
-    private static final Logger LOG = Logger
-            .getInstance(ProjectSettingsComponent.class.getName());
+    private static final Logger LOG = Logger.getInstance(ProjectSettingsComponent.class.getName());
 
     @NotNull
     private final ProjectCodeStyleInstaller projectCodeStyle;
@@ -70,14 +55,14 @@ public class ProjectSettingsComponent
     private ProjectSettingsForm form;
     @Nullable
     private ImageIcon icon;
+    @NotNull
+    private Project project;
 
     public ProjectSettingsComponent(@NotNull Project project) {
         this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
-
-        NotificationsConfiguration.getNotificationsConfiguration().register(
-                GROUP_DISPLAY_ID, NotificationDisplayType.BALLOON);
-        NotificationsConfiguration.getNotificationsConfiguration().register(
-                GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
+        this.project = project;
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID, NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
     }
 
     private void install(@NotNull Settings settings) {
@@ -88,8 +73,7 @@ public class ProjectSettingsComponent
         projectCodeStyle.changeFormatterTo(null);
     }
 
-    private void verifySettingsOf(@Nullable ProjectSettingsForm form)
-            throws ConfigurationException {
+    private void verifySettingsOf(@Nullable ProjectSettingsForm form) throws ConfigurationException {
         try {
             if (form != null) {
                 Settings test = settings.clone();
@@ -147,7 +131,7 @@ public class ProjectSettingsComponent
     @NotNull
     public JComponent createComponent() {
         if (form == null) {
-            form = new ProjectSettingsForm();
+            form = new ProjectSettingsForm(project);
         }
         return form.getRootComponent();
     }

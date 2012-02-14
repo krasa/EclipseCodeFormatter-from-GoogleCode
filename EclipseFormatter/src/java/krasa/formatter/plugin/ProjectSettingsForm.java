@@ -1,27 +1,23 @@
 /*
- * External Code Formatter
- * Copyright (c) 2007-2009  Esko Luontola, www.orfjackal.net
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * External Code Formatter Copyright (c) 2007-2009 Esko Luontola, www.orfjackal.net Licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+ * the specific language governing permissions and limitations under the License.
  */
 
 package krasa.formatter.plugin;
 
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.DocumentAdapter;
 import krasa.formatter.Messages;
 import krasa.formatter.settings.Settings;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.AncestorEvent;
@@ -36,8 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Configuration dialog for changing the
- * {@link krasa.formatter.settings.Settings} of the plugin.
+ * Configuration dialog for changing the {@link krasa.formatter.settings.Settings} of the plugin.
  *
  * @author Esko Luontola
  * @author Vojtech Krasa
@@ -75,15 +70,13 @@ public class ProjectSettingsForm {
     private JCheckBox formatSeletedTextInAllFileTypes;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
-    @Nullable
-    private File lastDirectory;
+    @NotNull
+    private Project project;
 
-    public ProjectSettingsForm() {
-        JToggleButton[] modifyableButtons = new JToggleButton[]{
-                useDefaultFormatter, useEclipseFormatter,
-                optimizeImportsCheckBox, doNotFormatOtherFilesRadioButton,
-                formatOtherFilesWithExceptionsRadioButton,
-                formatSeletedTextInAllFileTypes,};
+    public ProjectSettingsForm(Project project) {
+        this.project = project;
+        JToggleButton[] modifyableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter, optimizeImportsCheckBox,
+                doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton, formatSeletedTextInAllFileTypes,};
         for (JToggleButton button : modifyableButtons) {
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -92,9 +85,7 @@ public class ProjectSettingsForm {
             });
         }
 
-        JTextField[] modifyableFields = new JTextField[]{eclipsePrefs,
-                eclipseSupportedFileTypes, optimizeImportGroups,
-                disabledFileTypes};
+        JTextField[] modifyableFields = new JTextField[]{eclipsePrefs, eclipseSupportedFileTypes, optimizeImportGroups, disabledFileTypes};
         for (JTextField field : modifyableFields) {
             field.getDocument().addDocumentListener(new DocumentAdapter() {
                 protected void textChanged(DocumentEvent e) {
@@ -126,45 +117,33 @@ public class ProjectSettingsForm {
         });
     }
 
-    private void browseForFile(@NotNull JTextField target) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.setMultiSelectionEnabled(false);
-        chooser.setFileHidingEnabled(false); // Eclipse's prefs file is in a
-        // hidden ".settings" directory
+    private void browseForFile(@NotNull final JTextField target) {
+        final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor();
+        descriptor.setHideIgnored(false);
 
-        if (target.getText().equals("") && lastDirectory != null) {
-            chooser.setCurrentDirectory(lastDirectory);
-        } else {
-            File currentSelection = new File(target.getText());
-            chooser.setCurrentDirectory(currentSelection);
-            chooser.setSelectedFile(currentSelection);
+        descriptor.setTitle("Select config file");
+        String text = target.getText();
+        final VirtualFile toSelect = text == null || text.isEmpty() ? project.getBaseDir() : LocalFileSystem.getInstance().findFileByPath(text);
+
+        VirtualFile virtualFile = FileChooser.chooseFile(project, descriptor, toSelect);
+        if (virtualFile != null) {
+            target.setText(virtualFile.getPath());
         }
 
-        int result = chooser.showOpenDialog(rootComponent);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            target.setText(chooser.getSelectedFile().getAbsolutePath());
-        }
-        lastDirectory = chooser.getCurrentDirectory();
     }
 
     private void updateComponents() {
         hidePopups();
 
-        enabledBy(new JComponent[]{eclipseSupportedFileTypesLabel,
-                eclipsePrefs, eclipsePrefsBrowse, eclipsePrefsLabel,
-                eclipsePrefsExample, optimizeImportsCheckBox,
-                doNotFormatOtherFilesRadioButton,
-                formatOtherFilesWithExceptionsRadioButton,
+        enabledBy(new JComponent[]{eclipseSupportedFileTypesLabel, eclipsePrefs, eclipsePrefsBrowse, eclipsePrefsLabel,
+                eclipsePrefsExample, optimizeImportsCheckBox, doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton,
                 formatSeletedTextInAllFileTypes,}, useEclipseFormatter);
 
-        enabledBy(new JComponent[]{optimizeImportGroups,
-                optimizeImportGroupsLabel, optimizeImportGroupsHelpLabel,},
+        enabledBy(new JComponent[]{optimizeImportGroups, optimizeImportGroupsLabel, optimizeImportGroupsHelpLabel,},
                 optimizeImportsCheckBox, useEclipseFormatter);
 
-        enabledBy(new JComponent[]{disabledFileTypes,
-                disabledFileTypesHelpLabel,},
-                formatOtherFilesWithExceptionsRadioButton, useEclipseFormatter);
+        enabledBy(new JComponent[]{disabledFileTypes, disabledFileTypesHelpLabel,}, formatOtherFilesWithExceptionsRadioButton,
+                useEclipseFormatter);
 
         if (notEmpty(eclipsePrefs) && fileExists(eclipsePrefs)) {
             ok(eclipsePrefs);
@@ -172,8 +151,7 @@ public class ProjectSettingsForm {
 
     }
 
-    private void enabledBy(@NotNull JComponent[] targets,
-                           @NotNull JToggleButton... control) {
+    private void enabledBy(@NotNull JComponent[] targets, @NotNull JToggleButton... control) {
         boolean b = true;
         for (JToggleButton jToggleButton : control) {
             b = b && (jToggleButton.isEnabled() && jToggleButton.isSelected());
@@ -192,8 +170,7 @@ public class ProjectSettingsForm {
         return true;
     }
 
-    private boolean containsText(@NotNull String needle,
-                                 @NotNull JTextField field) {
+    private boolean containsText(@NotNull String needle, @NotNull JTextField field) {
         if (!field.getText().contains(needle)) {
             field.setBackground(ERROR);
             showPopup(field, Messages.message("warning.mustContain", needle));
@@ -237,8 +214,7 @@ public class ProjectSettingsForm {
         int x = (int) location.getX();
         int y = (int) (location.getY() - tipSize.getHeight());
 
-        Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x,
-                y);
+        Popup popup = PopupFactory.getSharedInstance().getPopup(parent, tip, x, y);
         popup.show();
         visiblePopups.add(popup);
     }
@@ -257,14 +233,10 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
-        formatOtherFilesWithExceptionsRadioButton.setSelected(in
-                .isFormatOtherFileTypesWithIntelliJ());
-        doNotFormatOtherFilesRadioButton.setSelected(!in
-                .isFormatOtherFileTypesWithIntelliJ());
-        useDefaultFormatter.setSelected(in.getFormatter().equals(
-                Settings.Formatter.DEFAULT));
-        useEclipseFormatter.setSelected(in.getFormatter().equals(
-                Settings.Formatter.ECLIPSE));
+        formatOtherFilesWithExceptionsRadioButton.setSelected(in.isFormatOtherFileTypesWithIntelliJ());
+        doNotFormatOtherFilesRadioButton.setSelected(!in.isFormatOtherFileTypesWithIntelliJ());
+        useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
+        useEclipseFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.ECLIPSE));
         setData(in);
         updateComponents();
     }
@@ -274,8 +246,7 @@ public class ProjectSettingsForm {
         optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
         optimizeImportGroups.setText(data.getJoinedGroup());
         disabledFileTypes.setText(data.getDisabledFileTypes());
-        formatSeletedTextInAllFileTypes.setSelected(data
-                .isFormatSeletedTextInAllFileTypes());
+        formatSeletedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
     }
 
     public void exportTo(@NotNull Settings out) {
@@ -298,42 +269,33 @@ public class ProjectSettingsForm {
         data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
         data.setJoinedGroup(optimizeImportGroups.getText());
         data.setDisabledFileTypes(disabledFileTypes.getText());
-        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes
-                .isSelected());
+        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes.isSelected());
     }
 
     public boolean isModified(Settings data) {
-        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(
-                Settings.Formatter.DEFAULT)) {
+        if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {
             return true;
         }
-        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(
-                Settings.Formatter.ECLIPSE)) {
+        if (useEclipseFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.ECLIPSE)) {
             return true;
         }
-        if (formatOtherFilesWithExceptionsRadioButton.isSelected() != data
-                .isFormatOtherFileTypesWithIntelliJ()) {
+        if (formatOtherFilesWithExceptionsRadioButton.isSelected() != data.isFormatOtherFileTypesWithIntelliJ()) {
             return true;
         }
-        if (doNotFormatOtherFilesRadioButton.isSelected() != !data
-                .isFormatOtherFileTypesWithIntelliJ()) {
+        if (doNotFormatOtherFilesRadioButton.isSelected() != !data.isFormatOtherFileTypesWithIntelliJ()) {
             return true;
         }
-        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(
-                data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
+        if (eclipsePrefs.getText() != null ? !eclipsePrefs.getText().equals(data.getEclipsePrefs()) : data.getEclipsePrefs() != null)
             return true;
         if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports())
             return true;
-        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups
-                .getText().equals(data.getJoinedGroup()) : data
-                .getJoinedGroup() != null)
+        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups.getText().equals(data.getJoinedGroup())
+                : data.getJoinedGroup() != null)
             return true;
-        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText()
-                .equals(data.getDisabledFileTypes()) : data
+        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes()) : data
                 .getDisabledFileTypes() != null)
             return true;
-        if (formatSeletedTextInAllFileTypes.isSelected() != data
-                .isFormatSeletedTextInAllFileTypes())
+        if (formatSeletedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes())
             return true;
         return false;
     }
