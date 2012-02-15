@@ -4,7 +4,7 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>0.9.1</version>
+    <version>1.0.0</version>
 
     <description><![CDATA[
         Allows using Eclipse's code formatter directly from IntelliJ. 
@@ -19,12 +19,15 @@
     <vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech
         Krasa
     </vendor>
-    <idea-version since-build="110.137" until-build="114.65"/>
-
     <!--<idea-version since-build="114.65" until-build=""/>-->
+    <idea-version since-build="110.137" until-build="114.00"/>
     <!--<idea-version since-build="100.000" until-build="109.999"/>-->
 
     <change-notes><![CDATA[
+        <p>1.0 (2012-02-15)
+        <br>- new FileChooser dialog
+        <br>- fixed bug with loading of plugin
+        </p> 
         <p>0.9 (2012-02-14)
         <br>- caching of config file
         <br>- improved error handling

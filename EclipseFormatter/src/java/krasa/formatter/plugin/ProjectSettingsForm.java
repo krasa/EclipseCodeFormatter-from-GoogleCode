@@ -67,7 +67,7 @@ public class ProjectSettingsForm {
     private JTextPane disabledFileTypesHelpLabel;
     private JRadioButton doNotFormatOtherFilesRadioButton;
     private JRadioButton formatOtherFilesWithExceptionsRadioButton;
-    private JCheckBox formatSeletedTextInAllFileTypes;
+    private JCheckBox formatSelectedTextInAllFileTypes;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @NotNull
@@ -75,9 +75,9 @@ public class ProjectSettingsForm {
 
     public ProjectSettingsForm(Project project) {
         this.project = project;
-        JToggleButton[] modifyableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter, optimizeImportsCheckBox,
-                doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton, formatSeletedTextInAllFileTypes,};
-        for (JToggleButton button : modifyableButtons) {
+        JToggleButton[] modifiableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter, optimizeImportsCheckBox,
+                doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton, formatSelectedTextInAllFileTypes,};
+        for (JToggleButton button : modifiableButtons) {
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     updateComponents();
@@ -85,8 +85,8 @@ public class ProjectSettingsForm {
             });
         }
 
-        JTextField[] modifyableFields = new JTextField[]{eclipsePrefs, eclipseSupportedFileTypes, optimizeImportGroups, disabledFileTypes};
-        for (JTextField field : modifyableFields) {
+        JTextField[] modifiableFields = new JTextField[]{eclipsePrefs, eclipseSupportedFileTypes, optimizeImportGroups, disabledFileTypes};
+        for (JTextField field : modifiableFields) {
             field.getDocument().addDocumentListener(new DocumentAdapter() {
                 protected void textChanged(DocumentEvent e) {
                     updateComponents();
@@ -125,9 +125,10 @@ public class ProjectSettingsForm {
         String text = target.getText();
         final VirtualFile toSelect = text == null || text.isEmpty() ? project.getBaseDir() : LocalFileSystem.getInstance().findFileByPath(text);
 
-        VirtualFile virtualFile = FileChooser.chooseFile(project, descriptor, toSelect);
-        if (virtualFile != null) {
-            target.setText(virtualFile.getPath());
+        //10.5 does not have #chooseFile
+        VirtualFile[] virtualFile = FileChooser.chooseFiles(project, descriptor, toSelect);
+        if (virtualFile != null && virtualFile.length>0) {
+            target.setText(virtualFile[0].getPath());
         }
 
     }
@@ -137,7 +138,7 @@ public class ProjectSettingsForm {
 
         enabledBy(new JComponent[]{eclipseSupportedFileTypesLabel, eclipsePrefs, eclipsePrefsBrowse, eclipsePrefsLabel,
                 eclipsePrefsExample, optimizeImportsCheckBox, doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton,
-                formatSeletedTextInAllFileTypes,}, useEclipseFormatter);
+                formatSelectedTextInAllFileTypes,}, useEclipseFormatter);
 
         enabledBy(new JComponent[]{optimizeImportGroups, optimizeImportGroupsLabel, optimizeImportGroupsHelpLabel,},
                 optimizeImportsCheckBox, useEclipseFormatter);
@@ -246,7 +247,7 @@ public class ProjectSettingsForm {
         optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
         optimizeImportGroups.setText(data.getJoinedGroup());
         disabledFileTypes.setText(data.getDisabledFileTypes());
-        formatSeletedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
+        formatSelectedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
     }
 
     public void exportTo(@NotNull Settings out) {
@@ -269,7 +270,7 @@ public class ProjectSettingsForm {
         data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
         data.setJoinedGroup(optimizeImportGroups.getText());
         data.setDisabledFileTypes(disabledFileTypes.getText());
-        data.setFormatSeletedTextInAllFileTypes(formatSeletedTextInAllFileTypes.isSelected());
+        data.setFormatSeletedTextInAllFileTypes(formatSelectedTextInAllFileTypes.isSelected());
     }
 
     public boolean isModified(Settings data) {
@@ -295,7 +296,7 @@ public class ProjectSettingsForm {
         if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes()) : data
                 .getDisabledFileTypes() != null)
             return true;
-        if (formatSeletedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes())
+        if (formatSelectedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes())
             return true;
         return false;
     }

@@ -21,9 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
-import krasa.formatter.settings.IllegalSettingsException;
 import krasa.formatter.settings.Settings;
-import krasa.formatter.settings.SettingsManager;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-// import com.intellij.notification.impl.NotificationsConfiguration;
+//import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
  * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
@@ -72,22 +70,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     private void uninstall() {
         projectCodeStyle.changeFormatterTo(null);
     }
-
-    private void verifySettingsOf(@Nullable ProjectSettingsForm form) throws ConfigurationException {
-        try {
-            if (form != null) {
-                Settings test = settings.clone();
-                form.exportTo(test);
-                SettingsManager.verify(test);
-            }
-        } catch (IllegalSettingsException e) {
-            LOG.info(e);
-            throw new ConfigurationException(Messages.message(e));
-        }
-    }
-
-    // implements ProjectComponent
-
+    
     public void initComponent() {
     }
 
@@ -141,7 +124,6 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     }
 
     public void apply() throws ConfigurationException {
-        verifySettingsOf(form);
         if (form != null) {
             form.exportTo(settings);
             install(settings);

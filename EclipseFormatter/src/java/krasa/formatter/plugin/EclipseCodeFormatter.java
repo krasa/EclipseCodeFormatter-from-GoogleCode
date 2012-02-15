@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.util.PsiUtilBase;
 import krasa.formatter.eclipse.EclipseCodeFormatterFacade;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;

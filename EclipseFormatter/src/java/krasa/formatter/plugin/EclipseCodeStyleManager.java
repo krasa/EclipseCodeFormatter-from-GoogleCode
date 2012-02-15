@@ -3,6 +3,7 @@ package krasa.formatter.plugin;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -30,13 +31,14 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
+    private static final Logger LOG = Logger.getInstance(EclipseCodeStyleManager.class.getName());
 
     @NotNull
     private Settings settings;
     @NotNull
     private Notifier notifier;
     @NotNull
-    private CodeFormatter codeFormatter;
+    private EclipseCodeFormatter eclipseCodeFormatter;
 
     public EclipseCodeStyleManager(@NotNull CodeStyleManager original,
                                    @NotNull Settings settings, @NotNull Project project) {
@@ -44,7 +46,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         this.settings = settings;
 
         notifier = new Notifier(project);
-        codeFormatter = new CodeFormatter(settings, project, original);
+        eclipseCodeFormatter = new EclipseCodeFormatter(settings, project, original);
     }
 
     public void reformatText(@NotNull PsiFile psiFile, final int startOffset,
@@ -71,16 +73,18 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                     notifier.notifySuccessFormatting(psiFile, true);
                 }
             } else {
-                codeFormatter.format(psiFile, startOffset, endOffset);
+                eclipseCodeFormatter.format(psiFile, startOffset, endOffset);
 
             }
 
 
         } catch (final InvalidPathToConfigFileException e) {
             e.printStackTrace();
+            LOG.debug(e);
             notifier.notify(e);
         } catch (final Exception e) {
             e.printStackTrace();
+            LOG.error(e);
             notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         }
     }

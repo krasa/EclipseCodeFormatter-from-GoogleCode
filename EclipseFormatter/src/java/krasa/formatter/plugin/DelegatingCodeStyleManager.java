@@ -23,6 +23,8 @@ import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+
 /**
  * Wrapper for intercepting the method calls to a {@link CodeStyleManager} instance.
  *
@@ -55,31 +57,25 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     @NotNull
-    public PsiElement reformat(@NotNull PsiElement element, boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
+    public PsiElement reformat(@NotNull PsiElement element, boolean canChangeWhiteSpacesOnly)
+            throws IncorrectOperationException {
         return original.reformat(element, canChangeWhiteSpacesOnly);
     }
 
-    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset) throws IncorrectOperationException {
+    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset)
+            throws IncorrectOperationException {
         return original.reformatRange(element, startOffset, endOffset);
     }
 
-    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset, boolean canChangeWhiteSpacesOnly)
-            throws IncorrectOperationException {
+    public PsiElement reformatRange(@NotNull PsiElement element, int startOffset, int endOffset,
+                                    boolean canChangeWhiteSpacesOnly) throws IncorrectOperationException {
         return original.reformatRange(element, startOffset, endOffset, canChangeWhiteSpacesOnly);
     }
 
-    public void reformatText(@NotNull PsiFile element, int startOffset, int endOffset) throws IncorrectOperationException {
+    public void reformatText(@NotNull PsiFile element, int startOffset, int endOffset)
+            throws IncorrectOperationException {
         original.reformatText(element, startOffset, endOffset);
     }
-
-    // @Override
-    // public void reformatText(@NotNull PsiFile psiFile, @NotNull
-    // Collection<TextRange> textRanges) throws IncorrectOperationException {
-    // for (TextRange textRange : textRanges) {
-    // reformatText(psiFile, textRange.getStartOffset(),
-    // textRange.getEndOffset());
-    // }
-    // }
 
     public void adjustLineIndent(@NotNull PsiFile file, TextRange rangeToAdjust) throws IncorrectOperationException {
         original.adjustLineIndent(file, rangeToAdjust);
@@ -114,7 +110,8 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
         return original.zeroIndent();
     }
 
-    public void reformatNewlyAddedElement(@NotNull ASTNode block, @NotNull ASTNode addedElement) throws IncorrectOperationException {
+    public void reformatNewlyAddedElement(@NotNull ASTNode block, @NotNull ASTNode addedElement)
+            throws IncorrectOperationException {
         original.reformatNewlyAddedElement(block, addedElement);
     }
 
@@ -123,12 +120,14 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
         return original.isSequentialProcessingAllowed();
     }
 
+    // 10.5
     // @Override
     // public String getLineIndent(@NotNull Editor editor) {
     // return original.getLineIndent(editor);
     //
     // }
 
+    // 11.0
     @Override
     public String getLineIndent(@NotNull Document document, int offset) {
         return original.getLineIndent(document, offset);
@@ -151,4 +150,12 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
 
     }
 
+    // 11.1
+    // @Override
+    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
+            throws IncorrectOperationException {
+        for (TextRange textRange : textRanges) {
+            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
+        }
+    }
 }
