@@ -11,6 +11,7 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
 import krasa.formatter.settings.JoinedGroup;
 import krasa.formatter.settings.Settings;
+import krasa.formatter.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -29,8 +30,11 @@ public class ImportOptimization {
         this.settings = settings;
     }
 
-    public void byIntellij(PsiFile psiFile) {
+    public void byIntellij(PsiFile psiFile, int startOffset, int endOffset) {
         if (!settings.isOptimizeImports()) {
+            return;
+        }
+        if (!FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText())) {
             return;
         }
         Project project = psiFile.getProject();
@@ -56,8 +60,11 @@ public class ImportOptimization {
     /**
      * appends blank lines between import groups
      */
-    public void appendBlankLinesBetweenGroups(Document document) {
+    public void appendBlankLinesBetweenGroups(Document document, boolean wholeFile) {
         if (!settings.isOptimizeImports()) {
+            return;
+        }
+        if (!wholeFile) {
             return;
         }
         String documentText = document.getText();

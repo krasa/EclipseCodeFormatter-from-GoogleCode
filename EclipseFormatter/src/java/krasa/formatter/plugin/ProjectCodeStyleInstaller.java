@@ -54,9 +54,9 @@ public class ProjectCodeStyleInstaller {
         if (!(manager instanceof EclipseCodeStyleManager) && Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
             registerCodeStyleManager(project, new EclipseCodeStyleManager(manager, settings, project));
             // todo nastaveni okna pro formatovani at se otvira
-            if (settings.isOptimizeImports()) {
-                PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
-            }
+//            if (settings.isOptimizeImports()) {
+//                PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
+//            }
         }
     }
 

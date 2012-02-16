@@ -84,7 +84,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             notifier.notify(e);
         } catch (final Exception e) {
             e.printStackTrace();
-            LOG.error(e);
+            LOG.error("startOffset"+startOffset+", endOffset:"+endOffset+", size of file "+psiFile.getText().length(), e);
             notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         }
     }
@@ -131,5 +131,4 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     private boolean fileTypeIsSupported(@NotNull VirtualFile file) {
         return FileUtils.ioFile(file).getPath().endsWith(".java");
     }
-
 }
