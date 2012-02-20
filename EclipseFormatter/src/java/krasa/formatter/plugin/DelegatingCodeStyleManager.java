@@ -10,6 +10,7 @@ package krasa.formatter.plugin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
@@ -121,11 +122,11 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 10.5
-    // @Override
-    // public String getLineIndent(@NotNull Editor editor) {
-    // return original.getLineIndent(editor);
-    //
-    // }
+//    @Override
+//    public String getLineIndent(@NotNull Editor editor) {
+//    return original.getLineIndent(editor);
+//
+//    }
 
     // 11.0
     @Override
@@ -151,7 +152,7 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 11.1
-    // @Override
+    @Override
     public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
             throws IncorrectOperationException {
         for (TextRange textRange : textRanges) {

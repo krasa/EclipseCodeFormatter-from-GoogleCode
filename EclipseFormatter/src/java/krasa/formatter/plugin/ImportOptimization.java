@@ -30,13 +30,11 @@ public class ImportOptimization {
         this.settings = settings;
     }
 
-    public void byIntellij(PsiFile psiFile, int startOffset, int endOffset) {
+    public void byIntellij(PsiFile psiFile) {
         if (!settings.isOptimizeImports()) {
             return;
         }
-        if (!FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText())) {
-            return;
-        }
+    
         Project project = psiFile.getProject();
         final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
 

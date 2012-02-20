@@ -49,9 +49,8 @@ public class EclipseCodeFormatterFacade {
         return file.lastModified() > lastModified;
     }
 
-    public String format(File file, String lineSeparator) throws InvalidPathToConfigFileException {
-        IDocument iDocument = codeFormatterApplication.formatWithoutWrite(file, getCodeFormatter(), lineSeparator);
-        return iDocument.get();
+    public String format(String file, String lineSeparator) throws InvalidPathToConfigFileException {
+        return codeFormatterApplication.format(file, getCodeFormatter(), 0, file.length(), lineSeparator);
     }
 
     /**

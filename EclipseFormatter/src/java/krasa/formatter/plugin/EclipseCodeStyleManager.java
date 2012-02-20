@@ -65,16 +65,23 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 return;
             }
 
-            if (!canReformatWithEclipse(psiFile)) {
+            boolean wholeFileOrSelectedText = isWholeFileOrSelectedText(psiFile, startOffset, endOffset);
+            if (canReformatWithEclipse(psiFile) && wholeFileOrSelectedText) {
+                eclipseCodeFormatter.format(psiFile, startOffset, endOffset);
+                boolean skipSuccessFormattingNotification = shouldSkipNotification(startOffset,
+                        endOffset, psiFile.getText());
+                if (!skipSuccessFormattingNotification) {
+                    notifier.notifySuccessFormatting(psiFile, false);
+                }
+            } else {
                 if (shouldSkipFormatting(psiFile, startOffset, endOffset)) {
                     notifier.notifyFormattingWasDisabled(psiFile);
                 } else {
                     formatWithIntelliJ(psiFile, startOffset, endOffset);
-                    notifier.notifySuccessFormatting(psiFile, true);
+                    if (wholeFileOrSelectedText) {
+                        notifier.notifySuccessFormatting(psiFile, true);
+                    }
                 }
-            } else {
-                eclipseCodeFormatter.format(psiFile, startOffset, endOffset);
-
             }
 
 
@@ -84,9 +91,16 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             notifier.notify(e);
         } catch (final Exception e) {
             e.printStackTrace();
-            LOG.error("startOffset"+startOffset+", endOffset:"+endOffset+", size of file "+psiFile.getText().length(), e);
+            LOG.error("startOffset" + startOffset + ", endOffset:" + endOffset + ", length of file " + psiFile.getText().length(), e);
             notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         }
+    }
+
+    private boolean shouldSkipNotification(int startOffset, int endOffset,
+                                           String text) {
+        boolean isShort = endOffset - startOffset < settings
+                .getNotifyFromTextLenght();
+        return isShort && !FileUtils.isWholeFile(startOffset, endOffset, text);
     }
 
     private boolean shouldSkipFormatting(PsiFile psiFile, int startOffset,
@@ -116,19 +130,34 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 && fileTypeIsSupported(file);
     }
 
+    private boolean isWholeFileOrSelectedText(PsiFile psiFile, int startOffset, int endOffset) {
+
+        final Editor editor = PsiUtilBase.findEditor(psiFile);
+
+        if (editor == null) {
+            return true;
+        } else {
+            Document document = editor.getDocument();
+            String text = document.getText();
+            boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, text);
+
+            return editor.getSelectionModel().hasSelection() || wholeFile;
+        }
+    }
+
     private void formatWithIntelliJ(PsiFile psiFile, int startOffset,
                                     int endOffset) {
         original.reformatText(psiFile, startOffset, endOffset);
     }
 
     private boolean isDisabledFileType(VirtualFile virtualFile) {
-        String path = FileUtils.ioFile(virtualFile).getPath();
+        String path = virtualFile.getPath();
         DisabledFileTypeSettings disabledFileTypeSettings = settings
                 .geDisabledFileTypeSettings();
         return disabledFileTypeSettings.isDisabled(path);
     }
 
     private boolean fileTypeIsSupported(@NotNull VirtualFile file) {
-        return FileUtils.ioFile(file).getPath().endsWith(".java");
+        return file.getPath().endsWith(".java");
     }
 }
