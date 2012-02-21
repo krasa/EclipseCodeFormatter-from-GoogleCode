@@ -15,14 +15,15 @@ import com.intellij.psi.impl.CheckUtil;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.util.IncorrectOperationException;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.eclipse.JSCodeFormatterFacade;
+import krasa.formatter.eclipse.JavaCodeFormatterFacade;
 import krasa.formatter.settings.DisabledFileTypeSettings;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Supported operations are handled by Eclipse formatter, other by IntelliJ
- * formatter.
+ * Supported operations are handled by Eclipse formatter, other by IntelliJ formatter.
  * <p/>
  * TODO proper write action thread handling
  *
@@ -32,25 +33,31 @@ import org.jetbrains.annotations.NotNull;
 public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
     private static final Logger LOG = Logger.getInstance(EclipseCodeStyleManager.class.getName());
+    public static final String JS = ".js";
 
     @NotNull
     private Settings settings;
     @NotNull
     private Notifier notifier;
     @NotNull
-    private EclipseCodeFormatter eclipseCodeFormatter;
+    private EclipseCodeFormatter eclipseCodeFormatterJava;
+    @NotNull
+    private EclipseCodeFormatter eclipseCodeFormatterJs;
 
-    public EclipseCodeStyleManager(@NotNull CodeStyleManager original,
-                                   @NotNull Settings settings, @NotNull Project project) {
+    public EclipseCodeStyleManager(@NotNull CodeStyleManager original, @NotNull Settings settings,
+                                   @NotNull Project project) {
         super(original);
         this.settings = settings;
 
         notifier = new Notifier(project);
-        eclipseCodeFormatter = new EclipseCodeFormatter(settings, project, original);
+        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, project, original, new JavaCodeFormatterFacade(
+                settings.getPathToConfigFileJava()));
+        eclipseCodeFormatterJs = new EclipseCodeFormatter(settings, project, original, new JSCodeFormatterFacade(
+                settings.getPathToConfigFileJava()));
     }
 
-    public void reformatText(@NotNull PsiFile psiFile, final int startOffset,
-                             final int endOffset) throws IncorrectOperationException {
+    public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)
+            throws IncorrectOperationException {
         boolean formattedByIntelliJ = false;
         try {
             ApplicationManager.getApplication().assertWriteAccessAllowed();
@@ -58,18 +65,17 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             CheckUtil.checkWritable(psiFile);
 
             if (psiFile.getVirtualFile() == null) {
-                Notification notification = new Notification(
-                        ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
+                Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
                         Notifier.NO_FILE_TO_FORMAT, NotificationType.ERROR);
                 notifier.showNotification(notification);
                 return;
             }
-
+            //ctrl shift enter fix
             boolean wholeFileOrSelectedText = isWholeFileOrSelectedText(psiFile, startOffset, endOffset);
             if (canReformatWithEclipse(psiFile) && wholeFileOrSelectedText) {
-                eclipseCodeFormatter.format(psiFile, startOffset, endOffset);
-                boolean skipSuccessFormattingNotification = shouldSkipNotification(startOffset,
-                        endOffset, psiFile.getText());
+                formatWithEclipse(psiFile, startOffset, endOffset);
+                boolean skipSuccessFormattingNotification = shouldSkipNotification(startOffset, endOffset,
+                        psiFile.getText());
                 if (!skipSuccessFormattingNotification) {
                     notifier.notifySuccessFormatting(psiFile, false);
                 }
@@ -84,35 +90,42 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 }
             }
 
-
         } catch (final InvalidPathToConfigFileException e) {
             e.printStackTrace();
             LOG.debug(e);
             notifier.notify(e);
         } catch (final Exception e) {
             e.printStackTrace();
-            LOG.error("startOffset" + startOffset + ", endOffset:" + endOffset + ", length of file " + psiFile.getText().length(), e);
+            LOG.error("startOffset" + startOffset + ", endOffset:" + endOffset + ", length of file "
+                    + psiFile.getText().length(), e);
             notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         }
     }
 
-    private boolean shouldSkipNotification(int startOffset, int endOffset,
-                                           String text) {
-        boolean isShort = endOffset - startOffset < settings
-                .getNotifyFromTextLenght();
+    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
+            throws InvalidPathToConfigFileException {
+        if (endsWith(psiFile, JS)) {
+            eclipseCodeFormatterJs.format(psiFile, startOffset, endOffset);
+        } else {
+            eclipseCodeFormatterJava.format(psiFile, startOffset, endOffset);
+        }
+    }
+
+    private boolean shouldSkipNotification(int startOffset, int endOffset, String text) {
+        boolean isShort = endOffset - startOffset < settings.getNotifyFromTextLenght();
         return isShort && !FileUtils.isWholeFile(startOffset, endOffset, text);
     }
 
-    private boolean shouldSkipFormatting(PsiFile psiFile, int startOffset,
-                                         int endOffset) {
+    private boolean shouldSkipFormatting(PsiFile psiFile, int startOffset, int endOffset) {
         VirtualFile virtualFile = psiFile.getVirtualFile();
         if (settings.isFormatSeletedTextInAllFileTypes()) {
-            //when file is being edited, it is important to load text from editor, i think
+            // when file is being edited, it is important to load text from editor, i think
             final Editor editor = PsiUtilBase.findEditor(psiFile);
             if (editor != null) {
                 Document document = editor.getDocument();
                 String text = document.getText();
                 if (!FileUtils.isWholeFile(startOffset, endOffset, text)) {
+                    //todo rozlisit oznacenej celej file v editoru od normalniho formatovani
                     return false;
                 }
             }
@@ -124,10 +137,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     }
 
     public boolean canReformatWithEclipse(PsiFile psiFile) {
-        VirtualFile file = psiFile.getVirtualFile();
         Project project = psiFile.getProject();
-        return file.isInLocalFileSystem() && FileUtils.isWritable(file, project)
-                && fileTypeIsSupported(file);
+        return psiFile.getVirtualFile().isInLocalFileSystem()
+                && FileUtils.isWritable(psiFile.getVirtualFile(), project) && fileTypeIsEnabled(psiFile);
     }
 
     private boolean isWholeFileOrSelectedText(PsiFile psiFile, int startOffset, int endOffset) {
@@ -145,19 +157,35 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         }
     }
 
-    private void formatWithIntelliJ(PsiFile psiFile, int startOffset,
-                                    int endOffset) {
+    private void formatWithIntelliJ(PsiFile psiFile, int startOffset, int endOffset) {
         original.reformatText(psiFile, startOffset, endOffset);
     }
 
     private boolean isDisabledFileType(VirtualFile virtualFile) {
         String path = virtualFile.getPath();
-        DisabledFileTypeSettings disabledFileTypeSettings = settings
-                .geDisabledFileTypeSettings();
+        DisabledFileTypeSettings disabledFileTypeSettings = settings.geDisabledFileTypeSettings();
         return disabledFileTypeSettings.isDisabled(path);
     }
 
-    private boolean fileTypeIsSupported(@NotNull VirtualFile file) {
-        return file.getPath().endsWith(".java");
+    private boolean fileTypeIsEnabled(@NotNull PsiFile psiFile) {
+        return (isJava(psiFile) && settings.isEnableJavaFormatting()) || (isJavaScript(psiFile) && settings.isEnableJSFormatting());
+    }
+
+    private boolean isJavaScript(PsiFile psiFile) {
+        return endsWith(psiFile, ".js");
+    }
+
+    private boolean isJava(PsiFile psiFile) {
+        return endsWith(psiFile, ".java");
+    }
+
+    private boolean endsWith(PsiFile psiFile, String... suffix) {
+        VirtualFile file = psiFile.getVirtualFile();
+        for (String s : suffix) {
+            if (file.getPath().endsWith(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

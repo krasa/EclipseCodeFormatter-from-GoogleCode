@@ -4,14 +4,18 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>1.2.2</version>
+    <version>1.3.1</version>
 
     <description><![CDATA[
         Allows using Eclipse's code formatter directly from IntelliJ.<br> 
         Solves the problem of maintaining a common code style in team environments where both IDEA and Eclipse are used. <br> 
-        
-        Also emulates Eclipse's imports optimizing. Go to <a href="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo">http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo</a>
-        for instructions how to configure it.
+        Currently can format Java and JavaScript files.  <br>
+        Also emulates Eclipse's imports optimizing. <br>   <br>
+
+        Go to <a href="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo">http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo</a>
+        for instructions how to use it.     <br><br>
+
+        It is possible to add support for more file types, feel free to contribute.
 
         ]]></description>
     <category>Formatting</category>
@@ -19,14 +23,17 @@
     <vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech
         Krasa
     </vendor>
-    <idea-version since-build="114.65" until-build=""/>
-    <!--<idea-version since-build="110.137" until-build="114.00"/>-->
+    <!--<idea-version since-build="114.65" until-build=""/>-->
+    <idea-version since-build="110.137" until-build="114.00"/>
     <!--<idea-version since-build="90.000" until-build="109.999"/>-->
 
     <change-notes><![CDATA[
+        <p>1.3 (2012-02-21)
+        <br>- new JavaScript formatting!
+        </p>
         <p>1.2 (2012-02-20)
         <br>- fixed bug - it was possible to get an error about wrong line separators
-        </p> 
+        </p>
          <p>1.1 (2012-02-16)
         <br>- fixed error logging
         <br>- fixed bug - caret position was sometimes changed after reformatting
@@ -43,7 +50,7 @@
         </p> 
         <p>0.8 (2012-02-13)
         <br>- fixed rebuild for 11.1 build 114.65
-        </p>        
+        </p>
         <p>0.7 (2012-02-13)
         <br>- rebuild for 11.1 build 114.65
         </p>

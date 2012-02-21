@@ -10,7 +10,6 @@ package krasa.formatter.plugin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
@@ -23,8 +22,6 @@ import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collection;
 
 /**
  * Wrapper for intercepting the method calls to a {@link CodeStyleManager} instance.
@@ -152,11 +149,11 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 11.1
-    @Override
-    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
-            throws IncorrectOperationException {
-        for (TextRange textRange : textRanges) {
-            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
-        }
-    }
+//    @Override
+//    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
+//            throws IncorrectOperationException {
+//        for (TextRange textRange : textRanges) {
+//            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
+//        }
+//    }
 }

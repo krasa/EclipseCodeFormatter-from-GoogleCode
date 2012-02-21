@@ -11,7 +11,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiUtilBase;
-import krasa.formatter.eclipse.EclipseCodeFormatterFacade;
+import krasa.formatter.eclipse.CodeFormatterFacade;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
@@ -34,11 +34,10 @@ public class EclipseCodeFormatter {
     @NotNull
     Project project;
     @NotNull
-    protected final EclipseCodeFormatterFacade codeFormatterFacade;
+    protected final CodeFormatterFacade codeFormatterFacade;
 
-    public EclipseCodeFormatter(@NotNull Settings settings, @NotNull Project project, CodeStyleManager original) {
-        codeFormatterFacade = new EclipseCodeFormatterFacade(
-                settings.getEclipsePrefs());
+    public EclipseCodeFormatter(@NotNull Settings settings, @NotNull Project project, CodeStyleManager original, CodeFormatterFacade codeFormatterFacade1) {
+        codeFormatterFacade = codeFormatterFacade1;
         this.importOptimization = new ImportOptimization(settings);
         this.settings = settings;
         this.notifier = new Notifier(project);
@@ -49,13 +48,13 @@ public class EclipseCodeFormatter {
     public void format(PsiFile psiFile, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
         if (FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText())) {
             importOptimization.byIntellij(psiFile);
-        } ;
+        }
+        ;
         formatWithEclipse(psiFile, startOffset, endOffset);
     }
 
-
-    private void formatWithEclipse(PsiFile psiFile, int startOffset,
-                                   int endOffset) throws InvalidPathToConfigFileException {
+    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
+            throws InvalidPathToConfigFileException {
         final Editor editor = PsiUtilBase.findEditor(psiFile);
 
         if (editor != null) {
@@ -68,10 +67,10 @@ public class EclipseCodeFormatter {
 
     private void formatWhenEditorIsClosed(PsiFile psiFile) throws InvalidPathToConfigFileException {
         VirtualFile virtualFile = psiFile.getVirtualFile();
-        FileDocumentManager fileDocumentManager = FileDocumentManager
-                .getInstance();
+        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
         Document document = fileDocumentManager.getDocument(virtualFile);
-        fileDocumentManager.saveDocument(document); //when file is edited and editor is closed, it is needed to save the text
+        fileDocumentManager.saveDocument(document); // when file is edited and editor is closed, it is needed to save
+        // the text
         document.setText(reformat(document.getText()));
         importOptimization.appendBlankLinesBetweenGroups(document, true);
         fileDocumentManager.saveDocument(document);
@@ -81,11 +80,12 @@ public class EclipseCodeFormatter {
         return codeFormatterFacade.format(virtualFile, Settings.LINE_SEPARATOR);
     }
 
-    /*when file is being edited, it is important to load text from editor, i think */
-    private void formatWhenEditorIsOpen(int startOffset, int endOffset, PsiFile file) throws InvalidPathToConfigFileException {
+    /* when file is being edited, it is important to load text from editor, i think */
+    private void formatWhenEditorIsOpen(int startOffset, int endOffset, PsiFile file)
+            throws InvalidPathToConfigFileException {
         final Editor editor = PsiUtilBase.findEditor(file);
         int visualColumnToRestore = getVisualColumnToRestore(editor);
-      
+
         Document document = editor.getDocument();
         String text = document.getText();
         boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, text);
@@ -96,8 +96,8 @@ public class EclipseCodeFormatter {
     }
 
     private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {
-        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text),
-                endOffset, Settings.LINE_SEPARATOR);
+        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset,
+                Settings.LINE_SEPARATOR);
     }
 
     /**
@@ -107,10 +107,8 @@ public class EclipseCodeFormatter {
         if (startOffset == 0) {
             return 0;
         }
-        return text.substring(0, startOffset).lastIndexOf(
-                Settings.LINE_SEPARATOR) + 1;
+        return text.substring(0, startOffset).lastIndexOf(Settings.LINE_SEPARATOR) + 1;
     }
-
 
     private void restoreVisualColumn(Editor editor, int visualColumnToRestore) {
         if (visualColumnToRestore < 0) {
@@ -123,11 +121,13 @@ public class EclipseCodeFormatter {
         }
     }
 
-    // There is a possible case that cursor is located at the end of the line that contains only white spaces. For example:
-    //     public void foo() {
-    //         <caret>
-    //     }
-    // Formatter removes such white spaces, i.e. keeps only line feed symbol. But we want to preserve caret position then.
+    // There is a possible case that cursor is located at the end of the line that contains only white spaces. For
+    // example:
+    // public void foo() {
+    // <caret>
+    // }
+    // Formatter removes such white spaces, i.e. keeps only line feed symbol. But we want to preserve caret position
+    // then.
     // So, we check if it should be preserved and restore it after formatting if necessary
 
     private int getVisualColumnToRestore(Editor editor) {
@@ -156,5 +156,4 @@ public class EclipseCodeFormatter {
         return visualColumnToRestore;
     }
 
-   
 }

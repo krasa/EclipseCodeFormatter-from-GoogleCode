@@ -18,26 +18,53 @@ import org.jetbrains.annotations.NotNull;
 public class Settings implements Cloneable {
 
     public static final String LINE_SEPARATOR = "\n";
-
-    public DisabledFileTypeSettings geDisabledFileTypeSettings() {
-        return new DisabledFileTypeSettings(disabledFileTypes);
-    }
-
-    public static enum Formatter {
-        DEFAULT,
-        ECLIPSE
-    }
+    private String pathToConfigFileJS = "";
+    private boolean enableJavaFormatting = true;
+    private boolean enableJSFormatting = false;
 
     @NotNull
     private Formatter formatter = Formatter.DEFAULT;
     @NotNull
-    private String eclipsePrefs = "";
+    private String pathToConfigFileJava = "";
     private String joinedGroup = "";
     private String disabledFileTypes = "";
     private boolean optimizeImports = true;
     private boolean formatOtherFileTypesWithIntelliJ = true;
     private boolean formatSeletedTextInAllFileTypes = true;
     private Integer notifyFromTextLenght = 300;
+
+    public DisabledFileTypeSettings geDisabledFileTypeSettings() {
+        return new DisabledFileTypeSettings(disabledFileTypes);
+    }
+
+    public String getPathToConfigFileJS() {
+        return pathToConfigFileJS;
+    }
+
+    public void setPathToConfigFileJS(final String pathToConfigFileJS) {
+        this.pathToConfigFileJS = pathToConfigFileJS;
+    }
+
+    public boolean isEnableJavaFormatting() {
+        return enableJavaFormatting;
+    }
+
+    public void setEnableJavaFormatting(final boolean enableJavaFormatting) {
+        this.enableJavaFormatting = enableJavaFormatting;
+    }
+
+    public boolean isEnableJSFormatting() {
+        return enableJSFormatting;
+    }
+
+    public void setEnableJSFormatting(final boolean enableJSFormatting) {
+        this.enableJSFormatting = enableJSFormatting;
+    }
+
+    public static enum Formatter {
+        DEFAULT,
+        ECLIPSE
+    }
 
     public boolean isFormatSeletedTextInAllFileTypes() {
         return formatSeletedTextInAllFileTypes;
@@ -114,16 +141,16 @@ public class Settings implements Cloneable {
     }
 
     @NotNull
-    public String getEclipsePrefs() {
-        return eclipsePrefs;
+    public String getPathToConfigFileJava() {
+        return pathToConfigFileJava;
     }
 
-    public void setEclipsePrefs(@NotNull String eclipsePrefs) {
-        this.eclipsePrefs = eclipsePrefs;
+    public void setPathToConfigFileJava(@NotNull String pathToConfigFileJava) {
+        this.pathToConfigFileJava = pathToConfigFileJava;
     }
 
     public boolean isPreferenceFileConfigured() {
-        return eclipsePrefs != null && !eclipsePrefs.isEmpty();
+        return pathToConfigFileJava != null && !pathToConfigFileJava.isEmpty();
     }
 
 }
