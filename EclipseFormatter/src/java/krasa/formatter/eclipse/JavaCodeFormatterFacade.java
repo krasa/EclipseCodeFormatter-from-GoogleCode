@@ -56,7 +56,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         try {
             doc.set(text);
             TextEdit edit = getCodeFormatter().format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, text,
-                    startOffset, endOffset, 0, lineSeparator);
+                    startOffset, endOffset - startOffset, 0, lineSeparator);
             if (edit != null) {
                 edit.apply(doc);
             } else {

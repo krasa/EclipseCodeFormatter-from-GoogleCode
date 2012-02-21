@@ -11,7 +11,6 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
 import krasa.formatter.settings.JoinedGroup;
 import krasa.formatter.settings.Settings;
-import krasa.formatter.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -34,9 +33,10 @@ public class ImportOptimization {
         if (!settings.isOptimizeImports()) {
             return;
         }
-    
+
         Project project = psiFile.getProject();
-        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult((PsiJavaFile) psiFile);
+        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult(
+                (PsiJavaFile) psiFile);
 
         try {
             final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
