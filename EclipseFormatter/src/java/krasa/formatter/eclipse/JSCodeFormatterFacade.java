@@ -26,11 +26,7 @@ public class JSCodeFormatterFacade extends CodeFormatterFacade {
         if (pathToConfigFile == null || pathToConfigFile.isEmpty()) {
             return new DefaultCodeFormatter();
         }
-        File file = new File(this.pathToConfigFile);
-        if (!file.exists()) {
-            System.err.println(new File("").getAbsolutePath());
-            throw new InvalidPathToConfigFileException();
-        }
+        File file = checkIfExists(this.pathToConfigFile);
 
         if (codeFormatter == null || configFileWasChanged(file)) {
             return newCodeFormatter(file);
@@ -54,18 +50,7 @@ public class JSCodeFormatterFacade extends CodeFormatterFacade {
         return file.lastModified() > lastModified;
     }
 
-    @Override
-    public String format(String content, String lineSeparator) throws InvalidPathToConfigFileException {
-        return formatInternal(content, 0, content.length(), lineSeparator);
-    }
-
-    @Override
-    public String format(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
-        return formatInternal(text, startOffset, endOffset, lineSeparator);
-
-    }
-
-    private String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
+    protected String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
         IDocument doc = new Document();
         try {
             // format the file (the meat and potatoes)

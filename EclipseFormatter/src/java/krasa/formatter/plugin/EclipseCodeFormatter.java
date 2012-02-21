@@ -46,11 +46,15 @@ public class EclipseCodeFormatter {
     }
 
     public void format(PsiFile psiFile, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
-        if (FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText())) {
+        preProcess(psiFile, startOffset, endOffset);
+        formatWithEclipse(psiFile, startOffset, endOffset);
+    }
+
+    private void preProcess(PsiFile psiFile, int startOffset, int endOffset) {
+        if (FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText()) && FileUtils.isJava(psiFile)) {
             importOptimization.byIntellij(psiFile);
         }
         ;
-        formatWithEclipse(psiFile, startOffset, endOffset);
     }
 
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
@@ -72,7 +76,7 @@ public class EclipseCodeFormatter {
         fileDocumentManager.saveDocument(document); // when file is edited and editor is closed, it is needed to save
         // the text
         document.setText(reformat(document.getText()));
-        importOptimization.appendBlankLinesBetweenGroups(document, true);
+        postProcess(document, true, psiFile);
         fileDocumentManager.saveDocument(document);
     }
 
@@ -90,9 +94,15 @@ public class EclipseCodeFormatter {
         String text = document.getText();
         boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, text);
         document.setText(reformat(startOffset, endOffset, text));
-        importOptimization.appendBlankLinesBetweenGroups(document, wholeFile);
+        postProcess(document, wholeFile, file);
 
         restoreVisualColumn(editor, visualColumnToRestore);
+    }
+
+    private void postProcess(Document document, boolean wholeFile, PsiFile psiFile) {
+        if (FileUtils.isJava(psiFile)) {
+            importOptimization.appendBlankLinesBetweenGroups(document, wholeFile);
+        }
     }
 
     private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {

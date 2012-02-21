@@ -3,19 +3,13 @@ package krasa.formatter.utils;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.ReadonlyStatusHandler;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 
 /**
  * @author Vojtech Krasa
  */
 public class FileUtils {
-
-    @NotNull
-    public static File ioFile(@NotNull VirtualFile file) {
-        return new File(file.getPath());
-    }
 
     public static boolean isWritable(@NotNull VirtualFile file,
                                      @NotNull Project project) {
@@ -27,4 +21,21 @@ public class FileUtils {
         return startOffset == 0 && endOffset == text.length();
     }
 
+    public static boolean isJavaScript(PsiFile psiFile) {
+        return endsWith(psiFile, ".js");
+    }
+
+    public static boolean isJava(PsiFile psiFile) {
+        return endsWith(psiFile, ".java");
+    }
+
+    public static boolean endsWith(PsiFile psiFile, String... suffix) {
+        VirtualFile file = psiFile.getVirtualFile();
+        for (String s : suffix) {
+            if (file.getPath().endsWith(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

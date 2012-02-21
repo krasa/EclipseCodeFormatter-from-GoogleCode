@@ -10,10 +10,24 @@ import java.util.Properties;
  * @author Vojtech Krasa
  */
 public abstract class CodeFormatterFacade {
-    public abstract String format(String content, String lineSeparator) throws InvalidPathToConfigFileException;
 
-    public abstract String format(String text, int startOffset, int endOffset, String lineSeparator)
-            throws InvalidPathToConfigFileException;
+
+    public String format(String content, String lineSeparator) throws InvalidPathToConfigFileException {
+        return formatInternal(content, 0, content.length(), lineSeparator);
+    }
+
+    /**
+     * @param text          to format
+     * @param startOffset   start of formatted area - this should be always start of line
+     * @param endOffset     end of formatted area
+     * @param lineSeparator - null for default
+     */
+    public String format(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
+        return formatInternal(text, startOffset, endOffset, lineSeparator);
+    }
+
+    protected abstract String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException;
+
 
     /**
      * Return a Java Properties file representing the options that are in the specified configuration file.
@@ -38,4 +52,12 @@ public abstract class CodeFormatterFacade {
         }
     }
 
+    protected File checkIfExists(String pathToConfigFile1) throws InvalidPathToConfigFileException {
+        File file = new File(pathToConfigFile1);
+        if (!file.exists()) {
+            System.err.println(new File("").getAbsolutePath());
+            throw new InvalidPathToConfigFileException();
+        }
+        return file;
+    }
 }

@@ -24,11 +24,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
     }
 
     private CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
-        File file = new File(this.pathToConfigFile);
-        if (!file.exists()) {
-            System.err.println(new File("").getAbsolutePath());
-            throw new InvalidPathToConfigFileException();
-        }
+        File file = checkIfExists(this.pathToConfigFile);
 
         if (codeFormatter == null || configFileWasChanged(file)) {
             return newCodeFormatter(file);
@@ -52,30 +48,15 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         return file.lastModified() > lastModified;
     }
 
-
-    public String format(String content, String lineSeparator) throws InvalidPathToConfigFileException {
-        return formatInternal(content, 0, lineSeparator, content.length());
-    }
-
-    /**
-     * @param text          to format
-     * @param startOffset   start of formatted area - this should be always start of line
-     * @param endOffset     end of formatted area
-     * @param lineSeparator - null for default
-     */
-    public String format(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
+    protected String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
         if (endOffset > text.length()) {
             endOffset = text.length();
         }
-        return formatInternal(text, startOffset, lineSeparator, endOffset - startOffset);
-    }
-
-    private String formatInternal(String text, int startOffset, String lineSeparator, int length) throws InvalidPathToConfigFileException {
         IDocument doc = new Document();
         try {
             doc.set(text);
             TextEdit edit = getCodeFormatter().format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, text,
-                    startOffset, length, 0, lineSeparator);
+                    startOffset, endOffset, 0, lineSeparator);
             if (edit != null) {
                 edit.apply(doc);
             } else {

@@ -104,7 +104,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
             throws InvalidPathToConfigFileException {
-        if (endsWith(psiFile, JS)) {
+        if (FileUtils.isJavaScript(psiFile)) {
             eclipseCodeFormatterJs.format(psiFile, startOffset, endOffset);
         } else {
             eclipseCodeFormatterJava.format(psiFile, startOffset, endOffset);
@@ -168,24 +168,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     }
 
     private boolean fileTypeIsEnabled(@NotNull PsiFile psiFile) {
-        return (isJava(psiFile) && settings.isEnableJavaFormatting()) || (isJavaScript(psiFile) && settings.isEnableJSFormatting());
+        return (FileUtils.isJava(psiFile) && settings.isEnableJavaFormatting()) || (FileUtils.isJavaScript(psiFile) && settings.isEnableJSFormatting());
     }
 
-    private boolean isJavaScript(PsiFile psiFile) {
-        return endsWith(psiFile, ".js");
-    }
-
-    private boolean isJava(PsiFile psiFile) {
-        return endsWith(psiFile, ".java");
-    }
-
-    private boolean endsWith(PsiFile psiFile, String... suffix) {
-        VirtualFile file = psiFile.getVirtualFile();
-        for (String s : suffix) {
-            if (file.getPath().endsWith(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
