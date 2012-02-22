@@ -49,4 +49,9 @@ public class JSCodeFormatterFacadeTest {
         Assert.assertEquals(FORMATTED, output);
     }
 
+    @Test
+    public void testEndOffset() throws Exception {
+        eclipseCodeFormatterFacade.format(INPUT, INPUT.length() - 11, INPUT.length() - 10, Settings.LINE_SEPARATOR);
+    }
+
 }

@@ -107,7 +107,7 @@ public class JavaCodeFormatterFacadeTest {
     }
 
     @Test
-    public void testFormat3() throws Exception {
+    public void testEndOffset() throws Exception {
         String input2 = FORMATTED2;
         String output = eclipseCodeFormatterFacade.format(input2, input2.length() - 20, input2.length() - 10, Settings.LINE_SEPARATOR);
         Assert.assertEquals(FORMATTED2, output);

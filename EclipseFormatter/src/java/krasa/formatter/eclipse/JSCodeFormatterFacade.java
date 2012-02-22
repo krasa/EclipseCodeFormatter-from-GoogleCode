@@ -5,7 +5,6 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.wst.jsdt.internal.formatter.DefaultCodeFormatter;
 
 import java.io.File;
 import java.util.Properties;
@@ -23,9 +22,6 @@ public class JSCodeFormatterFacade extends CodeFormatterFacade {
     }
 
     private org.eclipse.wst.jsdt.core.formatter.CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
-        if (pathToConfigFile == null || pathToConfigFile.isEmpty()) {
-            return new DefaultCodeFormatter();
-        }
         File file = checkIfExists(this.pathToConfigFile);
 
         if (codeFormatter == null || configFileWasChanged(file)) {
