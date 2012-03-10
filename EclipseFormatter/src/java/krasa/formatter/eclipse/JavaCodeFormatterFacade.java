@@ -109,4 +109,30 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected Properties createDefaultConfig() {
+        Properties defaultConfig = new Properties();
+        // TODO: Ideally, the IntelliJ project's language level should be the default value.
+        defaultConfig.setProperty("org.eclipse.jdt.core.compiler.source", "1.5");
+        return defaultConfig;
+    }
+
+    @Override
+    protected void validateConfig(Properties config) {
+        String sourceVersionString = config.getProperty("org.eclipse.jdt.core.compiler.source");
+        if (sourceVersionString != null) {
+            float sourceVersion = 0;
+            try {
+                sourceVersion = Float.parseFloat(sourceVersionString);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Illegal value for org.eclipse.jdt.core.compiler.source property ("
+                        + sourceVersionString + ") - supported Java source versions are 1.5, 1.6, 1.7, or 1.8.");
+            }
+            if (sourceVersion < 1.5) {
+                throw new RuntimeException("Illegal value for org.eclipse.jdt.core.compiler.source property ("
+                        + sourceVersionString + ") - Eclipse formatter requires a Java source version >= 1.5.");
+            }
+        }
+    }
 }
