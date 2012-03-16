@@ -58,13 +58,7 @@ public class ImportOptimization {
     /**
      * appends blank lines between import groups
      */
-    public void appendBlankLinesBetweenGroups(Document document, boolean wholeFile) {
-        if (!settings.isOptimizeImports()) {
-            return;
-        }
-        if (!wholeFile) {
-            return;
-        }
+    public void appendBlankLinesBetweenGroups(Document document) {
         String documentText = document.getText();
         String text = appendBlankLinesBetweenGroups(documentText);
         document.setText(text);

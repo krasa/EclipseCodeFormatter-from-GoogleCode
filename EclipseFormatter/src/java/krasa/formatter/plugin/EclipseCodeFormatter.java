@@ -9,6 +9,9 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiImportList;
+import com.intellij.psi.PsiImportStatementBase;
+import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiUtilBase;
 import krasa.formatter.eclipse.CodeFormatterFacade;
@@ -46,23 +49,23 @@ public class EclipseCodeFormatter {
     }
 
     public void format(PsiFile psiFile, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
-        preProcess(psiFile, startOffset, endOffset);
-        formatWithEclipse(psiFile, startOffset, endOffset);
+        boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
+        preProcess(psiFile, wholeFile);
+        formatWithEclipse(psiFile, startOffset, endOffset, wholeFile);
     }
 
-    private void preProcess(PsiFile psiFile, int startOffset, int endOffset) {
-        if (FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText()) && FileUtils.isJava(psiFile)) {
+    private void preProcess(PsiFile psiFile, boolean wholeFile) {
+        if (wholeFile && FileUtils.isJava(psiFile)) {
             importOptimization.byIntellij(psiFile);
         }
         ;
     }
 
-    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
+    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset, boolean wholeFile)
             throws InvalidPathToConfigFileException {
         final Editor editor = PsiUtilBase.findEditor(psiFile);
-
         if (editor != null) {
-            formatWhenEditorIsOpen(startOffset, endOffset, psiFile);
+            formatWhenEditorIsOpen(startOffset, endOffset, psiFile, wholeFile);
         } else {
             formatWhenEditorIsClosed(psiFile);
         }
@@ -85,14 +88,13 @@ public class EclipseCodeFormatter {
     }
 
     /* when file is being edited, it is important to load text from editor, i think */
-    private void formatWhenEditorIsOpen(int startOffset, int endOffset, PsiFile file)
+    private void formatWhenEditorIsOpen(int startOffset, int endOffset, PsiFile file, boolean wholeFile)
             throws InvalidPathToConfigFileException {
         final Editor editor = PsiUtilBase.findEditor(file);
         int visualColumnToRestore = getVisualColumnToRestore(editor);
 
         Document document = editor.getDocument();
         String text = document.getText();
-        boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, text);
         document.setText(reformat(startOffset, endOffset, text));
         postProcess(document, wholeFile, file);
 
@@ -101,7 +103,33 @@ public class EclipseCodeFormatter {
 
     private void postProcess(Document document, boolean wholeFile, PsiFile psiFile) {
         if (FileUtils.isJava(psiFile)) {
-            importOptimization.appendBlankLinesBetweenGroups(document, wholeFile);
+            if (!settings.isOptimizeImports()) {
+                return;
+            }
+            if (!wholeFile) {
+                return;
+            }
+            if (settings.isNewImportOptimizer()) {
+                ImportSorter importSorter = null;
+                try {
+                    importSorter = new ImportSorter(settings.getImportOrderAsList());
+                    importSorter.process(document);
+                } catch (Exception e) {
+                    final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    if (oldImportList != null) {
+                        PsiImportStatementBase[] allImportStatements = oldImportList.getAllImportStatements();
+                        for (PsiImportStatementBase allImportStatement : allImportStatements) {
+                            String text = allImportStatement.getText();
+                            stringBuilder.append(text);
+                        }
+                    }
+                    String message = "imports: " + stringBuilder.toString() + ", settings: " + settings.getImportOrder();
+                    throw new ImportSorterException(message, e);
+                }
+            } else {
+                importOptimization.appendBlankLinesBetweenGroups(document);
+            }
         }
     }
 

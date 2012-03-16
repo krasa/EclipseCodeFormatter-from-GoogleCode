@@ -68,4 +68,11 @@ public class Notifier {
         Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
         showNotification(notification);
     }
+
+    public void notifyBrokenImportSorter() {
+        String content = "Formatting failed due to new experimental Import optimizer, please send me the error log";
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        showNotification(notification);
+
+    }
 }

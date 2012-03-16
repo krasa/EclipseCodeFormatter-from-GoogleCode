@@ -8,8 +8,6 @@
 
 package krasa.formatter.plugin;
 
-import com.intellij.codeInsight.actions.LayoutCodeDialog;
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CodeStyleManager;

@@ -94,6 +94,9 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             e.printStackTrace();
             LOG.debug(e);
             notifier.notify(e);
+        } catch (final ImportSorterException e) {
+            LOG.error(e);
+            notifier.notifyBrokenImportSorter();
         } catch (final Exception e) {
             e.printStackTrace();
             LOG.error("startOffset" + startOffset + ", endOffset:" + endOffset + ", length of file "
@@ -124,8 +127,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             if (editor != null) {
                 Document document = editor.getDocument();
                 String text = document.getText();
-                if (!FileUtils.isWholeFile(startOffset, endOffset, text)) {
-                    //todo rozlisit oznacenej celej file v editoru od normalniho formatovani
+                if (!FileUtils.isWholeFile(startOffset, endOffset, text) || isFocusInEditorAndSelectedText()) {
                     return false;
                 }
             }
@@ -134,6 +136,11 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             return isDisabledFileType(virtualFile);
         }
         return true;
+    }
+
+    //todo rozlisit oznacenej celej file v editoru od normalniho formatovani
+    private boolean isFocusInEditorAndSelectedText() {
+        return false;
     }
 
     public boolean canReformatWithEclipse(PsiFile psiFile) {

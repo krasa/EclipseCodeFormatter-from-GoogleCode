@@ -8,7 +8,10 @@
 
 package krasa.formatter.settings;
 
+import krasa.formatter.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * @author Esko Luontola
@@ -32,6 +35,8 @@ public class Settings implements Cloneable {
     private boolean formatOtherFileTypesWithIntelliJ = true;
     private boolean formatSeletedTextInAllFileTypes = true;
     private Integer notifyFromTextLenght = 300;
+    private boolean newImportOptimizer = true;
+    private String importOrder = "java;javax;com;org;";
 
     public DisabledFileTypeSettings geDisabledFileTypeSettings() {
         return new DisabledFileTypeSettings(disabledFileTypes);
@@ -59,6 +64,26 @@ public class Settings implements Cloneable {
 
     public void setEnableJSFormatting(final boolean enableJSFormatting) {
         this.enableJSFormatting = enableJSFormatting;
+    }
+
+    public boolean isNewImportOptimizer() {
+        return newImportOptimizer;
+    }
+
+    public void setNewImportOptimizer(boolean newImportOptimizer) {
+        this.newImportOptimizer = newImportOptimizer;
+    }
+
+    public List<String> getImportOrderAsList() {
+        return StringUtils.trimToList(importOrder);
+    }
+
+    public String getImportOrder() {
+        return importOrder;
+    }
+
+    public void setImportOrder(final String importOrder) {
+        this.importOrder = importOrder;
     }
 
     public static enum Formatter {

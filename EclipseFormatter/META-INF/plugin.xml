@@ -4,7 +4,7 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>1.4.1</version>
+    <version>1.5.1.0 beta</version>
 
     <!--<idea-version since-build="114.65" until-build=""/>-->
     <idea-version since-build="110.137" until-build="114.00"/>
@@ -29,8 +29,12 @@
     </vendor>
 
     <change-notes><![CDATA[
+        <p>1.5 (2012-03-15)
+        <br>- Added new experimental Import optimizer, which should work exactly like the Eclipse's one (it may be buggy).
+        <br>- fixed bug - formatting one file multiple times toggles imports formatting
+        </p>
         <p>1.4 (2012-03-10)
-        <br>- Added default language level for java formatter (1.5)and more robust handling of config file.
+        <br>- Added default language level for java formatter(1.5) and more robust handling of config file.
         </p>
         <p>1.3 (2012-02-21)
         <br>- new JavaScript formatting support!

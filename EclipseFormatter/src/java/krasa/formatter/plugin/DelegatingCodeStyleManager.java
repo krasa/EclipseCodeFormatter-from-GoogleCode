@@ -23,6 +23,8 @@ import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+
 /**
  * Wrapper for intercepting the method calls to a {@link CodeStyleManager} instance.
  *
