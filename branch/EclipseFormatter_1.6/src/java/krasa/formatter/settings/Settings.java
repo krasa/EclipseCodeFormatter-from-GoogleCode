@@ -36,7 +36,7 @@ public class Settings implements Cloneable {
     private boolean formatSeletedTextInAllFileTypes = true;
     private Integer notifyFromTextLenght = 300;
     private boolean newImportOptimizer = true;
-    private String importOrder = "java;javax;com;org;";
+    private String importOrder = "java;javax;org;com;";
 
     public DisabledFileTypeSettings geDisabledFileTypeSettings() {
         return new DisabledFileTypeSettings(disabledFileTypes);

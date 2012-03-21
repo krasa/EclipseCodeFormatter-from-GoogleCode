@@ -14,8 +14,9 @@ import java.util.List;
 public class ImportSorterTest {
 
 	public static final String N = "\n";
+    public static final List<String> DEFAULT_ORDER = Arrays.asList("java", "javax", "org", "com");
 
-	@Test
+    @Test
 	public void testName() throws Exception {
 		String EXPECTED = "import java.util.HashMap;\n" + "import java.util.Map;\n" + "\n"
 				+ "import org.jingle.mocquer.MockControl;\n" + N + "import sun.security.action.GetLongAction;\n"
@@ -76,6 +77,30 @@ public class ImportSorterTest {
 				+ "import java.util.ArrayList;";
 
 		List<String> importsOrder = Arrays.asList("java", "javax", "org", "com");
+		ImportSorter importSorter = new ImportSorter(importsOrder);
+
+		List<String> imports1 = StringUtils.trimImport(imports);
+		System.err.println(Arrays.toString(imports1.toArray()));
+		List<String> strings = importSorter.sortByEclipseStandard(imports1);
+		printAndAssert(EXPECTED, strings);
+	}
+
+	@Test
+	public void testName4() throws Exception {
+		String EXPECTED = "import java.util.Arrays;\n" +
+                "\n" +
+                "import models.Deployment;\n" +
+                "import play.jobs.Job;\n" +
+                "import play.mvc.Before;\n" +
+                "import controllers.deadbolt.Restrict;\n";
+
+		String imports = "import controllers.deadbolt.Restrict;\n" +
+                "import java.util.Arrays;\n" +
+                "import play.mvc.Before;\n" +
+                "import models.Deployment;\n" +
+                "import play.jobs.Job;\n";
+
+		List<String> importsOrder = DEFAULT_ORDER;
 		ImportSorter importSorter = new ImportSorter(importsOrder);
 
 		List<String> imports1 = StringUtils.trimImport(imports);

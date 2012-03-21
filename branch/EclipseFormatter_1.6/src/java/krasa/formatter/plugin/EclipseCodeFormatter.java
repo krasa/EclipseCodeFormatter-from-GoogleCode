@@ -113,7 +113,7 @@ public class EclipseCodeFormatter {
                 ImportSorter importSorter = null;
                 try {
                     importSorter = new ImportSorter(settings.getImportOrderAsList());
-                    importSorter.process(document);
+                    importSorter.sortImports(document);
                 } catch (Exception e) {
                     final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
                     StringBuilder stringBuilder = new StringBuilder();
