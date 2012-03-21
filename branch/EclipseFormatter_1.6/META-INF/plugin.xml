@@ -103,14 +103,10 @@
     ]]></change-notes>
 
     <!--<helpset file="formatter-help.jar" path="/Help.hs"/>-->
-    <application-components>
-        <component>
-            <implementation-class>krasa.formatter.settings.GlobalSettings</implementation-class>
-        </component>
-    </application-components>
+
     <project-components>
         <component>
-            <implementation-class>krasa.formatter.settings.ProjectSettingsComponent</implementation-class>
+            <implementation-class>krasa.formatter.plugin.ProjectSettingsComponent</implementation-class>
         </component>
     </project-components>
     <!--<helpset path="/Help.hs" file="testpluginuploaf.jar"/>-->
