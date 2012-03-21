@@ -7,6 +7,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.settings.ProjectSettingsComponent;
 import org.jetbrains.annotations.NotNull;
 
 /**

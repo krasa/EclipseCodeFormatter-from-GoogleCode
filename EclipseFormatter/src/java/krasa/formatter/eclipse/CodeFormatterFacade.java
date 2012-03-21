@@ -14,21 +14,20 @@ import java.util.Properties;
 public abstract class CodeFormatterFacade {
 
 
-    public String format(String content, String lineSeparator) throws InvalidPathToConfigFileException {
-        return formatInternal(content, 0, content.length(), lineSeparator);
+    public String format(String content) throws InvalidPathToConfigFileException {
+        return formatInternal(content, 0, content.length());
     }
 
     /**
      * @param text          to format
      * @param startOffset   start of formatted area - this should be always start of line
      * @param endOffset     end of formatted area
-     * @param lineSeparator - null for default
      */
-    public String format(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
-        return formatInternal(text, startOffset, endOffset, lineSeparator);
+    public String format(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
+        return formatInternal(text, startOffset, endOffset);
     }
 
-    protected abstract String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException;
+    protected abstract String formatInternal(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException;
 
 
     /**

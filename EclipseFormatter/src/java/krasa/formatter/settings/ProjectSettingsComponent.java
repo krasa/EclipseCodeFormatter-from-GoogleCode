@@ -6,7 +6,7 @@
  * the specific language governing permissions and limitations under the License.
  */
 
-package krasa.formatter.plugin;
+package krasa.formatter.settings;
 
 import com.intellij.notification.NotificationDisplayType;
 import com.intellij.notification.NotificationsConfiguration;
@@ -18,10 +18,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.xmlb.XmlSerializerUtil;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
-import krasa.formatter.settings.Settings;
+import krasa.formatter.plugin.ProjectCodeStyleInstaller;
+import krasa.formatter.plugin.ProjectSettingsForm;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     @NotNull
     private final ProjectCodeStyleInstaller projectCodeStyle;
     @NotNull
-    private final Settings settings = new Settings();
+    private Settings settings = new Settings();
     @Nullable
     private ProjectSettingsForm form;
     @Nullable
@@ -125,6 +125,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
 
     public void apply() throws ConfigurationException {
         if (form != null) {
+            GlobalSettings.getInstance().saveSettings(settings, project);
             form.exportTo(settings);
             install(settings);
         }
@@ -132,7 +133,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
 
     public void reset() {
         if (form != null) {
-            form.importFrom(settings);
+            form.importFrom(GlobalSettings.getInstance().getSettings(settings, project));
         }
     }
 
@@ -144,11 +145,11 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
 
     @NotNull
     public Settings getState() {
-        return settings.clone();
+        return GlobalSettings.getInstance().getSettings(settings, project);
     }
 
     public void loadState(@NotNull Settings state) {
-        XmlSerializerUtil.copyBean(state, settings);
+        settings = GlobalSettings.getInstance().getSettings(state, project);
         install(settings);
     }
 

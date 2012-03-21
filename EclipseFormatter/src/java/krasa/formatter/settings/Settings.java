@@ -18,7 +18,9 @@ import java.util.List;
  * @author Vojtech Krasa
  * @since 4.12.2007
  */
-public class Settings implements Cloneable {
+public class Settings {
+    private String name = null;
+    private Integer id = null;
 
     public static final String LINE_SEPARATOR = "\n";
     private String pathToConfigFileJS = "";
@@ -29,14 +31,20 @@ public class Settings implements Cloneable {
     private Formatter formatter = Formatter.DEFAULT;
     @NotNull
     private String pathToConfigFileJava = "";
-    private String joinedGroup = "";
     private String disabledFileTypes = "";
     private boolean optimizeImports = true;
     private boolean formatOtherFileTypesWithIntelliJ = true;
     private boolean formatSeletedTextInAllFileTypes = true;
     private Integer notifyFromTextLenght = 300;
-    private boolean newImportOptimizer = true;
-    private String importOrder = "java;javax;com;org;";
+    private String importOrder = "java;javax;org;com;";
+
+    public Settings() {
+    }
+
+    public Settings(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public DisabledFileTypeSettings geDisabledFileTypeSettings() {
         return new DisabledFileTypeSettings(disabledFileTypes);
@@ -64,14 +72,6 @@ public class Settings implements Cloneable {
 
     public void setEnableJSFormatting(final boolean enableJSFormatting) {
         this.enableJSFormatting = enableJSFormatting;
-    }
-
-    public boolean isNewImportOptimizer() {
-        return newImportOptimizer;
-    }
-
-    public void setNewImportOptimizer(boolean newImportOptimizer) {
-        this.newImportOptimizer = newImportOptimizer;
     }
 
     public List<String> getImportOrderAsList() {
@@ -115,10 +115,6 @@ public class Settings implements Cloneable {
         this.notifyFromTextLenght = notifyFromTextLenght;
     }
 
-    public void setJoinedGroup(String joinedGroup) {
-        this.joinedGroup = joinedGroup;
-    }
-
     public boolean isOptimizeImports() {
         return optimizeImports;
     }
@@ -133,27 +129,6 @@ public class Settings implements Cloneable {
 
     public void setOptimizeImports(boolean optimizeImports) {
         this.optimizeImports = optimizeImports;
-    }
-
-    public String getJoinedGroup() {
-        return joinedGroup;
-    }
-
-    public ImportGroupSettings getImportGroupSettings() {
-        if (joinedGroup == null || joinedGroup.isEmpty()) {
-            return ImportGroupSettings.empty();
-        }
-
-        return new ImportGroupSettings(joinedGroup);
-    }
-
-    @NotNull
-    public final Settings clone() {
-        try {
-            return (Settings) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @NotNull
@@ -174,8 +149,45 @@ public class Settings implements Cloneable {
         this.pathToConfigFileJava = pathToConfigFileJava;
     }
 
-    public boolean isPreferenceFileConfigured() {
-        return pathToConfigFileJava != null && !pathToConfigFileJava.isEmpty();
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean equalsContent(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Settings settings = (Settings) o;
+
+        if (enableJSFormatting != settings.enableJSFormatting) return false;
+        if (enableJavaFormatting != settings.enableJavaFormatting) return false;
+        if (formatOtherFileTypesWithIntelliJ != settings.formatOtherFileTypesWithIntelliJ) return false;
+        if (formatSeletedTextInAllFileTypes != settings.formatSeletedTextInAllFileTypes) return false;
+        if (optimizeImports != settings.optimizeImports) return false;
+        if (disabledFileTypes != null ? !disabledFileTypes.equals(settings.disabledFileTypes) : settings.disabledFileTypes != null)
+            return false;
+        if (formatter != settings.formatter) return false;
+        if (importOrder != null ? !importOrder.equals(settings.importOrder) : settings.importOrder != null)
+            return false;
+        if (notifyFromTextLenght != null ? !notifyFromTextLenght.equals(settings.notifyFromTextLenght) : settings.notifyFromTextLenght != null)
+            return false;
+        if (pathToConfigFileJS != null ? !pathToConfigFileJS.equals(settings.pathToConfigFileJS) : settings.pathToConfigFileJS != null)
+            return false;
+        if (pathToConfigFileJava != null ? !pathToConfigFileJava.equals(settings.pathToConfigFileJava) : settings.pathToConfigFileJava != null)
+            return false;
+
+        return true;
+    }
 }

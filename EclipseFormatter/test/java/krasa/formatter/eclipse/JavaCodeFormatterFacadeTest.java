@@ -1,7 +1,6 @@
 package krasa.formatter.eclipse;
 
 import junit.framework.Assert;
-import krasa.formatter.settings.Settings;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -93,26 +92,26 @@ public class JavaCodeFormatterFacadeTest {
 
     @Test
     public void testFormat() throws Exception {
-        String output = eclipseCodeFormatterFacade.format(INPUT, Settings.LINE_SEPARATOR);
+        String output = eclipseCodeFormatterFacade.format(INPUT);
         Assert.assertEquals(FORMATTED, output);
-        output = eclipseCodeFormatterFacade.format(INPUT2, Settings.LINE_SEPARATOR);
+        output = eclipseCodeFormatterFacade.format(INPUT2);
         Assert.assertEquals(FORMATTED2, output);
     }
 
     @Test
     public void testFormat2() throws Exception {
         String input2 = INPUT2;
-        String output = eclipseCodeFormatterFacade.format(input2, 10, input2.length() - 10, Settings.LINE_SEPARATOR);
+        String output = eclipseCodeFormatterFacade.format(input2, 10, input2.length() - 10);
         Assert.assertEquals(FORMATTED2, output);
     }
 
     @Test
     public void testEndOffset() throws Exception {
         String input2 = FORMATTED2;
-        String output = eclipseCodeFormatterFacade.format(input2, input2.length() - 20, input2.length() - 10, Settings.LINE_SEPARATOR);
+        String output = eclipseCodeFormatterFacade.format(input2, input2.length() - 20, input2.length() - 10);
         Assert.assertEquals(FORMATTED2, output);
         input2 = INPUT;
-        eclipseCodeFormatterFacade.format(input2, input2.length() - 20, input2.length() - 10, Settings.LINE_SEPARATOR);
+        eclipseCodeFormatterFacade.format(input2, input2.length() - 20, input2.length() - 10);
     }
 
     public String convert(String s, String utf8) throws UnsupportedEncodingException {

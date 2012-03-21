@@ -29,8 +29,6 @@ public class EclipseCodeFormatter {
     @NotNull
     private Settings settings;
     @NotNull
-    private ImportOptimization importOptimization;
-    @NotNull
     private Notifier notifier;
     @NotNull
     CodeStyleManager original;
@@ -39,9 +37,9 @@ public class EclipseCodeFormatter {
     @NotNull
     protected final CodeFormatterFacade codeFormatterFacade;
 
-    public EclipseCodeFormatter(@NotNull Settings settings, @NotNull Project project, CodeStyleManager original, CodeFormatterFacade codeFormatterFacade1) {
+    public EclipseCodeFormatter(@NotNull Settings settings, @NotNull Project project, CodeStyleManager original,
+                                CodeFormatterFacade codeFormatterFacade1) {
         codeFormatterFacade = codeFormatterFacade1;
-        this.importOptimization = new ImportOptimization(settings);
         this.settings = settings;
         this.notifier = new Notifier(project);
         this.project = project;
@@ -55,10 +53,9 @@ public class EclipseCodeFormatter {
     }
 
     private void preProcess(PsiFile psiFile, boolean wholeFile) {
-        if (wholeFile && FileUtils.isJava(psiFile)) {
-            importOptimization.byIntellij(psiFile);
+        if (wholeFile && FileUtils.isJava(psiFile)&&settings.isOptimizeImports()) {
+            FileUtils.byIntellij(psiFile);
         }
-        ;
     }
 
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset, boolean wholeFile)
@@ -84,7 +81,7 @@ public class EclipseCodeFormatter {
     }
 
     private String reformat(String virtualFile) throws InvalidPathToConfigFileException {
-        return codeFormatterFacade.format(virtualFile, Settings.LINE_SEPARATOR);
+        return codeFormatterFacade.format(virtualFile);
     }
 
     /* when file is being edited, it is important to load text from editor, i think */
@@ -109,33 +106,29 @@ public class EclipseCodeFormatter {
             if (!wholeFile) {
                 return;
             }
-            if (settings.isNewImportOptimizer()) {
-                ImportSorter importSorter = null;
-                try {
-                    importSorter = new ImportSorter(settings.getImportOrderAsList());
-                    importSorter.process(document);
-                } catch (Exception e) {
-                    final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
-                    StringBuilder stringBuilder = new StringBuilder();
-                    if (oldImportList != null) {
-                        PsiImportStatementBase[] allImportStatements = oldImportList.getAllImportStatements();
-                        for (PsiImportStatementBase allImportStatement : allImportStatements) {
-                            String text = allImportStatement.getText();
-                            stringBuilder.append(text);
-                        }
+            ImportSorter importSorter = null;
+            try {
+                importSorter = new ImportSorter(settings.getImportOrderAsList());
+                importSorter.sortImports(document);
+            } catch (Exception e) {
+                final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
+                StringBuilder stringBuilder = new StringBuilder();
+                if (oldImportList != null) {
+                    PsiImportStatementBase[] allImportStatements = oldImportList.getAllImportStatements();
+                    for (PsiImportStatementBase allImportStatement : allImportStatements) {
+                        String text = allImportStatement.getText();
+                        stringBuilder.append(text);
                     }
-                    String message = "imports: " + stringBuilder.toString() + ", settings: " + settings.getImportOrder();
-                    throw new ImportSorterException(message, e);
                 }
-            } else {
-                importOptimization.appendBlankLinesBetweenGroups(document);
+                String message = "imports: " + stringBuilder.toString() + ", settings: " + settings.getImportOrder();
+                throw new ImportSorterException(message, e);
             }
         }
     }
 
     private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {
-        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset,
-                Settings.LINE_SEPARATOR);
+        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset
+        );
     }
 
     /**

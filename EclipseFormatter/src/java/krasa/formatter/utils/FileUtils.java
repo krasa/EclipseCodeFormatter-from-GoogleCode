@@ -1,15 +1,23 @@
 package krasa.formatter.utils;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.ReadonlyStatusHandler;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiImportList;
+import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.codeStyle.JavaCodeStyleManager;
+import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Vojtech Krasa
  */
 public class FileUtils {
+    private static final Logger LOG = Logger.getInstance(FileUtils.class.getName());
 
     public static boolean isWritable(@NotNull VirtualFile file,
                                      @NotNull Project project) {
@@ -37,5 +45,28 @@ public class FileUtils {
             }
         }
         return false;
+    }
+
+    public static void byIntellij(PsiFile psiFile) {
+
+        Project project = psiFile.getProject();
+        final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult(
+                (PsiJavaFile) psiFile);
+
+        try {
+            final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
+            final Document document = manager.getDocument(psiFile);
+            if (document != null) {
+                manager.commitDocument(document);
+            }
+            final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
+            assert oldImportList != null;
+            if (newImportList != null) {
+                oldImportList.replace(newImportList);
+            }
+            manager.doPostponedOperationsAndUnblockDocument(document);
+        } catch (IncorrectOperationException e) {
+            LOG.error(e);
+        }
     }
 }

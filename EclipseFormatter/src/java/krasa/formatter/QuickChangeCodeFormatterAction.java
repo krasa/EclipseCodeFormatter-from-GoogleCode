@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
-import krasa.formatter.plugin.ProjectSettingsComponent;
+import krasa.formatter.settings.ProjectSettingsComponent;
 import krasa.formatter.settings.Settings;
 
 /**

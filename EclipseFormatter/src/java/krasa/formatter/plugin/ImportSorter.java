@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class ImportSorter {
     public static final int START_INDEX_OF_IMPORTS_PACKAGE_DECLARATION = 7;
-    public static final String N = "\n";
+    public static final String N = Settings.LINE_SEPARATOR;
 
     private List<String> importsOrder;
 
@@ -20,21 +20,9 @@ public class ImportSorter {
         this.importsOrder = new ArrayList<String>(importsOrder);
     }
 
-    public List<String> sortByEclipseStandard(List<String> imports) {
-        ImportsTemplate importsTemplate = new ImportsTemplate(importsOrder);
-        List<String> notMatching = importsTemplate.filterMatchingImports(imports);
-        notMatching.addAll(importsOrder);
-        importsTemplate.mergeStaticImports(notMatching);
-        importsTemplate.mergeNotMatchingItems(notMatching);
-        importsTemplate.mergeMatchingItems();
-
-        return importsTemplate.getResult();
-    }
-
-    public void process(Document document) {
-        boolean alreadySorted = false;
+    public void sortImports(Document document) {
         String documentText = document.getText();
-        StringBuilder sb = new StringBuilder();
+        //parse file
         Scanner scanner = new Scanner(documentText);
         int firstImportLine = 0;
         int lastImportLine = 0;
@@ -59,9 +47,17 @@ public class ImportSorter {
                 imports.add(next.substring(START_INDEX_OF_IMPORTS_PACKAGE_DECLARATION, endIndex != -1 ? endIndex : next.length()));
             }
         }
-        scanner = new Scanner(documentText);
-        List<String> strings = sortByEclipseStandard(imports);
+
+        List<String> sortedImports = sortByEclipseStandard(imports);
+        applyImportsToDocument(document, firstImportLine, lastImportLine, sortedImports);
+    }
+
+    private void applyImportsToDocument(Document document, int firstImportLine, int lastImportLine, List<String> strings) {
+        Scanner scanner;
+        boolean alreadySorted = false;
+        scanner = new Scanner(document.getText());
         int line2 = 0;
+        StringBuilder sb = new StringBuilder();
         while (scanner.hasNext()) {
             line2++;
             String next = scanner.nextLine();
@@ -80,6 +76,17 @@ public class ImportSorter {
             }
         }
         document.setText(sb.toString());
+    }
+
+    protected List<String> sortByEclipseStandard(List<String> imports) {
+        ImportsTemplate importsTemplate = new ImportsTemplate(importsOrder);
+        List<String> notMatching = importsTemplate.filterMatchingImports(imports);
+        notMatching.addAll(importsOrder);
+        importsTemplate.mergeStaticImports(notMatching);
+        importsTemplate.mergeNotMatchingItems(notMatching);
+        importsTemplate.mergeMatchingItems();
+
+        return importsTemplate.getResult();
     }
 
     private void append(StringBuilder sb, String next) {
@@ -132,7 +139,6 @@ public class ImportSorter {
          */
         public void mergeNotMatchingItems(List<String> notMatching) {
             Collections.sort(notMatching);
-            Collections.reverse(notMatching);
 
             int firstIndexOfOrderItem = getFirstIndexOfOrderItem(notMatching);
             int indexOfOrderItem = 0;
@@ -143,11 +149,12 @@ public class ImportSorter {
                     indexOfOrderItem = template.indexOf(notMatchingItem);
                 } else {
                     if (indexOfOrderItem == 0) {
-                        //insert after first item
-                        template.add(firstIndexOfOrderItem + 1, notMatchingItem);
+                        //insert before alphabetically first order item
+                        template.add(firstIndexOfOrderItem , notMatchingItem);
                     } else {
-                        //insert before last order item
-                        template.add(indexOfOrderItem, notMatchingItem);
+                        //insert after the previous order item
+                        template.add(indexOfOrderItem+1, notMatchingItem);
+                        indexOfOrderItem++;
                     }
                 }
             }
@@ -185,6 +192,7 @@ public class ImportSorter {
                     Collections.sort(matchingItems);
 
                     //replace order item by matching import statements
+                    //this is a mess and it is only a luck that it works :-]
                     template.remove(i);
                     if (i != 0 && !template.get(i - 1).equals(N)) {
                         template.add(i, N);

@@ -52,9 +52,10 @@ public class ProjectCodeStyleInstaller {
         if (!(manager instanceof EclipseCodeStyleManager) && Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
             registerCodeStyleManager(project, new EclipseCodeStyleManager(manager, settings, project));
             // todo nastaveni okna pro formatovani at se otvira
-//            if (settings.isOptimizeImports()) {
-//                PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY, Boolean.toString(false));
-//            }
+            // if (settings.isOptimizeImports()) {
+            // PropertiesComponent.getInstance().setValue(LayoutCodeDialog.OPTIMIZE_IMPORTS_KEY,
+            // Boolean.toString(false));
+            // }
         }
     }
 
@@ -73,13 +74,5 @@ public class ProjectCodeStyleInstaller {
         container.registerComponentInstance(CODE_STYLE_MANAGER_KEY, manager);
     }
 
-    /*
-      * NOTES: Relevant places in IDEA's code style architecture from com.intellij.codeInsight.actions.ReformatCodeProcessor:
-      * CodeStyleManager.getInstance(myProject).reformatText(file, k.getStartOffset(), k.getEndOffset());else
-      * CodeStyleManager.getInstance(myProject).reformatText(file, 0, file.getTextRange().getEndOffset()); - try to inject a custom
-      * com.intellij.psi.codeStyle.CodeStyleManager and replace it after the command exits from com.intellij.psi.codeStyle.CodeStyleManager:
-      * public static CodeStyleManager getInstance(@NotNull Project project) { return ServiceManager.getService(project,
-      * CodeStyleManager.class); } from com.intellij.openapi.components.ServiceManager public static <T> T getService(Project project,
-      * Class<T> serviceClass) { return (T)project.getPicoContainer ().getComponentInstance(serviceClass.getName()); }
-      */
+
 }

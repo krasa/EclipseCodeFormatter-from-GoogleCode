@@ -1,6 +1,7 @@
 package krasa.formatter.eclipse;
 
 import krasa.formatter.plugin.Notifier;
+import krasa.formatter.settings.Settings;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
@@ -48,7 +49,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         return file.lastModified() > lastModified;
     }
 
-    protected String formatInternal(String text, int startOffset, int endOffset, String lineSeparator) throws InvalidPathToConfigFileException {
+    protected String formatInternal(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
         if (endOffset > text.length()) {
             endOffset = text.length();
         }
@@ -98,7 +99,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
              */
 
             TextEdit edit = getCodeFormatter().format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, text,
-                    startOffset, endOffset - startOffset, 0, lineSeparator);
+                    startOffset, endOffset - startOffset, 0, Settings.LINE_SEPARATOR);
             if (edit != null) {
                 edit.apply(doc);
             } else {

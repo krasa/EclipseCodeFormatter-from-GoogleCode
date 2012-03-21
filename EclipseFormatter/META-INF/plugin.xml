@@ -4,7 +4,7 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>1.5.1.0 beta</version>
+    <version>1.7.2</version>
 
     <!--<idea-version since-build="114.65" until-build=""/>-->
     <idea-version since-build="110.137" until-build="114.00"/>
@@ -29,6 +29,15 @@
     </vendor>
 
     <change-notes><![CDATA[
+        <p>1.7 (2012-03-21)
+        <br>- New features: profiles, import/export of settings, imports order configuration from eclipse settings file
+        </p>
+        <p>1.6 (2012-03-21)
+        <br>- Fixed bug - new import sorting was sometimes wrong
+        </p>
+        <p>1.5.x.1 (2012-03-16)
+        <br>- Fixed default import order - if you already installed 1.5, you need to change it manually
+        </p>
         <p>1.5 (2012-03-15)
         <br>- Added new experimental Import optimizer, which should work exactly like the Eclipse's one (it may be buggy).
         <br>- fixed bug - formatting one file multiple times toggles imports formatting
@@ -84,9 +93,9 @@
         <br>- Initial release
         </p>
         <br>Note:
-        <br>versions 0.x.0 is for IntelliJ 10.5
-        <br>versions 0.x.1 is for IntelliJ 11.0
-        <br>versions 0.x.2 is for IntelliJ 11.1
+        <br>versions x.x.0 is for IntelliJ 10.5
+        <br>versions x.x.1 is for IntelliJ 11.0
+        <br>versions x.x.2 is for IntelliJ 11.1
 
         <br>
         <br>Known issues:
@@ -97,10 +106,14 @@
     ]]></change-notes>
 
     <!--<helpset file="formatter-help.jar" path="/Help.hs"/>-->
-
+    <application-components>
+        <component>
+            <implementation-class>krasa.formatter.settings.GlobalSettings</implementation-class>
+        </component>
+    </application-components>
     <project-components>
         <component>
-            <implementation-class>krasa.formatter.plugin.ProjectSettingsComponent</implementation-class>
+            <implementation-class>krasa.formatter.settings.ProjectSettingsComponent</implementation-class>
         </component>
     </project-components>
     <!--<helpset path="/Help.hs" file="testpluginuploaf.jar"/>-->

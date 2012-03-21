@@ -8,14 +8,20 @@
 
 package krasa.formatter.plugin;
 
+import com.intellij.ide.ui.ListCellRendererWrapper;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.popup.util.PopupUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.DocumentAdapter;
+import com.intellij.ui.SortedComboBoxModel;
+import com.intellij.ui.popup.PopupFactoryImpl;
 import krasa.formatter.Messages;
+import krasa.formatter.settings.GlobalSettings;
+import krasa.formatter.settings.ProjectSettingsComponent;
 import krasa.formatter.settings.Settings;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,13 +56,9 @@ public class ProjectSettingsForm {
     private JRadioButton useDefaultFormatter;
     private JRadioButton useEclipseFormatter;
 
-    private JFormattedTextField optimizeImportGroups;
 
     private JLabel eclipseSupportedFileTypesLabel;
     private JCheckBox optimizeImportsCheckBox;
-    private JLabel optimizeImportGroupsLabel;
-    private JLabel optimizeImportGroupsHelpLabel;
-    private JTextArea help;
 
     private JTextField disabledFileTypes;
     private JLabel disabledFileTypesHelpLabel;
@@ -77,22 +80,31 @@ public class ProjectSettingsForm {
 
     private JButton eclipsePreferenceFilePathJavaBrowse;
     private JButton eclipsePreferenceFilePathJSBrowse;
-    private JRadioButton useNewExperimentalImportRadioButton;
-    private JRadioButton useOldImportOptimizerRadioButton;
     private JLabel importOrderLabel;
     private JFormattedTextField importOrder;
     private JLabel importOrderHelp;
+    private JTextField pathToEclipseImportOrderPreferenceFileJava;
+    private JButton pathToEclipseImportOrderPreferenceFileJavaBrowse;
+    private JLabel eclipsePrefsExampleImportOrderFile;
+    private JRadioButton fromFileRadioButton;
+    private JRadioButton manualConfigurationRadioButton;
+    private JTextArea help;
+    private JComboBox profiles;
+    private JButton newProfile;
+    private JButton copyProfile;
+    private Settings currentSettings;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @NotNull
     private Project project;
+    protected final SortedComboBoxModel<Settings> comboBoxModel;
 
     public ProjectSettingsForm(Project project) {
         this.project = project;
         JToggleButton[] modifiableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter,
                 optimizeImportsCheckBox, enableJavaFormatting, doNotFormatOtherFilesRadioButton,
                 formatOtherFilesWithExceptionsRadioButton, formatSelectedTextInAllFileTypes, enableJSFormatting
-                , useNewExperimentalImportRadioButton, useOldImportOptimizerRadioButton};
+                ,};
         for (JToggleButton button : modifiableButtons) {
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -102,7 +114,7 @@ public class ProjectSettingsForm {
         }
 
         JTextField[] modifiableFields = new JTextField[]{pathToEclipsePreferenceFileJava, pathToEclipsePreferenceFileJS,
-                optimizeImportGroups, disabledFileTypes, importOrder};
+                 disabledFileTypes, importOrder};
         for (JTextField field : modifiableFields) {
             field.getDocument().addDocumentListener(new DocumentAdapter() {
                 protected void textChanged(DocumentEvent e) {
@@ -114,6 +126,11 @@ public class ProjectSettingsForm {
         eclipsePreferenceFilePathJavaBrowse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 browseForFile(pathToEclipsePreferenceFileJava);
+            }
+        });
+        pathToEclipseImportOrderPreferenceFileJavaBrowse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                browseForFile(pathToEclipseImportOrderPreferenceFileJava);
             }
         });
         eclipsePreferenceFilePathJSBrowse.addActionListener(new ActionListener() {
@@ -135,6 +152,79 @@ public class ProjectSettingsForm {
 
             public void ancestorMoved(AncestorEvent event) {
             }
+        });
+        newProfile.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.err.println("newProfile");
+                GlobalSettings.getInstance().newSettings();
+                comboBoxModel.setAll(GlobalSettings.getInstance().getSettingsList());
+                rootComponent.updateUI();
+            }
+        });
+        copyProfile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.err.println("copyProfile");
+                ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance(ProjectSettingsForm.this.project);
+                GlobalSettings.getInstance().copySettings(instance.getState());
+                comboBoxModel.setAll(GlobalSettings.getInstance().getSettingsList());
+                rootComponent.updateUI();
+            }
+        });
+        comboBoxModel = new SortedComboBoxModel<Settings>(new Comparator<Settings>() {
+            @Override
+            public int compare(Settings o1, Settings o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        comboBoxModel.setAll(GlobalSettings.getInstance().getSettingsList());
+        profiles.setModel(comboBoxModel);
+        profiles.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentSettings != null && isSameId() && isModified(currentSettings)){
+                    PopupFactoryImpl.getInstance().createConfirmation("Profile was modified, save changes to current profile?", "Yes", "No", new Runnable() {
+                                @Override
+                                public void run() {
+                                    exportTo(currentSettings);
+//                                    importFrom((Settings) profiles.getSelectedItem());
+//                                    rootComponent.updateUI();
+                                    importFrom((Settings) profiles.getSelectedItem());
+
+                                    updateComponents();
+
+                                }
+                            }, new Runnable() {
+                                @Override
+                                public void run() {
+                                    importFrom((Settings) profiles.getSelectedItem());
+//                                    rootComponent.updateUI();
+                                    updateComponents();
+                                }
+                            }, 0
+                    ).showInFocusCenter();
+                }else{
+                    importFrom((Settings) profiles.getSelectedItem());
+                    rootComponent.updateUI();
+                    updateComponents();
+                }
+                Settings selectedItem = (Settings) profiles.getSelectedItem();
+                System.err.println("selectedItem " + selectedItem);
+                updateComponents();
+            }
+
+            private boolean isSameId() {
+                return !currentSettings.getId().equals(((Settings) profiles.getSelectedItem()).getId());
+            }
+        });
+        profiles.setRenderer(new ListCellRendererWrapper(profiles.getRenderer()) {
+            @Override
+            public void customize(JList jList, Object value, int i, boolean b, boolean b1) {
+                if (value != null) {
+                    setText(((Settings) value).getName());
+            } }
         });
     }
 
@@ -160,17 +250,14 @@ public class ProjectSettingsForm {
 
         enabledBy(new JComponent[]{eclipseSupportedFileTypesLabel, enableJavaFormatting, enableJSFormatting,
                 doNotFormatOtherFilesRadioButton, formatOtherFilesWithExceptionsRadioButton,
-                formatSelectedTextInAllFileTypes, useNewExperimentalImportRadioButton, useOldImportOptimizerRadioButton}, useEclipseFormatter);
+                formatSelectedTextInAllFileTypes, }, useEclipseFormatter);
 
         enabledBy(new JComponent[]{pathToEclipsePreferenceFileJava, eclipsePrefsExample,
                 eclipsePreferenceFileJavaLabel, optimizeImportsCheckBox, eclipsePreferenceFilePathJavaBrowse},
                 useEclipseFormatter, enableJavaFormatting);
 
-        enabledBy(new JComponent[]{importOrder, importOrderHelp, importOrderLabel},
-                enableJavaFormatting, useNewExperimentalImportRadioButton, optimizeImportsCheckBox);
-
-        enabledBy(new JComponent[]{optimizeImportGroups, optimizeImportGroupsLabel, optimizeImportGroupsHelpLabel,},
-                optimizeImportsCheckBox, useEclipseFormatter, enableJavaFormatting, useOldImportOptimizerRadioButton);
+        enabledBy(new JComponent[]{importOrder, importOrderHelp, importOrderLabel, },
+                optimizeImportsCheckBox, useEclipseFormatter, enableJavaFormatting);
 
         enabledBy(new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS, eclipsePreferenceFileJSLabel,
                 eclipsePreferenceFilePathJSBrowse}, useEclipseFormatter, enableJSFormatting);
@@ -262,6 +349,8 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
+        currentSettings = in;
+        profiles.setSelectedItem(in);
         formatOtherFilesWithExceptionsRadioButton.setSelected(in.isFormatOtherFileTypesWithIntelliJ());
         doNotFormatOtherFilesRadioButton.setSelected(!in.isFormatOtherFileTypesWithIntelliJ());
         useDefaultFormatter.setSelected(in.getFormatter().equals(Settings.Formatter.DEFAULT));
@@ -271,11 +360,7 @@ public class ProjectSettingsForm {
     }
 
     public void exportTo(@NotNull Settings out) {
-        if (useNewExperimentalImportRadioButton.isSelected()) {
-            out.setNewImportOptimizer(true);
-        } else {
-            out.setNewImportOptimizer(false);
-        }
+        out = currentSettings;
         if (useEclipseFormatter.isSelected()) {
             out.setFormatter(Settings.Formatter.ECLIPSE);
         } else {
@@ -307,41 +392,29 @@ public class ProjectSettingsForm {
         if (doNotFormatOtherFilesRadioButton.isSelected() != !data.isFormatOtherFileTypesWithIntelliJ()) {
             return true;
         }
-        if (useNewExperimentalImportRadioButton.isSelected() != data.isNewImportOptimizer()) {
-            return true;
-        }
-
-        if (useOldImportOptimizerRadioButton.isSelected() != !data.isNewImportOptimizer()) {
-            return true;
-        }
         return false;
     }
 
     public void setData(Settings data) {
         pathToEclipsePreferenceFileJava.setText(data.getPathToConfigFileJava());
         optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
-        optimizeImportGroups.setText(data.getJoinedGroup());
         enableJavaFormatting.setSelected(data.isEnableJavaFormatting());
         enableJSFormatting.setSelected(data.isEnableJSFormatting());
         pathToEclipsePreferenceFileJS.setText(data.getPathToConfigFileJS());
         formatSelectedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
         disabledFileTypes.setText(data.getDisabledFileTypes());
         importOrder.setText(data.getImportOrder());
-        useNewExperimentalImportRadioButton.setSelected(data.isNewImportOptimizer());
-        useOldImportOptimizerRadioButton.setSelected(!data.isNewImportOptimizer());
     }
 
     public void getData(Settings data) {
         data.setPathToConfigFileJava(pathToEclipsePreferenceFileJava.getText());
         data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
-        data.setJoinedGroup(optimizeImportGroups.getText());
         data.setEnableJavaFormatting(enableJavaFormatting.isSelected());
         data.setEnableJSFormatting(enableJSFormatting.isSelected());
         data.setPathToConfigFileJS(pathToEclipsePreferenceFileJS.getText());
         data.setFormatSeletedTextInAllFileTypes(formatSelectedTextInAllFileTypes.isSelected());
         data.setDisabledFileTypes(disabledFileTypes.getText());
         data.setImportOrder(importOrder.getText());
-        data.setNewImportOptimizer(useNewExperimentalImportRadioButton.isSelected());
     }
 
     public boolean isModified(Settings data) {
@@ -351,8 +424,6 @@ public class ProjectSettingsForm {
         if (pathToEclipsePreferenceFileJava.getText() != null ? !pathToEclipsePreferenceFileJava.getText().equals(data.getPathToConfigFileJava()) : data.getPathToConfigFileJava() != null)
             return true;
         if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) return true;
-        if (optimizeImportGroups.getText() != null ? !optimizeImportGroups.getText().equals(data.getJoinedGroup()) : data.getJoinedGroup() != null)
-            return true;
         if (enableJavaFormatting.isSelected() != data.isEnableJavaFormatting()) return true;
         if (enableJSFormatting.isSelected() != data.isEnableJSFormatting()) return true;
         if (pathToEclipsePreferenceFileJS.getText() != null ? !pathToEclipsePreferenceFileJS.getText().equals(data.getPathToConfigFileJS()) : data.getPathToConfigFileJS() != null)

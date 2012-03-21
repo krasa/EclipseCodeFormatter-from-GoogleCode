@@ -18,6 +18,7 @@ import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import krasa.formatter.eclipse.JSCodeFormatterFacade;
 import krasa.formatter.eclipse.JavaCodeFormatterFacade;
 import krasa.formatter.settings.DisabledFileTypeSettings;
+import krasa.formatter.settings.ProjectSettingsComponent;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
     private static final Logger LOG = Logger.getInstance(EclipseCodeStyleManager.class.getName());
-    public static final String JS = ".js";
 
     @NotNull
     private Settings settings;
