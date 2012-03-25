@@ -1,5 +1,6 @@
 package krasa.formatter.eclipse;
 
+import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Notifier;
 import krasa.formatter.settings.Settings;
 import org.eclipse.jface.text.BadLocationException;
@@ -31,12 +32,12 @@ public class JSCodeFormatterFacade extends CodeFormatterFacade {
         return codeFormatter;
     }
 
-    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter newCodeFormatter(File file) throws InvalidPathToConfigFileException {
+    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter newCodeFormatter(File file) throws InvalidPropertyFile {
         lastModified = file.lastModified();
         Properties properties = readConfig(file);
 
         if (properties.isEmpty()) {
-            throw new InvalidPathToConfigFileException("incorrect properties file");
+            throw new InvalidPropertyFile(file);
         }
 
         codeFormatter = org.eclipse.wst.jsdt.core.ToolFactory.createCodeFormatter(properties);

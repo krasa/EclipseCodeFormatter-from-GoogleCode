@@ -1,9 +1,9 @@
 package krasa.formatter.eclipse;
 
-import java.io.BufferedInputStream;
+import krasa.formatter.plugin.InvalidPropertyFile;
+import krasa.formatter.utils.FileUtils;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -19,9 +19,9 @@ public abstract class CodeFormatterFacade {
     }
 
     /**
-     * @param text          to format
-     * @param startOffset   start of formatted area - this should be always start of line
-     * @param endOffset     end of formatted area
+     * @param text        to format
+     * @param startOffset start of formatted area - this should be always start of line
+     * @param endOffset   end of formatted area
      */
     public String format(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
         return formatInternal(text, startOffset, endOffset);
@@ -33,24 +33,8 @@ public abstract class CodeFormatterFacade {
     /**
      * Return a Java Properties object representing the options that are in the specified configuration file.
      */
-    protected Properties readConfig(File file) {
-        BufferedInputStream stream = null;
-        final Properties formatterOptions;
-        try {
-            stream = new BufferedInputStream(new FileInputStream(file));
-            formatterOptions = new Properties(createDefaultConfig());
-            formatterOptions.load(stream);
-        } catch (IOException e) {
-            throw new RuntimeException("config file read error", e);
-        } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    /* ignore */
-                }
-            }
-        }
+    protected Properties readConfig(File file) throws InvalidPropertyFile {
+        final Properties formatterOptions = FileUtils.readPropertiesFile(file, createDefaultConfig());
         // Properties.load() does not trim trailing whitespace from prop values, so trim it ourselves, since it would
         // cause the Eclipse formatter to fail to parse the values.
         trimTrailingWhitespaceFromConfigValues(formatterOptions);
@@ -84,8 +68,7 @@ public abstract class CodeFormatterFacade {
     protected File checkIfExists(String pathToConfigFile1) throws InvalidPathToConfigFileException {
         File file = new File(pathToConfigFile1);
         if (!file.exists()) {
-            System.err.println(new File("").getAbsolutePath());
-            throw new InvalidPathToConfigFileException();
+            throw new InvalidPathToConfigFileException(file);
         }
         return file;
     }

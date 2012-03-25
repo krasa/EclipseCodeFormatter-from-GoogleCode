@@ -152,10 +152,10 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
 
     // 11.1
 //    @Override
-//    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
-//            throws IncorrectOperationException {
-//        for (TextRange textRange : textRanges) {
-//            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
-//        }
-//    }
+    public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
+            throws IncorrectOperationException {
+        for (TextRange textRange : textRanges) {
+            reformatText(psiFile, textRange.getStartOffset(), textRange.getEndOffset());
+        }
+    }
 }

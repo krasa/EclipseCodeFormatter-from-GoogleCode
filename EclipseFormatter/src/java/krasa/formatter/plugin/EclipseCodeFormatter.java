@@ -6,19 +6,22 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.VisualPosition;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiImportList;
 import com.intellij.psi.PsiImportStatementBase;
 import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiUtilBase;
 import krasa.formatter.eclipse.CodeFormatterFacade;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
+import krasa.formatter.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Vojtech Krasa
@@ -29,21 +32,14 @@ public class EclipseCodeFormatter {
     @NotNull
     private Settings settings;
     @NotNull
-    private Notifier notifier;
-    @NotNull
-    CodeStyleManager original;
-    @NotNull
-    Project project;
-    @NotNull
     protected final CodeFormatterFacade codeFormatterFacade;
+    protected ImportSorter importSorter;
+    protected long lastModified;
 
-    public EclipseCodeFormatter(@NotNull Settings settings, @NotNull Project project, CodeStyleManager original,
+    public EclipseCodeFormatter(@NotNull Settings settings,
                                 CodeFormatterFacade codeFormatterFacade1) {
         codeFormatterFacade = codeFormatterFacade1;
         this.settings = settings;
-        this.notifier = new Notifier(project);
-        this.project = project;
-        this.original = original;
     }
 
     public void format(PsiFile psiFile, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
@@ -53,7 +49,7 @@ public class EclipseCodeFormatter {
     }
 
     private void preProcess(PsiFile psiFile, boolean wholeFile) {
-        if (wholeFile && FileUtils.isJava(psiFile)&&settings.isOptimizeImports()) {
+        if (wholeFile && FileUtils.isJava(psiFile) && settings.isOptimizeImports()) {
             FileUtils.byIntellij(psiFile);
         }
     }
@@ -106,10 +102,24 @@ public class EclipseCodeFormatter {
             if (!wholeFile) {
                 return;
             }
-            ImportSorter importSorter = null;
             try {
-                importSorter = new ImportSorter(settings.getImportOrderAsList());
+                if (importSorter == null) {
+                    importSorter = createImportSorter();
+                } else {
+                    if (settings.isImportOrderFromFile()) {
+                        String importOrderConfigFilePath = settings.getImportOrderConfigFilePath();
+                        File file = new File(importOrderConfigFilePath);
+                        boolean wasModified = file.lastModified() > lastModified;
+                        if (wasModified) {
+                            importSorter = createImportSorter();
+                        }
+                    }
+                }
                 importSorter.sortImports(document);
+            } catch (InvalidPathToConfigFileException e) {
+                throw e;
+            } catch (InvalidPropertyFile e) {
+                throw e;
             } catch (Exception e) {
                 final PsiImportList oldImportList = ((PsiJavaFile) psiFile).getImportList();
                 StringBuilder stringBuilder = new StringBuilder();
@@ -124,6 +134,24 @@ public class EclipseCodeFormatter {
                 throw new ImportSorterException(message, e);
             }
         }
+    }
+
+    private ImportSorter createImportSorter() {
+        List<String> strings;
+        if (settings.isImportOrderFromFile()) {
+            String importOrderConfigFilePath = settings.getImportOrderConfigFilePath();
+            File file = new File(importOrderConfigFilePath);
+            lastModified = file.lastModified();
+            Properties properties = FileUtils.readPropertiesFile(file);
+            String property = properties.getProperty("org.eclipse.jdt.ui.importorder");
+            if (property == null) {
+                throw new InvalidPropertyFile("org.eclipse.jdt.ui.importorder", file);
+            }
+            strings = StringUtils.trimToList(property);
+        } else {
+            strings = settings.getImportOrderAsList();
+        }
+        return new ImportSorter(strings);
     }
 
     private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {

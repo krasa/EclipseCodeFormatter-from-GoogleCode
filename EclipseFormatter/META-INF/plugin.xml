@@ -6,8 +6,8 @@
     <id>EclipseCodeFormatter</id>
     <version>1.7.2</version>
 
-    <!--<idea-version since-build="114.65" until-build=""/>-->
-    <idea-version since-build="110.137" until-build="114.00"/>
+    <idea-version since-build="114.65" until-build=""/>
+    <!--<idea-version since-build="110.137" until-build="114.00"/>-->
     <!--<idea-version since-build="90.000" until-build="109.999"/>-->
 
     <description><![CDATA[
@@ -29,8 +29,10 @@
     </vendor>
 
     <change-notes><![CDATA[
-        <p>1.7 (2012-03-21)
-        <br>- New features: profiles, import/export of settings, imports order configuration from eclipse settings file
+        <p>1.7 (2012-03-25)
+        <br>- New features: profiles, import/export of settings, loading of imports order from eclipse settings file
+        <br>- fixed import sorting when no order is specified
+        <br>- deleted old imports formatter
         </p>
         <p>1.6 (2012-03-21)
         <br>- Fixed bug - new import sorting was sometimes wrong
@@ -105,7 +107,6 @@
 
     ]]></change-notes>
 
-    <!--<helpset file="formatter-help.jar" path="/Help.hs"/>-->
     <application-components>
         <component>
             <implementation-class>krasa.formatter.settings.GlobalSettings</implementation-class>
@@ -116,7 +117,6 @@
             <implementation-class>krasa.formatter.settings.ProjectSettingsComponent</implementation-class>
         </component>
     </project-components>
-    <!--<helpset path="/Help.hs" file="testpluginuploaf.jar"/>-->
     <actions>
         <action id="QuickChangeCodeFormatter" class="krasa.formatter.QuickChangeCodeFormatterAction"
                 text="Switch Code Formatter" description="Switch Code Formatter">

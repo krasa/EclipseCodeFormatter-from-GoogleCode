@@ -1,5 +1,6 @@
 package krasa.formatter.eclipse;
 
+import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Notifier;
 import krasa.formatter.settings.Settings;
 import org.eclipse.jdt.core.ToolFactory;
@@ -33,12 +34,12 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         return codeFormatter;
     }
 
-    private CodeFormatter newCodeFormatter(File file) throws InvalidPathToConfigFileException {
+    private CodeFormatter newCodeFormatter(File file) {
         lastModified = file.lastModified();
         Properties properties = readConfig(file);
 
         if (properties.isEmpty()) {
-            throw new InvalidPathToConfigFileException("incorrect properties file");
+            throw new InvalidPropertyFile(file);
         }
 
         codeFormatter = ToolFactory.createCodeFormatter(properties);

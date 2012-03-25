@@ -19,10 +19,13 @@ import java.util.List;
  * @since 4.12.2007
  */
 public class Settings {
-    private String name = null;
-    private Integer id = null;
-
     public static final String LINE_SEPARATOR = "\n";
+
+
+    private String name = null;
+    private Long id = null;
+
+
     private String pathToConfigFileJS = "";
     private boolean enableJavaFormatting = true;
     private boolean enableJSFormatting = false;
@@ -33,15 +36,18 @@ public class Settings {
     private String pathToConfigFileJava = "";
     private String disabledFileTypes = "";
     private boolean optimizeImports = true;
+    private boolean importOrderFromFile = false;
     private boolean formatOtherFileTypesWithIntelliJ = true;
     private boolean formatSeletedTextInAllFileTypes = true;
     private Integer notifyFromTextLenght = 300;
     private String importOrder = "java;javax;org;com;";
+    private String importOrderConfigFilePath = "";
+    private boolean defaultSettings = false;
 
     public Settings() {
     }
 
-    public Settings(int id, String name) {
+    public Settings(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -86,9 +92,26 @@ public class Settings {
         this.importOrder = importOrder;
     }
 
+    public String getImportOrderConfigFilePath() {
+        return importOrderConfigFilePath;
+    }
+
+    public void setImportOrderConfigFilePath(final String importOrderConfigFilePath) {
+        this.importOrderConfigFilePath = importOrderConfigFilePath;
+    }
+
+    public boolean isDefault() {
+        return defaultSettings;
+    }
+
     public static enum Formatter {
         DEFAULT,
         ECLIPSE
+    }
+
+    public static enum Location {
+        PROJECT,
+        APPLICATION
     }
 
     public boolean isFormatSeletedTextInAllFileTypes() {
@@ -157,11 +180,11 @@ public class Settings {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -189,5 +212,19 @@ public class Settings {
             return false;
 
         return true;
+    }
+
+    public boolean isImportOrderFromFile() {
+        return importOrderFromFile;
+    }
+
+    public void setDefaultSettings(boolean defaultSettings) {
+        this.defaultSettings = defaultSettings;
+    }
+
+    public void setImportOrderFromFile(boolean importOrderFromFile) {
+        this.importOrderFromFile = importOrderFromFile;
+
+
     }
 }

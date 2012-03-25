@@ -1,25 +1,13 @@
 package krasa.formatter.eclipse;
 
-import krasa.formatter.plugin.Notifier;
+import java.io.File;
 
 /**
  * @author Vojtech Krasa
  */
-public class InvalidPathToConfigFileException extends Exception {
+public class InvalidPathToConfigFileException extends RuntimeException {
 
-    public InvalidPathToConfigFileException() {
-        super(Notifier.FILE_DOES_NOT_EXISTS);
-    }
-
-    public InvalidPathToConfigFileException(Throwable cause) {
-        super(cause);
-    }
-
-    public InvalidPathToConfigFileException(String message) {
-        super(message);
-    }
-
-    public InvalidPathToConfigFileException(String message, Throwable cause) {
-        super(message, cause);
+    public InvalidPathToConfigFileException(File file) {
+        super("File does not exists: " + file.getAbsolutePath());
     }
 }

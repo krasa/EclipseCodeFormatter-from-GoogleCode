@@ -6,7 +6,6 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import krasa.formatter.settings.ProjectSettingsComponent;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 public class Notifier {
 
     public static final String FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE = "formatting failed, probably due to not compilable code or wrong config file";
-    public static final String FILE_DOES_NOT_EXISTS = "file does not exists";
     public static final String NO_FILE_TO_FORMAT = "No file to format";
 
     @NotNull
@@ -30,16 +28,16 @@ public class Notifier {
         String error = e.getMessage() == null ? "" : e.getMessage();
         String content;
         if (!formattedByIntelliJ) {
-            content = psiFile.getName() + " failed to format with Eclipse code formatter. " + error;
+            content = psiFile.getName() + " failed to format with Eclipse code formatter.\n" + error;
         } else {
-            content = psiFile.getName() + " failed to format with IntelliJ code formatter. " + error;
+            content = psiFile.getName() + " failed to format with IntelliJ code formatter.\n" + error;
         }
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_ERROR, "", content, NotificationType.ERROR);
         showNotification(notification);
     }
 
     void notifyFormattingWasDisabled(PsiFile psiFile) {
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", psiFile.getName()
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_INFO, "", psiFile.getName()
                 + " - formatting was disabled for this file type", NotificationType.WARNING);
         showNotification(notification);
     }
@@ -51,7 +49,7 @@ public class Notifier {
         } else {
             content = psiFile.getName() + " formatted sucessfully by Eclipse code formatter";
         }
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.INFORMATION);
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_INFO, "", content, NotificationType.INFORMATION);
         showNotification(notification);
     }
 
@@ -64,16 +62,24 @@ public class Notifier {
         });
     }
 
-    public void notify(InvalidPathToConfigFileException e) {
-        String content = "Path to Eclipse code formatter config file is invalid: " + e.getMessage();
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
-        showNotification(notification);
-    }
-
     public void notifyBrokenImportSorter() {
-        String content = "Formatting failed due to new experimental Import optimizer, please send me the error log";
-        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "", content, NotificationType.ERROR);
+        String content = "Formatting failed due to new Import optimizer.";
+        Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_ERROR, "", content, NotificationType.ERROR);
         showNotification(notification);
 
     }
+
+    public static void notifyDeletedSettings(final Project project) {
+        String content = "Eclipse formatter settings profile was deleted for project " + project.getName() +
+                ". Default settings is used now.";
+        final Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_ERROR, "", content, NotificationType.ERROR);
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Notifications.Bus.notify(notification, project);
+            }
+        });
+
+    }
+
 }

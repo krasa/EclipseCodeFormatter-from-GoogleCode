@@ -18,6 +18,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.impl.ProjectManagerImpl;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
 import krasa.formatter.plugin.ProjectCodeStyleInstaller;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 //import com.intellij.notification.impl.NotificationsConfiguration;
-//
+
 /**
  * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
  * plugin settings are changed.
@@ -41,7 +42,7 @@ import javax.swing.*;
 @State(name = "EclipseCodeFormatter", storages = {@Storage(id = "other", file = "$PROJECT_FILE$")})
 public class ProjectSettingsComponent implements ProjectComponent, Configurable, PersistentStateComponent<Settings> {
 
-    public static final String GROUP_DISPLAY_ID = "Eclipse code formatter info";
+    public static final String GROUP_DISPLAY_ID_INFO = "Eclipse code formatter info";
     public static final String GROUP_DISPLAY_ID_ERROR = "Eclipse code formatter error";
     private static final Logger LOG = Logger.getInstance(ProjectSettingsComponent.class.getName());
 
@@ -59,7 +60,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     public ProjectSettingsComponent(@NotNull Project project) {
         this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
         this.project = project;
-        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID, NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_INFO, NotificationDisplayType.BALLOON);
         NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
     }
 
@@ -70,7 +71,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     private void uninstall() {
         projectCodeStyle.changeFormatterTo(null);
     }
-    
+
     public void initComponent() {
     }
 
@@ -120,20 +121,40 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     }
 
     public boolean isModified() {
-        return form != null && form.isModified(settings);
+        return form != null && (form.isModified(settings) || !isSameId());
+    }
+
+    private boolean isSameId() {
+        return form.getDisplayedSettings() != null && form.getDisplayedSettings().getId().equals(settings.getId());
     }
 
     public void apply() throws ConfigurationException {
         if (form != null) {
-            GlobalSettings.getInstance().saveSettings(settings, project);
-            form.exportTo(settings);
+//            GlobalSettings.getInstance().updateSettings(settings, project);
+            settings = form.exportDisplayedSettings();
             install(settings);
+            applyToAllOpenedProjects(settings);
+        }
+    }
+
+    private void applyToAllOpenedProjects(Settings settings1) {
+        Project[] openProjects = ProjectManagerImpl.getInstance().getOpenProjects();
+        for (Project openProject : openProjects) {
+            ProjectSettingsComponent component = openProject.getComponent(ProjectSettingsComponent.class);
+            if (component != null) {
+                Settings state = component.getSettings();
+                if (settings1.getId().equals(state.getId())) {
+                    if (project != openProject) {
+                        component.install(settings1);
+                    }
+                }
+            }
         }
     }
 
     public void reset() {
         if (form != null) {
-            form.importFrom(GlobalSettings.getInstance().getSettings(settings, project));
+            form.importFrom(settings);
         }
     }
 
@@ -148,8 +169,12 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
         return GlobalSettings.getInstance().getSettings(settings, project);
     }
 
+    /**
+     * sets profile for this project
+     */
     public void loadState(@NotNull Settings state) {
-        settings = GlobalSettings.getInstance().getSettings(state, project);
+        settings = GlobalSettings.getInstance().loadState(state, this);
+//        GlobalSettings.getInstance().addWeakListener(this);
         install(settings);
     }
 
@@ -157,4 +182,13 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
         return project.getComponent(ProjectSettingsComponent.class);
     }
 
+    @NotNull
+    public Project getProject() {
+        return project;
+    }
+
+    @NotNull
+    public Settings getSettings() {
+        return settings;
+    }
 }

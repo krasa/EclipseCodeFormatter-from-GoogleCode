@@ -20,6 +20,13 @@ public class ImportSorter {
         this.importsOrder = new ArrayList<String>(importsOrder);
     }
 
+    public void setImportsOrder(List<String> importsOrder) {
+        this.importsOrder = importsOrder;
+    }
+
+    public ImportSorter() {
+    }
+
     public void sortImports(Document document) {
         String documentText = document.getText();
         //parse file
@@ -148,12 +155,19 @@ public class ImportSorter {
                 if (isOrderItem) {
                     indexOfOrderItem = template.indexOf(notMatchingItem);
                 } else {
-                    if (indexOfOrderItem == 0) {
+                    if (indexOfOrderItem == 0 && firstIndexOfOrderItem != 0) {
                         //insert before alphabetically first order item
-                        template.add(firstIndexOfOrderItem , notMatchingItem);
+                        template.add(firstIndexOfOrderItem, notMatchingItem);
+                    } else if (firstIndexOfOrderItem == 0) {
+                        //no order is specified
+                        if (template.size() > 0 && (template.get(template.size() - 1).startsWith("static"))) {
+                            //insert N after last static import
+                            template.add(N);
+                        }
+                        template.add(notMatchingItem);
                     } else {
                         //insert after the previous order item
-                        template.add(indexOfOrderItem+1, notMatchingItem);
+                        template.add(indexOfOrderItem + 1, notMatchingItem);
                         indexOfOrderItem++;
                     }
                 }

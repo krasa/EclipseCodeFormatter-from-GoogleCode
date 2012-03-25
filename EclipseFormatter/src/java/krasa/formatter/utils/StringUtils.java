@@ -37,7 +37,10 @@ public class StringUtils {
         ArrayList<String> strings = new ArrayList<String>();
         String[] split = importOrder1.split(";");
         for (String s : split) {
-            strings.add(s.trim());
+            String trim = s.trim();
+            if (!trim.isEmpty()) {
+                strings.add(trim);
+            }
         }
         return strings;
     }

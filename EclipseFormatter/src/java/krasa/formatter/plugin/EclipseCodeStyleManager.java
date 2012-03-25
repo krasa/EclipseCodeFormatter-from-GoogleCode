@@ -22,6 +22,7 @@ import krasa.formatter.settings.ProjectSettingsComponent;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Supported operations are handled by Eclipse formatter, other by IntelliJ formatter.
@@ -41,19 +42,17 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     private Notifier notifier;
     @NotNull
     private EclipseCodeFormatter eclipseCodeFormatterJava;
-    @NotNull
+    @Nullable
     private EclipseCodeFormatter eclipseCodeFormatterJs;
 
     public EclipseCodeStyleManager(@NotNull CodeStyleManager original, @NotNull Settings settings,
                                    @NotNull Project project) {
         super(original);
         this.settings = settings;
-
         notifier = new Notifier(project);
-        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, project, original, new JavaCodeFormatterFacade(
+        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, new JavaCodeFormatterFacade(
                 settings.getPathToConfigFileJava()));
-        eclipseCodeFormatterJs = new EclipseCodeFormatter(settings, project, original, new JSCodeFormatterFacade(
-                settings.getPathToConfigFileJS()));
+        ;
     }
 
     public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)
@@ -65,7 +64,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
             CheckUtil.checkWritable(psiFile);
 
             if (psiFile.getVirtualFile() == null) {
-                Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID, "",
+                Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_INFO, "",
                         Notifier.NO_FILE_TO_FORMAT, NotificationType.ERROR);
                 notifier.showNotification(notification);
                 return;
@@ -93,7 +92,11 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         } catch (final InvalidPathToConfigFileException e) {
             e.printStackTrace();
             LOG.debug(e);
-            notifier.notify(e);
+            notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
+        } catch (final InvalidPropertyFile e) {
+            e.printStackTrace();
+            LOG.debug(e);
+            notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
         } catch (final ImportSorterException e) {
             LOG.error(e);
             notifier.notifyBrokenImportSorter();
@@ -108,6 +111,10 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
             throws InvalidPathToConfigFileException {
         if (FileUtils.isJavaScript(psiFile)) {
+            if (eclipseCodeFormatterJs == null) {
+                eclipseCodeFormatterJs = new EclipseCodeFormatter(settings, new JSCodeFormatterFacade(
+                        settings.getPathToConfigFileJS()));
+            }
             eclipseCodeFormatterJs.format(psiFile, startOffset, endOffset);
         } else {
             eclipseCodeFormatterJava.format(psiFile, startOffset, endOffset);

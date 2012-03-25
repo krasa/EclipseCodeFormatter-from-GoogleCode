@@ -11,7 +11,14 @@ import com.intellij.psi.PsiImportList;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
+import krasa.formatter.eclipse.InvalidPathToConfigFileException;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * @author Vojtech Krasa
@@ -68,5 +75,34 @@ public class FileUtils {
         } catch (IncorrectOperationException e) {
             LOG.error(e);
         }
+    }
+
+    public static Properties readPropertiesFile(File file, Properties defaultConfig) {
+        if (!file.exists()) {
+            throw new InvalidPathToConfigFileException(file);
+
+        }
+        BufferedInputStream stream = null;
+        final Properties formatterOptions;
+        try {
+            stream = new BufferedInputStream(new FileInputStream(file));
+            formatterOptions = new Properties(defaultConfig);
+            formatterOptions.load(stream);
+        } catch (IOException e) {
+            throw new RuntimeException("config file read error", e);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    /* ignore */
+                }
+            }
+        }
+        return formatterOptions;
+    }
+
+    public static Properties readPropertiesFile(File file) {
+        return readPropertiesFile(file, null);
     }
 }

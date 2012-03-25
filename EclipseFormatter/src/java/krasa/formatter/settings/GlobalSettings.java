@@ -3,12 +3,14 @@ package krasa.formatter.settings;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.impl.ProjectManagerImpl;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import krasa.formatter.plugin.Notifier;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,9 +23,9 @@ import java.util.List;
                         file = "$APP_CONFIG$/eclipseCodeFormatter.xml"
                 )}
 )
-public class GlobalSettings implements ApplicationComponent, PersistentStateComponent<GlobalSettings>,ExportableApplicationComponent {
+public class GlobalSettings implements ApplicationComponent, PersistentStateComponent<GlobalSettings>, ExportableApplicationComponent {
     private List<Settings> settingsList = new ArrayList<Settings>();
-    private Integer lastId = 0;
+    private List<Long> deletedSettingsId = new ArrayList<Long>();
 
     public static GlobalSettings getInstance() {
         return ServiceManager.getService(GlobalSettings.class);
@@ -56,12 +58,13 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
         XmlSerializerUtil.copyBean(settings, newSettings);
         newSettings.setName(settings.getName() + " copy");
         newSettings.setId(generateId());
+        newSettings.setDefaultSettings(false);
         settingsList.add(newSettings);
-        return settings;
+        return newSettings;
     }
 
 
-    public void saveSettings(Settings settings, Project project) {
+    public void updateSettings(Settings settings, Project project) {
         if (settings.getId() == null) {
             addToGlobalSettings(settings, project);
         } else {
@@ -74,19 +77,15 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     }
 
     private void addToGlobalSettings(Settings newSettings, Project project) {
-        newSettings.setId(lastId + generateId());
+        newSettings.setId(generateId());
         if (newSettings.getName() == null) {
-            if (newSettings.equalsContent(new Settings())) {
-                newSettings.setName("default");
-            } else {
-                newSettings.setName(project.getName());
-            }
+            newSettings.setName(project.getName());
         }
         settingsList.add(newSettings);
     }
 
-    private int generateId() {
-        Integer newId = ++lastId;
+    private Long generateId() {
+        long newId = new Date().getTime();
         for (Settings settings : settingsList) {
             if (settings.getId().equals(newId)) {
                 newId = generateId();
@@ -98,32 +97,49 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     @NotNull
     public Settings getSettings(@NotNull Settings state, @NotNull Project project) {
         if (state.getId() == null) {
-            Settings duplicateSettings = getDuplicateSettings(state);
-            if (duplicateSettings != null) {
-                return duplicateSettings;
+//            Settings duplicateSettings = getDuplicateSettings(state);
+            if (isSameAsDefault(state)) {
+                return getDefaultSettings();
             }
             addToGlobalSettings(state, project);
             return state;
         } else {
             for (Settings settings : settingsList) {
-                if (settings.getId().equals(state.getId())) {
+                if (settings.getId().equals(state.getId()) || settings.getName().equals(state.getName())) {
                     return settings;
                 }
+            }
+            if (deletedSettingsId.contains(state.getId())) {
+                Settings defaultSettings = getDefaultSettings();
+                Notifier.notifyDeletedSettings(project);
+                return defaultSettings;
             }
             addToGlobalSettings(state, project);
             return state;
         }
     }
 
-    @Nullable
-    private Settings getDuplicateSettings(Settings state) {
+    private boolean isSameAsDefault(Settings state) {
+        return getDefaultSettings().equalsContent(state);
+    }
+
+    public Settings getDefaultSettings() {
         for (Settings settings : settingsList) {
-            if (settings.equalsContent(state)) {
+            if (settings.isDefault()) {
                 return settings;
             }
         }
-        return null;
+        Settings aDefault = createDefaultSettings();
+        settingsList.add(aDefault);
+        return aDefault;
     }
+
+    private Settings createDefaultSettings() {
+        Settings aDefault = new Settings(generateId(), "default");
+        aDefault.setDefaultSettings(true);
+        return aDefault;
+    }
+
 
     @Override
     public void initComponent() {
@@ -150,4 +166,35 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     public String getPresentableName() {
         return "Eclipse Code Formatter";
     }
+
+    public void delete(Settings settings, Project project) {
+        settingsList.remove(settings);
+        deletedSettingsId.add(settings.getId());
+        getDefaultSettings(); //to create default setting when it was deleted
+        notifyProjectsWhichUsesThisSettings(settings, project);
+
+    }
+
+    private void notifyProjectsWhichUsesThisSettings(Settings deletedSettings, Project project) {
+        Project[] openProjects = ProjectManagerImpl.getInstance().getOpenProjects();
+        for (Project openProject : openProjects) {
+            ProjectSettingsComponent component = openProject.getComponent(ProjectSettingsComponent.class);
+            if (component != null) {
+                Settings state = component.getSettings();
+                if (deletedSettings.getId().equals(state.getId())) {
+                    component.loadState(getDefaultSettings());
+                    if (project != openProject) {
+                        Notifier.notifyDeletedSettings(component.getProject());
+                    }
+                }
+            }
+        }
+    }
+
+
+    public Settings loadState(Settings state, ProjectSettingsComponent projectSettingsComponent) {
+        return getSettings(state, projectSettingsComponent.getProject());
+    }
+
+
 }
