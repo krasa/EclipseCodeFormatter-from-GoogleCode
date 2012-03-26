@@ -9,12 +9,9 @@
 
 
 == Optimizing imports ==
- * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 999 or more (Settings - Code Style - Imports)
+ * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 99 or more (Settings - Code Style - Imports)
  * IntelliJ's Import Optimizing must be turned off (Settings-Editor-Show "Reformat Code" dialog...)
   
-
-http://eclipse-code-formatter-intellij-plugin.googlecode.com/svn/importsSettings.png
-
 
 == Getting the Eclipse code formatter preferences file ==
 
