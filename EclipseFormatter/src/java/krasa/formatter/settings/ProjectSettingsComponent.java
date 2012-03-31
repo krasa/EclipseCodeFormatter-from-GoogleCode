@@ -9,7 +9,7 @@
 package krasa.formatter.settings;
 
 import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.NotificationsConfiguration;
+import com.intellij.notification.impl.NotificationsConfiguration;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
@@ -23,6 +23,7 @@ import krasa.formatter.Messages;
 import krasa.formatter.Resources;
 import krasa.formatter.plugin.ProjectCodeStyleInstaller;
 import krasa.formatter.plugin.ProjectSettingsForm;
+import org.apache.commons.lang.ObjectUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-//import com.intellij.notification.impl.NotificationsConfiguration;
+//import com.intellij.notification.NotificationsConfiguration;
 
 /**
  * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
@@ -121,16 +122,15 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     }
 
     public boolean isModified() {
-        return form != null && (form.isModified(settings) || !isSameId());
+        return form != null && (form.isModified(settings) || (form.getDisplayedSettings() != null && !isSameId()));
     }
 
     private boolean isSameId() {
-        return form.getDisplayedSettings() != null && form.getDisplayedSettings().getId().equals(settings.getId());
+        return ObjectUtils.equals(form.getDisplayedSettings().getId(), settings.getId());
     }
 
     public void apply() throws ConfigurationException {
         if (form != null) {
-//            GlobalSettings.getInstance().updateSettings(settings, project);
             settings = form.exportDisplayedSettings();
             install(settings);
             applyToAllOpenedProjects(settings);
@@ -174,7 +174,6 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
      */
     public void loadState(@NotNull Settings state) {
         settings = GlobalSettings.getInstance().loadState(state, this);
-//        GlobalSettings.getInstance().addWeakListener(this);
         install(settings);
     }
 

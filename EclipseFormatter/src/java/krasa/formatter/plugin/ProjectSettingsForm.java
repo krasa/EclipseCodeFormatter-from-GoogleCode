@@ -8,6 +8,7 @@
 
 package krasa.formatter.plugin;
 
+import com.centerkey.utils.BareBonesBrowserLaunch;
 import com.intellij.ide.ui.ListCellRendererWrapper;
 import com.intellij.openapi.application.ex.ApplicationEx;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
@@ -30,6 +31,7 @@ import krasa.formatter.settings.Settings;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
@@ -105,6 +107,7 @@ public class ProjectSettingsForm {
      * do not delete
      */
     private JTextArea help;
+    private JButton DONATEButton;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @NotNull
@@ -144,6 +147,7 @@ public class ProjectSettingsForm {
 
 
     public ProjectSettingsForm(Project project) {
+        DONATEButton.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.project = project;
         JToggleButton[] modifiableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter,
                 optimizeImportsCheckBox, enableJavaFormatting, doNotFormatOtherFilesRadioButton,
@@ -335,6 +339,12 @@ public class ProjectSettingsForm {
                     profiles.setSelectedItem(defaultSettings);
                 }
 
+            }
+        });
+        DONATEButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BareBonesBrowserLaunch.openURL("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=75YN7U7H7D7XU&lc=CZ&item_name=Eclipse%20code%20formatter%20%2d%20IntelliJ%20plugin%20%2d%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest");
             }
         });
     }

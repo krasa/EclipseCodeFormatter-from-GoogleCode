@@ -50,7 +50,7 @@ public class EclipseCodeFormatter {
 
     private void preProcess(PsiFile psiFile, boolean wholeFile) {
         if (wholeFile && FileUtils.isJava(psiFile) && settings.isOptimizeImports()) {
-            FileUtils.byIntellij(psiFile);
+            FileUtils.optimizeImportsByIntellij(psiFile);
         }
     }
 

@@ -54,7 +54,7 @@ public class FileUtils {
         return false;
     }
 
-    public static void byIntellij(PsiFile psiFile) {
+    public static void optimizeImportsByIntellij(PsiFile psiFile) {
 
         Project project = psiFile.getProject();
         final PsiImportList newImportList = JavaCodeStyleManager.getInstance(project).prepareOptimizeImportsResult(

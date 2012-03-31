@@ -61,7 +61,7 @@ public class ImportSorter {
 
     private void applyImportsToDocument(Document document, int firstImportLine, int lastImportLine, List<String> strings) {
         Scanner scanner;
-        boolean alreadySorted = false;
+        boolean importsAlreadyAppended = false;
         scanner = new Scanner(document.getText());
         int line2 = 0;
         StringBuilder sb = new StringBuilder();
@@ -72,12 +72,12 @@ public class ImportSorter {
                 break;
             }
             if (line2 >= firstImportLine && line2 <= lastImportLine) {
-                if (!alreadySorted) {
+                if (!importsAlreadyAppended) {
                     for (String string : strings) {
                         sb.append(string);
                     }
                 }
-                alreadySorted = true;
+                importsAlreadyAppended = true;
             } else {
                 append(sb, next);
             }

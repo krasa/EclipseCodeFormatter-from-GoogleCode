@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="krasa.formatter.plugin.ProjectSettingsForm">
-  <grid id="27dc6" binding="rootComponent" layout-manager="GridLayoutManager" row-count="19" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="rootComponent" layout-manager="GridLayoutManager" row-count="19" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="969" height="641"/>
     </constraints>
     <properties>
+      <enabled value="true"/>
       <maximumSize width="778000" height="551000"/>
       <minimumSize width="700" height="551"/>
       <preferredSize width="700" height="551"/>
@@ -25,9 +26,7 @@
       </component>
       <component id="d8281" class="javax.swing.JButton" binding="eclipsePreferenceFilePathJavaBrowse">
         <constraints>
-          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="93" height="27"/>
-          </grid>
+          <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="krasa/formatter/messages" key="action.browse"/>
@@ -35,7 +34,7 @@
       </component>
       <component id="a1e8b" class="javax.swing.JRadioButton" binding="useDefaultFormatter">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="8" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="12"/>
@@ -44,7 +43,7 @@
       </component>
       <component id="a7c42" class="javax.swing.JRadioButton" binding="useEclipseFormatter">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="8" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="12" style="1"/>
@@ -60,7 +59,7 @@
       </hspacer>
       <component id="b4ea9" class="javax.swing.JCheckBox" binding="optimizeImportsCheckBox" default-binding="true">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="7" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="-1"/>
           </grid>
         </constraints>
@@ -90,7 +89,7 @@
       </component>
       <component id="fcbd9" class="javax.swing.JCheckBox" binding="formatSelectedTextInAllFileTypes">
         <constraints>
-          <grid row="17" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="17" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="krasa/formatter/messages" key="settings.formatAllFilesPartial"/>
@@ -98,7 +97,7 @@
       </component>
       <component id="23982" class="javax.swing.JRadioButton" binding="doNotFormatOtherFilesRadioButton">
         <constraints>
-          <grid row="14" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="krasa/formatter/messages" key="settings.formatOtherFileTypesByIntellij"/>
@@ -114,7 +113,7 @@
       </component>
       <component id="aaee7" class="javax.swing.JLabel" binding="disabledFileTypesHelpLabel">
         <constraints>
-          <grid row="16" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="16" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="20"/>
           </grid>
         </constraints>
@@ -126,9 +125,7 @@
       </component>
       <component id="c501b" class="javax.swing.JButton" binding="eclipsePreferenceFilePathJSBrowse">
         <constraints>
-          <grid row="12" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="93" height="27"/>
-          </grid>
+          <grid row="12" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="krasa/formatter/messages" key="action.browse"/>
@@ -146,8 +143,8 @@
       </component>
       <component id="4ff2e" class="javax.swing.JTextField" binding="pathToEclipsePreferenceFileJava">
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="1" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="20"/>
+          <grid row="5" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="20"/>
           </grid>
         </constraints>
         <properties>
@@ -156,8 +153,8 @@
       </component>
       <component id="b70f0" class="javax.swing.JTextField" binding="pathToEclipsePreferenceFileJS">
         <constraints>
-          <grid row="12" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="20"/>
+          <grid row="12" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="20"/>
           </grid>
         </constraints>
         <properties>
@@ -166,7 +163,7 @@
       </component>
       <component id="b2c53" class="javax.swing.JLabel" binding="eclipsePrefsExampleJS">
         <constraints>
-          <grid row="13" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="13" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="20"/>
           </grid>
         </constraints>
@@ -178,15 +175,15 @@
       </component>
       <component id="36b8b" class="javax.swing.JTextField" binding="disabledFileTypes">
         <constraints>
-          <grid row="15" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="20"/>
+          <grid row="15" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="20"/>
           </grid>
         </constraints>
         <properties/>
       </component>
       <component id="e0ba8" class="javax.swing.JCheckBox" binding="enableJSFormatting">
         <constraints>
-          <grid row="4" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="4" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="23"/>
           </grid>
         </constraints>
@@ -196,7 +193,7 @@
       </component>
       <component id="5b5d4" class="javax.swing.JCheckBox" binding="enableJavaFormatting">
         <constraints>
-          <grid row="3" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="23"/>
           </grid>
         </constraints>
@@ -206,7 +203,7 @@
       </component>
       <component id="4416d" class="javax.swing.JLabel" binding="eclipsePrefsExample">
         <constraints>
-          <grid row="6" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="6" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="20"/>
           </grid>
         </constraints>
@@ -246,8 +243,8 @@
       </component>
       <component id="f8e02" class="javax.swing.JFormattedTextField" binding="importOrder">
         <constraints>
-          <grid row="8" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="20"/>
+          <grid row="8" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="20"/>
           </grid>
         </constraints>
         <properties>
@@ -256,7 +253,7 @@
       </component>
       <component id="be43c" class="javax.swing.JLabel" binding="importOrderPreferenceFileExample">
         <constraints>
-          <grid row="11" column="3" row-span="1" col-span="6" vsize-policy="1" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="11" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="20"/>
           </grid>
         </constraints>
@@ -268,8 +265,8 @@
       </component>
       <component id="2c7b4" class="javax.swing.JTextField" binding="pathToImportOrderPreferenceFile">
         <constraints>
-          <grid row="10" column="3" row-span="1" col-span="5" vsize-policy="1" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="20"/>
+          <grid row="10" column="3" row-span="1" col-span="4" vsize-policy="1" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="20"/>
           </grid>
         </constraints>
         <properties>
@@ -278,7 +275,7 @@
       </component>
       <component id="b82e7" class="javax.swing.JLabel" binding="importOrderManualExample">
         <constraints>
-          <grid row="9" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="9" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="350" height="20"/>
           </grid>
         </constraints>
@@ -298,7 +295,7 @@
       </component>
       <component id="bdccd" class="javax.swing.JButton" binding="newProfile">
         <constraints>
-          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="New profile"/>
@@ -306,7 +303,7 @@
       </component>
       <component id="9fe18" class="javax.swing.JButton" binding="rename">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <hideActionText value="false"/>
@@ -315,7 +312,7 @@
       </component>
       <component id="535c9" class="javax.swing.JButton" binding="delete">
         <constraints>
-          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <hideActionText value="false"/>
@@ -324,7 +321,7 @@
       </component>
       <component id="e7a7e" class="javax.swing.JButton" binding="copyProfile">
         <constraints>
-          <grid row="0" column="7" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Copy profile"/>
@@ -332,9 +329,7 @@
       </component>
       <component id="fd68d" class="javax.swing.JButton" binding="pathToImportOrderPreferenceFileBrowse">
         <constraints>
-          <grid row="10" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="93" height="20"/>
-          </grid>
+          <grid row="10" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="krasa/formatter/messages" key="action.browse"/>
@@ -342,7 +337,7 @@
       </component>
       <component id="6d039" class="javax.swing.JTextArea" binding="help">
         <constraints>
-          <grid row="18" column="0" row-span="1" col-span="9" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="18" column="0" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="20"/>
           </grid>
         </constraints>
@@ -350,6 +345,20 @@
           <editable value="false"/>
           <font size="12"/>
           <text resource-bundle="krasa/formatter/messages" key="settings.help"/>
+        </properties>
+      </component>
+      <component id="781ad" class="javax.swing.JButton" binding="DONATEButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2697514"/>
+          <font/>
+          <hideActionText value="false"/>
+          <horizontalTextPosition value="0"/>
+          <icon value="krasa/formatter/btn_donate_LG.gif"/>
+          <text value=""/>
+          <toolTipText value="via PayPal"/>
         </properties>
       </component>
     </children>
