@@ -4,10 +4,10 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>1.7.2</version>
+    <version>1.8.3</version>
 
-    <idea-version since-build="114.65" until-build=""/>
-    <!--<idea-version since-build="110.137" until-build="114.00"/>-->
+    <!--<idea-version since-build="114.65" until-build=""/>-->
+    <idea-version since-build="110.137" until-build=""/>
     <!--<idea-version since-build="90.000" until-build="109.999"/>-->
 
     <description><![CDATA[
@@ -29,6 +29,12 @@
     </vendor>
 
     <change-notes><![CDATA[
+        <p>1.8 (2012-04-04)
+        <br>- fixed bug: error when calling a live template from a file which has syntax errors
+        <br>- fixed bug: duplication of profiles
+        <br>- fixed bug: quick swich of code formatter now applies to all opened projects which uses same settings
+        <br>- new donation button :-)
+        </p>
         <p>1.7 (2012-03-25)
         <br>- New features: profiles, import/export of settings, loading of imports order from eclipse settings file
         <br>- fixed import sorting when no order is specified
@@ -98,6 +104,7 @@
         <br>versions x.x.0 is for IntelliJ 10.5
         <br>versions x.x.1 is for IntelliJ 11.0
         <br>versions x.x.2 is for IntelliJ 11.1
+        <br>versions x.x.3 is for IntelliJ 11.0 and 11.1
 
         <br>
         <br>Known issues:

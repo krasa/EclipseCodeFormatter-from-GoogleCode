@@ -100,7 +100,7 @@ public class Settings {
         this.importOrderConfigFilePath = importOrderConfigFilePath;
     }
 
-    public boolean isDefault() {
+    public boolean isDefaultSettings() {
         return defaultSettings;
     }
 
@@ -198,18 +198,20 @@ public class Settings {
         if (enableJavaFormatting != settings.enableJavaFormatting) return false;
         if (formatOtherFileTypesWithIntelliJ != settings.formatOtherFileTypesWithIntelliJ) return false;
         if (formatSeletedTextInAllFileTypes != settings.formatSeletedTextInAllFileTypes) return false;
+        if (importOrderFromFile != settings.importOrderFromFile) return false;
         if (optimizeImports != settings.optimizeImports) return false;
         if (disabledFileTypes != null ? !disabledFileTypes.equals(settings.disabledFileTypes) : settings.disabledFileTypes != null)
             return false;
         if (formatter != settings.formatter) return false;
         if (importOrder != null ? !importOrder.equals(settings.importOrder) : settings.importOrder != null)
             return false;
+        if (importOrderConfigFilePath != null ? !importOrderConfigFilePath.equals(settings.importOrderConfigFilePath) : settings.importOrderConfigFilePath != null)
+            return false;
         if (notifyFromTextLenght != null ? !notifyFromTextLenght.equals(settings.notifyFromTextLenght) : settings.notifyFromTextLenght != null)
             return false;
         if (pathToConfigFileJS != null ? !pathToConfigFileJS.equals(settings.pathToConfigFileJS) : settings.pathToConfigFileJS != null)
             return false;
-        if (pathToConfigFileJava != null ? !pathToConfigFileJava.equals(settings.pathToConfigFileJava) : settings.pathToConfigFileJava != null)
-            return false;
+        if (!pathToConfigFileJava.equals(settings.pathToConfigFileJava)) return false;
 
         return true;
     }

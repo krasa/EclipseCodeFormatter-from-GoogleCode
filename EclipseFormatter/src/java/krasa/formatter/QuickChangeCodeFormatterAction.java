@@ -8,6 +8,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import krasa.formatter.settings.ProjectSettingsComponent;
 import krasa.formatter.settings.Settings;
+import krasa.formatter.utils.ProjectUtils;
 
 /**
  * @author Vojtech Krasa
@@ -25,11 +26,11 @@ public class QuickChangeCodeFormatterAction extends QuickSwitchSchemeAction {
         }
     }
 
-    private void changeFormatter(Project project, Settings.Formatter lf) {
+    private void changeFormatter(Project project, Settings.Formatter formatter) {
         ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance(project);
         final Settings state = instance.getState();
-        state.setFormatter(lf);
-        instance.loadState(state);
+        state.setFormatter(formatter);
+        ProjectUtils.applyToAllOpenedProjects(state);
     }
 
     protected boolean isEnabled() {

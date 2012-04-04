@@ -7,10 +7,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.VisualPosition;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiImportList;
-import com.intellij.psi.PsiImportStatementBase;
-import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilBase;
 import krasa.formatter.eclipse.CodeFormatterFacade;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
@@ -36,8 +33,7 @@ public class EclipseCodeFormatter {
     protected ImportSorter importSorter;
     protected long lastModified;
 
-    public EclipseCodeFormatter(@NotNull Settings settings,
-                                CodeFormatterFacade codeFormatterFacade1) {
+    public EclipseCodeFormatter(@NotNull Settings settings, CodeFormatterFacade codeFormatterFacade1) {
         codeFormatterFacade = codeFormatterFacade1;
         this.settings = settings;
     }
@@ -87,6 +83,9 @@ public class EclipseCodeFormatter {
         int visualColumnToRestore = getVisualColumnToRestore(editor);
 
         Document document = editor.getDocument();
+        // http://code.google.com/p/eclipse-code-formatter-intellij-plugin/issues/detail?id=7
+        PsiDocumentManager.getInstance(editor.getProject()).doPostponedOperationsAndUnblockDocument(document);
+
         String text = document.getText();
         document.setText(reformat(startOffset, endOffset, text));
         postProcess(document, wholeFile, file);
@@ -155,8 +154,7 @@ public class EclipseCodeFormatter {
     }
 
     private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {
-        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset
-        );
+        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset);
     }
 
     /**

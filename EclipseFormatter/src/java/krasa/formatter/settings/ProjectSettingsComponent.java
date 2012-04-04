@@ -9,7 +9,7 @@
 package krasa.formatter.settings;
 
 import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.impl.NotificationsConfiguration;
+import com.intellij.notification.NotificationsConfiguration;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
@@ -18,11 +18,11 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.impl.ProjectManagerImpl;
 import krasa.formatter.Messages;
 import krasa.formatter.Resources;
 import krasa.formatter.plugin.ProjectCodeStyleInstaller;
 import krasa.formatter.plugin.ProjectSettingsForm;
+import krasa.formatter.utils.ProjectUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-//import com.intellij.notification.NotificationsConfiguration;
+//import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
  * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
@@ -65,7 +65,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
         NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
     }
 
-    private void install(@NotNull Settings settings) {
+    public void install(@NotNull Settings settings) {
         projectCodeStyle.changeFormatterTo(settings);
     }
 
@@ -132,25 +132,10 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     public void apply() throws ConfigurationException {
         if (form != null) {
             settings = form.exportDisplayedSettings();
-            install(settings);
-            applyToAllOpenedProjects(settings);
+            ProjectUtils.applyToAllOpenedProjects(settings);
         }
     }
 
-    private void applyToAllOpenedProjects(Settings settings1) {
-        Project[] openProjects = ProjectManagerImpl.getInstance().getOpenProjects();
-        for (Project openProject : openProjects) {
-            ProjectSettingsComponent component = openProject.getComponent(ProjectSettingsComponent.class);
-            if (component != null) {
-                Settings state = component.getSettings();
-                if (settings1.getId().equals(state.getId())) {
-                    if (project != openProject) {
-                        component.install(settings1);
-                    }
-                }
-            }
-        }
-    }
 
     public void reset() {
         if (form != null) {

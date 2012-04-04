@@ -121,11 +121,11 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 10.5
-//    @Override
-//    public String getLineIndent(@NotNull Editor editor) {
-//    return original.getLineIndent(editor);
-//
-//    }
+    // @Override
+    // public String getLineIndent(@NotNull Editor editor) {
+    // return original.getLineIndent(editor);
+    //
+    // }
 
     // 11.0
     @Override
@@ -151,7 +151,7 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 11.1
-//    @Override
+    // @Override
     public void reformatText(@NotNull PsiFile psiFile, @NotNull Collection<TextRange> textRanges)
             throws IncorrectOperationException {
         for (TextRange textRange : textRanges) {

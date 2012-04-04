@@ -1,5 +1,8 @@
 package krasa.formatter.utils;
 
+import com.intellij.openapi.project.Project;
+import krasa.formatter.settings.Settings;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,5 +59,15 @@ public class StringUtils {
             }
         }
         return strings;
+    }
+
+    public static String generateName(List<Settings> settingsList, Project project, int i, String name) {
+        for (Settings settings : settingsList) {
+            if (name.equals(settings.getName())) {
+                name = project.getName() + " (" + i + ")";
+                name = generateName(settingsList, project, ++i, name);
+            }
+        }
+        return name;
     }
 }
