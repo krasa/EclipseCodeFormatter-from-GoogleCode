@@ -46,15 +46,15 @@ public class StringUtilsTest {
     public void testGenerateName() throws Exception {
         ArrayList<Settings> settingsList = new ArrayList<Settings>();
         Project instance = new MyDummyProject();
-        String s = StringUtils.generateName(settingsList, instance, 1, instance.getName());
+        String s = StringUtils.generateName(settingsList, 1, instance.getName());
         Assert.assertEquals("dummy", s);
         settingsList.add(new Settings(1L, "dummy"));
 
-        s = StringUtils.generateName(settingsList, instance, 1, instance.getName());
+        s = StringUtils.generateName(settingsList, 1, instance.getName());
         Assert.assertEquals("dummy (1)", s);
         settingsList.add(new Settings(1L, "dummy (1)"));
 
-        s = StringUtils.generateName(settingsList, instance, 1, instance.getName());
+        s = StringUtils.generateName(settingsList, 1, instance.getName());
         Assert.assertEquals("dummy (2)", s);
     }
 

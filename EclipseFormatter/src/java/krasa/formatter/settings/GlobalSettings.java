@@ -49,7 +49,8 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     }
 
     public Settings newSettings() {
-        Settings aNew = new Settings(generateId(), "new");
+        String name = StringUtils.generateName(settingsList, 1, "new");
+        Settings aNew = new Settings(generateId(), name);
         settingsList.add(aNew);
         return aNew;
     }
@@ -80,7 +81,7 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     private void addToGlobalSettings(Settings newSettings, Project project) {
         newSettings.setId(generateId());
         if (newSettings.getName() == null) {
-            String name = StringUtils.generateName(settingsList, project, 1, project.getName());
+            String name = StringUtils.generateName(settingsList, 1, project.getName(), project.getName());
             newSettings.setName(name);
         }
         settingsList.add(newSettings);
@@ -137,7 +138,8 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     }
 
     private Settings createDefaultSettings() {
-        Settings aDefault = new Settings(generateId(), "default");
+        String name = StringUtils.generateName(settingsList, 1, "default");
+        Settings aDefault = new Settings(generateId(), name);
         aDefault.setDefaultSettings(true);
         return aDefault;
     }

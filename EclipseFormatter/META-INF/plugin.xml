@@ -32,7 +32,7 @@
         <p>1.8 (2012-04-04)
         <br>- fixed bug: error when calling a live template from a file which has syntax errors
         <br>- fixed bug: duplication of profiles
-        <br>- fixed bug: quick swich of code formatter now applies to all opened projects which uses same settings
+        <br>- fixed bug: quick swich of code formatter now applies to all opened projects which uses same profile
         <br>- new donation button :-)
         </p>
         <p>1.7 (2012-03-25)
