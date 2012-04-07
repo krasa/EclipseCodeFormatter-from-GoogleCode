@@ -3,6 +3,7 @@ package krasa.formatter.eclipse;
 import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Notifier;
 import krasa.formatter.settings.Settings;
+import krasa.formatter.utils.FileUtils;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
@@ -18,11 +19,13 @@ import java.util.Properties;
  */
 public class JavaCodeFormatterFacade extends CodeFormatterFacade {
     protected final String pathToConfigFile;
+    protected final String profile;
     protected CodeFormatter codeFormatter;
     private long lastModified;
 
-    public JavaCodeFormatterFacade(String pathToConfigFile) {
-        this.pathToConfigFile = pathToConfigFile;
+    public JavaCodeFormatterFacade(Settings settings) {
+        this.pathToConfigFile = settings.getPathToConfigFileJava();
+        this.profile = settings.getSelectedJavaProfile();
     }
 
     private CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
@@ -48,6 +51,18 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
 
     private boolean configFileWasChanged(File file) {
         return file.lastModified() > lastModified;
+    }
+
+    @Override
+    protected Properties readConfig(File file) throws InvalidPropertyFile {
+        if (file.getName().endsWith("xml")) {
+            final Properties formatterOptions = FileUtils.readXmlJavaSettingsFile(file, createDefaultConfig(), profile);
+            validateConfig(formatterOptions);
+            return formatterOptions;
+        } else {
+            //properties file
+            return super.readConfig(file);
+        }
     }
 
     protected String formatInternal(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {

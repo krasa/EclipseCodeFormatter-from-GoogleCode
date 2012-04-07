@@ -4,12 +4,10 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>1.8.3</version>
+    <version>1.9.3</version>
 
-    <!--<idea-version since-build="114.65" until-build=""/>-->
     <idea-version since-build="110.137" until-build=""/>
     <!--<idea-version since-build="90.000" until-build="109.999"/>-->
-
     <description><![CDATA[
         Allows using Eclipse's code formatter directly from IntelliJ.<br>
         Solves the problem of maintaining a common code style in team environments where both IDEA and Eclipse are used. <br> 
@@ -29,6 +27,9 @@
     </vendor>
 
     <change-notes><![CDATA[
+        <p>1.9 (2012-04-08)
+        <br>- new feature: support for xml preference file for java formatter
+        </p>
         <p>1.8 (2012-04-04)
         <br>- fixed bug: error when calling a live template from a file which has syntax errors
         <br>- fixed bug: duplication of profiles
@@ -36,22 +37,22 @@
         <br>- new donation button :-)
         </p>
         <p>1.7 (2012-03-25)
-        <br>- New features: profiles, import/export of settings, loading of imports order from eclipse settings file
+        <br>- new features: profiles, import/export of settings, loading of imports order from eclipse settings file
         <br>- fixed import sorting when no order is specified
         <br>- deleted old imports formatter
         </p>
         <p>1.6 (2012-03-21)
-        <br>- Fixed bug - new import sorting was sometimes wrong
+        <br>- fixed bug - new import sorting was sometimes wrong
         </p>
         <p>1.5.x.1 (2012-03-16)
-        <br>- Fixed default import order - if you already installed 1.5, you need to change it manually
+        <br>- fixed default import order - if you already installed 1.5, you need to change it manually
         </p>
         <p>1.5 (2012-03-15)
-        <br>- Added new experimental Import optimizer, which should work exactly like the Eclipse's one (it may be buggy).
+        <br>- added new experimental Import optimizer, which should work exactly like the Eclipse's one.
         <br>- fixed bug - formatting one file multiple times toggles imports formatting
         </p>
         <p>1.4 (2012-03-10)
-        <br>- Added default language level for java formatter(1.5) and more robust handling of config file.
+        <br>- added default language level for java formatter(1.5) and more robust handling of config file.
         </p>
         <p>1.3 (2012-02-21)
         <br>- new JavaScript formatting support!

@@ -123,7 +123,7 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     }
 
     private boolean isSameAsDefault(Settings state) {
-        return getDefaultSettings().equalsContent(state);
+        return new Settings().equalsContent(state) || getDefaultSettings().equalsContent(state);
     }
 
     public Settings getDefaultSettings() {

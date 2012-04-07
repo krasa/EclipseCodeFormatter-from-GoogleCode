@@ -12,8 +12,14 @@ import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
 import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.plugin.InvalidPropertyFile;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -104,5 +110,61 @@ public class FileUtils {
 
     public static Properties readPropertiesFile(File file) {
         return readPropertiesFile(file, null);
+    }
+
+    public static Properties readXmlJavaSettingsFile(File file, Properties properties, String profile) {
+        int defaultSize = properties.size();
+        if (!file.exists()) {
+            throw new IllegalStateException("file does not exists " + file.getAbsolutePath());
+        }
+        if (profile == null) {
+            throw new IllegalStateException("loading of profile settings failed, selected profile is null");
+        }
+        boolean profileFound = false;
+        try { // load file profiles
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList profiles = doc.getElementsByTagName("profile");
+            if (profiles.getLength() == 0) {
+                throw new IllegalStateException("loading of profile settings failed, file does not contain any profiles");
+            }
+            for (int temp = 0; temp < profiles.getLength(); temp++) {
+                Node profileNode = profiles.item(temp);
+                if (profileNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element profileElement = (Element) profileNode;
+                    String name = profileElement.getAttribute("name");
+                    String kind = profileElement.getAttribute("kind");
+                    if ("CodeFormatterProfile".equals(kind) && profile.equals(name)) {
+                        profileFound = true;
+                        NodeList childNodes = profileElement.getElementsByTagName("setting");
+                        if (childNodes.getLength() == 0) {
+                            throw new IllegalStateException("loading of profile settings failed, profile has no settings elements");
+                        }
+                        for (int i = 0; i < childNodes.getLength(); i++) {
+                            Node item = childNodes.item(i);
+                            if (item.getNodeType() == Node.ELEMENT_NODE) {
+                                Element attributeItem = (Element) item;
+                                String id = attributeItem.getAttribute("id");
+                                String value = attributeItem.getAttribute("value");
+                                properties.setProperty(id.trim(), value.trim());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("file: " + file.getAbsolutePath() + ", profile: " + profile, e);
+            throw new InvalidPropertyFile(e.getMessage(), e);
+        }
+        if (!profileFound) {
+            throw new IllegalStateException("profile not found in the file");
+        }
+        if (properties.size() == defaultSize) {
+            throw new IllegalStateException("no properties loaded, something is broken");
+        }
+        return properties;
     }
 }

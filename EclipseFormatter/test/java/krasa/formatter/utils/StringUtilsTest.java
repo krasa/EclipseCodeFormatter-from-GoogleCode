@@ -104,6 +104,11 @@ public class StringUtilsTest {
             return null;
         }
 
+        //        @Override
+        public String getBasePath() {
+            return null;
+        }
+
         public void save() {
         }
 
@@ -131,6 +136,12 @@ public class StringUtilsTest {
 
         public <T> T getComponent(Class<T> interfaceClass, T defaultImplementation) {
             return null;
+        }
+
+        @NotNull
+//        @Override
+        public Class[] getComponentInterfaces() {
+            return new Class[0];
         }
 
         public boolean isDisposed() {

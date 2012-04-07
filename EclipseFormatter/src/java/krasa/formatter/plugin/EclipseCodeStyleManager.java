@@ -50,9 +50,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         super(original);
         this.settings = settings;
         notifier = new Notifier(project);
-        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, new JavaCodeFormatterFacade(
-                settings.getPathToConfigFileJava()));
-        ;
+        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, new JavaCodeFormatterFacade(settings));
     }
 
     public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)

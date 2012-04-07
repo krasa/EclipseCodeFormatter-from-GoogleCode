@@ -42,6 +42,7 @@ public class Settings {
     private Integer notifyFromTextLenght = 300;
     private String importOrder = "java;javax;org;com;";
     private String importOrderConfigFilePath = "";
+    private String selectedJavaProfile = null;
     private boolean defaultSettings = false;
 
     public Settings() {
@@ -54,6 +55,14 @@ public class Settings {
 
     public DisabledFileTypeSettings geDisabledFileTypeSettings() {
         return new DisabledFileTypeSettings(disabledFileTypes);
+    }
+
+    public String getSelectedJavaProfile() {
+        return selectedJavaProfile;
+    }
+
+    public void setSelectedJavaProfile(String selectedJavaProfile) {
+        this.selectedJavaProfile = selectedJavaProfile;
     }
 
     public String getPathToConfigFileJS() {
@@ -103,6 +112,7 @@ public class Settings {
     public boolean isDefaultSettings() {
         return defaultSettings;
     }
+
 
     public static enum Formatter {
         DEFAULT,

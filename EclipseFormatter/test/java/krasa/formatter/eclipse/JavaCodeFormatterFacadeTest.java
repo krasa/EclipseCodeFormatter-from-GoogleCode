@@ -1,11 +1,11 @@
 package krasa.formatter.eclipse;
 
 import junit.framework.Assert;
+import krasa.formatter.settings.Settings;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-import java.util.Properties;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Vojtech Krasa
@@ -20,7 +20,12 @@ public class JavaCodeFormatterFacadeTest {
             "\t@Test\n" +
             "\tpublic void testFormat() throws                      Exception {\n" +
             "\t\t           String pathToCo色は匂へどnfigFile = \"org.eclipse.jdt.core.prefs\";\n" +
-            "\t\t                     EclipseCodeFormatterFacade          eclipseCodeFormatterFacade = new EclipseCodeFormatterFacade(pathToConfigFile);\n" +
+            "\t\t                     EclipseCodeFormatterFacade   " +
+            "" +
+            "" +
+            "" +
+            "" +
+            "       eclipseCodeFormatterFacade = new EclipseCodeFormatterFacade(pathToConfigFile);\n" +
             "\t\tString output                   =                 eclipseCodeFormatterFacade.format(INPUT, Settings.LINE_SEPARATOR);\n" +
             "\t\tAssert.                 assertEquals(INPUT,                 output);\n" +
             "\n" +
@@ -87,11 +92,25 @@ public class JavaCodeFormatterFacadeTest {
 
     @Before
     public void setUp() throws Exception {
-        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(PATH_TO_CONFIG_FILE);
+        Settings settings = new Settings();
+        settings.setPathToConfigFileJava(PATH_TO_CONFIG_FILE);
+        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings);
     }
 
     @Test
     public void testFormat() throws Exception {
+        String output = eclipseCodeFormatterFacade.format(INPUT);
+        Assert.assertEquals(FORMATTED, output);
+        output = eclipseCodeFormatterFacade.format(INPUT2);
+        Assert.assertEquals(FORMATTED2, output);
+    }
+
+    @Test
+    public void testFormatByXML() throws Exception {
+        Settings settings = new Settings();
+        settings.setPathToConfigFileJava("test\\resources\\format.xml");
+        settings.setSelectedJavaProfile("kuk");
+        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings);
         String output = eclipseCodeFormatterFacade.format(INPUT);
         Assert.assertEquals(FORMATTED, output);
         output = eclipseCodeFormatterFacade.format(INPUT2);
@@ -118,25 +137,5 @@ public class JavaCodeFormatterFacadeTest {
         return new String(s.getBytes("UTF8"), utf8);
     }
 
-
-    Properties readConfig(File file) {
-        BufferedInputStream stream = null;
-        try {
-            stream = new BufferedInputStream(new FileInputStream(file));
-            final Properties formatterOptions = new Properties();
-            formatterOptions.load(stream);
-            return formatterOptions;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    /* ignore */
-                }
-            }
-        }
-    }
 
 }

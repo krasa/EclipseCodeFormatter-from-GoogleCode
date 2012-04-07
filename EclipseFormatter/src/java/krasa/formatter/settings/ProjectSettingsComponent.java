@@ -85,6 +85,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     }
 
     public void projectOpened() {
+        settings = GlobalSettings.getInstance().getSettings(settings, project);
         install(settings);
     }
 
