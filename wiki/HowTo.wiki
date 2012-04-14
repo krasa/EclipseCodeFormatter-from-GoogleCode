@@ -1,6 +1,6 @@
 =Instructions=
  #  [HowTo#Getting_the_Eclipse_code_formatter_preferences_file enable project specific formatter settings in Eclipse to get preference file]
- #  set path to eclipse preference file(org.eclipse.jdt.core.prefs) or to exported profiles file in the IntelliJ (Settings - Eclipse Code Formatter - field "Eclipse preference file") 
+ #  set path to eclipse preference file(org.eclipse.jdt.core.prefs) or to exported profiles file in the IntelliJ (Settings - Eclipse Code Formatter - field "Eclipse preference file"), when using exported profiles, select desired profile in the combobox "Java formatter profile" 
  #  format code as usual, notification will come up with result 
  #  use ctrl + ~ for quick switch between formatters    
 
@@ -15,6 +15,7 @@
 
 == Getting the Eclipse code formatter profiles ==
  # Go to Windows | Preferences | Java| Code Style | Formatter and click on "Export all..." button.
+ # Eclipse do not export default profiles, so you have to make your own
  
 == Getting the Eclipse code formatter preferences file ==
  # With your project open in Eclipse's workspace, right-click the project and choose Properties.
