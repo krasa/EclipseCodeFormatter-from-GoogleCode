@@ -16,7 +16,8 @@
 == Getting the Eclipse code formatter profiles ==
  # Go to Windows | Preferences | Java| Code Style | Formatter and click on "Export all..." button.
  # Eclipse do not export default profiles, so you have to make your own
- 
+ # the result should look like [http://code.google.com/p/eclipse-code-formatter-intellij-plugin/source/browse/EclipseFormatter/test/resources/format.xml this]
+
 == Getting the Eclipse code formatter preferences file ==
  # With your project open in Eclipse's workspace, right-click the project and choose Properties.
  # Go to Java Code Style | Formatter and select Enable project specific settings.
