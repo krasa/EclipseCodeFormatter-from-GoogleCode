@@ -20,7 +20,7 @@ import java.util.List;
 @State(
         name = "EclipseCodeFormatterSettings",
         storages = {
-                @Storage(
+                @Storage(id = "EclipseCodeFormatterSettings",
                         file = "$APP_CONFIG$/eclipseCodeFormatter.xml"
                 )}
 )

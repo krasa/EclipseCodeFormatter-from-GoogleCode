@@ -5,9 +5,9 @@ import java.io.File;
 /**
  * @author Vojtech Krasa
  */
-public class InvalidPathToConfigFileException extends RuntimeException {
+public class FileDoesNotExistsException extends RuntimeException {
 
-    public InvalidPathToConfigFileException(File file) {
+    public FileDoesNotExistsException(File file) {
         super("File does not exists: " + file.getAbsolutePath());
     }
 }

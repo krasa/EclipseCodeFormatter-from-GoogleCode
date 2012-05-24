@@ -11,7 +11,7 @@ import com.intellij.psi.PsiImportList;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
-import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.eclipse.FileDoesNotExistsException;
 import krasa.formatter.plugin.InvalidPropertyFile;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Element;
@@ -85,7 +85,7 @@ public class FileUtils {
 
     public static Properties readPropertiesFile(File file, Properties defaultConfig) {
         if (!file.exists()) {
-            throw new InvalidPathToConfigFileException(file);
+            throw new FileDoesNotExistsException(file);
 
         }
         BufferedInputStream stream = null;
@@ -115,7 +115,7 @@ public class FileUtils {
     public static Properties readXmlJavaSettingsFile(File file, Properties properties, String profile) {
         int defaultSize = properties.size();
         if (!file.exists()) {
-            throw new IllegalStateException("file does not exists " + file.getAbsolutePath());
+            throw new FileDoesNotExistsException(file);
         }
         if (profile == null) {
             throw new IllegalStateException("loading of profile settings failed, selected profile is null");

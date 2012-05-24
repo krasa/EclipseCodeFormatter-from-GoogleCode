@@ -36,7 +36,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
@@ -60,10 +59,6 @@ import java.util.List;
  */
 public class ProjectSettingsForm {
     private static final Logger LOG = Logger.getInstance(ProjectSettingsForm.class.getName());
-
-    private static final Color NORMAL = new JTextField().getBackground();
-    private static final Color WARNING = new Color(255, 255, 204);
-    private static final Color ERROR = new Color(255, 204, 204);
 
     private JPanel rootComponent;
 
@@ -110,13 +105,11 @@ public class ProjectSettingsForm {
     private JButton delete;
     private Settings displayedSettings;
     private Settings projectSettings;
-    /**
-     * do not delete
-     */
-    private JTextArea help;
     private JButton DONATEButton;
     private JComboBox javaFormatterProfile;
     private JLabel javaFormatterProfileLabel;
+    private JButton helpButton;
+    private JButton homepage;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @NotNull
@@ -162,7 +155,8 @@ public class ProjectSettingsForm {
     }
 
     public ProjectSettingsForm(Project project) {
-        DONATEButton.setBorder(new EmptyBorder(0, 0, 0, 0));
+        DONATEButton.setBorder(BorderFactory.createEmptyBorder());
+        DONATEButton.setContentAreaFilled(false);
         this.project = project;
         JToggleButton[] modifiableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter,
                 optimizeImportsCheckBox, enableJavaFormatting, doNotFormatOtherFilesRadioButton,
@@ -368,6 +362,19 @@ public class ProjectSettingsForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BareBonesBrowserLaunch.openURL("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=75YN7U7H7D7XU&lc=CZ&item_name=Eclipse%20code%20formatter%20%2d%20IntelliJ%20plugin%20%2d%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest");
+            }
+        });
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BareBonesBrowserLaunch.openURL("http://code.google.com/p/eclipse-code-formatter-intellij-plugin/wiki/HowTo");
+            }
+        });
+        ;
+        homepage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BareBonesBrowserLaunch.openURL("http://plugins.intellij.net/plugin/?idea&id=6546");
             }
         });
     }

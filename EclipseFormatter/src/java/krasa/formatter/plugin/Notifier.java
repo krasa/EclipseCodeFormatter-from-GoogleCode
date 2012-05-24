@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Notifier {
 
-    public static final String FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE = "formatting failed, probably due to not compilable code or wrong config file";
+    public static final String FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE = "formatting failed, probably due to syntax error in the code or wrong config file";
     public static final String NO_FILE_TO_FORMAT = "No file to format";
 
     @NotNull

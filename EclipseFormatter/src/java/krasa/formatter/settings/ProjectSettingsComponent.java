@@ -62,7 +62,7 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
         this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
         this.project = project;
         NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_INFO, NotificationDisplayType.BALLOON);
-        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.STICKY_BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.BALLOON);
     }
 
     public void install(@NotNull Settings settings) {

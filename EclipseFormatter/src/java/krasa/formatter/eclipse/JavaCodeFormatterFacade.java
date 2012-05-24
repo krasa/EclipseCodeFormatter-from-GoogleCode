@@ -1,5 +1,6 @@
 package krasa.formatter.eclipse;
 
+import krasa.formatter.common.ModifiableFile;
 import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Notifier;
 import krasa.formatter.settings.Settings;
@@ -18,27 +19,25 @@ import java.util.Properties;
  * @author Vojtech Krasa
  */
 public class JavaCodeFormatterFacade extends CodeFormatterFacade {
-    protected final String pathToConfigFile;
     protected final String profile;
     protected CodeFormatter codeFormatter;
-    private long lastModified;
+    private ModifiableFile configFile;
 
     public JavaCodeFormatterFacade(Settings settings) {
-        this.pathToConfigFile = settings.getPathToConfigFileJava();
+        configFile = new ModifiableFile(settings.getPathToConfigFileJava());
         this.profile = settings.getSelectedJavaProfile();
     }
 
-    private CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
-        File file = checkIfExists(this.pathToConfigFile);
-
-        if (codeFormatter == null || configFileWasChanged(file)) {
-            return newCodeFormatter(file);
+    private CodeFormatter getCodeFormatter() throws FileDoesNotExistsException {
+        if (codeFormatter == null || configFile.wasChanged()) {
+            return newCodeFormatter(configFile);
         }
         return codeFormatter;
     }
 
-    private CodeFormatter newCodeFormatter(File file) {
-        lastModified = file.lastModified();
+    private CodeFormatter newCodeFormatter(ModifiableFile file) {
+        file.saveLastModified();
+
         Properties properties = readConfig(file);
 
         if (properties.isEmpty()) {
@@ -49,9 +48,6 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         return codeFormatter;
     }
 
-    private boolean configFileWasChanged(File file) {
-        return file.lastModified() > lastModified;
-    }
 
     @Override
     protected Properties readConfig(File file) throws InvalidPropertyFile {
@@ -65,7 +61,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
         }
     }
 
-    protected String formatInternal(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
+    protected String formatInternal(String text, int startOffset, int endOffset) throws FileDoesNotExistsException {
         if (endOffset > text.length()) {
             endOffset = text.length();
         }

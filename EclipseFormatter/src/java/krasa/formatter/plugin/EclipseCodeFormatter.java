@@ -10,7 +10,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilBase;
 import krasa.formatter.eclipse.CodeFormatterFacade;
-import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.eclipse.FileDoesNotExistsException;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
 import krasa.formatter.utils.StringUtils;
@@ -38,7 +38,7 @@ public class EclipseCodeFormatter {
         this.settings = settings;
     }
 
-    public void format(PsiFile psiFile, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
+    public void format(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
         boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
         preProcess(psiFile, wholeFile);
         formatWithEclipse(psiFile, startOffset, endOffset, wholeFile);
@@ -51,7 +51,7 @@ public class EclipseCodeFormatter {
     }
 
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset, boolean wholeFile)
-            throws InvalidPathToConfigFileException {
+            throws FileDoesNotExistsException {
         final Editor editor = PsiUtilBase.findEditor(psiFile);
         if (editor != null) {
             formatWhenEditorIsOpen(startOffset, endOffset, psiFile, wholeFile);
@@ -61,7 +61,7 @@ public class EclipseCodeFormatter {
 
     }
 
-    private void formatWhenEditorIsClosed(PsiFile psiFile) throws InvalidPathToConfigFileException {
+    private void formatWhenEditorIsClosed(PsiFile psiFile) throws FileDoesNotExistsException {
         VirtualFile virtualFile = psiFile.getVirtualFile();
         FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
         Document document = fileDocumentManager.getDocument(virtualFile);
@@ -72,13 +72,13 @@ public class EclipseCodeFormatter {
         fileDocumentManager.saveDocument(document);
     }
 
-    private String reformat(String virtualFile) throws InvalidPathToConfigFileException {
+    private String reformat(String virtualFile) throws FileDoesNotExistsException {
         return codeFormatterFacade.format(virtualFile);
     }
 
     /* when file is being edited, it is important to load text from editor, i think */
     private void formatWhenEditorIsOpen(int startOffset, int endOffset, PsiFile file, boolean wholeFile)
-            throws InvalidPathToConfigFileException {
+            throws FileDoesNotExistsException {
         final Editor editor = PsiUtilBase.findEditor(file);
         int visualColumnToRestore = getVisualColumnToRestore(editor);
 
@@ -115,7 +115,7 @@ public class EclipseCodeFormatter {
                     }
                 }
                 importSorter.sortImports(document);
-            } catch (InvalidPathToConfigFileException e) {
+            } catch (FileDoesNotExistsException e) {
                 throw e;
             } catch (InvalidPropertyFile e) {
                 throw e;
@@ -153,7 +153,7 @@ public class EclipseCodeFormatter {
         return new ImportSorter(strings);
     }
 
-    private String reformat(int startOffset, int endOffset, String text) throws InvalidPathToConfigFileException {
+    private String reformat(int startOffset, int endOffset, String text) throws FileDoesNotExistsException {
         return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset);
     }
 

@@ -1,5 +1,6 @@
 package krasa.formatter.eclipse;
 
+import krasa.formatter.common.ModifiableFile;
 import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Notifier;
 import krasa.formatter.settings.Settings;
@@ -8,32 +9,29 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
 
-import java.io.File;
 import java.util.Properties;
 
 /**
  * @author Vojtech Krasa
  */
 public class JSCodeFormatterFacade extends CodeFormatterFacade {
-    protected final String pathToConfigFile;
     protected org.eclipse.wst.jsdt.core.formatter.CodeFormatter codeFormatter;
-    private long lastModified;
+    private ModifiableFile configFile;
 
     public JSCodeFormatterFacade(String pathToConfigFile) {
-        this.pathToConfigFile = pathToConfigFile;
+        configFile = new ModifiableFile(pathToConfigFile);
     }
 
-    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter getCodeFormatter() throws InvalidPathToConfigFileException {
-        File file = checkIfExists(this.pathToConfigFile);
-
-        if (codeFormatter == null || configFileWasChanged(file)) {
-            return newCodeFormatter(file);
+    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter getCodeFormatter() throws FileDoesNotExistsException {
+        if (codeFormatter == null || configFile.wasChanged()) {
+            return newCodeFormatter(configFile);
         }
         return codeFormatter;
     }
 
-    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter newCodeFormatter(File file) throws InvalidPropertyFile {
-        lastModified = file.lastModified();
+    private org.eclipse.wst.jsdt.core.formatter.CodeFormatter newCodeFormatter(ModifiableFile file) throws InvalidPropertyFile {
+        file.saveLastModified();
+
         Properties properties = readConfig(file);
 
         if (properties.isEmpty()) {
@@ -44,11 +42,8 @@ public class JSCodeFormatterFacade extends CodeFormatterFacade {
         return codeFormatter;
     }
 
-    private boolean configFileWasChanged(File file) {
-        return file.lastModified() > lastModified;
-    }
 
-    protected String formatInternal(String text, int startOffset, int endOffset) throws InvalidPathToConfigFileException {
+    protected String formatInternal(String text, int startOffset, int endOffset) throws FileDoesNotExistsException {
         IDocument doc = new Document();
         try {
             // format the file (the meat and potatoes)

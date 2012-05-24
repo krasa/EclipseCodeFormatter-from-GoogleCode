@@ -63,15 +63,15 @@ public class ImportSorter {
         Scanner scanner;
         boolean importsAlreadyAppended = false;
         scanner = new Scanner(document.getText());
-        int line2 = 0;
+        int curentLine = 0;
         StringBuilder sb = new StringBuilder();
         while (scanner.hasNext()) {
-            line2++;
+            curentLine++;
             String next = scanner.nextLine();
             if (next == null) {
                 break;
             }
-            if (line2 >= firstImportLine && line2 <= lastImportLine) {
+            if (curentLine >= firstImportLine && curentLine <= lastImportLine) {
                 if (!importsAlreadyAppended) {
                     for (String string : strings) {
                         sb.append(string);

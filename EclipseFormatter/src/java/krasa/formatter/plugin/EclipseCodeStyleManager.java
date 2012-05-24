@@ -14,7 +14,7 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.CheckUtil;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.util.IncorrectOperationException;
-import krasa.formatter.eclipse.InvalidPathToConfigFileException;
+import krasa.formatter.eclipse.FileDoesNotExistsException;
 import krasa.formatter.eclipse.JSCodeFormatterFacade;
 import krasa.formatter.eclipse.JavaCodeFormatterFacade;
 import krasa.formatter.settings.DisabledFileTypeSettings;
@@ -87,7 +87,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 }
             }
 
-        } catch (final InvalidPathToConfigFileException e) {
+        } catch (final FileDoesNotExistsException e) {
             e.printStackTrace();
             LOG.debug(e);
             notifier.notifyFailedFormatting(psiFile, formattedByIntelliJ, e);
@@ -107,7 +107,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     }
 
     private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
-            throws InvalidPathToConfigFileException {
+            throws FileDoesNotExistsException {
         if (FileUtils.isJavaScript(psiFile)) {
             if (eclipseCodeFormatterJs == null) {
                 eclipseCodeFormatterJs = new EclipseCodeFormatter(settings, new JSCodeFormatterFacade(
