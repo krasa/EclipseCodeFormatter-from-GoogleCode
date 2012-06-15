@@ -28,19 +28,14 @@ import com.intellij.ui.popup.list.ListPopupImpl;
 import com.intellij.ui.popup.mock.MockConfirmation;
 import krasa.formatter.settings.GlobalSettings;
 import krasa.formatter.settings.Settings;
+import krasa.formatter.utils.FileUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -380,7 +375,7 @@ public class ProjectSettingsForm {
     }
 
     private ComboBoxModel createJavaProfilesModel() {
-        SortedComboBoxModel<String> model = new SortedComboBoxModel<String>(new Comparator<String>() {
+        SortedComboBoxModel<String> profilesModel = new SortedComboBoxModel<String>(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 return o1.compareTo(o2);
@@ -389,50 +384,25 @@ public class ProjectSettingsForm {
         String text = pathToEclipsePreferenceFileJava.getText();
         if (!text.isEmpty()) {
             if (text.endsWith("xml")) {
-                File file = new File(text);
-                if (file.exists()) {
-                    try { // load file profiles
-                        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                        Document doc = dBuilder.parse(file);
-                        doc.getDocumentElement().normalize();
-
-                        NodeList nList = doc.getElementsByTagName("profile");
-                        for (int temp = 0; temp < nList.getLength(); temp++) {
-                            Node nNode = nList.item(temp);
-                            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                                Element eElement = (Element) nNode;
-                                String name = eElement.getAttribute("name");
-                                String kind = eElement.getAttribute("kind");
-                                if ("CodeFormatterProfile".equals(kind)) {
-                                    model.add(name);
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        LOG.error(e);
-                    }
-                } else {
-                    LOG.info("not existing file");
-                }
+                profilesModel.addAll(FileUtils.getProfileNamesFromJavaConfigXML(new File(text)));
             } else {
                 //not xml
             }
         } else {
             //empty
         }
-        List<String> items = model.getItems();
+        List<String> items = profilesModel.getItems();
         if (items.size() > 0) {
             for (String item : items) {
                 if (item.equals(displayedSettings.getSelectedJavaProfile())) {
-                    model.setSelectedItem(item);
+                    profilesModel.setSelectedItem(item);
                 }
             }
-            if (model.getSelectedItem() == null) {
-                model.setSelectedItem(items.get(0));
+            if (profilesModel.getSelectedItem() == null) {
+                profilesModel.setSelectedItem(items.get(0));
             }
         }
-        return model;
+        return profilesModel;
     }
 
     private SortedComboBoxModel<Settings> createProfilesModel() {

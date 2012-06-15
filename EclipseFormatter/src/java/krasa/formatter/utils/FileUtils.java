@@ -24,6 +24,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -166,5 +168,36 @@ public class FileUtils {
             throw new IllegalStateException("no properties loaded, something is broken");
         }
         return properties;
+    }
+
+    public static List<String> getProfileNamesFromJavaConfigXML(File file) {
+        List<String> profileNames = new ArrayList<String>();
+        if (file.exists()) {
+            try { // load file profiles
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                org.w3c.dom.Document doc = dBuilder.parse(file);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("profile");
+                for (int temp = 0; temp < nList.getLength(); temp++) {
+                    Node nNode = nList.item(temp);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        String name = eElement.getAttribute("name");
+                        String kind = eElement.getAttribute("kind");
+                        if ("CodeFormatterProfile".equals(kind)) {
+                            profileNames.add(name);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                LOG.error(e);
+            }
+
+        } else {
+            LOG.info("not existing file");
+        }
+        return profileNames;
     }
 }
