@@ -49,7 +49,7 @@ public class ProjectCodeStyleInstaller {
 
     private void installCodeFormatter(@NotNull Settings settings) {
         CodeStyleManager manager = CodeStyleManager.getInstance(project);
-        if (!(manager instanceof EclipseCodeStyleManager) && Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
+        if (Settings.Formatter.ECLIPSE.equals(settings.getFormatter())) {
             registerCodeStyleManager(project, new EclipseCodeStyleManager(manager, settings, project));
             // todo nastaveni okna pro formatovani at se otvira
             // if (settings.isOptimizeImports()) {
@@ -73,6 +73,5 @@ public class ProjectCodeStyleInstaller {
         container.unregisterComponent(CODE_STYLE_MANAGER_KEY);
         container.registerComponentInstance(CODE_STYLE_MANAGER_KEY, manager);
     }
-
 
 }

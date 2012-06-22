@@ -18,7 +18,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -34,10 +33,8 @@ import java.util.Properties;
 public class FileUtils {
     private static final Logger LOG = Logger.getInstance(FileUtils.class.getName());
 
-    public static boolean isWritable(@NotNull VirtualFile file,
-                                     @NotNull Project project) {
-        return !ReadonlyStatusHandler.getInstance(project)
-                .ensureFilesWritable(file).hasReadonlyFiles();
+    public static boolean isWritable(@NotNull VirtualFile file, @NotNull Project project) {
+        return !ReadonlyStatusHandler.getInstance(project).ensureFilesWritable(file).hasReadonlyFiles();
     }
 
     public static boolean isWholeFile(int startOffset, int endOffset, String text) {
@@ -45,21 +42,11 @@ public class FileUtils {
     }
 
     public static boolean isJavaScript(PsiFile psiFile) {
-        return endsWith(psiFile, ".js");
+        return psiFile.getName().endsWith(".js");
     }
 
     public static boolean isJava(PsiFile psiFile) {
-        return endsWith(psiFile, ".java");
-    }
-
-    public static boolean endsWith(PsiFile psiFile, String... suffix) {
-        VirtualFile file = psiFile.getVirtualFile();
-        for (String s : suffix) {
-            if (file.getPath().endsWith(s)) {
-                return true;
-            }
-        }
-        return false;
+        return psiFile.getName().endsWith(".java");
     }
 
     public static void optimizeImportsByIntellij(PsiFile psiFile) {
@@ -124,14 +111,13 @@ public class FileUtils {
         }
         boolean profileFound = false;
         try { // load file profiles
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            org.w3c.dom.Document doc = dBuilder.parse(file);
+            org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
             doc.getDocumentElement().normalize();
 
             NodeList profiles = doc.getElementsByTagName("profile");
             if (profiles.getLength() == 0) {
-                throw new IllegalStateException("loading of profile settings failed, file does not contain any profiles");
+                throw new IllegalStateException(
+                        "loading of profile settings failed, file does not contain any profiles");
             }
             for (int temp = 0; temp < profiles.getLength(); temp++) {
                 Node profileNode = profiles.item(temp);
@@ -143,7 +129,8 @@ public class FileUtils {
                         profileFound = true;
                         NodeList childNodes = profileElement.getElementsByTagName("setting");
                         if (childNodes.getLength() == 0) {
-                            throw new IllegalStateException("loading of profile settings failed, profile has no settings elements");
+                            throw new IllegalStateException(
+                                    "loading of profile settings failed, profile has no settings elements");
                         }
                         for (int i = 0; i < childNodes.getLength(); i++) {
                             Node item = childNodes.item(i);
@@ -174,9 +161,7 @@ public class FileUtils {
         List<String> profileNames = new ArrayList<String>();
         if (file.exists()) {
             try { // load file profiles
-                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                org.w3c.dom.Document doc = dBuilder.parse(file);
+                org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
                 doc.getDocumentElement().normalize();
 
                 NodeList nList = doc.getElementsByTagName("profile");

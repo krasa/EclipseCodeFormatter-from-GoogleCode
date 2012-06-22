@@ -105,6 +105,7 @@ public class ProjectSettingsForm {
     private JLabel javaFormatterProfileLabel;
     private JButton helpButton;
     private JButton homepage;
+    private JCheckBox enableGWTNativeMethodsCheckBox;
 
     private final List<Popup> visiblePopups = new ArrayList<Popup>();
     @NotNull
@@ -119,8 +120,8 @@ public class ProjectSettingsForm {
                 importOrderConfigurationManualRadioButton, formatSelectedTextInAllFileTypes,}, useEclipseFormatter);
 
         enabledBy(new JComponent[]{pathToEclipsePreferenceFileJava, eclipsePrefsExample,
-                eclipsePreferenceFileJavaLabel, optimizeImportsCheckBox, eclipsePreferenceFilePathJavaBrowse, javaFormatterProfileLabel, javaFormatterProfile},
-                enableJavaFormatting);
+                eclipsePreferenceFileJavaLabel, optimizeImportsCheckBox, eclipsePreferenceFilePathJavaBrowse,
+                javaFormatterProfileLabel, javaFormatterProfile, enableGWTNativeMethodsCheckBox}, enableJavaFormatting);
 
         enabledBy(new JComponent[]{importOrder, pathToImportOrderPreferenceFile,
                 pathToImportOrderPreferenceFileBrowse, importOrderManualExample, importOrderLabel,
@@ -133,13 +134,30 @@ public class ProjectSettingsForm {
         enabledBy(new JComponent[]{importOrder, importOrderManualExample,},
                 importOrderConfigurationManualRadioButton);
 
-        enabledBy(new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS,
-                eclipsePreferenceFileJSLabel, eclipsePreferenceFilePathJSBrowse}, enableJSFormatting);
+        enabledByAny(new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS,
+                eclipsePreferenceFileJSLabel, eclipsePreferenceFilePathJSBrowse}, enableJSFormatting,
+                enableGWTNativeMethodsCheckBox);
 
         enabledBy(new JComponent[]{disabledFileTypes, disabledFileTypesHelpLabel,},
                 formatOtherFilesWithExceptionsRadioButton);
 
         disabledJavaProfilesIfNecessary();
+    }
+
+    private void enabledByAny(@NotNull JComponent[] targets, @NotNull JToggleButton[] negated,
+                              @NotNull JToggleButton... control) {
+        boolean b = false;
+
+        for (JToggleButton jToggleButton : control) {
+            b = b || (jToggleButton.isEnabled() && jToggleButton.isSelected());
+        }
+        for (JToggleButton jToggleButton : negated) {
+            b = b || (jToggleButton.isEnabled() && !jToggleButton.isSelected());
+        }
+
+        for (JComponent target : targets) {
+            target.setEnabled(b);
+        }
     }
 
     private void disabledJavaProfilesIfNecessary() {
@@ -156,7 +174,8 @@ public class ProjectSettingsForm {
         JToggleButton[] modifiableButtons = new JToggleButton[]{useDefaultFormatter, useEclipseFormatter,
                 optimizeImportsCheckBox, enableJavaFormatting, doNotFormatOtherFilesRadioButton,
                 formatOtherFilesWithExceptionsRadioButton, formatSelectedTextInAllFileTypes, enableJSFormatting,
-                importOrderConfigurationManualRadioButton, importOrderConfigurationFromFileRadioButton,};
+                importOrderConfigurationManualRadioButton, importOrderConfigurationFromFileRadioButton,
+                enableGWTNativeMethodsCheckBox};
         for (JToggleButton button : modifiableButtons) {
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -216,7 +235,6 @@ public class ProjectSettingsForm {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                log("newProfile action");
                 if (isModified(displayedSettings)) {
                     createConfirmation("Profile was modified, save changes to current profile?", "Yes", "No",
                             new Runnable() {
@@ -239,7 +257,6 @@ public class ProjectSettingsForm {
             }
 
             private void createProfile() {
-                log("createProfile");
                 Settings settings = GlobalSettings.getInstance().newSettings();
                 refreshProfilesModel();
                 profiles.setSelectedItem(settings);
@@ -248,7 +265,6 @@ public class ProjectSettingsForm {
         copyProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log("copyProfile action");
                 if (isModified(displayedSettings)) {
                     ListPopup confirmation = createConfirmation(
                             "Profile was modified, save changes to current profile?", "Yes", "No", new Runnable() {
@@ -273,7 +289,6 @@ public class ProjectSettingsForm {
             }
 
             private void copyProfile() {
-                log("copyProfile");
                 Settings settings = GlobalSettings.getInstance().copySettings(displayedSettings);
                 refreshProfilesModel();
                 profiles.setSelectedItem(settings);
@@ -286,13 +301,10 @@ public class ProjectSettingsForm {
         profiles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log("profiles ActionListener");
                 // && isSameId()
                 if (displayedSettings != null && getSelectedItem() != null && isModified(displayedSettings)) {
-                    log("profiles ActionListener showConfirmationDialogOnProfileChange");
                     showConfirmationDialogOnProfileChange();
                 } else if (displayedSettings != null && getSelectedItem() != null) {
-                    log("profiles ActionListener importFrom");
                     importFromInternal(getSelectedItem());
                 }
             }
@@ -310,7 +322,6 @@ public class ProjectSettingsForm {
         rename.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log("rename action");
                 final JTextField content = new JTextField();
                 content.setText(displayedSettings.getName());
                 JBPopup balloon = PopupFactoryImpl.getInstance().createComponentPopupBuilder(content, content).createPopup();
@@ -331,7 +342,6 @@ public class ProjectSettingsForm {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log("delete action");
                 int selectedIndex = profiles.getSelectedIndex();
                 GlobalSettings.getInstance().delete(getSelectedItem(), getProject());
                 profiles.setModel(profilesModel = createProfilesModel());
@@ -386,10 +396,10 @@ public class ProjectSettingsForm {
             if (text.endsWith("xml")) {
                 profilesModel.addAll(FileUtils.getProfileNamesFromJavaConfigXML(new File(text)));
             } else {
-                //not xml
+                // not xml
             }
         } else {
-            //empty
+            // empty
         }
         List<String> items = profilesModel.getItems();
         if (items.size() > 0) {
@@ -483,6 +493,16 @@ public class ProjectSettingsForm {
         }
     }
 
+    private void enabledByAny(@NotNull JComponent[] targets, @NotNull JToggleButton... control) {
+        boolean b = false;
+        for (JToggleButton jToggleButton : control) {
+            b = b || (jToggleButton.isEnabled() && jToggleButton.isSelected());
+        }
+        for (JComponent target : targets) {
+            target.setEnabled(b);
+        }
+    }
+
     private void showPopup(@NotNull JComponent parent, @NotNull String message) {
         if (!parent.isShowing() || !parent.isEnabled()) {
             return; // if getLocationOnScreen is called when the component is
@@ -515,7 +535,6 @@ public class ProjectSettingsForm {
     }
 
     public void importFrom(@NotNull Settings in) {
-        log("importFrom");
         boolean displayedSettingsIsNull = displayedSettings == null;
         if (displayedSettingsIsNull) {
             projectSettings = in;
@@ -533,7 +552,6 @@ public class ProjectSettingsForm {
      * does not update profiles DropDown
      */
     private void importFromInternal(Settings in) {
-        log("importFromInternal");
         displayedSettings = in;
         formatOtherFilesWithExceptionsRadioButton.setSelected(in.isFormatOtherFileTypesWithIntelliJ());
         doNotFormatOtherFilesRadioButton.setSelected(!in.isFormatOtherFileTypesWithIntelliJ());
@@ -546,20 +564,7 @@ public class ProjectSettingsForm {
         updateComponents();
     }
 
-    public void setData(Settings data) {
-        optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
-        formatSelectedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
-        pathToEclipsePreferenceFileJava.setText(data.getPathToConfigFileJava());
-        pathToEclipsePreferenceFileJS.setText(data.getPathToConfigFileJS());
-        disabledFileTypes.setText(data.getDisabledFileTypes());
-        enableJSFormatting.setSelected(data.isEnableJSFormatting());
-        enableJavaFormatting.setSelected(data.isEnableJavaFormatting());
-        importOrder.setText(data.getImportOrder());
-        pathToImportOrderPreferenceFile.setText(data.getImportOrderConfigFilePath());
-    }
-
     public Settings exportDisplayedSettings() {
-        log("exportTo");
         if (useEclipseFormatter.isSelected()) {
             displayedSettings.setFormatter(Settings.Formatter.ECLIPSE);
         } else {
@@ -570,48 +575,6 @@ public class ProjectSettingsForm {
         displayedSettings.setSelectedJavaProfile((String) javaFormatterProfile.getSelectedItem());
         getData(displayedSettings);
         return displayedSettings;
-    }
-
-    public void getData(Settings data) {
-        data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
-        data.setFormatSeletedTextInAllFileTypes(formatSelectedTextInAllFileTypes.isSelected());
-        data.setPathToConfigFileJava(pathToEclipsePreferenceFileJava.getText());
-        data.setPathToConfigFileJS(pathToEclipsePreferenceFileJS.getText());
-        data.setDisabledFileTypes(disabledFileTypes.getText());
-        data.setEnableJSFormatting(enableJSFormatting.isSelected());
-        data.setEnableJavaFormatting(enableJavaFormatting.isSelected());
-        data.setImportOrder(importOrder.getText());
-        data.setImportOrderConfigFilePath(pathToImportOrderPreferenceFile.getText());
-    }
-
-    public boolean isModified(Settings data) {
-        if (customIsModified(data)) {
-            return true;
-        }
-        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports())
-            return true;
-        if (formatSelectedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes())
-            return true;
-        if (pathToEclipsePreferenceFileJava.getText() != null ? !pathToEclipsePreferenceFileJava.getText().equals(
-                data.getPathToConfigFileJava()) : data.getPathToConfigFileJava() != null)
-            return true;
-        if (pathToEclipsePreferenceFileJS.getText() != null ? !pathToEclipsePreferenceFileJS.getText().equals(
-                data.getPathToConfigFileJS()) : data.getPathToConfigFileJS() != null)
-            return true;
-        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes())
-                : data.getDisabledFileTypes() != null)
-            return true;
-        if (enableJSFormatting.isSelected() != data.isEnableJSFormatting())
-            return true;
-        if (enableJavaFormatting.isSelected() != data.isEnableJavaFormatting())
-            return true;
-        if (importOrder.getText() != null ? !importOrder.getText().equals(data.getImportOrder())
-                : data.getImportOrder() != null)
-            return true;
-        if (pathToImportOrderPreferenceFile.getText() != null ? !pathToImportOrderPreferenceFile.getText().equals(
-                data.getImportOrderConfigFilePath()) : data.getImportOrderConfigFilePath() != null)
-            return true;
-        return false;
     }
 
     private boolean customIsModified(Settings data) {
@@ -674,4 +637,61 @@ public class ProjectSettingsForm {
         // TODO: place custom component creation code here
     }
 
+    public void setData(Settings data) {
+        optimizeImportsCheckBox.setSelected(data.isOptimizeImports());
+        formatSelectedTextInAllFileTypes.setSelected(data.isFormatSeletedTextInAllFileTypes());
+        pathToEclipsePreferenceFileJava.setText(data.getPathToConfigFileJava());
+        pathToEclipsePreferenceFileJS.setText(data.getPathToConfigFileJS());
+        disabledFileTypes.setText(data.getDisabledFileTypes());
+        enableJSFormatting.setSelected(data.isEnableJSFormatting());
+        enableJavaFormatting.setSelected(data.isEnableJavaFormatting());
+        importOrder.setText(data.getImportOrder());
+        pathToImportOrderPreferenceFile.setText(data.getImportOrderConfigFilePath());
+        enableGWTNativeMethodsCheckBox.setSelected(data.isEnableGWT());
+    }
+
+    public void getData(Settings data) {
+        data.setOptimizeImports(optimizeImportsCheckBox.isSelected());
+        data.setFormatSeletedTextInAllFileTypes(formatSelectedTextInAllFileTypes.isSelected());
+        data.setPathToConfigFileJava(pathToEclipsePreferenceFileJava.getText());
+        data.setPathToConfigFileJS(pathToEclipsePreferenceFileJS.getText());
+        data.setDisabledFileTypes(disabledFileTypes.getText());
+        data.setEnableJSFormatting(enableJSFormatting.isSelected());
+        data.setEnableJavaFormatting(enableJavaFormatting.isSelected());
+        data.setImportOrder(importOrder.getText());
+        data.setImportOrderConfigFilePath(pathToImportOrderPreferenceFile.getText());
+        data.setEnableGWT(enableGWTNativeMethodsCheckBox.isSelected());
+    }
+
+    public boolean isModified(Settings data) {
+        if (customIsModified(data)) {
+            return true;
+        }
+        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports())
+            return true;
+        if (formatSelectedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes())
+            return true;
+        if (pathToEclipsePreferenceFileJava.getText() != null ? !pathToEclipsePreferenceFileJava.getText().equals(
+                data.getPathToConfigFileJava()) : data.getPathToConfigFileJava() != null)
+            return true;
+        if (pathToEclipsePreferenceFileJS.getText() != null ? !pathToEclipsePreferenceFileJS.getText().equals(
+                data.getPathToConfigFileJS()) : data.getPathToConfigFileJS() != null)
+            return true;
+        if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes())
+                : data.getDisabledFileTypes() != null)
+            return true;
+        if (enableJSFormatting.isSelected() != data.isEnableJSFormatting())
+            return true;
+        if (enableJavaFormatting.isSelected() != data.isEnableJavaFormatting())
+            return true;
+        if (importOrder.getText() != null ? !importOrder.getText().equals(data.getImportOrder())
+                : data.getImportOrder() != null)
+            return true;
+        if (pathToImportOrderPreferenceFile.getText() != null ? !pathToImportOrderPreferenceFile.getText().equals(
+                data.getImportOrderConfigFilePath()) : data.getImportOrderConfigFilePath() != null)
+            return true;
+        if (enableGWTNativeMethodsCheckBox.isSelected() != data.isEnableGWT())
+            return true;
+        return false;
+    }
 }

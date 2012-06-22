@@ -121,11 +121,10 @@ public class DelegatingCodeStyleManager extends CodeStyleManager {
     }
 
     // 10.5
-//    @Override
-//    public String getLineIndent(@NotNull Editor editor) {
-//    return original.getLineIndent(editor);
-//
-//    }
+    // @Override
+    // public String getLineIndent(@NotNull Editor editor) {
+    // return original.getLineIndent(editor);
+    // }
 
     // 11.0
     @Override

@@ -17,14 +17,9 @@ import java.util.List;
 /**
  * @author Vojtech Krasa
  */
-@State(
-        name = "EclipseCodeFormatterSettings",
-        storages = {
-                @Storage(id = "EclipseCodeFormatterSettings",
-                        file = "$APP_CONFIG$/eclipseCodeFormatter.xml"
-                )}
-)
-public class GlobalSettings implements ApplicationComponent, PersistentStateComponent<GlobalSettings>, ExportableApplicationComponent {
+@State(name = "EclipseCodeFormatterSettings", storages = {@Storage(id = "EclipseCodeFormatterSettings", file = "$APP_CONFIG$/eclipseCodeFormatter.xml")})
+public class GlobalSettings implements ApplicationComponent, PersistentStateComponent<GlobalSettings>,
+        ExportableApplicationComponent {
     private List<Settings> settingsList = new ArrayList<Settings>();
     private List<Long> deletedSettingsId = new ArrayList<Long>();
 
@@ -65,7 +60,6 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
         return newSettings;
     }
 
-
     public void updateSettings(Settings settings, Project project) {
         if (settings.getId() == null) {
             addToGlobalSettings(settings, project);
@@ -100,7 +94,7 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     @NotNull
     public Settings getSettings(@NotNull Settings state, @NotNull Project project) {
         if (state.getId() == null && state.getName() == null) {
-//            Settings duplicateSettings = getDuplicateSettings(state);
+            // Settings duplicateSettings = getDuplicateSettings(state);
             if (isSameAsDefault(state)) {
                 return getDefaultSettings();
             }
@@ -144,7 +138,6 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
         return aDefault;
     }
 
-
     @Override
     public void initComponent() {
     }
@@ -174,14 +167,12 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     public void delete(Settings settings, Project project) {
         settingsList.remove(settings);
         deletedSettingsId.add(settings.getId());
-        Settings defaultSettings = getDefaultSettings();//to create default setting when it was deleted
+        Settings defaultSettings = getDefaultSettings();// to create default setting when it was deleted
         ProjectUtils.notifyProjectsWhichUsesThisSettings(settings, project, defaultSettings);
     }
-
 
     public Settings loadState(Settings state, ProjectSettingsComponent projectSettingsComponent) {
         return getSettings(state, projectSettingsComponent.getProject());
     }
-
 
 }

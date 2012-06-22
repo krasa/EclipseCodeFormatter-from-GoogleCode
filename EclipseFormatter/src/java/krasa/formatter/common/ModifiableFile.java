@@ -14,7 +14,6 @@ public class ModifiableFile extends File {
         super(pathToConfigFileJava);
     }
 
-
     public boolean wasChanged() {
         checkIfExists();
         return this.lastModified() > lastModified;

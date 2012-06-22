@@ -2,6 +2,7 @@ package krasa.formatter.eclipse;
 
 import java.io.File;
 
+
 /**
  * @author Vojtech Krasa
  */

@@ -34,8 +34,8 @@ import javax.swing.*;
 //import com.intellij.notification.impl.NotificationsConfiguration;
 
 /**
- * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the formatter whenever the
- * plugin settings are changed.
+ * Takes care of initializing a project's CodeFormatter and disposing of it when the project is closed. Updates the
+ * formatter whenever the plugin settings are changed.
  *
  * @author Esko Luontola
  * @since 4.12.2007
@@ -61,8 +61,10 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
     public ProjectSettingsComponent(@NotNull Project project) {
         this.projectCodeStyle = new ProjectCodeStyleInstaller(project);
         this.project = project;
-        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_INFO, NotificationDisplayType.BALLOON);
-        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR, NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_INFO,
+                NotificationDisplayType.BALLOON);
+        NotificationsConfiguration.getNotificationsConfiguration().register(GROUP_DISPLAY_ID_ERROR,
+                NotificationDisplayType.BALLOON);
     }
 
     public void install(@NotNull Settings settings) {
@@ -136,7 +138,6 @@ public class ProjectSettingsComponent implements ProjectComponent, Configurable,
             ProjectUtils.applyToAllOpenedProjects(settings);
         }
     }
-
 
     public void reset() {
         if (form != null) {

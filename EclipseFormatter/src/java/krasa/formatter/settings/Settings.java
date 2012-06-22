@@ -8,6 +8,9 @@
 
 package krasa.formatter.settings;
 
+import com.intellij.util.xmlb.annotations.Transient;
+import krasa.formatter.settings.provider.JSPropertiesProvider;
+import krasa.formatter.settings.provider.JavaPropertiesProvider;
 import krasa.formatter.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,10 +24,8 @@ import java.util.List;
 public class Settings {
     public static final String LINE_SEPARATOR = "\n";
 
-
     private String name = null;
     private Long id = null;
-
 
     private String pathToConfigFileJS = "";
     private boolean enableJavaFormatting = true;
@@ -44,6 +45,11 @@ public class Settings {
     private String importOrderConfigFilePath = "";
     private String selectedJavaProfile = null;
     private boolean defaultSettings = false;
+    private boolean enableGWT = false;
+    @Transient
+    protected transient JavaPropertiesProvider javaPropertiesProvider;
+    @Transient
+    protected transient JSPropertiesProvider jsPropertiesProvider;
 
     public Settings() {
     }
@@ -62,6 +68,7 @@ public class Settings {
     }
 
     public void setSelectedJavaProfile(String selectedJavaProfile) {
+        javaPropertiesProvider = null;
         this.selectedJavaProfile = selectedJavaProfile;
     }
 
@@ -70,6 +77,7 @@ public class Settings {
     }
 
     public void setPathToConfigFileJS(final String pathToConfigFileJS) {
+        jsPropertiesProvider = null;
         this.pathToConfigFileJS = pathToConfigFileJS;
     }
 
@@ -113,6 +121,27 @@ public class Settings {
         return defaultSettings;
     }
 
+    public boolean isEnableGWT() {
+        return enableGWT;
+    }
+
+    public void setEnableGWT(final boolean enableGWT) {
+        this.enableGWT = enableGWT;
+    }
+
+    public JSPropertiesProvider getJSProperties() {
+        if (jsPropertiesProvider == null) {
+            jsPropertiesProvider = new JSPropertiesProvider(pathToConfigFileJS);
+        }
+        return jsPropertiesProvider;
+    }
+
+    public JavaPropertiesProvider getJavaProperties() {
+        if (javaPropertiesProvider == null) {
+            javaPropertiesProvider = new JavaPropertiesProvider(this);
+        }
+        return javaPropertiesProvider;
+    }
 
     public static enum Formatter {
         DEFAULT,
@@ -179,6 +208,7 @@ public class Settings {
     }
 
     public void setPathToConfigFileJava(@NotNull String pathToConfigFileJava) {
+        javaPropertiesProvider = null;
         this.pathToConfigFileJava = pathToConfigFileJava;
     }
 
@@ -199,29 +229,43 @@ public class Settings {
     }
 
     public boolean equalsContent(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Settings settings = (Settings) o;
 
-        if (enableJSFormatting != settings.enableJSFormatting) return false;
-        if (enableJavaFormatting != settings.enableJavaFormatting) return false;
-        if (formatOtherFileTypesWithIntelliJ != settings.formatOtherFileTypesWithIntelliJ) return false;
-        if (formatSeletedTextInAllFileTypes != settings.formatSeletedTextInAllFileTypes) return false;
-        if (importOrderFromFile != settings.importOrderFromFile) return false;
-        if (optimizeImports != settings.optimizeImports) return false;
-        if (disabledFileTypes != null ? !disabledFileTypes.equals(settings.disabledFileTypes) : settings.disabledFileTypes != null)
+        if (enableJSFormatting != settings.enableJSFormatting)
             return false;
-        if (formatter != settings.formatter) return false;
+        if (enableJavaFormatting != settings.enableJavaFormatting)
+            return false;
+        if (formatOtherFileTypesWithIntelliJ != settings.formatOtherFileTypesWithIntelliJ)
+            return false;
+        if (formatSeletedTextInAllFileTypes != settings.formatSeletedTextInAllFileTypes)
+            return false;
+        if (importOrderFromFile != settings.importOrderFromFile)
+            return false;
+        if (optimizeImports != settings.optimizeImports)
+            return false;
+        if (disabledFileTypes != null ? !disabledFileTypes.equals(settings.disabledFileTypes)
+                : settings.disabledFileTypes != null)
+            return false;
+        if (formatter != settings.formatter)
+            return false;
         if (importOrder != null ? !importOrder.equals(settings.importOrder) : settings.importOrder != null)
             return false;
-        if (importOrderConfigFilePath != null ? !importOrderConfigFilePath.equals(settings.importOrderConfigFilePath) : settings.importOrderConfigFilePath != null)
+        if (importOrderConfigFilePath != null ? !importOrderConfigFilePath.equals(settings.importOrderConfigFilePath)
+                : settings.importOrderConfigFilePath != null)
             return false;
-        if (notifyFromTextLenght != null ? !notifyFromTextLenght.equals(settings.notifyFromTextLenght) : settings.notifyFromTextLenght != null)
+        if (notifyFromTextLenght != null ? !notifyFromTextLenght.equals(settings.notifyFromTextLenght)
+                : settings.notifyFromTextLenght != null)
             return false;
-        if (pathToConfigFileJS != null ? !pathToConfigFileJS.equals(settings.pathToConfigFileJS) : settings.pathToConfigFileJS != null)
+        if (pathToConfigFileJS != null ? !pathToConfigFileJS.equals(settings.pathToConfigFileJS)
+                : settings.pathToConfigFileJS != null)
             return false;
-        if (!pathToConfigFileJava.equals(settings.pathToConfigFileJava)) return false;
+        if (!pathToConfigFileJava.equals(settings.pathToConfigFileJava))
+            return false;
 
         return true;
     }
@@ -236,7 +280,6 @@ public class Settings {
 
     public void setImportOrderFromFile(boolean importOrderFromFile) {
         this.importOrderFromFile = importOrderFromFile;
-
-
     }
+
 }

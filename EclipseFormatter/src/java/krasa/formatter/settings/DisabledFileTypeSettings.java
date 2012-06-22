@@ -3,6 +3,7 @@ package krasa.formatter.settings;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * @author Vojtech Krasa
  */

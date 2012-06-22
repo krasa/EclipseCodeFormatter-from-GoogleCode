@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
  */
 public class JavaCodeFormatterFacadeTest {
 
-
     public static final String INPUT = "public class EclipseCodeFormatterFacadeTest {\n" +
             "\n" +
             "\t                 public static final String INPUT = \"ღმ⠀⠑⠁⠞色は匂へど 散りぬるを⠀⠛⠇⠁⠎⠎⠀⠁⠝⠙⠀⠊⠞⠀⠙⠕⠑⠎⠝⠞⠀⠓⠥⠗⠞⠀⠍⠑ერთსი შემვედრე, ნუთუ კვლა დამხსნას სოფლისა შრომასა, ცეცხლს, წყალსა და მიწასა, ჰაერთა თანა მრომასა; მომცნეს ფრთენი და აღვფრინდე, მივჰხვდე მას ჩემსა ნდომასა, დღისით და ღამით ვჰხედვიდე யாமறிந்த மொழிகளி+ěščřრუსთაველიžýáíé=ê¹ś¿źæñ³ó\";\n" +
@@ -94,7 +93,7 @@ public class JavaCodeFormatterFacadeTest {
     public void setUp() throws Exception {
         Settings settings = new Settings();
         settings.setPathToConfigFileJava(PATH_TO_CONFIG_FILE);
-        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings);
+        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings.getJavaProperties());
     }
 
     @Test
@@ -110,7 +109,7 @@ public class JavaCodeFormatterFacadeTest {
         Settings settings = new Settings();
         settings.setPathToConfigFileJava("test\\resources\\format.xml");
         settings.setSelectedJavaProfile("kuk");
-        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings);
+        eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings.getJavaProperties());
         String output = eclipseCodeFormatterFacade.format(INPUT);
         Assert.assertEquals(FORMATTED, output);
         output = eclipseCodeFormatterFacade.format(INPUT2);

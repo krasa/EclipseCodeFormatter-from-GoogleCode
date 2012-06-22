@@ -11,8 +11,8 @@ import krasa.formatter.settings.Settings;
  */
 public class ProjectUtils {
 
-
-    public static void notifyProjectsWhichUsesThisSettings(Settings deletedSettings, Project project, Settings defaultSettings) {
+    public static void notifyProjectsWhichUsesThisSettings(Settings deletedSettings, Project project,
+                                                           Settings defaultSettings) {
         Project[] openProjects = ProjectManagerImpl.getInstance().getOpenProjects();
         for (Project openProject : openProjects) {
             ProjectSettingsComponent component = openProject.getComponent(ProjectSettingsComponent.class);
@@ -27,7 +27,6 @@ public class ProjectUtils {
             }
         }
     }
-
 
     public static void applyToAllOpenedProjects(Settings updatedSettings) {
         Project[] openProjects = ProjectManagerImpl.getInstance().getOpenProjects();

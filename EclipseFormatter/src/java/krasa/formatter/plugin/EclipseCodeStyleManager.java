@@ -50,15 +50,17 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         super(original);
         this.settings = settings;
         notifier = new Notifier(project);
-        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, new JavaCodeFormatterFacade(settings));
+        eclipseCodeFormatterJava = new EclipseCodeFormatter(settings, new JavaCodeFormatterFacade(
+                settings.getJavaProperties()));
     }
 
-    public void reformatText(@NotNull PsiFile psiFile, final int startOffset, final int endOffset)
+    public void reformatText(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
             throws IncorrectOperationException {
+        ApplicationManager.getApplication().assertWriteAccessAllowed();
+        PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
         boolean formattedByIntelliJ = false;
         try {
-            ApplicationManager.getApplication().assertWriteAccessAllowed();
-            PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
+
             CheckUtil.checkWritable(psiFile);
 
             if (psiFile.getVirtualFile() == null) {
@@ -67,7 +69,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
                 notifier.showNotification(notification);
                 return;
             }
-            //ctrl shift enter fix
+            // ctrl shift enter fix
             boolean wholeFileOrSelectedText = isWholeFileOrSelectedText(psiFile, startOffset, endOffset);
             if (canReformatWithEclipse(psiFile) && wholeFileOrSelectedText) {
                 formatWithEclipse(psiFile, startOffset, endOffset);
@@ -106,12 +108,11 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         }
     }
 
-    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset)
-            throws FileDoesNotExistsException {
+    private void formatWithEclipse(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
         if (FileUtils.isJavaScript(psiFile)) {
             if (eclipseCodeFormatterJs == null) {
                 eclipseCodeFormatterJs = new EclipseCodeFormatter(settings, new JSCodeFormatterFacade(
-                        settings.getPathToConfigFileJS()));
+                        settings.getJSProperties()));
             }
             eclipseCodeFormatterJs.format(psiFile, startOffset, endOffset);
         } else {
@@ -143,7 +144,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
         return true;
     }
 
-    //todo rozlisit oznacenej celej file v editoru od normalniho formatovani
+    // todo rozlisit oznacenej celej file v editoru od normalniho formatovani
     private boolean isFocusInEditorAndSelectedText() {
         return false;
     }
@@ -180,7 +181,8 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
     }
 
     private boolean fileTypeIsEnabled(@NotNull PsiFile psiFile) {
-        return (FileUtils.isJava(psiFile) && settings.isEnableJavaFormatting()) || (FileUtils.isJavaScript(psiFile) && settings.isEnableJSFormatting());
+        return (FileUtils.isJava(psiFile) && settings.isEnableJavaFormatting())
+                || (FileUtils.isJavaScript(psiFile) && settings.isEnableJSFormatting());
     }
 
 }
