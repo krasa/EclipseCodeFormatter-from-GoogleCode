@@ -1,8 +1,6 @@
 package krasa.formatter;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import krasa.formatter.settings.ProjectSettingsComponent;
@@ -28,7 +26,8 @@ public class ChangeFormatterToolbarAction extends AnAction {
     }
 
     private Settings getSettings(AnActionEvent e) {
-        Project project = e.getProject();
+        DataContext dataContext = e.getDataContext();
+        Project project = DataKeys.PROJECT.getData(dataContext);
         if (project != null) {
             ProjectSettingsComponent instance = ProjectSettingsComponent.getInstance(project);
             return instance.getSettings();
