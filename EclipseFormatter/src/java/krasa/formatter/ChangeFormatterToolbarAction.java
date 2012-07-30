@@ -21,6 +21,7 @@ public class ChangeFormatterToolbarAction extends AnAction {
         final Settings state = getSettings(e);
         if (state != null) {
             state.setFormatter(Settings.Formatter.DEFAULT == state.getFormatter() ? Settings.Formatter.ECLIPSE : Settings.Formatter.DEFAULT);
+            ProjectUtils.applyToAllOpenedProjects(state);
             updateIcon(state, e.getPresentation());
         }
     }
@@ -36,7 +37,6 @@ public class ChangeFormatterToolbarAction extends AnAction {
     }
 
     private void updateIcon(Settings state, Presentation presentation) {
-        ProjectUtils.applyToAllOpenedProjects(state);
         if (state.getFormatter() == Settings.Formatter.DEFAULT) {
             presentation.setIcon(ICON1);
         } else {
