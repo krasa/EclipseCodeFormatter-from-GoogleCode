@@ -1,4 +1,4 @@
-package krasa.formatter;
+package krasa.formatter.action;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;

@@ -1,4 +1,4 @@
-package krasa.formatter;
+package krasa.formatter.action;
 
 import com.intellij.ide.actions.QuickSwitchSchemeAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

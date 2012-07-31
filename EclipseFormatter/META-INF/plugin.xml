@@ -4,7 +4,7 @@
 
     <name>Eclipse Code Formatter</name>
     <id>EclipseCodeFormatter</id>
-    <version>2.2.3</version>
+    <version>2.4.0</version>
 
     <idea-version since-build="110.137" until-build=""/>
     <!--<idea-version since-build="90.000" until-build="109.999"/>-->
@@ -28,6 +28,10 @@
     </vendor>
 
     <change-notes><![CDATA[
+        <br>2.4 (2012-08-03)
+        <br>- new action for import optimalization
+        <br>2.3 (2012-07-12)
+        <br>- fixed bug: log spam 
         <br>2.2 (2012-06-30)
         <br>- added button for switching formatters to the main toolbar
         <br>2.1 (2012-06-22)
@@ -119,13 +123,21 @@
         </component>
     </project-components>
     <actions>
-        <action id="QuickChangeCodeFormatter" class="krasa.formatter.QuickChangeCodeFormatterAction"
+        <action id="QuickChangeCodeFormatter" class="krasa.formatter.action.QuickChangeCodeFormatterAction"
                 text="Switch Code Formatter" description="Switch Code Formatter">
             <add-to-group group-id="ChangeScheme" anchor="first"/>
         </action>
-        <action id="ChangeFormatterToolbarAction" class="krasa.formatter.ChangeFormatterToolbarAction"
+        <action id="ChangeFormatterToolbarAction" class="krasa.formatter.action.ChangeFormatterToolbarAction"
                 text="Switch formatter"
                 description="Switch formatter between Eclipse and IntelliJ">
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+        </action>
+        <action id="EclipseFormatterPluginOptimizeImportsAction" class="krasa.formatter.action.OptimizeImportsAction"
+                text="Optimize Imports by Eclipse Formatter Plugin"
+                description="Optimize Imports by Eclipse Formatter Plugin"
+                keymap="ctrl alt o">
+            <keyboard-shortcut keymap="$default" remove="OptimizeImports" replace-all="ctrl alt o"
+                               first-keystroke="ctrl alt o"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
         </action>
     </actions>
