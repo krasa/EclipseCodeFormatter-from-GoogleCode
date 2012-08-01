@@ -28,8 +28,9 @@
     </vendor>
 
     <change-notes><![CDATA[
-        <br>2.4 (2012-08-03)
-        <br>- new action for import optimalization
+        <br>2.4 (2012-08-1)
+        <br>- new action for import optimalization, it de/registeres shortcuts of default action on formatter schitch.
+        <br>- automatic turn off of IntelliJ's import optimalization on code reformatting - which causes problems.
         <br>2.3 (2012-07-12)
         <br>- fixed bug: log spam 
         <br>2.2 (2012-06-30)
@@ -105,8 +106,7 @@
         <br>
         <br>Known issues:
         <br>-when editor is opened, view sometimes moves one line up or down after reformatting
-        <br>-IntelliJ's import optimizing must be manually turned off, otherwise this plugin will not optimize imports on reformatting
-        <br>-ctrl-shift-o uses IntelliJ's import optimising no matter what
+        <br>-IntelliJ's import optimizing must be turned off, otherwise this plugin will sometimes not optimize imports on reformatting
 
     ]]></change-notes>
 
@@ -134,11 +134,8 @@
         </action>
         <action id="EclipseFormatterPluginOptimizeImportsAction" class="krasa.formatter.action.OptimizeImportsAction"
                 text="Optimize Imports by Eclipse Formatter Plugin"
-                description="Optimize Imports by Eclipse Formatter Plugin"
-                keymap="ctrl alt o">
-            <keyboard-shortcut keymap="$default" remove="OptimizeImports" replace-all="ctrl alt o"
-                               first-keystroke="ctrl alt o"/>
-            <add-to-group group-id="MainToolBar" anchor="last"/>
+                description="Optimize Imports by Eclipse Formatter Plugin">
+            <add-to-group group-id="CodeMenu" anchor="after" relative-to-action="CodeFormatGroup"/>
         </action>
     </actions>
 </idea-plugin>
