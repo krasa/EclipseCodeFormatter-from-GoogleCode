@@ -24,6 +24,8 @@
  # Also in the project properties, go to Java Compiler and select Enable project specific settings. *Make sure that the Compiler compliance level is set right.*
  # Click OK to save the settings.
  # Go to the .settings directory inside your project's directory. There you will find the org.eclipse.jdt.core.prefs file which contains the Eclipse formatter settings.
+ # the result should look like [http://code.google.com/p/eclipse-code-formatter-intellij-plugin/source/browse/EclipseFormatter/test/resources/org.eclipse.jdt.core.prefs this]
+
 
 ===Java language level is set to 1.5 by default. For 1.6+ make sure following lines are in the config file===
  * org.eclipse.jdt.core.compiler.compliance=1.6
