@@ -33,4 +33,4 @@
  * org.eclipse.jdt.core.compiler.source=1.6
 
 == Notifications ==
- * if you do not like them, turn them off (Settings - Notifications)
+ * notification on code format can be turned on or off(Settings - Notifications)
