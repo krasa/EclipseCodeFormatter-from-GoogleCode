@@ -1,8 +1,9 @@
 =Instructions=
+ # [http://plugins.intellij.net/plugin/?idea&id=6546 Download the plugin and install] 
  #  [HowTo#Getting_the_Eclipse_code_formatter_preferences_file enable project specific formatter settings in Eclipse to get preference file] or [HowTo#Getting_the_Eclipse_code_formatter_profiles export profiles]
- #  set path to eclipse preference file(org.eclipse.jdt.core.prefs) or to exported profiles file in the IntelliJ (Settings - Eclipse Code Formatter - field "Eclipse preference file"), when using exported profiles, select desired profile in the combobox "Java formatter profile" 
- #  format code as usual, notification will come up with result 
- #  use ctrl + ~ for quick switch between formatters    
+ #  set path to eclipse preference file or to exported profiles file (IntelliJ - Settings - Eclipse Code Formatter - field "Eclipse preference file"), when using exported profiles, select desired profile in the combobox "Java formatter profile" 
+ #  format code as usual, you can turn on or off notification about the  result(Settings - Notifications) 
+ #  use ctrl + ~ for quick switch between formatters or icon at main toolbar    
 
 * Possible problems with formatting : *
  * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
@@ -10,7 +11,7 @@
 
 == Optimizing imports ==
  * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 99 or more (Settings - Code Style - Imports)
- * ~~IntelliJ's Import Optimizing must be turned off (turn on Settings-Editor-Show "Reformat Code" dialog, and then in that dialog turn off Import Optimizing)~~ (all is automatic from version 2.4)
+ * IntelliJ's Import Optimizing must be turned off (turn on Settings-Editor-Show "Reformat Code" dialog, and then in that dialog turn off Import Optimizing) (it is automaticly turned off from version 2.4)
   
 
 == Getting the Eclipse code formatter profiles ==
@@ -31,6 +32,3 @@
  * org.eclipse.jdt.core.compiler.compliance=1.6
  * org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
  * org.eclipse.jdt.core.compiler.source=1.6
-
-== Notifications ==
- * notification on code format can be turned on or off(Settings - Notifications)
