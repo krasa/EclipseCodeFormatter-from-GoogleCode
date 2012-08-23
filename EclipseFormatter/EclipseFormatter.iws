@@ -6,37 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="2d6f995a-0c32-4f0b-afa9-3827d21d569f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DependencyDownloader" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/cglib-nodep-2.2.2-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/cglib-nodep-2.2.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/easymock-3.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/objenesis-1.2-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/test/objenesis-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/easymock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/settings/provider" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DependencyDownloader/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/easymock/EasyMockTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/easymock/MockAnnotationUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/easymock/Mocked.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/settings/provider/CachedProviderTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/test/unitils-core-3.3-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/test/unitils-core-3.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/test/unitils-easymock-3.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/test/unitils-mock-3.3.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iml" afterPath="$PROJECT_DIR$/EclipseFormatter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.ipr" afterPath="$PROJECT_DIR$/EclipseFormatter.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" afterPath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iws" afterPath="$PROJECT_DIR$/EclipseFormatter.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/action/OptimizeImportsProcessor.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/action/OptimizeImportsProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeFormatter.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeFormatter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/processor/ImportOrderProcessor.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/processor/ImportOrderProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JavaCodeFormatterFacadeTest.java" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JavaCodeFormatterFacadeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/krasa/formatter/plugin/ImportSorterTest.java" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/plugin/ImportSorterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/java/krasa/formatter/plugin/processor/ImportOrderProcessorTest.java" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/plugin/processor/ImportOrderProcessorTest.java" />
     </list>
     <list id="c2b475fe-bcd3-44e4-bcea-eae81f6876d7" name="ignore" comment="" />
     <ignored path="EclipseFormatter.iws" />
@@ -115,28 +86,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JavaCodeFormatterFacade.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
+      <file leaf-file-name="EasyMockTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/EasyMockTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Resources.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Resources.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="13" selection-start="785" selection-end="785" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Messages.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Messages.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="997" selection-end="997" vertical-scroll-proportion="0.0">
+            <state line="13" column="23" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -167,10 +120,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestUtils.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.44444445">
+            <state line="16" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DependencyDownloader.iml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EclipseFormatter.iws" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JavaCodeFormatterFacade.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="94" column="0" selection-start="3866" selection-end="3866" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -180,20 +160,7 @@
         <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/settings/provider/CachedProviderTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="17" column="41" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyMockTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/EasyMockTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="23" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -233,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" />
-        <option value="$PROJECT_DIR$/EclipseFormatter.iws" />
         <option value="$PROJECT_DIR$/../../../sandbox/plugins/plugin/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectCodeStyleInstaller.java" />
@@ -271,6 +237,7 @@
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JavaCodeFormatterFacadeTest.java" />
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java" />
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java" />
+        <option value="$PROJECT_DIR$/EclipseFormatter.iws" />
       </list>
     </option>
   </component>
@@ -361,8 +328,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1021,7 +988,7 @@
       <recent name="krasa.formatter.settings.provider" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in EclipseFormatter">
+  <component name="RunManager" selected="Plugin.Unnamed">
     <configuration default="false" name="CachedProviderTest.testWasChanged" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1397,7 +1364,7 @@
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
           <option name="myVcsRoot" value="$PROJECT_DIR$/DependencyDownloader" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/untitled" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$/DependencyDownloader" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -1429,7 +1396,11 @@
       <created>1345703396107</created>
       <updated>1345703396107</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="2.5">
+      <created>1345758137101</created>
+      <updated>1345758137101</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1456,12 +1427,10 @@
     <frame x="58" y="-4" width="1863" height="1085" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="2558" y="541" width="1663" height="114" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46581197" sideWeight="0.9944904" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46581197" sideWeight="0.9944904" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TunnelliJ" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.68115944" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27457264" sideWeight="0.47713497" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42841882" sideWeight="0.6865014" order="3" side_tool="false" content_ui="tabs" />
@@ -1470,20 +1439,22 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44017094" sideWeight="0.4939074" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Notes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31730768" sideWeight="0.46721762" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4661157" sideWeight="0.53418803" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23801653" sideWeight="0.43162394" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25454545" sideWeight="0.53418803" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25454545" sideWeight="0.53418803" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3386752" sideWeight="0.6584022" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29983792" sideWeight="0.68115944" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="2558" y="541" width="1663" height="114" />
       <window_info id="JavaRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="JavaRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4661157" sideWeight="0.53418803" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" sideWeight="0.62995595" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27457264" sideWeight="0.47713497" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1524,9 +1495,9 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" value="2.5" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
@@ -1548,20 +1519,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/plugin/ImportSorterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="410" selection-end="410" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DependencyDownloader/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="50" selection-start="934" selection-end="934" vertical-scroll-proportion="0.43820226">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/processor/ImportOrderProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="92" column="48" selection-start="3621" selection-end="3621" vertical-scroll-proportion="0.0">
@@ -1571,9 +1528,7 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/IExpectationSetters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="27" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="36" column="27" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/Mocked.java">
@@ -1585,51 +1540,37 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/MockInvocationHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1488" selection-end="1488" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="41" column="0" selection-start="1488" selection-end="1488" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ObjectMethodsFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="84" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ClassProxyFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="0" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="93" column="0" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ExpectedInvocation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="0" selection-start="4261" selection-end="4261" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="116" column="0" selection-start="4261" selection-end="4261" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/RecordState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="0" selection-start="7694" selection-end="7694" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="221" column="0" selection-start="7694" selection-end="7694" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/statements/RunAfters.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="16" selection-start="620" selection-end="620" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="16" selection-start="620" selection-end="620" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ClassExtensionHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="2006" selection-end="2006" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="60" column="0" selection-start="2006" selection-end="2006" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/MocksControl.java">
@@ -1846,13 +1787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Resources.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="13" selection-start="785" selection-end="785" vertical-scroll-proportion="0.0">
@@ -1889,18 +1823,14 @@
     <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/settings/provider/CachedProviderTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="41" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/EasyMockTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="23" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1913,7 +1843,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.44444445">
+        <state line="16" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="0" selection-start="3866" selection-end="3866" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
