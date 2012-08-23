@@ -8,12 +8,6 @@
 
 package krasa.formatter.plugin;
 
-import krasa.formatter.settings.Settings;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.picocontainer.MutablePicoContainer;
-
 import com.intellij.codeInsight.actions.LayoutCodeConstants;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.Shortcut;
@@ -22,10 +16,14 @@ import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.impl.KeymapManagerImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import krasa.formatter.settings.Settings;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.picocontainer.MutablePicoContainer;
 
 /**
  * Switches a project's {@link CodeStyleManager} to a eclipse formatter and back.
- * 
+ *
  * @author Esko Luontola
  * @author Vojtech Krasa
  * @since 2.12.2007
@@ -34,6 +32,10 @@ public class ProjectCodeStyleInstaller {
 
 	private static final String CODE_STYLE_MANAGER_KEY = CodeStyleManager.class.getName();
 	private static final Logger LOG = Logger.getInstance(ProjectCodeStyleInstaller.class.getName());
+
+	public static final String ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION = "EclipseFormatterPluginOptimizeImportsAction";
+	public static final String ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS = "EclipseFormatterPluginOptimizeImports";
+	public static final String OPTIMIZE_IMPORTS = "OptimizeImports";
 
 	@NotNull
 	private final Project project;
@@ -64,13 +66,18 @@ public class ProjectCodeStyleInstaller {
 						Boolean.toString(false));
 			}
 			Keymap keyMap = getKeyMap();
-			Shortcut[] shortcuts = keyMap.getShortcuts("OptimizeImports");
-			for (Shortcut shortcut : shortcuts) {
-				keyMap.removeShortcut("OptimizeImports", shortcut);
-				keyMap.addShortcut("EclipseFormatterPluginOptimizeImportsAction", shortcut);
-			}
+			installShortcut(keyMap, OPTIMIZE_IMPORTS);
+			installShortcut(keyMap, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION);
 		}
 
+	}
+
+	private void installShortcut(Keymap keyMap, String current) {
+		Shortcut[] shortcuts = keyMap.getShortcuts(current);
+		for (Shortcut shortcut : shortcuts) {
+			keyMap.removeShortcut(current, shortcut);
+			keyMap.addShortcut(ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS, shortcut);
+		}
 	}
 
 	private Keymap getKeyMap() {
@@ -87,13 +94,18 @@ public class ProjectCodeStyleInstaller {
 			manager = ((EclipseCodeStyleManager) manager).getOriginal();
 			registerCodeStyleManager(project, manager);
 			Keymap parent = getKeyMap();
-			Shortcut[] shortcuts = parent.getShortcuts("EclipseFormatterPluginOptimizeImportsAction");
-			for (Shortcut shortcut : shortcuts) {
-				parent.removeShortcut("EclipseFormatterPluginOptimizeImportsAction", shortcut);
-				parent.addShortcut("OptimizeImports", shortcut);
-			}
+			uninstallShortcut(parent, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION);
+			uninstallShortcut(parent, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS);
 		}
 
+	}
+
+	private void uninstallShortcut(Keymap parent, String current) {
+		Shortcut[] shortcuts = parent.getShortcuts(current);
+		for (Shortcut shortcut : shortcuts) {
+			parent.removeShortcut(current, shortcut);
+			parent.addShortcut(OPTIMIZE_IMPORTS, shortcut);
+		}
 	}
 
 	private static void registerCodeStyleManager(@NotNull Project project, @NotNull CodeStyleManager manager) {

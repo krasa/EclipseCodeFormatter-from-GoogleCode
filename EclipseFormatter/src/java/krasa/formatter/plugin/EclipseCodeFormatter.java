@@ -14,6 +14,7 @@ import krasa.formatter.eclipse.CodeFormatterFacade;
 import krasa.formatter.eclipse.FileDoesNotExistsException;
 import krasa.formatter.plugin.processor.GWTProcessor;
 import krasa.formatter.plugin.processor.ImportOrderProcessor;
+import krasa.formatter.plugin.processor.JSCommentsFormatterProcessor;
 import krasa.formatter.plugin.processor.Processor;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
@@ -26,134 +27,135 @@ import java.util.List;
  * @author Vojtech Krasa
  */
 public class EclipseCodeFormatter {
-    private static final Logger LOG = Logger.getInstance(EclipseCodeFormatter.class.getName());
+	private static final Logger LOG = Logger.getInstance(EclipseCodeFormatter.class.getName());
 
-    @NotNull
-    protected final CodeFormatterFacade codeFormatterFacade;
+	@NotNull
+	protected final CodeFormatterFacade codeFormatterFacade;
 
-    private List<Processor> postProcessors;
+	private List<Processor> postProcessors;
 
-    public EclipseCodeFormatter(@NotNull Settings settings, CodeFormatterFacade codeFormatterFacade1) {
-        codeFormatterFacade = codeFormatterFacade1;
-        postProcessors = new ArrayList<Processor>();
-        postProcessors.add(new ImportOrderProcessor(settings));
-        postProcessors.add(new GWTProcessor(settings));
-    }
+	public EclipseCodeFormatter(@NotNull Settings settings, @NotNull CodeFormatterFacade codeFormatterFacade1) {
+		codeFormatterFacade = codeFormatterFacade1;
+		postProcessors = new ArrayList<Processor>();
+		postProcessors.add(new ImportOrderProcessor(settings));
+		postProcessors.add(new GWTProcessor(settings));
+		postProcessors.add(new JSCommentsFormatterProcessor(settings));
+	}
 
-    public void format(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
-        boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
-        Range range = new Range(startOffset, endOffset, wholeFile);
-        formatWithEclipse(psiFile, range);
-    }
+	public void format(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
+		boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
+		Range range = new Range(startOffset, endOffset, wholeFile);
+		formatWithEclipse(psiFile, range);
+	}
 
-    private void formatWithEclipse(PsiFile psiFile, Range range) throws FileDoesNotExistsException {
-        final Editor editor = PsiUtilBase.findEditor(psiFile);
-        if (editor != null) {
-            formatWhenEditorIsOpen(range, psiFile);
-        } else {
-            formatWhenEditorIsClosed(psiFile);
-        }
+	private void formatWithEclipse(PsiFile psiFile, Range range) throws FileDoesNotExistsException {
+		final Editor editor = PsiUtilBase.findEditor(psiFile);
+		if (editor != null) {
+			formatWhenEditorIsOpen(range, psiFile);
+		} else {
+			formatWhenEditorIsClosed(psiFile);
+		}
 
-    }
+	}
 
-    private void formatWhenEditorIsClosed(PsiFile psiFile) throws FileDoesNotExistsException {
-        VirtualFile virtualFile = psiFile.getVirtualFile();
-        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
-        Document document = fileDocumentManager.getDocument(virtualFile);
-        fileDocumentManager.saveDocument(document); // when file is edited and editor is closed, it is needed to save
-        // the text
-        String reformat = reformat(document.getText());
-        document.setText(reformat);
-        postProcess(document, psiFile, new Range(-1, -1, true));
-        fileDocumentManager.saveDocument(document);
-    }
+	private void formatWhenEditorIsClosed(PsiFile psiFile) throws FileDoesNotExistsException {
+		VirtualFile virtualFile = psiFile.getVirtualFile();
+		FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
+		Document document = fileDocumentManager.getDocument(virtualFile);
+		fileDocumentManager.saveDocument(document); // when file is edited and editor is closed, it is needed to save
+		// the text
+		String reformat = reformat(document.getText());
+		document.setText(reformat);
+		postProcess(document, psiFile, new Range(-1, -1, true));
+		fileDocumentManager.saveDocument(document);
+	}
 
-    private String reformat(String virtualFile) throws FileDoesNotExistsException {
-        return codeFormatterFacade.format(virtualFile);
-    }
+	private String reformat(String virtualFile) throws FileDoesNotExistsException {
+		return codeFormatterFacade.format(virtualFile);
+	}
 
-    /* when file is being edited, it is important to load text from editor, i think */
-    private void formatWhenEditorIsOpen(Range range, PsiFile file) throws FileDoesNotExistsException {
-        final Editor editor = PsiUtilBase.findEditor(file);
-        int visualColumnToRestore = getVisualColumnToRestore(editor);
+	/* when file is being edited, it is important to load text from editor, i think */
+	private void formatWhenEditorIsOpen(Range range, PsiFile file) throws FileDoesNotExistsException {
+		final Editor editor = PsiUtilBase.findEditor(file);
+		int visualColumnToRestore = getVisualColumnToRestore(editor);
 
-        Document document = editor.getDocument();
-        // http://code.google.com/p/eclipse-code-formatter-intellij-plugin/issues/detail?id=7
-        PsiDocumentManager.getInstance(editor.getProject()).doPostponedOperationsAndUnblockDocument(document);
+		Document document = editor.getDocument();
+		// http://code.google.com/p/eclipse-code-formatter-intellij-plugin/issues/detail?id=7
+		PsiDocumentManager.getInstance(editor.getProject()).doPostponedOperationsAndUnblockDocument(document);
 
-        String text = document.getText();
-        String reformat = reformat(range.getStartOffset(), range.getEndOffset(), text);
-        document.setText(reformat);
-        postProcess(document, file, range);
+		String text = document.getText();
+		String reformat = reformat(range.getStartOffset(), range.getEndOffset(), text);
+		document.setText(reformat);
+		postProcess(document, file, range);
 
-        restoreVisualColumn(editor, visualColumnToRestore);
-    }
+		restoreVisualColumn(editor, visualColumnToRestore);
+	}
 
-    private void postProcess(Document document, PsiFile file, Range range) {
-        for (Processor postProcessor : postProcessors) {
-            postProcessor.process(document, file, range);
-        }
+	private void postProcess(Document document, PsiFile file, Range range) {
+		for (Processor postProcessor : postProcessors) {
+			postProcessor.process(document, file, range);
+		}
 
-    }
+	}
 
-    private String reformat(int startOffset, int endOffset, String text) throws FileDoesNotExistsException {
-        return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset);
-    }
+	private String reformat(int startOffset, int endOffset, String text) throws FileDoesNotExistsException {
+		return codeFormatterFacade.format(text, getLineStartOffset(startOffset, text), endOffset);
+	}
 
-    /**
-     * start offset must be on the start of line
-     */
-    private int getLineStartOffset(int startOffset, String text) {
-        if (startOffset == 0) {
-            return 0;
-        }
-        return text.substring(0, startOffset).lastIndexOf(Settings.LINE_SEPARATOR) + 1;
-    }
+	/**
+	 * start offset must be on the start of line
+	 */
+	private int getLineStartOffset(int startOffset, String text) {
+		if (startOffset == 0) {
+			return 0;
+		}
+		return text.substring(0, startOffset).lastIndexOf(Settings.LINE_SEPARATOR) + 1;
+	}
 
-    private void restoreVisualColumn(Editor editor, int visualColumnToRestore) {
-        if (visualColumnToRestore < 0) {
-        } else {
-            CaretModel caretModel = editor.getCaretModel();
-            VisualPosition position = caretModel.getVisualPosition();
-            if (visualColumnToRestore != position.column) {
-                caretModel.moveToVisualPosition(new VisualPosition(position.line, visualColumnToRestore));
-            }
-        }
-    }
+	private void restoreVisualColumn(Editor editor, int visualColumnToRestore) {
+		if (visualColumnToRestore < 0) {
+		} else {
+			CaretModel caretModel = editor.getCaretModel();
+			VisualPosition position = caretModel.getVisualPosition();
+			if (visualColumnToRestore != position.column) {
+				caretModel.moveToVisualPosition(new VisualPosition(position.line, visualColumnToRestore));
+			}
+		}
+	}
 
-    // There is a possible case that cursor is located at the end of the line that contains only white spaces. For
-    // example:
-    // public void foo() {
-    // <caret>
-    // }
-    // Formatter removes such white spaces, i.e. keeps only line feed symbol. But we want to preserve caret position
-    // then.
-    // So, we check if it should be preserved and restore it after formatting if necessary
+	// There is a possible case that cursor is located at the end of the line that contains only white spaces. For
+	// example:
+	// public void foo() {
+	// <caret>
+	// }
+	// Formatter removes such white spaces, i.e. keeps only line feed symbol. But we want to preserve caret position
+	// then.
+	// So, we check if it should be preserved and restore it after formatting if necessary
 
-    private int getVisualColumnToRestore(Editor editor) {
-        int visualColumnToRestore = -1;
+	private int getVisualColumnToRestore(Editor editor) {
+		int visualColumnToRestore = -1;
 
-        if (editor != null) {
-            Document document1 = editor.getDocument();
-            int caretOffset = editor.getCaretModel().getOffset();
-            caretOffset = Math.max(Math.min(caretOffset, document1.getTextLength() - 1), 0);
-            CharSequence text1 = document1.getCharsSequence();
-            int caretLine = document1.getLineNumber(caretOffset);
-            int lineStartOffset = document1.getLineStartOffset(caretLine);
-            int lineEndOffset = document1.getLineEndOffset(caretLine);
-            boolean fixCaretPosition = true;
-            for (int i = lineStartOffset; i < lineEndOffset; i++) {
-                char c = text1.charAt(i);
-                if (c != ' ' && c != '\t' && c != '\n') {
-                    fixCaretPosition = false;
-                    break;
-                }
-            }
-            if (fixCaretPosition) {
-                visualColumnToRestore = editor.getCaretModel().getVisualPosition().column;
-            }
-        }
-        return visualColumnToRestore;
-    }
+		if (editor != null) {
+			Document document1 = editor.getDocument();
+			int caretOffset = editor.getCaretModel().getOffset();
+			caretOffset = Math.max(Math.min(caretOffset, document1.getTextLength() - 1), 0);
+			CharSequence text1 = document1.getCharsSequence();
+			int caretLine = document1.getLineNumber(caretOffset);
+			int lineStartOffset = document1.getLineStartOffset(caretLine);
+			int lineEndOffset = document1.getLineEndOffset(caretLine);
+			boolean fixCaretPosition = true;
+			for (int i = lineStartOffset; i < lineEndOffset; i++) {
+				char c = text1.charAt(i);
+				if (c != ' ' && c != '\t' && c != '\n') {
+					fixCaretPosition = false;
+					break;
+				}
+			}
+			if (fixCaretPosition) {
+				visualColumnToRestore = editor.getCaretModel().getVisualPosition().column;
+			}
+		}
+		return visualColumnToRestore;
+	}
 
 }

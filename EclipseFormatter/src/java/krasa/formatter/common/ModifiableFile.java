@@ -8,25 +8,42 @@ import java.io.File;
  * @author Vojtech Krasa
  */
 public class ModifiableFile extends File {
-    private long lastModified;
 
-    public ModifiableFile(String pathToConfigFileJava) {
-        super(pathToConfigFileJava);
-    }
+	public ModifiableFile(String pathToConfigFileJava) {
+		super(pathToConfigFileJava);
+	}
 
-    public boolean wasChanged() {
-        checkIfExists();
-        return this.lastModified() > lastModified;
-    }
+	public boolean wasChanged(Monitor lastState) {
+		checkIfExists();
+		return this.lastModified() > lastState.getLastStateTime();
+	}
 
-    public void checkIfExists() throws FileDoesNotExistsException {
-        if (!this.exists()) {
-            throw new FileDoesNotExistsException(this);
-        }
-    }
+	public void checkIfExists() throws FileDoesNotExistsException {
+		if (!this.exists()) {
+			throw new FileDoesNotExistsException(this);
+		}
+	}
 
-    public void saveLastModified() {
-        lastModified = this.lastModified();
-    }
+	public Monitor getModifiedMonitor() {
+		return new Monitor(this);
+	}
 
+	/**
+	 * @author Vojtech Krasa
+	 */
+	public static class Monitor {
+		private long lastStateTime;
+
+		public Monitor(File file) {
+			lastStateTime = file.lastModified();
+		}
+
+		public long getLastStateTime() {
+			return lastStateTime;
+		}
+
+		public boolean wasModified(File l) {
+			return l.lastModified() > lastStateTime;
+		}
+	}
 }

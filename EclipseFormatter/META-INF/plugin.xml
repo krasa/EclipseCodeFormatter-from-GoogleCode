@@ -1,14 +1,14 @@
 <!DOCTYPE idea-plugin PUBLIC "Plugin/DTD"
-        "http://plugins.intellij.net/plugin.dtd">
+		"http://plugins.intellij.net/plugin.dtd">
 <idea-plugin version="2" url="http://plugins.intellij.net/plugin/?idea&amp;id=6546">
 
-    <name>Eclipse Code Formatter</name>
-    <id>EclipseCodeFormatter</id>
-    <version>2.4.0</version>
+	<name>Eclipse Code Formatter</name>
+	<id>EclipseCodeFormatter</id>
+	<version>2.4.0</version>
 
-    <idea-version since-build="110.137" until-build=""/>
-    <!--<idea-version since-build="90.000" until-build="109.999"/>-->
-    <description><![CDATA[
+	<idea-version since-build="110.137" until-build=""/>
+	<!--<idea-version since-build="90.000" until-build="109.999"/>-->
+	<description><![CDATA[
         Allows using Eclipse's code formatter directly from IntelliJ.<br>
         Solves the problem of maintaining a common code style in team environments where both IDEA and Eclipse are used. <br> 
         <br>
@@ -21,13 +21,15 @@
         It is possible to add support for more file types, feel free to contribute or raise an issue.
 
         ]]></description>
-    <category>Formatting</category>
+	<category>Formatting</category>
 
-    <vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech
-        Krasa
-    </vendor>
+	<vendor url="http://code.google.com/p/eclipse-code-formatter-intellij-plugin/" email="vojta.krasa@gmail.com">Vojtech
+		Krasa
+	</vendor>
 
-    <change-notes><![CDATA[
+	<change-notes><![CDATA[
+        <br>2.5 (2012-xxx)
+        <br>- new emulation of js comments formatting
         <br>2.4 (2012-08-1)
         <br>- new action for import optimalization, it de/registeres shortcuts of default action on formatter schitch.
         <br>- automatic turn off of IntelliJ's import optimalization on code reformatting - which causes problems.
@@ -110,32 +112,32 @@
 
     ]]></change-notes>
 
-    <depends>com.intellij.modules.lang</depends>
+	<depends>com.intellij.modules.lang</depends>
 
-    <application-components>
-        <component>
-            <implementation-class>krasa.formatter.settings.GlobalSettings</implementation-class>
-        </component>
-    </application-components>
-    <project-components>
-        <component>
-            <implementation-class>krasa.formatter.settings.ProjectSettingsComponent</implementation-class>
-        </component>
-    </project-components>
-    <actions>
-        <action id="QuickChangeCodeFormatter" class="krasa.formatter.action.QuickChangeCodeFormatterAction"
-                text="Switch Code Formatter" description="Switch Code Formatter">
-            <add-to-group group-id="ChangeScheme" anchor="first"/>
-        </action>
-        <action id="ChangeFormatterToolbarAction" class="krasa.formatter.action.ChangeFormatterToolbarAction"
-                text="Switch formatter"
-                description="Switch formatter between Eclipse and IntelliJ">
-            <add-to-group group-id="MainToolBar" anchor="last"/>
-        </action>
-        <action id="EclipseFormatterPluginOptimizeImportsAction" class="krasa.formatter.action.OptimizeImportsAction"
-                text="Optimize Imports by Eclipse Formatter Plugin"
-                description="Optimize Imports by Eclipse Formatter Plugin">
-            <add-to-group group-id="CodeMenu" anchor="after" relative-to-action="CodeFormatGroup"/>
-        </action>
-    </actions>
+	<application-components>
+		<component>
+			<implementation-class>krasa.formatter.settings.GlobalSettings</implementation-class>
+		</component>
+	</application-components>
+	<project-components>
+		<component>
+			<implementation-class>krasa.formatter.settings.ProjectSettingsComponent</implementation-class>
+		</component>
+	</project-components>
+	<actions>
+		<action id="QuickChangeCodeFormatter" class="krasa.formatter.action.QuickChangeCodeFormatterAction"
+				text="Switch Code Formatter" description="Switch Code Formatter">
+			<add-to-group group-id="ChangeScheme" anchor="first"/>
+		</action>
+		<action id="ChangeFormatterToolbarAction" class="krasa.formatter.action.ChangeFormatterToolbarAction"
+				text="Switch formatter"
+				description="Switch formatter between Eclipse and IntelliJ">
+			<add-to-group group-id="MainToolBar" anchor="last"/>
+		</action>
+		<action id="EclipseFormatterPluginOptimizeImportsAction" class="krasa.formatter.action.OptimizeImportsAction"
+				text="Optimize Imports by Eclipse Formatter Plugin"
+				description="Optimize Imports by Eclipse Formatter Plugin">
+			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="CodeFormatGroup"/>
+		</action>
+	</actions>
 </idea-plugin>

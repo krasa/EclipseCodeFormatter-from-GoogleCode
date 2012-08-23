@@ -17,31 +17,31 @@ import java.util.Properties;
  * @author Vojtech Krasa
  */
 public class GWTProcessor implements Processor {
-    private Settings settings;
+	private Settings settings;
 
-    public GWTProcessor(Settings settings) {
-        this.settings = settings;
-    }
+	public GWTProcessor(Settings settings) {
+		this.settings = settings;
+	}
 
-    @Override
-    public boolean process(Document documentIJ, PsiFile file, Range range) {
-        if (FileUtils.isJava(file) && settings.isEnableGWT()) {
-            try {
-                IDocument document = new org.eclipse.jface.text.Document(documentIJ.getText());
-                Properties javaFormattingPrefs = settings.getJavaProperties().getProperties();
-                Properties properties = settings.getJSProperties().getProperties();
+	@Override
+	public boolean process(Document documentIJ, PsiFile file, Range range) {
+		if (FileUtils.isJava(file) && settings.isEnableGWT()) {
+			try {
+				IDocument document = new org.eclipse.jface.text.Document(documentIJ.getText());
+				Properties javaFormattingPrefs = settings.getJavaProperties().get();
+				Properties properties = settings.getJSProperties().get();
 
-                TextEdit formatEdit = JsniFormattingUtil.format(document, javaFormattingPrefs, properties, range);
-                formatEdit.apply(document);
-                documentIJ.setText(document.get());
-            } catch (FileDoesNotExistsException e) {
-                throw e;
-            } catch (InvalidPropertyFile e) {
-                throw e;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return true;
-    }
+				TextEdit formatEdit = JsniFormattingUtil.format(document, javaFormattingPrefs, properties, range);
+				formatEdit.apply(document);
+				documentIJ.setText(document.get());
+			} catch (FileDoesNotExistsException e) {
+				throw e;
+			} catch (InvalidPropertyFile e) {
+				throw e;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return true;
+	}
 }
