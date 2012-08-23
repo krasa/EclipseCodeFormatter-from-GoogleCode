@@ -15,6 +15,7 @@ import krasa.formatter.plugin.Range;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.settings.provider.ImportOrderProvider;
 import krasa.formatter.utils.FileUtils;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Vojtech Krasa
@@ -25,12 +26,11 @@ public class ImportOrderProcessor implements Processor {
 	protected ImportOrderProvider importOrderProviderFromFile;
 	protected ModifiableFile.Monitor modifiedMonitor;
 
-	public ImportOrderProcessor(Settings settings) {
-		this.settings = settings;
-		importOrderProviderFromFile = new ImportOrderProvider(settings);
+	public ImportOrderProcessor(Settings settings, ImportOrderProvider importOrderProvider) {
+		this(settings, null, importOrderProvider, null);
 	}
 
-	public ImportOrderProcessor(Settings settings, ImportSorter importSorter, ImportOrderProvider importOrderProviderFromFile, ModifiableFile.Monitor modifiedMonitor) {
+	public ImportOrderProcessor(Settings settings, @Nullable ImportSorter importSorter, ImportOrderProvider importOrderProviderFromFile, @Nullable ModifiableFile.Monitor modifiedMonitor) {
 		this.settings = settings;
 		this.importSorter = importSorter;
 		this.importOrderProviderFromFile = importOrderProviderFromFile;

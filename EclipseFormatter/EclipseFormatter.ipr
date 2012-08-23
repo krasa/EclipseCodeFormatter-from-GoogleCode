@@ -18,13 +18,26 @@
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
     </wildcardResourcePatterns>
-    <annotationProcessing enabled="false" useClasspath="true" />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <processorPath useClasspath="true" />
+        <module name="DependencyDownloader" />
+        <module name="DependencyHandler" />
+        <module name="untitled" />
+      </profile>
+    </annotationProcessing>
   </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCodeFormatter">
-    <option name="eclipsePrefs" value="C:\org.eclipse.jdt.ui.prefs" />
+    <option name="id" value="1340636340667" />
+    <option name="name" value="sdpapi" />
+    <option name="pathToConfigFileJava" value="G:/workspace/_projekty/_T-Mobile/format (1).xml" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
@@ -46,6 +59,13 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/untitled/pom.xml" />
+      </list>
+    </option>
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -187,13 +207,14 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" filepath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" />
       <module fileurl="file://$PROJECT_DIR$/EclipseFormatter.iml" filepath="$PROJECT_DIR$/EclipseFormatter.iml" />
     </modules>
   </component>
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-107.587" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-122.29" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">
@@ -212,6 +233,55 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
+  </component>
+  <component name="libraryTable">
+    <library name="Maven: cglib:cglib-nodep:2.2.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.easymock:easymock:3.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/easymock/easymock/3.1/easymock-3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/easymock/easymock/3.1/easymock-3.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/easymock/easymock/3.1/easymock-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.objenesis:objenesis:1.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/objenesis/objenesis/1.2/objenesis-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/objenesis/objenesis/1.2/objenesis-1.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/objenesis/objenesis/1.2/objenesis-1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="test">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/test" />
+        <root url="file://$PROJECT_DIR$/lib/test" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/lib/test" />
+        <root url="file://$PROJECT_DIR$/lib/test" />
+        <root url="jar://$PROJECT_DIR$/../../unitils-easymock-3.3-sources.jar!/" />
+      </SOURCES>
+      <jarDirectory url="file://$PROJECT_DIR$/lib/test" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/test" recursive="false" type="SOURCES" />
+    </library>
   </component>
 </project>
 

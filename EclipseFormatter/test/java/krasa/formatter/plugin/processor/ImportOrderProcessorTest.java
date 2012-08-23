@@ -1,16 +1,15 @@
 package krasa.formatter.plugin.processor;
 
 import junit.framework.Assert;
+import krasa.easymock.EasyMockTest;
+import krasa.easymock.Mocked;
 import krasa.formatter.common.ModifiableFile;
 import krasa.formatter.plugin.ImportSorter;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.settings.provider.ImportOrderProvider;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.unitils.UnitilsJUnit4TestClassRunner;
-import org.unitils.easymock.EasyMockUnitils;
-import org.unitils.easymock.annotation.Mock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.easymock.EasyMock.expect;
@@ -20,33 +19,39 @@ import static org.easymock.EasyMock.expect;
 /**
  * @author Vojtech Krasa
  */
-@RunWith(UnitilsJUnit4TestClassRunner.class)
-public class ImportOrderProcessorTest {
-	@Mock
+
+public class ImportOrderProcessorTest extends EasyMockTest {
+	@Mocked
 	protected ImportSorter importSorter;
-	@Mock
+	@Mocked
 	protected ImportOrderProvider orderProvider;
-	@Mock
+	@Mocked
 	protected Settings settings;
-	@Mock
-	protected List<String> importOrder;
-	@Mock
+	@Mocked
 	protected ModifiableFile.Monitor monitor;
+
 
 	@Test
 	public void testInitializeImportSorter() throws Exception {
 		expect(settings.isImportOrderFromFile()).andReturn(true);
 		expect(orderProvider.wasChanged(null)).andReturn(true);
 		expect(orderProvider.getModifiedMonitor()).andReturn(monitor);
-		expect(orderProvider.get()).andReturn(importOrder);
-		EasyMockUnitils.replay();
+		expect(orderProvider.get()).andReturn(getStrings());
 
-		ImportOrderProcessor importOrderProcessor = new ImportOrderProcessor(settings, null, orderProvider, null);
+		replayAll();
+
+		ImportOrderProcessor importOrderProcessor = new ImportOrderProcessor(settings, orderProvider);
 
 
 		ImportSorter importSorter = importOrderProcessor.getImportSorter();
 		Assert.assertNotNull(importSorter);
-		EasyMockUnitils.verify();
+	}
 
+	private List<String> getStrings() {
+		List<String> importOrder;
+		importOrder = new ArrayList<String>();
+		importOrder.add("s");
+		importOrder.add("a");
+		return importOrder;
 	}
 }
