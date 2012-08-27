@@ -238,14 +238,14 @@ public class ProjectSettingsForm {
 		pathToEclipsePreferenceFileJava.getDocument().addDocumentListener(new DocumentAdapter() {
 			@Override
 			protected void textChanged(DocumentEvent e) {
-				javaFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJava, displayedSettings.getSelectedJavaProfile()));
+				setJavaModel();
 			}
 		});
 
 		pathToEclipsePreferenceFileJS.getDocument().addDocumentListener(new DocumentAdapter() {
 			@Override
 			protected void textChanged(DocumentEvent e) {
-				jsFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJS, displayedSettings.getSelectedJSProfile()));
+				setJSModel();
 			}
 		});
 		newProfile.addActionListener(new ActionListener() {
@@ -312,8 +312,8 @@ public class ProjectSettingsForm {
 
 			}
 		});
-		javaFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJava, displayedSettings.getSelectedJavaProfile()));
-		jsFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJS, displayedSettings.getSelectedJSProfile()));
+		setJavaModel();
+		setJSModel();
 		profilesModel = createProfilesModel();
 		profiles.setModel(profilesModel);
 		profiles.addActionListener(new ActionListener() {
@@ -401,6 +401,17 @@ public class ProjectSettingsForm {
 			}
 		});
 	}
+
+	private void setJSModel() {
+		String selectedProfile = displayedSettings != null ? displayedSettings.getSelectedJSProfile() : null;
+		jsFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJS, selectedProfile));
+	}
+
+	private void setJavaModel() {
+		String selectedProfile = displayedSettings != null ? displayedSettings.getSelectedJavaProfile() : null;
+		javaFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJava, selectedProfile));
+	}
+
 
 	private ComboBoxModel createProfilesModel(JTextField pathToEclipsePreferenceFile, String selectedProfile) {
 		SortedComboBoxModel<String> profilesModel = new SortedComboBoxModel<String>(new Comparator<String>() {

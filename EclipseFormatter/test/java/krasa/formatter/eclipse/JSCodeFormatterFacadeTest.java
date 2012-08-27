@@ -1,7 +1,9 @@
 package krasa.formatter.eclipse;
 
 import junit.framework.Assert;
+import krasa.formatter.settings.Settings;
 import krasa.formatter.settings.provider.JSPropertiesProvider;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -33,9 +35,16 @@ public class JSCodeFormatterFacadeTest {
 			"}\n" +
 			"wait.docString = \"convenient wrapper for java.lang.Object.wait method\";";
 
-
-	protected CodeFormatterFacade eclipseCodeFormatterFacade = new JSCodeFormatterFacade(new JSPropertiesProvider(PATH_TO_CONFIG_FILE));
 	public static final String PATH_TO_CONFIG_FILE = "test/resources/org.eclipse.wst.jsdt.core.prefs";
+
+	@Before
+	public void setUp() throws Exception {
+		Settings settings = new Settings();
+		settings.setPathToConfigFileJS(PATH_TO_CONFIG_FILE);
+		eclipseCodeFormatterFacade = new JSCodeFormatterFacade(new JSPropertiesProvider(settings));
+	}
+
+	protected CodeFormatterFacade eclipseCodeFormatterFacade;
 
 	@Test
 	public void testFormat() throws Exception {
