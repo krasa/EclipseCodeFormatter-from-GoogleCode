@@ -50,7 +50,6 @@ public class Settings {
 	protected transient JavaPropertiesProvider javaPropertiesProvider;
 	@Transient
 	protected transient JSPropertiesProvider jsPropertiesProvider;
-	private String selectedJSProfile;
 	private boolean enableJSProcessor;
 
 	public Settings() {
@@ -143,14 +142,6 @@ public class Settings {
 			javaPropertiesProvider = new JavaPropertiesProvider(this);
 		}
 		return javaPropertiesProvider;
-	}
-
-	public String getSelectedJSProfile() {
-		return selectedJSProfile;
-	}
-
-	public void setSelectedJSProfile(String selectedJSProfile) {
-		this.selectedJSProfile = selectedJSProfile;
 	}
 
 	public boolean isEnableJSProcessor() {

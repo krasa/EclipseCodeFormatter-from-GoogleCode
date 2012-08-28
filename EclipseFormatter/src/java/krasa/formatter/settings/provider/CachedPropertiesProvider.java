@@ -51,7 +51,7 @@ public class CachedPropertiesProvider extends CachedProvider<Properties> {
 	}
 
 	protected Properties createDefaultConfig() {
-		return null;
+		return new Properties();
 	}
 
 

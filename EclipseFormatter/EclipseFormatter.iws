@@ -6,10 +6,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="2d6f995a-0c32-4f0b-afa9-3827d21d569f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" afterPath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/java/krasa/formatter/utils/FileUtilsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iml" afterPath="$PROJECT_DIR$/EclipseFormatter.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.iws" afterPath="$PROJECT_DIR$/EclipseFormatter.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java" afterPath="$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java" />
     </list>
-    <list id="c2b475fe-bcd3-44e4-bcea-eae81f6876d7" name="ignore" comment="" />
+    <list id="c2b475fe-bcd3-44e4-bcea-eae81f6876d7" name="ignore" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" afterPath="$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EclipseFormatter.ipr" afterPath="$PROJECT_DIR$/EclipseFormatter.ipr" />
+    </list>
     <ignored path="EclipseFormatter.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -86,91 +96,98 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EasyMockTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/EasyMockTest.java">
+      <file leaf-file-name="FileUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="23" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0">
+            <state line="103" column="0" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DocumentBuilderFactoryImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.eclipse.wst.wsi.source_1.0.500.v201203081939.jar!/org/eclipse/wst/wsi/internal/core/xml/jaxp/DocumentBuilderFactoryImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="5" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChangeFormatterToolbarAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/action/ChangeFormatterToolbarAction.java">
+      <file leaf-file-name="ProjectSettingsForm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="13" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+            <state line="587" column="9" selection-start="20909" selection-end="20909" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EclipseFormatter.zip" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EclipseFormatter.zip">
-          <provider selected="true" editor-type-id="LargeFileEditor">
+      <file leaf-file-name="JSCodeFormatterFacadeTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="0" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileUtilsTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/utils/FileUtilsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="0" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JSPropertiesProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CachedPropertiesProvider.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0989011">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CachedProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Settings.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="146" column="0" selection-start="4278" selection-end="4278" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#8287#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectSettingsForm.form" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form">
+          <provider selected="true" editor-type-id="ui-designer">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImportOrderProcessorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/plugin/processor/ImportOrderProcessorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="36" selection-start="1309" selection-end="1309" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestUtils.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DependencyDownloader.iml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EclipseFormatter.iws" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JavaCodeFormatterFacade.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="0" selection-start="3866" selection-end="3866" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CachedProviderTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/settings/provider/CachedProviderTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="41" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OptimizeImportsAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/action/OptimizeImportsAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="13" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -187,21 +204,16 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/importoptimizer/MyImportHelper.java" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/importoptimizer/MyJavaSpacePropertyProcessor.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/MyCodeFormatterApplication.java" />
         <option value="/scratch.txt" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/EclipseCodeFormatterFacade.java" />
         <option value="$PROJECT_DIR$/../JetBrains-intellij-community-0142ba2/java/java-impl/src/com/intellij/lang/java/JavaImportOptimizer.java" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/JoinedGroup.java" />
         <option value="$PROJECT_DIR$/src/resources/krasa/formatter/messages.properties" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsComponent.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/DelegatingCodeStyleManager.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeStyleManager.java" />
         <option value="$PROJECT_DIR$/../../../sandbox/plugins/plugin/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectCodeStyleInstaller.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/CodeFormatterFacade.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/EclipseCodeFormatter.java" />
@@ -215,10 +227,7 @@
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JSCodeFormatterFacade.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/ImportOrderProvider.java" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java" />
-        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java" />
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JavaPropertiesProvider.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/test/resources/unitils-default.properties" />
         <option value="$PROJECT_DIR$/test/resources/format.xml" />
         <option value="$PROJECT_DIR$/test/java/krasa/easymock/Mocked.java" />
@@ -235,9 +244,17 @@
         <option value="$PROJECT_DIR$/src/java/krasa/formatter/common/ModifiableFile.java" />
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/settings/provider/CachedProviderTest.java" />
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JavaCodeFormatterFacadeTest.java" />
-        <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java" />
         <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/TestUtils.java" />
         <option value="$PROJECT_DIR$/EclipseFormatter.iws" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/test/java/krasa/formatter/utils/FileUtilsTest.java" />
+        <option value="$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java" />
+        <option value="$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java" />
       </list>
     </option>
   </component>
@@ -255,49 +272,10 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="DependencyDownloader" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="DependencyDownloader" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="DependencyDownloader" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Lifecycle" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
-        </PATH_ELEMENT>
-      </PATH>
-    </treeState>
+    <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="58" />
+    <option name="x" value="1978" />
     <option name="y" value="-4" />
     <option name="width" value="1863" />
     <option name="height" value="1085" />
@@ -328,8 +306,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -352,7 +328,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -366,7 +342,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -384,7 +360,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -402,7 +378,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -432,7 +408,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -466,7 +442,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-122.29 &gt;" />
+              <option name="myItemId" value="&lt; IDEA IU-122.29 (1) &gt;" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -820,6 +796,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="krasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="settings" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -884,6 +890,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="krasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="formatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="eclipse" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -912,21 +948,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DependencyDownloader" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EclipseFormatter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="191" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="247" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="168" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="224" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="75" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="195" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="252" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
@@ -934,28 +1026,28 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="166" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="361" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="163" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="357" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="161" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="356" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/test" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="960" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="161" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="161" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="355" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="356" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="154" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="987" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="989" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/test/java/krasa/formatter/settings" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/test/java/krasa/formatter/utils" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.lastSelected" value="krasa.formatter.settings.ProjectSettingsComponent" />
     <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/lib/test" />
     <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
@@ -966,17 +1058,18 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="krasa.formatter.utils" />
       <recent name="krasa.formatter.settings.provider" />
       <recent name="krasa.formatter.plugin.processor" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="krasa.formatter.plugin.processor" />
@@ -989,68 +1082,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Plugin.Unnamed">
-    <configuration default="false" name="CachedProviderTest.testWasChanged" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="krasa.formatter.settings.provider.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="EclipseFormatter" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="krasa.formatter.settings.provider" />
-      <option name="MAIN_CLASS_NAME" value="krasa.formatter.settings.provider.CachedProviderTest" />
-      <option name="METHOD_NAME" value="testWasChanged" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="CachedProviderTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="krasa.formatter.settings.provider.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="EclipseFormatter" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="krasa.formatter.settings.provider" />
-      <option name="MAIN_CLASS_NAME" value="krasa.formatter.settings.provider.CachedProviderTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="CachedProviderTest.testGet" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1140,6 +1171,62 @@
         <option name="LOCAL" value="true" />
       </RunnerSettings>
       <ConfigurationWrapper RunnerId="Debug" />
+      <method />
+    </configuration>
+    <configuration default="false" name="FileUtilsTest.testGetProfileNamesFromConfigXML" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="krasa.formatter.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="EclipseFormatter" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="krasa.formatter.utils" />
+      <option name="MAIN_CLASS_NAME" value="krasa.formatter.utils.FileUtilsTest" />
+      <option name="METHOD_NAME" value="testGetProfileNamesFromConfigXML" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="FileUtilsTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="krasa.formatter.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="EclipseFormatter" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="krasa.formatter.utils" />
+      <option name="MAIN_CLASS_NAME" value="krasa.formatter.utils.FileUtilsTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1290,19 +1377,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Plugin.Unnamed" />
       <item index="1" class="java.lang.String" itemvalue="Query Language Console.Unnamed" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testWasChanged" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CachedProviderTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testGet" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.All in EclipseFormatter" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.JavaCodeFormatterFacadeTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testGet" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.All in EclipseFormatter" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.JavaCodeFormatterFacadeTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.FileUtilsTest.testGetProfileNamesFromConfigXML" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.FileUtilsTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in EclipseFormatter" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.JavaCodeFormatterFacadeTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testGet" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testWasChanged" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.CachedProviderTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.FileUtilsTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.FileUtilsTest.testGetProfileNamesFromConfigXML" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in EclipseFormatter" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.JavaCodeFormatterFacadeTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CachedProviderTest.testGet" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
@@ -1400,7 +1487,19 @@
       <created>1345758137101</created>
       <updated>1345758137101</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="2.5">
+      <created>1345758157101</created>
+      <updated>1345758157101</updated>
+    </task>
+    <task id="LOCAL-00006" summary="2.5">
+      <created>1345763207101</created>
+      <updated>1345763207101</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2.5">
+      <created>1346106669104</created>
+      <updated>1346106669104</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1424,34 +1523,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="-4" width="1863" height="1085" extended-state="6" />
+    <frame x="1978" y="-4" width="1863" height="1085" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29972452" sideWeight="0.5715812" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46581197" sideWeight="0.9944904" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TunnelliJ" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.68115944" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289256" sideWeight="0.5715812" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42841882" sideWeight="0.6865014" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42841882" sideWeight="0.9944904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3386752" sideWeight="0.33774105" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44017094" sideWeight="0.4939074" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Notes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44017094" sideWeight="0.9944904" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Notes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31730768" sideWeight="0.46721762" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23801653" sideWeight="0.43162394" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23801653" sideWeight="0.53418803" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25454545" sideWeight="0.53418803" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20881543" sideWeight="0.53418803" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3386752" sideWeight="0.6584022" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29983792" sideWeight="0.68115944" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="2558" y="541" width="1663" height="114" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="2558" y="541" width="1663" height="114" />
       <window_info id="JavaRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="JavaRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4661157" sideWeight="0.53418803" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" sideWeight="0.62995595" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" sideWeight="0.62995595" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27457264" sideWeight="0.47713497" order="1" side_tool="false" content_ui="tabs" />
@@ -1497,7 +1596,7 @@
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
@@ -1519,193 +1618,19 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/processor/ImportOrderProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="48" selection-start="3621" selection-end="3621" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/IExpectationSetters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="27" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/krasa/easymock/Mocked.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="18" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/MockInvocationHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1488" selection-end="1488" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ObjectMethodsFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="0" selection-start="3257" selection-end="3257" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ClassProxyFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="0" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ExpectedInvocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="0" selection-start="4261" selection-end="4261" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/RecordState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="0" selection-start="7694" selection-end="7694" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/statements/RunAfters.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="16" selection-start="620" selection-end="620" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/ClassExtensionHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="2006" selection-end="2006" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/internal/MocksControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="0" selection-start="5656" selection-end="5656" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/test/easymock-3.1-sources.jar!/org/easymock/EasyMock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2071" column="23" selection-start="62814" selection-end="62814" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/common/ModifiableFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="19" selection-start="342" selection-end="342" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/yjp-controller-api-redist.jar!/com/yourkit/util/Asserts.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/gwt/gwt-dev.jar!/com/google/gwt/thirdparty/guava/common/io/Files.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="2344" selection-end="2344" vertical-scroll-proportion="-7.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/io/FileSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="25" selection-start="3991" selection-end="3991" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1256" column="19" selection-start="51618" selection-end="51618" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/ImportOrderProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="40" selection-start="848" selection-end="848" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/DisabledFileTypeSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1271#1287#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="62" selection-start="4805" selection-end="4805" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JavaPropertiesProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/net/URLClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="0" selection-start="7258" selection-end="7258" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="189" column="0" selection-start="7258" selection-end="7258" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/DefaultCodeFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="11" selection-start="3161" selection-end="3161" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="2078" selection-end="2078" vertical-scroll-proportion="-7.48">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="84" column="11" selection-start="3161" selection-end="3161" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="246" column="0" selection-start="9483" selection-end="9483" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JSCodeFormatterFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="246" column="0" selection-start="9483" selection-end="9483" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JavaCodeFormatterFacadeTest.java">
@@ -1715,20 +1640,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="402" selection-end="402" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="12" column="40" selection-start="402" selection-end="402" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/lang/Object.java">
@@ -1740,51 +1654,37 @@
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/runner/notification/Failure.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="11" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="11" column="11" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/EachTestNotifier.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="16" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="12" column="16" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/runners/ParentRunner.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="25" selection-start="2466" selection-end="2466" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="44" column="25" selection-start="2466" selection-end="2466" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/runners/BlockJUnit4ClassRunner.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="19" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="10" column="19" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jdt.core/model/org/eclipse/jdt/core/ToolFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="29" selection-start="8209" selection-end="8209" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="171" column="29" selection-start="8209" selection-end="8209" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jdt.core/compiler/org/eclipse/jdt/core/compiler/InvalidInputException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="34" selection-start="818" selection-end="839" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="19" column="34" selection-start="818" selection-end="839" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/ecj-4.2.jar!/org/eclipse/jdt/core/compiler/InvalidInputException.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/Resources.java">
@@ -1803,16 +1703,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/action/OptimizeImportsAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="13" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="36" column="13" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/action/ChangeFormatterToolbarAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="14" column="13" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EclipseFormatter.zip">
@@ -1848,13 +1744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JavaCodeFormatterFacade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="94" column="0" selection-start="3866" selection-end="3866" vertical-scroll-proportion="0.0">
@@ -1862,9 +1751,183 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/EclipseFormatter.iws">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DependencyDownloader/DependencyDownloader.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DependencyDownloader/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/java/io/DataInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="20" selection-start="654" selection-end="691" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="28" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/ui/SortedComboBoxModel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="158" selection-end="164" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JavaPropertiesProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="5" selection-start="1686" selection-end="2124" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/eclipse/JSCodeFormatterFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="12" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-6-oracle/src.zip!/javax/xml/parsers/DocumentBuilderFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="37" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.apache.xerces_2.9.0.v201101211617.jar!/org/apache/xerces/jaxp/DocumentBuilderFactoryImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="45" selection-start="1406" selection-end="1406" vertical-scroll-proportion="-8.96" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/javax.xml_1.3.4.v201005080400.jar!/javax/xml/parsers/DocumentBuilderFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="59" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/xerces.jar!/org/apache/xerces/jaxp/DocumentBuilderFactoryImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="1" selection-start="2362" selection-end="2362" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.eclipse.wst.ws.explorer.source_1.0.700.v201203072334.jar!/org/eclipse/wst/ws/internal/explorer/platform/engine/ActionDataParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="38" selection-start="762" selection-end="762" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/keymap/impl/IdeKeyEventDispatcher.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="5581" selection-end="5581" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../_eclipse/org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.core/src/org/eclipse/wst/jsdt/internal/core/JavaModelManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2426" column="68" selection-start="101156" selection-end="101156" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gwt/gwt-dev.jar!/com/google/gwt/dev/shell/jetty/JettyLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="869" column="60" selection-start="30096" selection-end="30096" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.eclipse.jst.common.frameworks.source_1.1.600.v201204190200.jar!/org/eclipse/jst/common/jdt/internal/classpath/ClasspathDecorationsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="19" selection-start="1531" selection-end="1531" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.eclipse.jst.jsf.apache.trinidad.tagsupport.source_1.1.200.v201104061711.jar!/org/eclipse/jst/jsf/apache/trinidad/tagsupport/converter/operations/OutputFormattedOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="13" selection-start="2211" selection-end="2211" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/eclipse/JSCodeFormatterFacadeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="0" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../_eclipse/jsdt/plugins/org.eclipse.wst.wsi.source_1.0.500.v201203081939.jar!/org/eclipse/wst/wsi/internal/core/xml/jaxp/DocumentBuilderFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="5" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/java/krasa/formatter/utils/FileUtilsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/utils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="0" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/plugin/ProjectSettingsForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="587" column="9" selection-start="20909" selection-end="20909" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="0" selection-start="4278" selection-end="4278" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#8287#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/JSPropertiesProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/krasa/formatter/settings/provider/CachedPropertiesProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0989011">
           <folding />
         </state>
       </provider>
@@ -1910,7 +1973,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>IDEA IU-122.29 (1)</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1950,7 +2013,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.20000002" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>

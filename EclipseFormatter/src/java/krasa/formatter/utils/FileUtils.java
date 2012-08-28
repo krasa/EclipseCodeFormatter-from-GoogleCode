@@ -160,6 +160,8 @@ public class FileUtils {
 		List<String> profileNames = new ArrayList<String>();
 		if (file.exists()) {
 			try { // load file profiles
+				//delete eclipse dependency to fix java.lang.ClassCastException: org.apache.xerces.jaxp.DocumentBuilderFactoryImpl cannot be cast to javax.xml.parsers.DocumentBuilderFactory
+
 				org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
 				doc.getDocumentElement().normalize();
 
