@@ -17,7 +17,11 @@ import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.*;
+import com.intellij.openapi.ui.popup.JBPopup;
+import com.intellij.openapi.ui.popup.JBPopupListener;
+import com.intellij.openapi.ui.popup.LightweightWindowEvent;
+import com.intellij.openapi.ui.popup.ListPopup;
+import com.intellij.openapi.ui.popup.PopupStep;
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -135,8 +139,9 @@ public class ProjectSettingsForm {
 		enabledBy(new JComponent[]{importOrder, importOrderManualExample,},
 				importOrderConfigurationManualRadioButton);
 
-		enabledByAny(new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS,
-				eclipsePreferenceFileJSLabel, eclipsePreferenceFilePathJSBrowse}, enableJSFormatting,
+		enabledByAny(
+				new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS, eclipsePreferenceFileJSLabel,
+						eclipsePreferenceFilePathJSBrowse, enableJavaScriptCommentsPostProcessor}, enableJSFormatting,
 				enableGWTNativeMethodsCheckBox);
 
 		enabledBy(new JComponent[]{disabledFileTypes, disabledFileTypesHelpLabel,},
@@ -390,7 +395,6 @@ public class ProjectSettingsForm {
 		String selectedProfile = displayedSettings != null ? displayedSettings.getSelectedJavaProfile() : null;
 		javaFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJava, selectedProfile));
 	}
-
 
 	private ComboBoxModel createProfilesModel(JTextField pathToEclipsePreferenceFile, String selectedProfile) {
 		SortedComboBoxModel<String> profilesModel = new SortedComboBoxModel<String>(new Comparator<String>() {
@@ -676,13 +680,16 @@ public class ProjectSettingsForm {
 		if (formatSelectedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes()) {
 			return true;
 		}
-		if (pathToEclipsePreferenceFileJava.getText() != null ? !pathToEclipsePreferenceFileJava.getText().equals(data.getPathToConfigFileJava()) : data.getPathToConfigFileJava() != null) {
+		if (pathToEclipsePreferenceFileJava.getText() != null ? !pathToEclipsePreferenceFileJava.getText().equals(
+				data.getPathToConfigFileJava()) : data.getPathToConfigFileJava() != null) {
 			return true;
 		}
-		if (pathToEclipsePreferenceFileJS.getText() != null ? !pathToEclipsePreferenceFileJS.getText().equals(data.getPathToConfigFileJS()) : data.getPathToConfigFileJS() != null) {
+		if (pathToEclipsePreferenceFileJS.getText() != null ? !pathToEclipsePreferenceFileJS.getText().equals(
+				data.getPathToConfigFileJS()) : data.getPathToConfigFileJS() != null) {
 			return true;
 		}
-		if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes()) : data.getDisabledFileTypes() != null) {
+		if (disabledFileTypes.getText() != null ? !disabledFileTypes.getText().equals(data.getDisabledFileTypes())
+				: data.getDisabledFileTypes() != null) {
 			return true;
 		}
 		if (enableJSFormatting.isSelected() != data.isEnableJSFormatting()) {
@@ -691,10 +698,12 @@ public class ProjectSettingsForm {
 		if (enableJavaFormatting.isSelected() != data.isEnableJavaFormatting()) {
 			return true;
 		}
-		if (importOrder.getText() != null ? !importOrder.getText().equals(data.getImportOrder()) : data.getImportOrder() != null) {
+		if (importOrder.getText() != null ? !importOrder.getText().equals(data.getImportOrder())
+				: data.getImportOrder() != null) {
 			return true;
 		}
-		if (pathToImportOrderPreferenceFile.getText() != null ? !pathToImportOrderPreferenceFile.getText().equals(data.getImportOrderConfigFilePath()) : data.getImportOrderConfigFilePath() != null) {
+		if (pathToImportOrderPreferenceFile.getText() != null ? !pathToImportOrderPreferenceFile.getText().equals(
+				data.getImportOrderConfigFilePath()) : data.getImportOrderConfigFilePath() != null) {
 			return true;
 		}
 		if (enableGWTNativeMethodsCheckBox.isSelected() != data.isEnableGWT()) {

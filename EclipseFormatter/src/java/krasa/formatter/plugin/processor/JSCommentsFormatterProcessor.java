@@ -36,8 +36,7 @@ public class JSCommentsFormatterProcessor implements Processor {
 
 	@Override
 	public boolean process(Document documentIJ, PsiFile file, Range range) {
-		if (FileUtils.isJavaScript(file)) {
-//		if (FileUtils.isJavaScript(file)&&false) {
+		if (FileUtils.isJavaScript(file) && settings.isEnableJSProcessor()) {
 			try {
 				String text = documentIJ.getText();
 				IDocument document = new org.eclipse.jface.text.Document(text);

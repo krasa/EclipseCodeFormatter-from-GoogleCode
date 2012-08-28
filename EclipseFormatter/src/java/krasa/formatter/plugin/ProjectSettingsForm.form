@@ -413,7 +413,7 @@
         </constraints>
         <properties>
           <selected value="false"/>
-          <text value="Enable experimental JSDoc formatting "/>
+          <text value="Enable experimental JavaScript comments formatting "/>
         </properties>
       </component>
     </children>
