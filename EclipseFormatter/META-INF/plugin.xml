@@ -29,7 +29,7 @@
 
 	<change-notes><![CDATA[
         <br>2.5 (2012-08-28)
-        <br>- new JavaScript comments formatter - turned off by default
+        <br>- new JavaScript comments formatting - turned off by default
         <br>2.4 (2012-08-1)
         <br>- new action for import optimalization, it de/registeres shortcuts of default action on formatter schitch.
         <br>- automatic turn off of IntelliJ's import optimalization on code reformatting - which causes problems.
