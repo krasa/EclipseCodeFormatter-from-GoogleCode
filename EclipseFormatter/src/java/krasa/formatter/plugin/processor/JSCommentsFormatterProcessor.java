@@ -3,9 +3,7 @@ package krasa.formatter.plugin.processor;
 import com.google.gwt.eclipse.core.editors.java.GWTPartitions;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiFile;
-import krasa.formatter.eclipse.FileDoesNotExistsException;
 import krasa.formatter.eclipse.JSCodeFormatterFacade;
-import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Range;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
@@ -46,10 +44,6 @@ public class JSCommentsFormatterProcessor implements Processor {
 
 				formatEdit.apply(document);
 				documentIJ.setText(document.get());
-			} catch (FileDoesNotExistsException e) {
-				throw e;
-			} catch (InvalidPropertyFile e) {
-				throw e;
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -58,7 +52,6 @@ public class JSCommentsFormatterProcessor implements Processor {
 	}
 
 	private TextEdit format(IDocument document, Range range) {
-//		Region[] regions = computePartitioning(range, document.get());
 		TextEdit combinedEdit = new MultiTextEdit();
 		ITypedRegion[] regions = computePartitioning(document, range);
 

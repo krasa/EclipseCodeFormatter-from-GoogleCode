@@ -1,11 +1,11 @@
 package krasa.formatter.eclipse;
 
 import krasa.formatter.common.ModifiableFile;
-import krasa.formatter.plugin.Notifier;
+import krasa.formatter.exception.FormattingFailedException;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.settings.provider.JavaPropertiesProvider;
-import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
+import org.eclipse.jdt.internal.formatter.DefaultCodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
@@ -32,7 +32,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
 
 	private CodeFormatter newCodeFormatter() {
 		lastState = javaPropertiesProvider.getModifiedMonitor();
-		codeFormatter = ToolFactory.createCodeFormatter(javaPropertiesProvider.get());
+		codeFormatter = new DefaultCodeFormatter(javaPropertiesProvider.get());
 		return codeFormatter;
 	}
 
@@ -92,8 +92,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
 			if (edit != null) {
 				edit.apply(doc);
 			} else {
-				throw new RuntimeException(
-						Notifier.FORMATTING_FAILED_PROBABLY_DUE_TO_NOT_COMPILABLE_CODE_OR_WRONG_CONFIG_FILE);
+				throw new FormattingFailedException();
 			}
 			return doc.get();
 		} catch (BadLocationException e) {

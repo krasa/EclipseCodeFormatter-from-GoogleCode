@@ -48,7 +48,7 @@ public class JSCodeFormatterFacadeTest {
 
 	@Test
 	public void testFormat() throws Exception {
-		String output = eclipseCodeFormatterFacade.format(INPUT);
+		String output = eclipseCodeFormatterFacade.format(INPUT, 0, INPUT.length());
 		Assert.assertEquals(FORMATTED, output);
 	}
 

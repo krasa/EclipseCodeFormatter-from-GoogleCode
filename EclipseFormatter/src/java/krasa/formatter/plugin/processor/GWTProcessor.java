@@ -3,8 +3,6 @@ package krasa.formatter.plugin.processor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiFile;
 import krasa.formatter.JsniFormattingUtil;
-import krasa.formatter.eclipse.FileDoesNotExistsException;
-import krasa.formatter.plugin.InvalidPropertyFile;
 import krasa.formatter.plugin.Range;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.utils.FileUtils;
@@ -34,10 +32,6 @@ public class GWTProcessor implements Processor {
 				TextEdit formatEdit = JsniFormattingUtil.format(document, javaFormattingPrefs, properties, range);
 				formatEdit.apply(document);
 				documentIJ.setText(document.get());
-			} catch (FileDoesNotExistsException e) {
-				throw e;
-			} catch (InvalidPropertyFile e) {
-				throw e;
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

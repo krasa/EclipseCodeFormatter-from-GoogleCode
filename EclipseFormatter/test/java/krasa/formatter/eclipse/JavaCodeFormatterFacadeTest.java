@@ -98,10 +98,14 @@ public class JavaCodeFormatterFacadeTest {
 
 	@Test
 	public void testFormat() throws Exception {
-		String output = eclipseCodeFormatterFacade.format(INPUT);
+		String output = format(INPUT);
 		Assert.assertEquals(FORMATTED, output);
-		output = eclipseCodeFormatterFacade.format(INPUT2);
+		output = format(INPUT2);
 		Assert.assertEquals(FORMATTED2, output);
+	}
+
+	private String format(String input) {
+		return eclipseCodeFormatterFacade.format(input, 0, input.length());
 	}
 
 	@Test
@@ -110,9 +114,9 @@ public class JavaCodeFormatterFacadeTest {
 		settings.setPathToConfigFileJava("test/resources/format.xml");
 		settings.setSelectedJavaProfile("kuk");
 		eclipseCodeFormatterFacade = new JavaCodeFormatterFacade(settings.getJavaProperties());
-		String output = eclipseCodeFormatterFacade.format(INPUT);
+		String output = format(INPUT);
 		Assert.assertEquals(FORMATTED, output);
-		output = eclipseCodeFormatterFacade.format(INPUT2);
+		output = format(INPUT2);
 		Assert.assertEquals(FORMATTED2, output);
 	}
 

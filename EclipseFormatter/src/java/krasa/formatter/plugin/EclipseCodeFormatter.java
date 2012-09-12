@@ -46,10 +46,7 @@ public class EclipseCodeFormatter {
 	public void format(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
 		boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
 		Range range = new Range(startOffset, endOffset, wholeFile);
-		formatWithEclipse(psiFile, range);
-	}
 
-	private void formatWithEclipse(PsiFile psiFile, Range range) throws FileDoesNotExistsException {
 		final Editor editor = PsiUtilBase.findEditor(psiFile);
 		if (editor != null) {
 			formatWhenEditorIsOpen(range, psiFile);
@@ -65,14 +62,11 @@ public class EclipseCodeFormatter {
 		Document document = fileDocumentManager.getDocument(virtualFile);
 		fileDocumentManager.saveDocument(document); // when file is edited and editor is closed, it is needed to save
 		// the text
-		String reformat = reformat(document.getText());
+		String text = document.getText();
+		String reformat = reformat(0, text.length(), text);
 		document.setText(reformat);
 		postProcess(document, psiFile, new Range(-1, -1, true));
 		fileDocumentManager.saveDocument(document);
-	}
-
-	private String reformat(String virtualFile) throws FileDoesNotExistsException {
-		return codeFormatterFacade.format(virtualFile);
 	}
 
 	/* when file is being edited, it is important to load text from editor, i think */
