@@ -4,7 +4,7 @@
 
 	<name>Eclipse Code Formatter</name>
 	<id>EclipseCodeFormatter</id>
-	<version>2.6.3</version>
+	<version>2.7.3</version>
 
 	<idea-version since-build="110.137" until-build=""/>
 	<!--<idea-version since-build="90.000" until-build="109.999"/>-->
@@ -28,6 +28,8 @@
 	</vendor>
 
 	<change-notes><![CDATA[
+        <br>2.7 (2012-09-16)
+        <br>- fixed toolbar action for IDEs which did not support it
         <br>2.6 (2012-09-12)
         <br>- improved error notification - only baloon is displayed, when formatting fails due to syntax error
         <br>2.5 (2012-08-28)
