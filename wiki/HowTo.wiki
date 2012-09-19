@@ -7,7 +7,7 @@
 
 * Possible problems with formatting : *
  * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
-
+ * file seems to be formatted differently: probably tab size and indendation is set differently than in eclipse (Settings-Code Style-Java)
 
 == Optimizing imports ==
  * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 99 or more (Settings - Code Style - Imports)
