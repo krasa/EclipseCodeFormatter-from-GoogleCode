@@ -33,8 +33,8 @@ public class ProjectCodeStyleInstaller {
 	private static final String CODE_STYLE_MANAGER_KEY = CodeStyleManager.class.getName();
 	private static final Logger LOG = Logger.getInstance(ProjectCodeStyleInstaller.class.getName());
 
-	public static final String ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION = "EclipseFormatterPluginOptimizeImportsAction";
-	public static final String ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS = "EclipseFormatterPluginOptimizeImports";
+	public static final String OPTIMIZE_IMPORTS_OLD_PLUGIN = "EclipseFormatterPluginOptimizeImportsAction";
+	public static final String OPTIMIZE_IMPORTS_PLUGIN = "EclipseFormatterPluginOptimizeImports";
 	public static final String OPTIMIZE_IMPORTS = "OptimizeImports";
 
 	@NotNull
@@ -67,7 +67,7 @@ public class ProjectCodeStyleInstaller {
 			}
 			Keymap keyMap = getKeyMap();
 			installShortcut(keyMap, OPTIMIZE_IMPORTS);
-			installShortcut(keyMap, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION);
+			installShortcut(keyMap, OPTIMIZE_IMPORTS_OLD_PLUGIN);
 		}
 
 	}
@@ -76,7 +76,7 @@ public class ProjectCodeStyleInstaller {
 		Shortcut[] shortcuts = keyMap.getShortcuts(current);
 		for (Shortcut shortcut : shortcuts) {
 			keyMap.removeShortcut(current, shortcut);
-			keyMap.addShortcut(ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS, shortcut);
+			keyMap.addShortcut(OPTIMIZE_IMPORTS_PLUGIN, shortcut);
 		}
 	}
 
@@ -94,8 +94,8 @@ public class ProjectCodeStyleInstaller {
 			manager = ((EclipseCodeStyleManager) manager).getOriginal();
 			registerCodeStyleManager(project, manager);
 			Keymap parent = getKeyMap();
-			uninstallShortcut(parent, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS_ACTION);
-			uninstallShortcut(parent, ECLIPSE_FORMATTER_PLUGIN_OPTIMIZE_IMPORTS);
+			uninstallShortcut(parent, OPTIMIZE_IMPORTS_OLD_PLUGIN);
+			uninstallShortcut(parent, OPTIMIZE_IMPORTS_PLUGIN);
 		}
 
 	}

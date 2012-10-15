@@ -2,7 +2,6 @@ package krasa.formatter.settings.provider;
 
 import com.google.gwt.dev.util.Util;
 import com.intellij.openapi.util.io.FileUtil;
-import com.yourkit.util.Asserts;
 import junit.framework.Assert;
 import krasa.formatter.common.ModifiableFile;
 import org.junit.Before;
@@ -33,9 +32,9 @@ public class CachedProviderTest {
 	@Test
 	public void testWasChanged() throws Exception {
 		ModifiableFile.Monitor modifiedMonitor = cachedProvider.getModifiedMonitor();
-		Asserts.assertFalse(cachedProvider.wasChanged(modifiedMonitor));
+		Assert.assertFalse(cachedProvider.wasChanged(modifiedMonitor));
 		tempFile.setLastModified(tempFile.lastModified() + 1000);
-		Asserts.assertTrue(cachedProvider.wasChanged(modifiedMonitor));
+		Assert.assertTrue(cachedProvider.wasChanged(modifiedMonitor));
 	}
 
 	@Test
