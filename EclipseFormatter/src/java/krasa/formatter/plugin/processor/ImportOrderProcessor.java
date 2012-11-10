@@ -25,15 +25,9 @@ public class ImportOrderProcessor implements Processor {
 	protected ModifiableFile.Monitor modifiedMonitor;
 
 	public ImportOrderProcessor(Settings settings, ImportOrderProvider importOrderProvider) {
-		this(settings, null, importOrderProvider, null);
-	}
-
-	public ImportOrderProcessor(Settings settings, @Nullable ImportSorter importSorter, ImportOrderProvider importOrderProviderFromFile, @Nullable ModifiableFile.Monitor modifiedMonitor) {
-		this.settings = settings;
-		this.importSorter = importSorter;
-		this.importOrderProviderFromFile = importOrderProviderFromFile;
-		this.modifiedMonitor = modifiedMonitor;
-	}
+        this.settings = settings;
+        this.importOrderProviderFromFile = importOrderProvider;
+    }
 
 	@Override
 	public boolean process(final Document document, final PsiFile psiFile, final Range range) {
@@ -62,7 +56,7 @@ public class ImportOrderProcessor implements Processor {
 
 	protected ImportSorter getImportSorter() {
 		if (settings.isImportOrderFromFile()) {
-			if (importOrderProviderFromFile.wasChanged(modifiedMonitor)) {
+			if (importSorter == null || importOrderProviderFromFile.wasChanged(modifiedMonitor)) {
 				modifiedMonitor = importOrderProviderFromFile.getModifiedMonitor();
 				importSorter = new ImportSorter(importOrderProviderFromFile.get());
 			}

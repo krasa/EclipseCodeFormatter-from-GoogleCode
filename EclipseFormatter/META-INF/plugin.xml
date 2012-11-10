@@ -4,7 +4,7 @@
 
 	<name>Eclipse Code Formatter</name>
 	<id>EclipseCodeFormatter</id>
-	<version>2.8.3</version>
+	<version>3.0.3</version>
 
 	<idea-version since-build="110.137" until-build=""/>
 	<!--<idea-version since-build="90.000" until-build="109.999"/>-->
@@ -29,6 +29,10 @@
 	</vendor>
 
 	<change-notes><![CDATA[
+        <br>3.0 (2012-11-10)
+        <br>- fixed radio buttons at settings form
+        <br>2.9 (2012-11-09)
+        <br>- attempt to fix NPE on import optimizing
         <br>2.8 (2012-10-15)
         <br>- fixed optimize imports action shortcut
         <br>2.7 (2012-09-16)
@@ -38,7 +42,7 @@
         <br>2.5 (2012-08-28)
         <br>- new JavaScript comments formatting - turned off by default
         <br>2.4 (2012-08-01)
-        <br>- new action for import optimalization, it de/registeres shortcuts of default action on formatter schitch.
+        <br>- new action for import optimalization, it de/registeres shortcuts of default action on formatter switch.
         <br>- automatic turn off of IntelliJ's import optimalization on code reformatting - which causes problems.
         <br>2.3 (2012-07-12)
         <br>- fixed bug: log spam 

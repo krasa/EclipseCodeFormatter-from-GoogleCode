@@ -35,13 +35,25 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCodeFormatter">
+    <option name="formatter" value="ECLIPSE" />
     <option name="id" value="1340636340667" />
+    <option name="importOrderConfigFilePath" value="$PROJECT_DIR$/test/resources/org.eclipse.jdt.core.prefs" />
+    <option name="importOrderFromFile" value="true" />
     <option name="name" value="sdpapi" />
-    <option name="pathToConfigFileJava" value="G:/workspace/_projekty/_T-Mobile/format (1).xml" />
+    <option name="pathToConfigFileJava" value="$PROJECT_DIR$/../_T-Mobile/format (1).xml" />
+    <option name="selectedJavaProfile" value="Ales" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+  </component>
+  <component name="IvyIDEA.ProjectSettings">
+    <option name="artifactTypeSettings">
+      <ArtifactTypeSettings />
+    </option>
+    <option name="propertiesSettings">
+      <PropertiesSettings />
+    </option>
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -214,7 +226,7 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-122.29" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IC-122.694" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">

@@ -148,7 +148,7 @@ public class ProjectSettingsForm {
 				formatOtherFilesWithExceptionsRadioButton);
 
 		disableJavaProfilesIfNecessary();
-	}
+    }
 
 	private void enabledByAny(@NotNull JComponent[] targets, @NotNull JToggleButton[] negated,
 							  @NotNull JToggleButton... control) {
@@ -674,7 +674,12 @@ public class ProjectSettingsForm {
 	}
 
 	public boolean isModified(Settings data) {
-		if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) {
+        //TODO THIS IS VERY IMPORTANT
+        if (customIsModified(data)) {
+            return true;
+        }
+        
+        if (optimizeImportsCheckBox.isSelected() != data.isOptimizeImports()) {
 			return true;
 		}
 		if (formatSelectedTextInAllFileTypes.isSelected() != data.isFormatSeletedTextInAllFileTypes()) {

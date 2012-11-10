@@ -307,4 +307,32 @@ public class Settings {
 		this.importOrderFromFile = importOrderFromFile;
 	}
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Settings");
+        sb.append("{name='").append(name).append('\'');
+        sb.append(", id=").append(id);
+        sb.append(", pathToConfigFileJS='").append(pathToConfigFileJS).append('\'');
+        sb.append(", enableJavaFormatting=").append(enableJavaFormatting);
+        sb.append(", enableJSFormatting=").append(enableJSFormatting);
+        sb.append(", formatter=").append(formatter);
+        sb.append(", pathToConfigFileJava='").append(pathToConfigFileJava).append('\'');
+        sb.append(", disabledFileTypes='").append(disabledFileTypes).append('\'');
+        sb.append(", optimizeImports=").append(optimizeImports);
+        sb.append(", importOrderFromFile=").append(importOrderFromFile);
+        sb.append(", formatOtherFileTypesWithIntelliJ=").append(formatOtherFileTypesWithIntelliJ);
+        sb.append(", formatSeletedTextInAllFileTypes=").append(formatSeletedTextInAllFileTypes);
+        sb.append(", notifyFromTextLenght=").append(notifyFromTextLenght);
+        sb.append(", importOrder='").append(importOrder).append('\'');
+        sb.append(", importOrderConfigFilePath='").append(importOrderConfigFilePath).append('\'');
+        sb.append(", selectedJavaProfile='").append(selectedJavaProfile).append('\'');
+        sb.append(", defaultSettings=").append(defaultSettings);
+        sb.append(", enableGWT=").append(enableGWT);
+        sb.append(", javaPropertiesProvider=").append(javaPropertiesProvider);
+        sb.append(", jsPropertiesProvider=").append(jsPropertiesProvider);
+        sb.append(", enableJSProcessor=").append(enableJSProcessor);
+        sb.append('}');
+        return sb.toString();
+    }
 }

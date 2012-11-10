@@ -30,11 +30,14 @@ public class ImportOrderProcessorTest extends EasyMockTest {
 	@Mocked
 	protected ModifiableFile.Monitor monitor;
 
-
 	@Test
 	public void testInitializeImportSorter() throws Exception {
 		expect(settings.isImportOrderFromFile()).andReturn(true);
-		expect(orderProvider.wasChanged(null)).andReturn(true);
+		expect(orderProvider.getModifiedMonitor()).andReturn(monitor);
+		expect(orderProvider.get()).andReturn(getStrings());
+
+		expect(settings.isImportOrderFromFile()).andReturn(true);
+		expect(orderProvider.wasChanged(monitor)).andReturn(true);
 		expect(orderProvider.getModifiedMonitor()).andReturn(monitor);
 		expect(orderProvider.get()).andReturn(getStrings());
 
@@ -42,6 +45,20 @@ public class ImportOrderProcessorTest extends EasyMockTest {
 
 		ImportOrderProcessor importOrderProcessor = new ImportOrderProcessor(settings, orderProvider);
 
+		ImportSorter importSorter = importOrderProcessor.getImportSorter();
+        Assert.assertNotNull(importSorter);
+		importSorter = importOrderProcessor.getImportSorter();
+		Assert.assertNotNull(importSorter);
+	}
+
+	@Test
+	public void testInitializeImportSorter2() throws Exception {
+		expect(settings.isImportOrderFromFile()).andReturn(false);
+		expect(settings.getImportOrderAsList()).andReturn(new ArrayList<String>());
+
+		replayAll();
+
+		ImportOrderProcessor importOrderProcessor = new ImportOrderProcessor(settings, orderProvider);
 
 		ImportSorter importSorter = importOrderProcessor.getImportSorter();
 		Assert.assertNotNull(importSorter);

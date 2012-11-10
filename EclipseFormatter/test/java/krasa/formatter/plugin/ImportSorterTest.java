@@ -1,5 +1,6 @@
 package krasa.formatter.plugin;
 
+import com.intellij.mock.MockDocument;
 import krasa.formatter.utils.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -141,6 +142,54 @@ public class ImportSorterTest {
 		List<String> strings = importSorter.sortByEclipseStandard(imports1);
 		printAndAssert(EXPECTED, strings);
 	}
+
+	@Test
+	public void testName6() throws Exception {
+		String document =
+                "package jobs;\n" +
+                        "\n" +
+                        "import models.Album;\n" +
+                        "import models.Picture;\n" +
+                        "import org.apache.commons.lang.StringUtils;\n" +
+                        "import org.apache.http.HttpEntity;\n" +
+                        "import org.apache.http.HttpResponse;\n" +
+                        "import org.apache.http.HttpStatus;\n" +
+                        "import org.apache.http.client.methods.HttpGet;\n" +
+                        "import org.apache.http.impl.client.DefaultHttpClient;\n" +
+                        "import org.apache.http.params.CoreConnectionPNames;\n" +
+                        "import org.apache.http.util.EntityUtils;\n" +
+                        "import org.jsoup.Jsoup;\n" +
+                        "import org.jsoup.nodes.Document;\n" +
+                        "import org.jsoup.nodes.Element;\n" +
+                        "import org.jsoup.select.Elements;\n" +
+                        "import play.Logger;\n" +
+                        "import play.db.jpa.JPA;\n" +
+                        "import play.jobs.Job;\n" +
+                        "import play.libs.Codec;\n" +
+                        "import play.mvc.Router;\n" +
+                        "import play.vfs.VirtualFile;\n" +
+                        "import utils.BaseX;\n" +
+                        "import utils.UpYunUtils;\n" +
+                        "\n" +
+                        "import java.io.File;\n" +
+                        "import java.io.FileOutputStream;\n" +
+                        "import java.io.IOException;\n" +
+                        "import java.io.InputStream;\n" +
+                        "import java.math.BigInteger;\n" +
+                        "\n" +
+                        "/**\n" +
+                        " * User: divxer Date: 12-6-4 Time: 上午12:17\n" +
+                        " */\n" +
+                        "// @Every(\"7h\")\n" +
+                        "// @OnApplicationStart(async=true)\n" +
+                        "public class Picture4493Crawler extends Job {\n\n}";
+
+        List<String> importsOrder = Collections.emptyList();
+		ImportSorter importSorter = new ImportSorter(importsOrder);
+        MockDocument document1 = new MockDocument(document);
+        importSorter.sortImports(document1);
+        System.err.println(document1.getText());
+    }
 
 	private void printAndAssert(String EXPECTED, List<String> strings) {
 		StringBuilder stringBuilder = print(strings);
