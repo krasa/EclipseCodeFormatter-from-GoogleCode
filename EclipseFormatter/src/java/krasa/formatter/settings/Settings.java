@@ -51,8 +51,9 @@ public class Settings {
 	@Transient
 	protected transient JSPropertiesProvider jsPropertiesProvider;
 	private boolean enableJSProcessor;
+    private String selectedJavaScriptProfile;
 
-	public Settings() {
+    public Settings() {
 	}
 
 	public Settings(Long id, String name) {
@@ -152,8 +153,17 @@ public class Settings {
 		this.enableJSProcessor = enableJSProcessor;
 	}
 
+    public String getSelectedJavaScriptProfile() {
+        return selectedJavaScriptProfile;
+    }
 
-	public static enum Formatter {
+    public void setSelectedJavaScriptProfile(String selectedJavaScriptProfile) {
+        jsPropertiesProvider = null;
+        this.selectedJavaScriptProfile = selectedJavaScriptProfile;
+    }
+
+
+    public static enum Formatter {
 		DEFAULT,
 		ECLIPSE
 	}
@@ -327,6 +337,7 @@ public class Settings {
         sb.append(", importOrder='").append(importOrder).append('\'');
         sb.append(", importOrderConfigFilePath='").append(importOrderConfigFilePath).append('\'');
         sb.append(", selectedJavaProfile='").append(selectedJavaProfile).append('\'');
+        sb.append(", selectedJavaScriptProfile='").append(selectedJavaScriptProfile).append('\'');
         sb.append(", defaultSettings=").append(defaultSettings);
         sb.append(", enableGWT=").append(enableGWT);
         sb.append(", javaPropertiesProvider=").append(javaPropertiesProvider);

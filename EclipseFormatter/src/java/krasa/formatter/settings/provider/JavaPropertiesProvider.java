@@ -49,13 +49,12 @@ public class JavaPropertiesProvider extends CachedPropertiesProvider {
 	@Override
 	protected Properties readFile(File file) throws InvalidPropertyFile {
 		if (file.getName().endsWith("xml")) {
-			final Properties formatterOptions = FileUtils.readXmlJavaSettingsFile(file, createDefaultConfig(), profile);
-			trimTrailingWhitespaceFromConfigValues(formatterOptions);
-			validateConfig(formatterOptions, file);
-			return formatterOptions;
+            return readXmlFile(file, profile);
 		} else {
 			// properties file
 			return super.readFile(file);
 		}
 	}
+
+ 
 }

@@ -111,8 +111,10 @@ public class ProjectSettingsForm {
 	private JButton homepage;
 	private JCheckBox enableGWTNativeMethodsCheckBox;
 	private JCheckBox enableJavaScriptCommentsPostProcessor;
+    private JLabel javaScriptFormatterProfileLabel;
+    private JComboBox javaScriptFormatterProfile;
 
-	private final List<Popup> visiblePopups = new ArrayList<Popup>();
+    private final List<Popup> visiblePopups = new ArrayList<Popup>();
 	@NotNull
 	private Project project;
 	protected SortedComboBoxModel<Settings> profilesModel;
@@ -140,7 +142,7 @@ public class ProjectSettingsForm {
 				importOrderConfigurationManualRadioButton);
 
 		enabledByAny(
-				new JComponent[]{pathToEclipsePreferenceFileJS, eclipsePrefsExampleJS, eclipsePreferenceFileJSLabel,
+				new JComponent[]{pathToEclipsePreferenceFileJS, javaScriptFormatterProfileLabel, javaScriptFormatterProfile, eclipsePrefsExampleJS, eclipsePreferenceFileJSLabel,
 						eclipsePreferenceFilePathJSBrowse, enableJavaScriptCommentsPostProcessor}, enableJSFormatting,
 				enableGWTNativeMethodsCheckBox);
 
@@ -148,6 +150,7 @@ public class ProjectSettingsForm {
 				formatOtherFilesWithExceptionsRadioButton);
 
 		disableJavaProfilesIfNecessary();
+		disableJavaScriptProfilesIfNecessary();
     }
 
 	private void enabledByAny(@NotNull JComponent[] targets, @NotNull JToggleButton[] negated,
@@ -170,6 +173,12 @@ public class ProjectSettingsForm {
 		String text = pathToEclipsePreferenceFileJava.getText();
 		if (!text.endsWith("xml")) {
 			javaFormatterProfile.setEnabled(false);
+		}
+	}
+	private void disableJavaScriptProfilesIfNecessary() {
+		String text = pathToEclipsePreferenceFileJS.getText();
+		if (!text.endsWith("xml")) {
+			javaScriptFormatterProfile.setEnabled(false);
 		}
 	}
 
@@ -234,7 +243,14 @@ public class ProjectSettingsForm {
 		pathToEclipsePreferenceFileJava.getDocument().addDocumentListener(new DocumentAdapter() {
 			@Override
 			protected void textChanged(DocumentEvent e) {
-				setJavaModel();
+				setJavaFormatterProfileModel();
+			}
+		});
+
+		pathToEclipsePreferenceFileJS.getDocument().addDocumentListener(new DocumentAdapter() {
+			@Override
+			protected void textChanged(DocumentEvent e) {
+				setJavaScriptFormatterProfileModel();
 			}
 		});
 
@@ -302,7 +318,9 @@ public class ProjectSettingsForm {
 
 			}
 		});
-		setJavaModel();
+		setJavaFormatterProfileModel();
+		setJavaScriptFormatterProfileModel();
+        
 		profilesModel = createProfilesModel();
 		profiles.setModel(profilesModel);
 		profiles.addActionListener(new ActionListener() {
@@ -391,9 +409,14 @@ public class ProjectSettingsForm {
 		});
 	}
 
-	private void setJavaModel() {
+	private void setJavaFormatterProfileModel() {
 		String selectedProfile = displayedSettings != null ? displayedSettings.getSelectedJavaProfile() : null;
 		javaFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJava, selectedProfile));
+	}
+    
+	private void setJavaScriptFormatterProfileModel() {
+		String selectedProfile = displayedSettings != null ? displayedSettings.getSelectedJavaProfile() : null;
+		javaScriptFormatterProfile.setModel(createProfilesModel(pathToEclipsePreferenceFileJS, selectedProfile));
 	}
 
 	private ComboBoxModel createProfilesModel(JTextField pathToEclipsePreferenceFile, String selectedProfile) {
@@ -568,6 +591,7 @@ public class ProjectSettingsForm {
 		importOrderConfigurationFromFileRadioButton.setSelected(in.isImportOrderFromFile());
 		importOrderConfigurationManualRadioButton.setSelected(!in.isImportOrderFromFile());
 		javaFormatterProfile.setSelectedItem(in.getSelectedJavaProfile());
+		javaScriptFormatterProfile.setSelectedItem(in.getSelectedJavaScriptProfile());
 		setData(in);
 		updateComponents();
 	}
@@ -581,12 +605,16 @@ public class ProjectSettingsForm {
 		displayedSettings.setFormatOtherFileTypesWithIntelliJ(formatOtherFilesWithExceptionsRadioButton.isSelected());
 		displayedSettings.setImportOrderFromFile(importOrderConfigurationFromFileRadioButton.isSelected());
 		displayedSettings.setSelectedJavaProfile((String) javaFormatterProfile.getSelectedItem());
+		displayedSettings.setSelectedJavaScriptProfile((String) javaScriptFormatterProfile.getSelectedItem());
 		getData(displayedSettings);
 		return displayedSettings;
 	}
 
 	private boolean customIsModified(Settings data) {
 		if (!ObjectUtils.equals(javaFormatterProfile.getSelectedItem(), data.getSelectedJavaProfile())) {
+			return true;
+		}
+		if (!ObjectUtils.equals(javaScriptFormatterProfile.getSelectedItem(), data.getSelectedJavaScriptProfile())) {
 			return true;
 		}
 		if (useDefaultFormatter.isSelected() != data.getFormatter().equals(Settings.Formatter.DEFAULT)) {

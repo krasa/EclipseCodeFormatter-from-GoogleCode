@@ -29,7 +29,14 @@ public class CachedPropertiesProvider extends CachedProvider<Properties> {
 		validateConfig(formatterOptions, file);
 		return formatterOptions;
 	}
-
+    
+    protected Properties readXmlFile(File file, String profile) {
+         final Properties formatterOptions = FileUtils.readXmlJavaSettingsFile(file, createDefaultConfig(), profile);
+         trimTrailingWhitespaceFromConfigValues(formatterOptions);
+         validateConfig(formatterOptions, file);
+         return formatterOptions;
+     }
+    
 	protected void trimTrailingWhitespaceFromConfigValues(Properties config) {
 		// First trim the values and store the trimmed values in a temporary map.
 		Map<String, String> map = new HashMap<String, String>(config.size());
