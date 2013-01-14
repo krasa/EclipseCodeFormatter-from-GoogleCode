@@ -4,7 +4,7 @@
 
 	<name>Eclipse Code Formatter</name>
 	<id>EclipseCodeFormatter</id>
-	<version>3.2</version>
+	<version>3.3</version>
 
 	<idea-version since-build="110.137" until-build=""/>
 	<!--<idea-version since-build="90.000" until-build="109.999"/>-->
@@ -29,6 +29,10 @@
 	</vendor>
 
 	<change-notes><![CDATA[
+        <br>3.3 (2013-01-14)
+        <br>- fixed loading of xml profile
+        <br>3.2.1 (2012-12-09)
+        <br>- compiled with java 1.6
         <br>3.2 (2012-12-08)
         <br>- new feature: support for xml config file for JavaScript formatter 
         <br>3.1 (2012-11-30)

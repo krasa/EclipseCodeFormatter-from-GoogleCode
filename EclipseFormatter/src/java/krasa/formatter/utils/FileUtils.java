@@ -123,8 +123,7 @@ public class FileUtils {
 				if (profileNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element profileElement = (Element) profileNode;
 					String name = profileElement.getAttribute("name");
-					String kind = profileElement.getAttribute("kind");
-					if ("CodeFormatterProfile".equals(kind) && profile.equals(name)) {
+					if (profile.equals(name)) {
 						profileFound = true;
 						NodeList childNodes = profileElement.getElementsByTagName("setting");
 						if (childNodes.getLength() == 0) {
