@@ -73,13 +73,15 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     }
 
     private void addToGlobalSettings(Settings newSettings, Project project) {
-        newSettings.setId(generateId());
-        if (newSettings.getName() == null) {
-            String name = StringUtils.generateName(settingsList, 1, project.getName(), project.getName());
-            newSettings.setName(name);
-        }
-        settingsList.add(newSettings);
-    }
+		if (newSettings.getId() == null) {
+			newSettings.setId(generateId());
+		}
+		if (newSettings.getName() == null) {
+			String name = StringUtils.generateName(settingsList, 1, project.getName(), project.getName());
+			newSettings.setName(name);
+		}
+		settingsList.add(newSettings);
+	}
 
     private Long generateId() {
         long newId = new Date().getTime();
