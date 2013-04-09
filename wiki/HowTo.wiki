@@ -8,7 +8,7 @@
 * Possible problems with formatting : *
  * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
  * file seems to be formatted differently: probably tab size and indendation is set differently than in eclipse (Settings-Code Style-Java). Using of either tab only or space only whitespace is recommended.
-
+ * Eclipse indendation is configured for 2 spaces, but a new line gets indented by 4 spaces when Enter is pressed. Solution: change code style in IntelliJ. Not all things get formatted by this plugin.
 == Optimizing imports ==
  * set "Class count to use import with '`*`'" and "Name count to use static import with '`*`'" to 99 or more (Settings - Code Style - Imports)
  * IntelliJ's Import Optimizing must be turned off (turn on Settings-Editor-Show "Reformat Code" dialog, and then in that dialog turn off Import Optimizing) (it is automaticly turned off from version 2.4)
