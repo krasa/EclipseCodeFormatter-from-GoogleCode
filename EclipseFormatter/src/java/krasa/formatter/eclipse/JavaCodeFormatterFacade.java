@@ -1,5 +1,6 @@
 package krasa.formatter.eclipse;
 
+import com.intellij.openapi.diagnostic.Logger;
 import krasa.formatter.common.ModifiableFile;
 import krasa.formatter.exception.FormattingFailedException;
 import krasa.formatter.settings.Settings;
@@ -15,6 +16,8 @@ import org.eclipse.text.edits.TextEdit;
  * @author Vojtech Krasa
  */
 public class JavaCodeFormatterFacade extends CodeFormatterFacade {
+	private static final Logger LOG = Logger.getInstance(JavaCodeFormatterFacade.class.getName());
+	
 	protected CodeFormatter codeFormatter;
 	private JavaPropertiesProvider javaPropertiesProvider;
 	protected ModifiableFile.Monitor lastState;
@@ -37,6 +40,7 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
 	}
 
 	protected String formatInternal(String text, int startOffset, int endOffset) throws FileDoesNotExistsException {
+		LOG.debug("#formatInternal");
 		if (endOffset > text.length()) {
 			endOffset = text.length();
 		}
@@ -86,10 +90,12 @@ public class JavaCodeFormatterFacade extends CodeFormatterFacade {
 			 *             if offset is lower than 0, length is lower than 0 or length is greater than source length.
 			 */
 
+			LOG.debug("#starting to format by eclipse formatter");
 			TextEdit edit = getCodeFormatter().format(
 					CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, text, startOffset,
 					endOffset - startOffset, 0, Settings.LINE_SEPARATOR);
 			if (edit != null) {
+				LOG.debug("reformatting done");
 				edit.apply(doc);
 			} else {
 				throw new FormattingFailedException();

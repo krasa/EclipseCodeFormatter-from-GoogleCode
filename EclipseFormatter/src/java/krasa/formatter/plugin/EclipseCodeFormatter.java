@@ -19,6 +19,7 @@ import krasa.formatter.plugin.processor.Processor;
 import krasa.formatter.settings.Settings;
 import krasa.formatter.settings.provider.ImportOrderProvider;
 import krasa.formatter.utils.FileUtils;
+import org.apache.log4j.helpers.LogLog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class EclipseCodeFormatter {
 	}
 
 	public void format(PsiFile psiFile, int startOffset, int endOffset) throws FileDoesNotExistsException {
+		LOG.debug("#format " + startOffset + "-" + endOffset);
 		boolean wholeFile = FileUtils.isWholeFile(startOffset, endOffset, psiFile.getText());
 		Range range = new Range(startOffset, endOffset, wholeFile);
 
@@ -57,6 +59,7 @@ public class EclipseCodeFormatter {
 	}
 
 	private void formatWhenEditorIsClosed(PsiFile psiFile) throws FileDoesNotExistsException {
+		LOG.debug("#formatWhenEditorIsClosed " + psiFile.getName());
 		VirtualFile virtualFile = psiFile.getVirtualFile();
 		FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
 		Document document = fileDocumentManager.getDocument(virtualFile);
@@ -71,6 +74,7 @@ public class EclipseCodeFormatter {
 
 	/* when file is being edited, it is important to load text from editor, i think */
 	private void formatWhenEditorIsOpen(Range range, PsiFile file) throws FileDoesNotExistsException {
+		LOG.debug("#formatWhenEditorIsOpen " + file.getName());
 		final Editor editor = PsiUtilBase.findEditor(file);
 		int visualColumnToRestore = getVisualColumnToRestore(editor);
 
@@ -84,6 +88,7 @@ public class EclipseCodeFormatter {
 		postProcess(document, file, range);
 
 		restoreVisualColumn(editor, visualColumnToRestore);
+		LOG.debug("#formatWhenEditorIsOpen done");
 	}
 
 	private void postProcess(Document document, PsiFile file, Range range) {

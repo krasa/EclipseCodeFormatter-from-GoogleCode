@@ -23,7 +23,7 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
     private List<Settings> settingsList = new ArrayList<Settings>();
     private List<Long> deletedSettingsId = new ArrayList<Long>();
 
-    public static GlobalSettings getInstance() {
+	public static GlobalSettings getInstance() {
         return ServiceManager.getService(GlobalSettings.class);
     }
 
@@ -173,7 +173,7 @@ public class GlobalSettings implements ApplicationComponent, PersistentStateComp
         ProjectUtils.notifyProjectsWhichUsesThisSettings(settings, project, defaultSettings);
     }
 
-    public Settings loadState(Settings state, ProjectSettingsComponent projectSettingsComponent) {
+	public Settings loadState(Settings state, ProjectSettingsComponent projectSettingsComponent) {
         return getSettings(state, projectSettingsComponent.getProject());
     }
 

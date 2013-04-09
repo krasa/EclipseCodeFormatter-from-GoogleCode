@@ -57,6 +57,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 
 	public void reformatText(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
 			throws IncorrectOperationException {
+		LOG.debug("reformatText "+psiFile.getName() + " "+ startOffset+ " "+ endOffset);
 		ApplicationManager.getApplication().assertWriteAccessAllowed();
 		PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
 		boolean formattedByIntelliJ = false;
@@ -65,6 +66,7 @@ public class EclipseCodeStyleManager extends DelegatingCodeStyleManager {
 			CheckUtil.checkWritable(psiFile);
 
 			if (psiFile.getVirtualFile() == null) {
+				LOG.debug("virtual file is null");
 				Notification notification = new Notification(ProjectSettingsComponent.GROUP_DISPLAY_ID_INFO, "",
 						Notifier.NO_FILE_TO_FORMAT, NotificationType.ERROR);
 				notifier.showNotification(notification);
