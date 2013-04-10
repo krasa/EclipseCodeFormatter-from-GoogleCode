@@ -32,3 +32,14 @@
  * org.eclipse.jdt.core.compiler.compliance=1.6
  * org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
  * org.eclipse.jdt.core.compiler.source=1.6
+
+
+== Troubleshooting==
+If it is mysteriously not working, edit IntelliJ IDEA XX\bin\log.xml:
+add following lines before <root>:
+
+	<category name="krasa.formatter">
+		<level value="DEBUG"/>
+	</category>
+
+and restart. Then send me the log...
