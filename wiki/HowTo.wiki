@@ -6,7 +6,8 @@
  #  use ctrl + ~ for quick switch between formatters or icon at main toolbar    
 
 * Possible problems with formatting : *
- * trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
+ * java formatting failed - make sure you are using proper language level, see below  
+* trailing spaces inside javadocs are stripped.  Solution: set "Strip trailing spaces on save" to "None" 
  * file seems to be formatted differently: probably tab size and indendation is set differently than in eclipse (Settings-Code Style-Java). Using of either tab only or space only whitespace is recommended.
  * Eclipse indendation is configured for 2 spaces, but a new line gets indented by 4 spaces when Enter is pressed. Solution: change code style in IntelliJ. Not all things get formatted by this plugin.
 
@@ -29,7 +30,7 @@
  # the result should look like [http://code.google.com/p/eclipse-code-formatter-intellij-plugin/source/browse/EclipseFormatter/test/resources/org.eclipse.jdt.core.prefs this]
 
 
-===Java language level is set to 1.5 by default. For 1.6+ make sure following lines are in the config file===
+===Java language level is set to 1.5 by default. For 1.6 make sure following lines are in the config file, same goes for 1.7+===
  * org.eclipse.jdt.core.compiler.compliance=1.6
  * org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
  * org.eclipse.jdt.core.compiler.source=1.6
