@@ -4,6 +4,8 @@
  #  set path to eclipse preference file or to exported profiles file (IntelliJ - Settings - Eclipse Code Formatter - field "Eclipse preference file"), when using exported profiles, select desired profile in the combobox "Java formatter profile" 
  #  format code as usual, you can turn on or off notification about the  result(Settings - Notifications) 
  #  use ctrl + ~ for quick switch between formatters or icon at main toolbar    
+([https://www.dropbox.com/s/2vw60a0nmpcxuiq/settingsEclipseFormatter.avi quick video])
+
 
 * Possible problems with formatting : *
  * java formatting failed - make sure you are using proper language level, see below  
