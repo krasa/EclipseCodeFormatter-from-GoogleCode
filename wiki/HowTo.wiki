@@ -1,4 +1,4 @@
-Please visit [https://github.com/krasa/EclipseCodeFormatter New instructions]
+Please visit [https://github.com/krasa/EclipseCodeFormatter#instructions New instructions]
 
 
 
