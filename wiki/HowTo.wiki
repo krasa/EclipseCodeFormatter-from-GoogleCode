@@ -1,3 +1,7 @@
+Please visit [https://github.com/krasa/EclipseCodeFormatter New instructions]
+
+
+
 =Instructions=
  # [http://plugins.intellij.net/plugin/?idea&id=6546 Download the plugin and install] 
  #  [HowTo#Getting_the_Eclipse_code_formatter_preferences_file enable project specific formatter settings in Eclipse to get preference file] or [HowTo#Getting_the_Eclipse_code_formatter_profiles export profiles]
