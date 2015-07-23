@@ -1,0 +1,1 @@
+Please visit [New instructions](https://github.com/krasa/EclipseCodeFormatter#instructions)
